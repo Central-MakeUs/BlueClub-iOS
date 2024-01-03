@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D22B459FC500318FA7 /* AppDelegate.swift */; };
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
-		FB1C63D72B459FC500318FA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D62B459FC500318FA7 /* ViewController.swift */; };
 		FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DB2B459FC600318FA7 /* Assets.xcassets */; };
 		FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DD2B459FC600318FA7 /* LaunchScreen.storyboard */; };
+		FB1C63EB2B45A84300318FA7 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63EA2B45A84300318FA7 /* SwiftUIView.swift */; };
+		FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63ED2B45A8C900318FA7 /* DesignSystem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlueClub-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1C63D22B459FC500318FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FB1C63D62B459FC500318FA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FB1C63DB2B459FC600318FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB1C63DE2B459FC600318FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB1C63E02B459FC600318FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB1C63E92B45A2F400318FA7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = text; name = DesignSystem; path = "BlueClub-iOS/Module/DesignSystem"; sourceTree = SOURCE_ROOT; };
+		FB1C63EA2B45A84300318FA7 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 			children = (
 				FB1C63D12B459FC500318FA7 /* BlueClub-iOS */,
 				FB1C63D02B459FC500318FA7 /* Products */,
+				FB1C63EC2B45A8C900318FA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,8 +58,10 @@
 		FB1C63D12B459FC500318FA7 /* BlueClub-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				FB1C63E82B45A2E000318FA7 /* Module */,
 				FB1C63E72B45A17C00318FA7 /* Presenter */,
 				FB1C63E62B45A16100318FA7 /* App */,
+				FB1C63EF2B45A9A900318FA7 /* Resource */,
 			);
 			path = "BlueClub-iOS";
 			sourceTree = "<group>";
@@ -63,7 +69,6 @@
 		FB1C63E62B45A16100318FA7 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C63DB2B459FC600318FA7 /* Assets.xcassets */,
 				FB1C63D22B459FC500318FA7 /* AppDelegate.swift */,
 				FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */,
 				FB1C63E02B459FC600318FA7 /* Info.plist */,
@@ -75,9 +80,32 @@
 		FB1C63E72B45A17C00318FA7 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C63D62B459FC500318FA7 /* ViewController.swift */,
+				FB1C63EA2B45A84300318FA7 /* SwiftUIView.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		FB1C63E82B45A2E000318FA7 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				FB1C63E92B45A2F400318FA7 /* DesignSystem */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		FB1C63EC2B45A8C900318FA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB1C63EF2B45A9A900318FA7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FB1C63DB2B459FC600318FA7 /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +124,9 @@
 			dependencies = (
 			);
 			name = "BlueClub-iOS";
+			packageProductDependencies = (
+				FB1C63ED2B45A8C900318FA7 /* DesignSystem */,
+			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -150,8 +181,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB1C63D72B459FC500318FA7 /* ViewController.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
+				FB1C63EB2B45A84300318FA7 /* SwiftUIView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,7 +253,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -279,7 +310,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -301,8 +332,9 @@
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,9 +342,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kim.BlueClub-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -328,8 +363,9 @@
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,9 +373,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kim.BlueClub-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -365,6 +404,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FB1C63ED2B45A8C900318FA7 /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FB1C63C72B459FC500318FA7 /* Project object */;
 }

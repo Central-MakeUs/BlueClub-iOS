@@ -5,7 +5,7 @@
 //  Created by 김인섭 on 1/3/24.
 //
 
-import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: scene.coordinateSpace.bounds)
         window?.windowScene = scene
-        window?.rootViewController = ViewController()
+        window?.rootViewController = UIHostingController(rootView: SwiftUIView()) 
         window?.makeKeyAndVisible()
     }
 
