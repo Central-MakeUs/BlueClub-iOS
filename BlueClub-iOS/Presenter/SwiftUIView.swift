@@ -12,16 +12,9 @@ struct SwiftUIView: View {
     var body: some View {
         VStack {
             Text("Hello Word")
-                .designedFont(.h1)
-            
+                .font(.typography(.b1))
             Text("Hello Word")
-                .designedFont(.h2)
-
-            Text("Hello Word")
-                .designedFont(.sb1(.bold))
-            
-            Text("Hello Word")
-                .designedFont(.sb1(.semiBold))
+                .typography(.b1)
         }
     }
 }

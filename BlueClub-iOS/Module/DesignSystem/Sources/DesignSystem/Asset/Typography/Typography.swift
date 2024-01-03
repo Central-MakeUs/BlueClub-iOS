@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum FontSystem {
+public enum Typography {
     
     case h1
     case h2
@@ -16,7 +16,7 @@ public enum FontSystem {
     case h5
     case h6
     
-    case sb1(UIFont.FontWeight)
+    case sb1(FontWeight)
     case sb2
     case sb3
     
@@ -30,37 +30,37 @@ public enum FontSystem {
         switch self {
             
         case .h1:
-            return .designSystem(.bold, size: 40)
+            return .typography(.bold, size: 40)
         case .h2:
-            return .designSystem(.bold, size: 36)
+            return .typography(.bold, size: 36)
         case .h3:
-            return .designSystem(.bold, size: 32)
+            return .typography(.bold, size: 32)
         case .h4:
-            return .designSystem(.bold, size: 28)
+            return .typography(.bold, size: 28)
         case .h5:
-            return .designSystem(.bold, size: 24)
+            return .typography(.bold, size: 24)
         case .h6:
-            return .designSystem(.bold, size: 20)
+            return .typography(.bold, size: 20)
             
         case .sb1(let weight):
-            return .designSystem(
+            return .typography(
                 weight,
                 size: (weight == .bold) ? 18 : 16
             )
         case .sb2:
-            return .designSystem(.semiBold, size: 14)
+            return .typography(.semiBold, size: 14)
         case .sb3:
-            return .designSystem(.semiBold, size: 12)
+            return .typography(.semiBold, size: 12)
             
         case .b1:
-            return .designSystem(.regular, size: 16)
+            return .typography(.regular, size: 16)
         case .b2:
-            return .designSystem(.regular, size: 14)
+            return .typography(.regular, size: 14)
             
         case .caption1:
-            return .designSystem(.regular, size: 12)
+            return .typography(.regular, size: 12)
         case .caption2:
-            return .designSystem(.regular, size: 11)
+            return .typography(.regular, size: 11)
         }
     }
     

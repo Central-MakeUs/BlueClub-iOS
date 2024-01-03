@@ -9,7 +9,7 @@ import SwiftUI
 
 public extension Font {
     
-    static func designSystem(_ font: FontSystem) -> Font {
-        Font(font.uiFont)
+    static func typography(_ typo: Typography) -> Font {
+        Font(typo.uiFont)
     }
 }

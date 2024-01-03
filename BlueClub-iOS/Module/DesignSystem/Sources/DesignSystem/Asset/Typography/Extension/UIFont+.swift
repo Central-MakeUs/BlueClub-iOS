@@ -9,21 +9,18 @@ import UIKit
 
 public extension UIFont {
     
-    enum FontWeight: String, CaseIterable {
-        case bold = "Pretendard-Bold"
-        case semiBold = "Pretendard-SemiBold"
-        case regular = "Pretendard-Regular"
-    }
-    
-    static func designSystem(_ weight: FontWeight, size: CGFloat) -> UIFont {
-        return .init(name: weight.rawValue, size: size)!
-    }
-    
     static func registerFonts() {
         for font in FontWeight.allCases {
             UIFont.registerFont(bundle: Bundle.module, fontName: font.rawValue)
         }
     }
+    
+    static func typography(_ weight: FontWeight, size: CGFloat) -> UIFont {
+        return .init(name: weight.rawValue, size: size)!
+    }
+}
+
+extension UIFont {
     
     static func registerFont(bundle: Bundle, fontName: String) {
         guard let pathForResourceString = bundle.path(forResource: fontName, ofType: ".otf"),
