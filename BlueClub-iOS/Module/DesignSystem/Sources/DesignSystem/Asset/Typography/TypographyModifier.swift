@@ -10,8 +10,15 @@ import SwiftUI
 struct TypographyModifier: ViewModifier {
     
     private let typo: Typography
-    private var fontHeight: CGFloat { typo.uiFont.lineHeight }
-    private var lineHeight: CGFloat { typo.lineHeight }
+    private var fontHeight: CGFloat {
+        UIFont.pretendard(
+            typo.font,
+            size: typo.size
+        ).lineHeight
+    }
+    private var lineHeight: CGFloat {
+        typo.lineHeight
+    }
     
     init(_ typo: Typography) {
         self.typo = typo

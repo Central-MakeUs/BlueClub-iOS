@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum FontWeight: String, CaseIterable {
+public enum Pretendard: String, CaseIterable {
     case bold = "Pretendard-Bold"
     case semiBold = "Pretendard-SemiBold"
     case regular = "Pretendard-Regular"

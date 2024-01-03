@@ -10,6 +10,6 @@ import SwiftUI
 public extension Font {
     
     static func typography(_ typo: Typography) -> Font {
-        Font(typo.uiFont)
+        .init(UIFont.pretendard(typo.font, size: typo.size))
     }
 }

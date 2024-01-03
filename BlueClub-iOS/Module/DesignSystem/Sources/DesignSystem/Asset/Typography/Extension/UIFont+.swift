@@ -10,13 +10,13 @@ import UIKit
 public extension UIFont {
     
     static func registerFonts() {
-        for font in FontWeight.allCases {
+        for font in Pretendard.allCases {
             UIFont.registerFont(bundle: Bundle.module, fontName: font.rawValue)
         }
     }
     
-    static func typography(_ weight: FontWeight, size: CGFloat) -> UIFont {
-        return .init(name: weight.rawValue, size: size)!
+    static func pretendard(_ font: Pretendard, size: CGFloat) -> UIFont {
+        return .init(name: font.rawValue, size: size)!
     }
 }
 

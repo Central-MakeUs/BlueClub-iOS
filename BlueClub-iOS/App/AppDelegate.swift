@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UIFont.registerFonts()
+        configDesignSystem()
         return true
     }
 
@@ -35,3 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+private extension AppDelegate {
+    
+    func configDesignSystem() {
+        UIFont.registerFonts()
+    }
+}
