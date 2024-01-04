@@ -45,13 +45,13 @@ struct MainTabView: View {
                 
                 let selected = viewStore.state.currentTab == tab
                 let icon = selected ? tab.selectedIcon : tab.icon
-                let color: Color? = selected ? Color.designSystem(.primaryNormal) : .none
+                let color: Color = selected ? Color.colors(.primaryNormal) : Color.colors(.gray07)
 
                 VStack(spacing: 0) {
-                    Image.icon(icon)
+                    Image.icons(icon)
                         .padding(.top, 6)
                     Text(tab.title)
-                        .typography(.caption2)
+                        .fontModifer(.caption2)
                 }
                 .frame(maxWidth: .infinity)
                 .frame(maxHeight: .infinity)

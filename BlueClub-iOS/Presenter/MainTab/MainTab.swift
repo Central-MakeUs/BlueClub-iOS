@@ -53,29 +53,29 @@ extension MainTab {
             }
         }
         
-        var icon: Icon {
+        var icon: Icons {
             switch self {
             case .home:
-                return .home04
+                return .home_outline
             case .note:
-                return .calendar
+                return .calendar_outline
             case .community:
-                return .chat01
+                return .chat_outline
             case .myPage:
-                return .user
+                return .my_outline
             }
         }
         
-        var selectedIcon: Icon {
+        var selectedIcon: Icons {
             switch self {
             case .home:
-                return .home04Filled
+                return .home_solid
             case .note:
-                return .calendarFilled
+                return .calendar_solid
             case .community:
-                return .chat01Filled
+                return .chat_solid
             case .myPage:
-                return .userFilled
+                return .my_solid
             }
         }
     }
