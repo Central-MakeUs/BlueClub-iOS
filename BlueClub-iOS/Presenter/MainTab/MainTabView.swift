@@ -9,9 +9,9 @@ import SwiftUI
 import DesignSystem
 import ComposableArchitecture
 
-fileprivate typealias viewStore = ViewStore<MainTab.State, MainTab.Action>
-
 struct MainTabView: View {
+    
+    typealias ViewStoreType = ViewStore<MainTab.State, MainTab.Action>
     
     @State var store = Store(initialState: MainTab.State()) {
         MainTab()
@@ -29,7 +29,7 @@ struct MainTabView: View {
 
 @MainActor private extension MainTabView {
     
-    @ViewBuilder func content(_ viewStore: viewStore) -> some View {
+    @ViewBuilder func content(_ viewStore: ViewStoreType) -> some View {
         TabView(selection: viewStore.$currentTab) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
                 Text(tab.title)
@@ -39,7 +39,7 @@ struct MainTabView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    @ViewBuilder func tabBar(_ viewStore: viewStore) -> some View {
+    @ViewBuilder func tabBar(_ viewStore: ViewStoreType) -> some View {
         LazyVGrid(columns: Array(repeating: .init(spacing: 0), count: 4)) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
                 
