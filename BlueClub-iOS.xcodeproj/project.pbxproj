@@ -203,6 +203,7 @@
 			files = (
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
+				FB1C63EB2B45A84300318FA7 /* SwiftUIView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
@@ -437,7 +438,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		FB1C63ED2B45A8C900318FA7 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
