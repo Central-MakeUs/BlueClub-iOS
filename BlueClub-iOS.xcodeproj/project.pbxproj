@@ -11,8 +11,11 @@
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
 		FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DB2B459FC600318FA7 /* Assets.xcassets */; };
 		FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DD2B459FC600318FA7 /* LaunchScreen.storyboard */; };
-		FB1C63EB2B45A84300318FA7 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63EA2B45A84300318FA7 /* SwiftUIView.swift */; };
 		FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63ED2B45A8C900318FA7 /* DesignSystem */; };
+		FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */; };
+		FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F72B45D1A500318FA7 /* MainTabView.swift */; };
+		FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTab.swift */; };
+		FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +26,9 @@
 		FB1C63DE2B459FC600318FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB1C63E02B459FC600318FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB1C63E92B45A2F400318FA7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = text; name = DesignSystem; path = "BlueClub-iOS/Module/DesignSystem"; sourceTree = SOURCE_ROOT; };
-		FB1C63EA2B45A84300318FA7 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FB1C63F72B45D1A500318FA7 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		FB1C63FD2B45D1E500318FA7 /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */,
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +75,7 @@
 		FB1C63E62B45A16100318FA7 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */,
 				FB1C63D22B459FC500318FA7 /* AppDelegate.swift */,
 				FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */,
 				FB1C63E02B459FC600318FA7 /* Info.plist */,
@@ -80,7 +87,7 @@
 		FB1C63E72B45A17C00318FA7 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C63EA2B45A84300318FA7 /* SwiftUIView.swift */,
+				FB1C63F62B45D15E00318FA7 /* MainTab */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -108,6 +115,15 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		FB1C63F62B45D15E00318FA7 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				FB1C63F72B45D1A500318FA7 /* MainTabView.swift */,
+				FB1C63FD2B45D1E500318FA7 /* MainTab.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,6 +142,7 @@
 			name = "BlueClub-iOS";
 			packageProductDependencies = (
 				FB1C63ED2B45A8C900318FA7 /* DesignSystem */,
+				FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -155,6 +172,9 @@
 				Base,
 			);
 			mainGroup = FB1C63C62B459FC500318FA7;
+			packageReferences = (
+				FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -181,9 +201,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB1C63EB2B45A84300318FA7 /* SwiftUIView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
+				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
+				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,10 +428,25 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 /* Begin XCSwiftPackageProductDependency section */
 		FB1C63ED2B45A8C900318FA7 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
+		};
+		FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

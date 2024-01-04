@@ -9,15 +9,13 @@ import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+    var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: scene.coordinateSpace.bounds)
-        window?.windowScene = scene
-        window?.rootViewController = UIHostingController(rootView: SwiftUIView()) 
-        window?.makeKeyAndVisible()
+        coordinator = .init()
+        coordinator?.start(scene)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
