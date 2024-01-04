@@ -15,13 +15,15 @@ public enum Typography {
     case h4
     case h5
     case h6
+    case h7
     
-    case sb1(Pretendard)
+    case sb1
     case sb2
     case sb3
     
     case b1
     case b2
+    case b3
     
     case caption1
     case caption2
@@ -41,9 +43,11 @@ public enum Typography {
             return .bold
         case .h6:
             return .bold
+        case .h7:
+            return .bold
             
-        case .sb1(let weight):
-            return weight
+        case .sb1:
+            return .semiBold
         case .sb2:
             return .semiBold
         case .sb3:
@@ -52,6 +56,8 @@ public enum Typography {
         case .b1:
             return .regular
         case .b2:
+            return .regular
+        case .b3:
             return .regular
             
         case .caption1:
@@ -76,9 +82,11 @@ public enum Typography {
             return 24
         case .h6:
             return 20
+        case .h7:
+            return 18
             
-        case .sb1(let weight):
-            return (weight == .bold) ? 18 : 16
+        case .sb1:
+            return 16
         case .sb2:
             return 14
         case .sb3:
@@ -88,6 +96,8 @@ public enum Typography {
             return 16
         case .b2:
             return 14
+        case .b3:
+            return 13
             
         case .caption1:
             return 12
@@ -111,9 +121,11 @@ public enum Typography {
             return 34
         case .h6:
             return 28
+        case .h7:
+            return 24
             
-        case .sb1(let weight):
-            return (weight == .bold) ? 24 : 22
+        case .sb1:
+            return 22
         case .sb2:
             return 20
         case .sb3:
@@ -122,7 +134,9 @@ public enum Typography {
         case .b1:
             return 24
         case .b2:
-            return 24
+            return 20
+        case .b3:
+            return 20
             
         case .caption1:
             return 18
@@ -135,7 +149,7 @@ public enum Typography {
         
         switch self {
             
-        case .b1, .b2, .caption1, .caption2:
+        case .b1, .b2, .b3, .caption1, .caption2:
             return -0.6
         default:
             return 0
