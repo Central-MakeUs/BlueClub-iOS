@@ -11,10 +11,7 @@ import DesignSystem
 struct SwiftUIView: View {
     var body: some View {
         VStack {
-            Text("Hello Word")
-                .font(.typography(.b1))
-            Text("Hello Word")
-                .typography(.b1)
+            Image.icons(.add_circle_outline)
         }
     }
 }
