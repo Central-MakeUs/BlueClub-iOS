@@ -10,6 +10,24 @@
       }
     },
     {
+      "identity" : "navigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/insub4067/Navigator.git",
+      "state" : {
+        "revision" : "e1e9a9fbab9bbb79e317d24d27c60b1b01f52519",
+        "version" : "0.2.2"
+      }
+    },
+    {
+      "identity" : "panmodal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MightyCombine/PanModal.git",
+      "state" : {
+        "revision" : "fc476cf65c1b12b950d49810a972dc16f1eeffe1",
+        "version" : "1.2.8"
+      }
+    },
+    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",
