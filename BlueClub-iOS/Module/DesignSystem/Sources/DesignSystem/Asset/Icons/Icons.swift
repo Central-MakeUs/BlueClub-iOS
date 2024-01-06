@@ -5,7 +5,7 @@
 //  Created by 김인섭 on 1/5/24.
 //
 
-import Foundation
+import SwiftUI
 
 public enum Icons: String {
     
@@ -111,4 +111,15 @@ public enum Icons: String {
     case trash_solid
     case warning_circle_solid
     case warning_solid
+    
+    // MARK: - social login
+    case kakao
+    case apple
+}
+
+public extension Icons {
+    
+    var image: Image {
+        .icons(self)
+    }
 }

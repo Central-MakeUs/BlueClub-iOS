@@ -6,17 +6,50 @@
 //
 
 import SwiftUI
+import Utility
+import Navigator
 
-final class AppCoordinator {
-    
+final class AppCoordinator: Coordinatorable {
+
+    var scene: UIWindowScene?
     var window: UIWindow?
     
-    func start(_ scene: UIWindowScene) {
-        
-        // 로그인 한 경우
+    var navigator: Navigator? = .none
+    var child: (any Coordinatorable)? = .none
+    weak var parent: (any Coordinatorable)? = .none
+    
+    func start(parent: (any Coordinatorable)?) {
+        guard let scene else { return }
         window = UIWindow(frame: scene.coordinateSpace.bounds)
         window?.windowScene = scene
-        window?.rootViewController = UIHostingController(rootView: MainTabView())
+        self.send(.splash)
         window?.makeKeyAndVisible()
+    }
+}
+
+
+extension AppCoordinator {
+    
+    enum Action: Equatable {
+        case splash
+        case login
+        case mainTab
+    }
+    
+    func reduce(_ action: Action) {
+        switch action {
+            
+        case .splash:
+            window?.rootViewController = SplashView(coordinator: self).viewController()
+            
+        case .login:
+            child = LoginCoordinator()
+            child?.start(parent: self)
+            window?.rootViewController = child?.navigator?.view
+            
+        case .mainTab:
+            break
+            
+        }
     }
 }

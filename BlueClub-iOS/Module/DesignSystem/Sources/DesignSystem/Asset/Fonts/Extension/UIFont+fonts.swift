@@ -16,7 +16,7 @@ public extension UIFont {
     }
     
     static func pretendard(_ font: Pretendard, size: CGFloat) -> UIFont {
-        return .init(name: font.rawValue, size: size)!
+        return .init(name: font.rawValue, size: size) ?? .systemFont(ofSize: size)
     }
 }
 

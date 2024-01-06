@@ -12,4 +12,8 @@ public extension Font {
     static func fonts(_ font: Fonts) -> Font {
         .init(UIFont.pretendard(font.pretendard, size: font.size))
     }
+    
+    static func pretendard(_ font: Pretendard, size: CGFloat) -> Font {
+        .init(UIFont.pretendard(font, size: size))
+    }
 }
