@@ -5,10 +5,12 @@
 //  Created by 김인섭 on 1/5/24.
 //
 
-import SwiftUI
-import DesignSystem
-import ComposableArchitecture
 import Architecture
+import ComposableArchitecture
+import DesignSystem
+import Domain
+import SwiftUI
+
 
 struct SignUpView: StoreView {
     

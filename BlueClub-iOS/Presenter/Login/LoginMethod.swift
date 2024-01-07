@@ -7,10 +7,9 @@
 
 import SwiftUI
 import DesignSystem
+import Domain
 
-enum LoginMethod: CaseIterable {
-    
-    case kakao, apple, email
+extension LoginMethod {
     
     var buttonTitle: String {
         switch self {
