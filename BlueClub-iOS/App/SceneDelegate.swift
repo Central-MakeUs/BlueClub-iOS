@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
+import DependencyContainer
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    var coordinator: AppCoordinator?
+    
+    var coordinator = AppCoordinator()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let scene = (scene as? UIWindowScene) else { return }
-        coordinator = .init()
-        coordinator?.scene = scene
-        coordinator?.start(parent: .none)
+        configCoordinator(scene)
+        configDepencies()
+        configDesignSystem()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,3 +50,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+private extension SceneDelegate {
+    
+    func configCoordinator(_ scene: UIWindowScene) {
+        coordinator.scene = scene
+        coordinator.start(parent: .none)
+    }
+    
+    func configDesignSystem() {
+        UIFont.registerFonts()
+    }
+    
+    func configDepencies() {
+        
+    }
+}

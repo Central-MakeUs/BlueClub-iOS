@@ -13,32 +13,36 @@ extension SignUpView {
  
     struct RegisterInfoContentView: View {
         
-        let store: SignUpView.StoreType
+        private let store: SignUpView.Store
+        @ObservedObject private var viewStore: SignUpView.ViewStore
         @FocusState var focusState: SignUp.FocusItem?
         
+        init(store: SignUpView.Store) {
+            self.store = store
+            self.viewStore = .init(store, observe: { $0 })
+        }
+        
         var body: some View {
-            WithViewStore(store, observe: { $0 }) { viewStore in
-                ScrollView {
-                    VStack(spacing: 36) {
-                        emailSection(viewStore)
-                        passwordSection(viewStore)
-                        nameSection(viewStore)
-                        phoneNumberSection(viewStore)
-                        allowSection(viewStore)
-                    }
-                    .padding(.vertical, 24)
-                    .hideKeyboardOnTapBackground()
+            ScrollView {
+                VStack(spacing: 36) {
+                    emailSection()
+                    passwordSection()
+                    nameSection()
+                    phoneNumberSection()
+                    allowSection()
                 }
-                .scrollDismissesKeyboard(.immediately)
-                .onAppear { viewStore.send(.setFocusState(.email)) }
+                .padding(.vertical, 24)
+                .hideKeyboardOnTapBackground()
             }
+            .scrollDismissesKeyboard(.immediately)
+            .onAppear { viewStore.send(.setFocusState(.email)) }
         }
     }
 }
 
 @MainActor extension SignUpView.RegisterInfoContentView {
     
-    @ViewBuilder func emailSection(_ viewStore: SignUpView.ViewStoreType) -> some View {
+    @ViewBuilder func emailSection() -> some View {
         InputContainer(title: ("이메일", true)) {
             TextInput(
                 text: viewStore.$email,
@@ -57,7 +61,7 @@ extension SignUpView {
         }
     }
     
-    @ViewBuilder func passwordSection(_ viewStore: SignUpView.ViewStoreType) -> some View {
+    @ViewBuilder func passwordSection() -> some View {
         InputContainer(title: ("비밀번호", true)) {
             VStack(spacing: 0) {
                 TextInput(
@@ -79,7 +83,7 @@ extension SignUpView {
         }
     }
     
-    @ViewBuilder func nameSection(_ viewStore: SignUpView.ViewStoreType) -> some View {
+    @ViewBuilder func nameSection() -> some View {
         InputContainer(title: ("이름", true)) {
             TextInput(
                 text: viewStore.$name,
@@ -91,7 +95,7 @@ extension SignUpView {
         }
     }
     
-    @ViewBuilder func phoneNumberSection(_ viewStore: SignUpView.ViewStoreType) -> some View {
+    @ViewBuilder func phoneNumberSection() -> some View {
         InputContainer(title: ("휴대폰 번호", true)) {
             VStack(spacing: 0) {
                 AccessoryButton(
@@ -125,7 +129,7 @@ extension SignUpView {
         }.padding(.bottom, 10)
     }
     
-    @ViewBuilder func allowSection(_ viewStore: SignUpView.ViewStoreType) -> some View {
+    @ViewBuilder func allowSection() -> some View {
         AllowView(hasAllow: viewStore.$hasAllow)
     }
 }

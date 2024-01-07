@@ -174,12 +174,3 @@ extension SignUp {
         case email, password, passwordConfirm, name, phoneNumber, verificationCode
     }
 }
-
-extension SignUp {
-    
-    static func buildStore(coordinator: LoginCoordinator) -> SignUpView.StoreType {
-        .init(initialState: Self.State()) {
-            Self.init(cooridonator: coordinator)
-        }
-    }
-}

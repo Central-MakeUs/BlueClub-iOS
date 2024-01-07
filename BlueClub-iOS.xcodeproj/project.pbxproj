@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB03FA8B2B4B141E00F2BDFA /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB03FA8A2B4B141E00F2BDFA /* Architecture */; };
+		FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */ = {isa = PBXBuildFile; productRef = FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */; };
 		FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D22B459FC500318FA7 /* AppDelegate.swift */; };
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
 		FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DB2B459FC600318FA7 /* Assets.xcassets */; };
@@ -33,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB03FA892B4B13EA00F2BDFA /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = ../../../Architecture; sourceTree = "<group>"; };
 		FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlueClub-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1C63D22B459FC500318FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +70,8 @@
 				FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */,
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
 				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
+				FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */,
+				FB03FA8B2B4B141E00F2BDFA /* Architecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +131,7 @@
 		FB1C63E82B45A2E000318FA7 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				FB03FA892B4B13EA00F2BDFA /* Architecture */,
 				FB1C64082B4710B000318FA7 /* Utility */,
 				FB1C63E92B45A2F400318FA7 /* DesignSystem */,
 			);
@@ -235,6 +241,8 @@
 				FB1C63ED2B45A8C900318FA7 /* DesignSystem */,
 				FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */,
 				FB1C64092B47119200318FA7 /* Utility */,
+				FB03FA8A2B4B141E00F2BDFA /* Architecture */,
+				FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -266,6 +274,7 @@
 			mainGroup = FB1C63C62B459FC500318FA7;
 			packageReferences = (
 				FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */,
 			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
@@ -533,6 +542,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/insub4067/DependencyContainer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
@@ -544,6 +561,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FB03FA8A2B4B141E00F2BDFA /* Architecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Architecture;
+		};
+		FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */;
+			productName = DependencyContainer;
+		};
 		FB1C63ED2B45A8C900318FA7 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;

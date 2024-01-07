@@ -8,41 +8,43 @@
 import SwiftUI
 import ComposableArchitecture
 import DesignSystem
+import Architecture
 
-struct SignUpEntryView: View {
+struct SignUpEntryView: StoreView {
     
-    typealias ViewStoreType = ViewStore<SignUpEntry.State, SignUpEntry.Action>
-    typealias StoreType = Store<SignUpEntry.State, SignUpEntry.Action>
+    typealias Reducer = SignUpEntry
+    typealias Store = StoreOf<Reducer>
+    typealias ViewStore = ViewStoreOf<Reducer>
+
+    internal let store: Store
+    @ObservedObject internal var viewStore: ViewStore
     
-    @State var store: StoreType
-    
-    init(store: StoreType) {
+    init(store: Store) {
         self.store = store
+        self.viewStore = .init(store, observe: { $0 })
     }
     
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            BaseView {
-                VStack {
-                    rotatingBanner(viewStore)
-                    description()
-                }.padding(.top, 96)
-            } footer: {
-                PrimaryButton(
-                    title: "직업 설정하고 시작하기",
-                    action: { viewStore.send(.didTapButton) }
-                ).padding(.bottom, 70)
-            }
-            .onAppear { viewStore.send(.onAppear) }
-            .onDisappear { viewStore.send(.onDisppaer) }
+        BaseView {
+            VStack {
+                rotatingBanner()
+                description()
+            }.padding(.top, 96)
+        } footer: {
+            PrimaryButton(
+                title: "직업 설정하고 시작하기",
+                action: { viewStore.send(.didTapButton) }
+            ).padding(.bottom, 70)
         }
+        .onAppear { viewStore.send(.onAppear) }
+        .onDisappear { viewStore.send(.onDisppaer) }
     }
 }
 
 // MARK: - Sub Views
 @MainActor extension SignUpEntryView {
     
-    @ViewBuilder func rotatingBanner(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func rotatingBanner() -> some View {
         
         VStack(spacing: 12) {
             viewStore.currentTab.image

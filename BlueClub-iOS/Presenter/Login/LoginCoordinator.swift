@@ -38,11 +38,15 @@ extension LoginCoordinator {
             navigator?.dismiss()
             
         case .initialLogin:
-            let store = SignUpEntry.buildStore(coordinator: self)
+            let store = SignUpEntryView.Store(initialState: .init()) {
+                SignUpEntry(coordinator: self)
+            }
             navigator?.start { SignUpEntryView(store: store) }
             
         case .signup:
-            let store = SignUp.buildStore(coordinator: self)
+            let store = SignUpView.Store(initialState: .init()) {
+                SignUpView.Reducer(cooridonator: self)
+            }
             navigator?.push { SignUpView(store: store) }
         }
     }
