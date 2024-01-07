@@ -19,11 +19,7 @@ final class AppCoordinator: Coordinatorable {
     weak var parent: (any Coordinatorable)? = .none
     
     func start(parent: (any Coordinatorable)?) {
-        guard let scene else { return }
-        window = UIWindow(frame: scene.coordinateSpace.bounds)
-        window?.windowScene = scene
-        self.send(.splash)
-        window?.makeKeyAndVisible()
+        self.parent = parent
     }
 }
 
@@ -31,7 +27,7 @@ final class AppCoordinator: Coordinatorable {
 extension AppCoordinator {
     
     enum Action: Equatable {
-        case splash
+        case start(UIWindowScene)
         case login
         case mainTab
     }
@@ -39,9 +35,13 @@ extension AppCoordinator {
     func reduce(_ action: Action) {
         switch action {
             
-        case .splash:
-            window?.rootViewController = SplashView(coordinator: self).viewController()
-            
+        case .start(let scene):
+            window = UIWindow(frame: scene.coordinateSpace.bounds)
+            window?.windowScene = scene
+            let view = SplashView(coordinator: self).viewController()
+            window?.rootViewController = view
+            window?.makeKeyAndVisible()
+
         case .login:
             child = LoginCoordinator()
             child?.start(parent: self)

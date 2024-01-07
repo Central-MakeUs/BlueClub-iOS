@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
-        configCoordinator(scene)
+        coordinator.reduce(.start(scene))
         configDepencies()
         configDesignSystem()
     }
@@ -51,11 +51,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 private extension SceneDelegate {
-    
-    func configCoordinator(_ scene: UIWindowScene) {
-        coordinator.scene = scene
-        coordinator.start(parent: .none)
-    }
     
     func configDesignSystem() {
         UIFont.registerFonts()
