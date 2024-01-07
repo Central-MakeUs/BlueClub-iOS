@@ -12,17 +12,11 @@ let package = Package(
             name: "Utility",
             targets: ["Utility"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/insub4067/Navigator.git", from: "0.2.2")
-    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Utility",
-            dependencies: [
-                .byName(name: "Navigator")
-            ]),
+            name: "Utility"),
         .testTarget(
             name: "UtilityTests",
             dependencies: ["Utility"]),

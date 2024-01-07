@@ -32,6 +32,7 @@
 		FBAD2C9A2B49ABE9002A77BC /* RegisterInfoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C992B49ABE9002A77BC /* RegisterInfoContentView.swift */; };
 		FBAD2C9C2B49ADBB002A77BC /* LoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9B2B49ADBB002A77BC /* LoginMethod.swift */; };
 		FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* AllowView.swift */; };
+		FBD21B5F2B4B2CF200E2237A /* Navigator in Frameworks */ = {isa = PBXBuildFile; productRef = FBD21B5E2B4B2CF200E2237A /* Navigator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 			files = (
 				FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */,
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
+				FBD21B5F2B4B2CF200E2237A /* Navigator in Frameworks */,
 				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
 				FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */,
 				FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */,
@@ -245,6 +247,7 @@
 				FB1C64092B47119200318FA7 /* Utility */,
 				FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */,
 				FB96A81F2B4B2BFF0094CB3D /* Architecture */,
+				FBD21B5E2B4B2CF200E2237A /* Navigator */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -277,6 +280,7 @@
 			packageReferences = (
 				FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */,
+				FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */,
 			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
@@ -560,6 +564,14 @@
 				minimumVersion = 1.5.6;
 			};
 		};
+		FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/insub4067/Navigator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -584,6 +596,11 @@
 		FB96A81F2B4B2BFF0094CB3D /* Architecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Architecture;
+		};
+		FBD21B5E2B4B2CF200E2237A /* Navigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */;
+			productName = Navigator;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
