@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import Utility
 import Navigator
+import Architecture
 
 final class AppCoordinator: Coordinatorable {
 
