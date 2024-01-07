@@ -65,15 +65,6 @@ struct SignUpEntry {
 
 extension SignUpEntry {
     
-    static func buildStore(coordinator: LoginCoordinator) -> SignUpEntryView.StoreType {
-        .init(initialState: Self.State()) {
-            Self.init(coordinator: coordinator)
-        }
-    }
-}
-
-extension SignUpEntry {
-    
     enum TabItem: CaseIterable {
         
         case first, second, third

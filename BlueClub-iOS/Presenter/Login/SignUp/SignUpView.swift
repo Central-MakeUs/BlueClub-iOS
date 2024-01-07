@@ -8,44 +8,50 @@
 import SwiftUI
 import DesignSystem
 import ComposableArchitecture
+import Architecture
 
-struct SignUpView: View {
+struct SignUpView: StoreView {
     
-    typealias StoreType = Store<SignUp.State, SignUp.Action>
-    typealias ViewStoreType = ViewStore<SignUp.State, SignUp.Action>
+    typealias Reducer = SignUp
+    typealias Store = StoreOf<Reducer>
+    typealias ViewStore = ViewStoreOf<Reducer>
     
-    @State var store: StoreType
+    let store: Store
+    @ObservedObject var viewStore: ViewStore
+    
+    init(store: Store) {
+        self.store = store
+        self.viewStore = .init(store, observe: { $0 })
+    }
     
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            BaseView {
-                header(viewStore)
-            } content: {
-                content(viewStore)
-            } footer: {
-                footer(viewStore)
-            }
-            .sheet(isPresented: viewStore.$showSelectYearSheet, content: {
-                selectYearView(viewStore)
-            })
-            .sheet(isPresented: viewStore.$showAllowSheet, content: {
-                allowView(viewStore)
-            })
+        BaseView {
+            header()
+        } content: {
+            content()
+        } footer: {
+            footer()
         }
+        .sheet(isPresented: viewStore.$showSelectYearSheet, content: {
+            selectYearView()
+        })
+        .sheet(isPresented: viewStore.$showAllowSheet, content: {
+            allowView()
+        })
     }
 }
 
 // MARK: - header
 extension SignUpView {
     
-    @ViewBuilder func header(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func header() -> some View {
         VStack(spacing: 0) {
-            topBar(viewStore)
-            indicator(viewStore)
+            topBar()
+            indicator()
         }
     }
     
-    @ViewBuilder func topBar(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func topBar() -> some View {
         HStack {
             Button(action: {
                 viewStore.send(.didTapBack)
@@ -63,7 +69,7 @@ extension SignUpView {
         }
     }
     
-    @ViewBuilder func indicator(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func indicator() -> some View {
         Rectangle()
             .frame(height: 4)
             .frame(maxWidth: .infinity)
@@ -82,24 +88,24 @@ extension SignUpView {
 // MARK: - content
 @MainActor extension SignUpView {
     
-    @ViewBuilder func content(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func content() -> some View {
         VStack(spacing: 0) {
             switch viewStore.currentStage {
             case .jobSelection:
-                contentHeader(viewStore)
-                jobSelectionContent(viewStore)
+                contentHeader()
+                jobSelectionContent()
             case .startYear:
-                contentHeader(viewStore)
-                startYearContent(viewStore)
+                contentHeader()
+                startYearContent()
             case .register:
-                registerContent(viewStore)
+                registerContent()
             case .registerInfo:
                 RegisterInfoContentView(store: store)
             }
         }
     }
     
-    @ViewBuilder func contentHeader(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func contentHeader() -> some View {
         Text("내 직업과 일치하는\n항목을 골라주세요")
             .fontModifer(.h6)
             .multilineTextAlignment(.leading)
@@ -109,7 +115,7 @@ extension SignUpView {
             .frame(height: 136)
     }
     
-    @ViewBuilder func jobSelectionContent(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func jobSelectionContent() -> some View {
         VStack(spacing: 12) {
             ForEach(SignUp.JobOption.allCases, id: \.title) { option in
                 PrimaryButton(
@@ -122,7 +128,7 @@ extension SignUpView {
         }
     }
     
-    @ViewBuilder func startYearContent(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func startYearContent() -> some View {
         VStack(spacing: 12) {
             PrimaryButton(
                 title: viewStore.selectedJob?.title ?? "",
@@ -147,7 +153,7 @@ extension SignUpView {
         }
     }
     
-    @ViewBuilder func registerContent(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func registerContent() -> some View {
         VStack(spacing: 20) {
             Image("character", bundle: .main)
             Text(viewStore.selectedJob!.title + "로 설정완료")
@@ -164,7 +170,7 @@ extension SignUpView {
 // MARK: - footer
 extension SignUpView {
     
-    @ViewBuilder func footer(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func footer() -> some View {
         switch viewStore.currentStage {
         case .startYear:
             PrimaryButton(
@@ -214,21 +220,21 @@ extension SignUpView {
 // MARK: - sheet
 @MainActor extension SignUpView {
     
-    @ViewBuilder func selectYearView(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func selectYearView() -> some View {
         SelectYearView(
             isPresented: viewStore.$showSelectYearSheet,
             selectedYear: viewStore.$startYear
         ).presentationDetents([.height(460)])
     }
     
-    @ViewBuilder func allowView(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func allowView() -> some View {
         AllowSheetView(
             isPresented: viewStore.$showAllowSheet,
             onFinish: { }
         ).presentationDetents([.height(488)])
     }
     
-    @ViewBuilder func selectTelecomSheet(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func selectTelecomSheet() -> some View {
         SelectTelecomView(
             isPresented: viewStore.$showSelectTelecomSheet,
             selected: viewStore.$telecom
@@ -237,5 +243,7 @@ extension SignUpView {
 }
 
 #Preview {
-    SignUpView(store: SignUp.buildStore(coordinator: .init()))
+    SignUpView(store: .init(initialState: .init(), reducer: {
+        SignUpView.Reducer(cooridonator: .init())
+    }))
 }

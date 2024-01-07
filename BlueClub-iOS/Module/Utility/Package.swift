@@ -22,8 +22,7 @@ let package = Package(
             name: "Utility",
             dependencies: [
                 .byName(name: "Navigator")
-            ]
-        ),
+            ]),
         .testTarget(
             name: "UtilityTests",
             dependencies: ["Utility"]),

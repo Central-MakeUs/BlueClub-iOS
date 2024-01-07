@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "dependencycontainer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/insub4067/DependencyContainer.git",
+      "state" : {
+        "revision" : "6c562d57546e466c4821afc59dfbe7426fe7ece5",
+        "version" : "1.0.2"
+      }
+    },
+    {
       "identity" : "navigator",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/insub4067/Navigator.git",

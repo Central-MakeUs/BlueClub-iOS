@@ -7,14 +7,12 @@
 
 import UIKit
 import DesignSystem
+import DependencyContainer
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        configDesignSystem()
         return true
     }
 
@@ -33,11 +31,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-}
-
-private extension AppDelegate {
-    
-    func configDesignSystem() {
-        UIFont.registerFonts()
-    }
 }

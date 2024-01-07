@@ -8,28 +8,33 @@
 import SwiftUI
 import DesignSystem
 import ComposableArchitecture
+import Architecture
 
-struct MainTabView: View {
+struct MainTabView: StoreView {
     
-    typealias ViewStoreType = ViewStore<MainTab.State, MainTab.Action>
+    typealias Reducer = MainTab
+    typealias Store = StoreOf<Reducer>
+    typealias ViewStore = ViewStoreOf<Reducer>
     
-    @State var store = Store(initialState: MainTab.State()) {
-        MainTab()
+    let store: Store
+    @ObservedObject var viewStore: ViewStore
+    
+    init(store: Store = .init(initialState: .init(), reducer: { Reducer() })) {
+        self.store = store
+        self.viewStore = .init(store, observe: { $0 })
     }
     
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack(spacing: 0) {
-                content(viewStore)
-                tabBar(viewStore)
-            }
+        VStack(spacing: 0) {
+            content()
+            tabBar()
         }
     }
 }
 
 @MainActor private extension MainTabView {
     
-    @ViewBuilder func content(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func content() -> some View {
         TabView(selection: viewStore.$currentTab) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
                 Text(tab.title)
@@ -39,7 +44,7 @@ struct MainTabView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    @ViewBuilder func tabBar(_ viewStore: ViewStoreType) -> some View {
+    @ViewBuilder func tabBar() -> some View {
         LazyVGrid(columns: Array(repeating: .init(spacing: 0), count: 4)) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
                 
@@ -73,5 +78,7 @@ struct MainTabView: View {
 
 
 #Preview {
-    MainTabView()
+    MainTabView(store: .init(initialState: .init(), reducer: {
+        MainTabView.Reducer()
+    }))
 }
