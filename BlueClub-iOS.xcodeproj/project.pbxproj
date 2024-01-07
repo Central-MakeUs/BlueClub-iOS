@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FB03FA8B2B4B141E00F2BDFA /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB03FA8A2B4B141E00F2BDFA /* Architecture */; };
 		FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */ = {isa = PBXBuildFile; productRef = FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */; };
 		FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D22B459FC500318FA7 /* AppDelegate.swift */; };
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
@@ -24,6 +23,7 @@
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
 		FB1C64112B471A3200318FA7 /* SignUpEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64102B471A3200318FA7 /* SignUpEntry.swift */; };
 		FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* SignUpView.swift */; };
+		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
 		FBAD2C732B487756002A77BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* SignUp.swift */; };
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
@@ -35,7 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FB03FA892B4B13EA00F2BDFA /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = ../../../Architecture; sourceTree = "<group>"; };
 		FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlueClub-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1C63D22B459FC500318FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +51,8 @@
 		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		FB1C64102B471A3200318FA7 /* SignUpEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEntry.swift; sourceTree = "<group>"; };
 		FB1C64132B47239200318FA7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
+		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
 		FBAD2C722B487756002A77BC /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -71,7 +72,7 @@
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
 				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
 				FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */,
-				FB03FA8B2B4B141E00F2BDFA /* Architecture in Frameworks */,
+				FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +132,7 @@
 		FB1C63E82B45A2E000318FA7 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				FB03FA892B4B13EA00F2BDFA /* Architecture */,
+				FB96A81E2B4B2BB90094CB3D /* Architecture */,
 				FB1C64082B4710B000318FA7 /* Utility */,
 				FB1C63E92B45A2F400318FA7 /* DesignSystem */,
 			);
@@ -141,6 +142,7 @@
 		FB1C63EC2B45A8C900318FA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB96A81D2B4B2B850094CB3D /* Architecture */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,8 +243,8 @@
 				FB1C63ED2B45A8C900318FA7 /* DesignSystem */,
 				FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */,
 				FB1C64092B47119200318FA7 /* Utility */,
-				FB03FA8A2B4B141E00F2BDFA /* Architecture */,
 				FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */,
+				FB96A81F2B4B2BFF0094CB3D /* Architecture */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -561,10 +563,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FB03FA8A2B4B141E00F2BDFA /* Architecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Architecture;
-		};
 		FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */;
@@ -582,6 +580,10 @@
 		FB1C64092B47119200318FA7 /* Utility */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Utility;
+		};
+		FB96A81F2B4B2BFF0094CB3D /* Architecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Architecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
