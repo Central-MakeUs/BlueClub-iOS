@@ -11,7 +11,6 @@ import Architecture
 
 final class AppCoordinator: Coordinatorable {
 
-    var scene: UIWindowScene?
     var window: UIWindow?
     
     var navigator: Navigator? = .none
