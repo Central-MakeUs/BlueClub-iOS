@@ -11,12 +11,5 @@ public protocol Actionable {
     
     associatedtype Action: Equatable
     
-    func reduce(_ action: Action)
-}
-
-public extension Actionable {
-    
-    func send(_ action: Action) {
-        self.reduce(action)
-    }
+    @MainActor func send(_ action: Action)
 }

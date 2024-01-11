@@ -18,19 +18,16 @@
 		FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F72B45D1A500318FA7 /* MainTabView.swift */; };
 		FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTab.swift */; };
 		FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */; };
-		FB1C64032B47101100318FA7 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64022B47101100318FA7 /* LoginCoordinator.swift */; };
 		FB1C640A2B47119200318FA7 /* Utility in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C64092B47119200318FA7 /* Utility */; };
-		FB1C640C2B47168C00318FA7 /* SignUpEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C640B2B47168C00318FA7 /* SignUpEntryView.swift */; };
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
-		FB1C64112B471A3200318FA7 /* SignUpEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64102B471A3200318FA7 /* SignUpEntry.swift */; };
 		FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* SignUpView.swift */; };
+		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
 		FBAD2C732B487756002A77BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* SignUp.swift */; };
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
 		FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* AllowSheetView.swift */; };
 		FBAD2C7B2B49238A002A77BC /* SelectTelecomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C7A2B49238A002A77BC /* SelectTelecomView.swift */; };
-		FBAD2C9A2B49ABE9002A77BC /* RegisterInfoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C992B49ABE9002A77BC /* RegisterInfoContentView.swift */; };
 		FBAD2C9C2B49ADBB002A77BC /* LoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9B2B49ADBB002A77BC /* LoginMethod.swift */; };
 		FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* AllowView.swift */; };
 		FBD21B5F2B4B2CF200E2237A /* Navigator in Frameworks */ = {isa = PBXBuildFile; productRef = FBD21B5E2B4B2CF200E2237A /* Navigator */; };
@@ -48,12 +45,10 @@
 		FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FB1C63F72B45D1A500318FA7 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		FB1C63FD2B45D1E500318FA7 /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
-		FB1C64022B47101100318FA7 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		FB1C64082B4710B000318FA7 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utility; sourceTree = "<group>"; };
-		FB1C640B2B47168C00318FA7 /* SignUpEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEntryView.swift; sourceTree = "<group>"; };
 		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
-		FB1C64102B471A3200318FA7 /* SignUpEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEntry.swift; sourceTree = "<group>"; };
 		FB1C64132B47239200318FA7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		FB28DE992B4F012F004710D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
@@ -61,7 +56,6 @@
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FBAD2C772B487E59002A77BC /* AllowSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowSheetView.swift; sourceTree = "<group>"; };
 		FBAD2C7A2B49238A002A77BC /* SelectTelecomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTelecomView.swift; sourceTree = "<group>"; };
-		FBAD2C992B49ABE9002A77BC /* RegisterInfoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfoContentView.swift; sourceTree = "<group>"; };
 		FBAD2C9B2B49ADBB002A77BC /* LoginMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMethod.swift; sourceTree = "<group>"; };
 		FBAD2C9F2B49C28E002A77BC /* AllowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,21 +168,11 @@
 		FB1C64012B470FE300318FA7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C64022B47101100318FA7 /* LoginCoordinator.swift */,
 				FBAD2C9B2B49ADBB002A77BC /* LoginMethod.swift */,
+				FB28DE992B4F012F004710D7 /* LoginView.swift */,
 				FB1C64122B47238600318FA7 /* SignUp */,
-				FB1C640F2B471A2800318FA7 /* SignUpEntry */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		FB1C640F2B471A2800318FA7 /* SignUpEntry */ = {
-			isa = PBXGroup;
-			children = (
-				FB1C640B2B47168C00318FA7 /* SignUpEntryView.swift */,
-				FB1C64102B471A3200318FA7 /* SignUpEntry.swift */,
-			);
-			path = SignUpEntry;
 			sourceTree = "<group>";
 		};
 		FB1C64122B47238600318FA7 /* SignUp */ = {
@@ -223,7 +207,6 @@
 		FBAD2C9E2B49C275002A77BC /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				FBAD2C992B49ABE9002A77BC /* RegisterInfoContentView.swift */,
 				FBAD2C9F2B49C28E002A77BC /* AllowView.swift */,
 			);
 			path = SubViews;
@@ -314,10 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBAD2C9A2B49ABE9002A77BC /* RegisterInfoContentView.swift in Sources */,
 				FBAD2C7B2B49238A002A77BC /* SelectTelecomView.swift in Sources */,
-				FB1C64112B471A3200318FA7 /* SignUpEntry.swift in Sources */,
-				FB1C64032B47101100318FA7 /* LoginCoordinator.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */,
 				FBAD2C9C2B49ADBB002A77BC /* LoginMethod.swift in Sources */,
@@ -325,11 +305,11 @@
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
-				FB1C640C2B47168C00318FA7 /* SignUpEntryView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
 				FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */,
 				FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */,
+				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

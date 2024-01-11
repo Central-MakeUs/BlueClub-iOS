@@ -46,7 +46,7 @@ public struct CustomButton: View {
                 }
                 Text(title)
             }
-            .fontModifer(.sb1)
+            .fontModifer(.sb2)
             .foregroundStyle(foreground)
             .frame(height: 56)
             .frame(maxWidth: .infinity)

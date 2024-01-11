@@ -28,6 +28,7 @@ public enum Icons: String {
     case arrow2_right
     case bold
     case checkpx
+    case close_circle
     case download
     case font_size
     case font
@@ -115,6 +116,7 @@ public enum Icons: String {
     // MARK: - social login
     case kakao
     case apple
+    case naver
 }
 
 public extension Icons {

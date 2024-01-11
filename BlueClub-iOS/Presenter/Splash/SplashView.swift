@@ -28,7 +28,7 @@ struct SplashView: View {
             let hasLogin = false
             try? await Task.sleep(nanoseconds: 1_500_000_000)
             if hasLogin {
-                coordinator?.send(.mainTab)
+                coordinator?.send(.home)
             } else {
                 coordinator?.send(.login)
             }

@@ -26,26 +26,19 @@ struct AllowSheetView: View {
         BaseView {
             SheetHeader(
                 dismiss: { isPresented = false },
-                title: "블루피플을 이용하려면,\n정보 동의가 필요해요."
+                title: "블루클럽을 이용하려면,\n정보 동의가 필요해요."
             )
         } content: {
             AllowView(hasAllow: $hasAllow)
         } footer: {
-            footer()
+            GrayButton(
+                title: "확인",
+                disabled: !hasAllow,
+                action: { onFinish() }
+            )
+            .padding(.vertical, 20)
+            .disabled(!hasAllow)
         }
-    }
-}
-
-extension AllowSheetView {
-
-    @ViewBuilder func footer() -> some View {
-        GrayButton(
-            title: "확인",
-            disabled: !hasAllow,
-            action: { onFinish() }
-        )
-        .padding(.vertical, 20)
-        .disabled(!hasAllow)
     }
 }
 

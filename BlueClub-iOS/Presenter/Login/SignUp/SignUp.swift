@@ -7,30 +7,26 @@
 
 import ComposableArchitecture
 import Domain
+import SwiftUI
+import DesignSystem
 
 @Reducer
 struct SignUp {
     
     struct State: Equatable {
-        // MARK: - Sheet
+
         @BindingState var showSelectYearSheet = false
         @BindingState var showAllowSheet = false
-        @BindingState var showSelectTelecomSheet = false
         
-        // MARK: - RegisterInfo
-        @BindingState var focusState: FocusItem? = .none
-        @BindingState var email = ""
-        @BindingState var password = ""
-        @BindingState var passwordConfirm = ""
-        @BindingState var name = ""
-        @BindingState var telecom: SelectTelecomView.Telecom? = .none
-        @BindingState var phoneNumber = ""
-        @BindingState var verificationCode = ""
-        @BindingState var hasAllow = false
-        
-        var currentStage: Stage = .jobSelection
-        var selectedJob: JobOption? = .none
         @BindingState var startYear: Int? = .none
+        @BindingState var nickname = ""
+        @BindingState var hasAllow = false
+        @BindingState var showKeyboard: Bool? = false
+        
+        var message: Messages?
+        
+        var currentStage: Stage = .job
+        var selectedJob: JobOption? = .none
     }
     
     enum Action: BindableAction {
@@ -39,19 +35,20 @@ struct SignUp {
         case didTapBack
         case setStage(Stage)
         case didSelectJob(JobOption)
-        case setFocusState(FocusItem)
         case didSelectLoginMethod(LoginMethod)
+        case nicknameDidChange
+        case didFinishSignUp
+        case showKeyboard
         
         // MARK: - Sheet
         case showSelectYearSheet
         case showAllowSheet
         case didFinishAllow
-        case showSelectTelecomSheet
     }
     
-    weak var cooridonator: LoginCoordinator?
+    weak var cooridonator: AppCoordinator?
     
-    init(cooridonator: LoginCoordinator) {
+    init(cooridonator: AppCoordinator) {
         self.cooridonator = cooridonator
     }
     
@@ -65,38 +62,48 @@ struct SignUp {
                 
             case .didTapBack:
                 switch state.currentStage {
-                case .jobSelection:
+                case .job:
                     cooridonator?.navigator?.pop()
                     return .none
                 case .startYear:
                     state.startYear = .none
-                    return .send(.setStage(.jobSelection))
-                case .register:
+                    return .send(.setStage(.job))
+                case .nickname:
                     return .send(.setStage(.startYear))
-                case .registerInfo:
-                    return .send(.setStage(.register))
+                case .welcome:
+                    return .none
                 }
                 
             case .setStage(let stage):
                 state.currentStage = stage
+                if stage == .nickname {
+                    return .send(.showKeyboard)
+                }
                 return .none
                 
             case .didSelectJob(let job):
                 state.selectedJob = job
                 return .send(.setStage(.startYear))
                 
-            case .setFocusState(let focusItem):
-                state.focusState = focusItem
-                return .none
-                
-                
             case .didSelectLoginMethod(let method):
                 switch method {
-                case .kakao, .apple:
+                case .kakao, .naver, .apple:
                     return .send(.showAllowSheet)
-                case .email:
-                    return .send(.setStage(.registerInfo))
                 }
+                
+            case .nicknameDidChange:
+                if state.nickname.count > 10 {
+                    state.nickname = String(state.nickname.prefix(10))
+                }
+                return .none
+                
+            case .didFinishSignUp:
+                cooridonator?.send(.home)
+                return .none
+                
+            case .showKeyboard:
+                state.showKeyboard = true
+                return .none
                 
             // MARK: - Sheet
             case .showSelectYearSheet:
@@ -109,10 +116,7 @@ struct SignUp {
                 
             case .didFinishAllow:
                 state.showAllowSheet = false
-                return .none
-                
-            case .showSelectTelecomSheet:
-                state.showSelectTelecomSheet = true
+                state.currentStage = .welcome
                 return .none
             }
         }
@@ -122,31 +126,31 @@ struct SignUp {
 extension SignUp {
 
     enum Stage: CaseIterable {
-        case jobSelection, startYear, register, registerInfo
+        case job, startYear, nickname, welcome
         
         var int: Int {
             switch self {
-            case .jobSelection:
+            case .job:
                 return 1
             case .startYear:
                 return 2
-            case .register:
+            case .nickname:
                 return 3
-            case .registerInfo:
+            case .welcome:
                 return 4
             }
         }
         
         var title: String {
             switch self {
-            case .jobSelection:
+            case .job:
                 return "직업 설정"
             case .startYear:
                 return "연차 설정"
-            case .register:
-                return "회원가입"
-            case .registerInfo:
-                return "회원가입"
+            case .nickname:
+                return "닉네임 설정"
+            case .welcome:
+                return "블루클럽 가입을 축하드립니다"
             }
         }
     }
@@ -171,7 +175,25 @@ extension SignUp {
         }
     }
     
-    enum FocusItem {
-        case email, password, passwordConfirm, name, phoneNumber, verificationCode
+    enum Messages {
+        case availableNickname, duplicateNickname
+        
+        var message: String {
+            switch self {
+            case .availableNickname:
+                return "사용 가능한 닉네임 입니다."
+            case .duplicateNickname:
+                return "중복된 닉네임 입니다."
+            }
+        }
+        
+        var color: Color {
+            switch self {
+            case .availableNickname:
+                return Color.colors(.primaryNormal)
+            case .duplicateNickname:
+                return Color.colors(.error)
+            }
+        }
     }
 }
