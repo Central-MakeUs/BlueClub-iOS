@@ -10,10 +10,14 @@ import Navigator
 import Architecture
 
 final class AppCoordinator: Coordinatorable {
-
     var window: UIWindow?
     
-    var navigator: Navigator? = .none
+    var navigator: Navigator? = {
+        let nController = UINavigationController()
+        nController.setNavigationBarHidden(true, animated: true)
+        return .init(navigationController: nController)
+    }()
+    
     var child: (any Coordinatorable)? = .none
     weak var parent: (any Coordinatorable)? = .none
     
@@ -28,10 +32,11 @@ extension AppCoordinator {
     enum Action: Equatable {
         case start(UIWindowScene)
         case login
-        case mainTab
+        case signup
+        case home
     }
     
-    func reduce(_ action: Action) {
+    func send(_ action: Action) {
         switch action {
             
         case .start(let scene):
@@ -42,13 +47,23 @@ extension AppCoordinator {
             window?.makeKeyAndVisible()
 
         case .login:
-            child = LoginCoordinator()
-            child?.start(parent: self)
-            window?.rootViewController = child?.navigator?.view
+            let store = LoginView.Store(initialState: .init()) {
+                Login(coordinator: self)
+            }
+            navigator?.start { LoginView(store: store) }
+            window?.rootViewController = navigator?.view
             
-        case .mainTab:
-            break
+        case .signup:
+            let store = SignUpView.Store(initialState: .init()) {
+                SignUp(cooridonator: self)
+            }
+            navigator?.push { SignUpView(store: store) }
             
+        case .home:
+            let store = MainTabView.Store(initialState: .init()) {
+                MainTab()
+            }
+            navigator?.start { MainTabView(store: store) }
         }
     }
 }

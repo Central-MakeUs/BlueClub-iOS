@@ -15,32 +15,32 @@ extension LoginMethod {
         switch self {
         case .kakao:
             return "카카오로 3초만에 시작하기"
+        case .naver:
+            return "네이버로 시작하기"
         case .apple:
             return "애플로 시작하기"
-        case .email:
-            return "이메일로 시작하기"
         }
     }
     
     var foreground: Color {
         switch self {
         case .kakao:
-            .init(hex: "3C1E1E")
+            return .init(hex: "3C1E1E")
+        case .naver:
+            return .colors(.white)
         case .apple:
-            .colors(.white)
-        case .email:
-            Color.colors(.gray06)
+            return .colors(.white)
         }
     }
     
     var background: Color {
         switch self {
         case .kakao:
-            .init(hex: "FDE500")
+            return .init(hex: "FDE500")
+        case .naver:
+            return .init(hex: "03C75A")
         case .apple:
-            .colors(.black)
-        case .email:
-            .clear
+            return .colors(.black)
         }
     }
     
@@ -48,10 +48,10 @@ extension LoginMethod {
         switch self {
         case .kakao:
             return .kakao
+        case .naver:
+            return .naver
         case .apple:
             return .apple
-        case .email:
-            return .none
         }
     }
 }
