@@ -61,33 +61,8 @@ struct LoginView: StoreView {
     }
 }
 
-@Reducer
-struct Login {
-    
-    struct State: Equatable {
-        
-    }
-    
-    enum Action { 
-        case didSelectLoginMethod(LoginMethod)
-    }
-    
-    weak var coordinator: AppCoordinator?
-    
-    var body: some Reducer<State, Action> {
-        Reduce { state, action in
-            switch action {
-            case .didSelectLoginMethod(let method):
-                let hasLogin = false
-                coordinator?.send(hasLogin ? .home : .signup)
-                return .none
-            }
-        }
-    }
-}
-
 #Preview {
     LoginView(store: .init(initialState: .init(), reducer: {
-        Login()
+        Login(coordinator: .init(), dependencies: .init())
     }))
 }

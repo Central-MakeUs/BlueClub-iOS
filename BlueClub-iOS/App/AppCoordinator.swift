@@ -48,7 +48,7 @@ extension AppCoordinator {
 
         case .login:
             let store = LoginView.Store(initialState: .init()) {
-                Login(coordinator: self)
+                Login(coordinator: self, dependencies: .live)
             }
             navigator?.start { LoginView(store: store) }
             window?.rootViewController = navigator?.view

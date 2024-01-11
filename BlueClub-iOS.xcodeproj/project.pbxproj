@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */ = {isa = PBXBuildFile; productRef = FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */; };
 		FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = FB0D21EA2B4B3EB00085670B /* Domain */; };
 		FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D22B459FC500318FA7 /* AppDelegate.swift */; };
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
@@ -17,11 +16,12 @@
 		FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */; };
 		FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F72B45D1A500318FA7 /* MainTabView.swift */; };
 		FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTab.swift */; };
-		FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */; };
 		FB1C640A2B47119200318FA7 /* Utility in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C64092B47119200318FA7 /* Utility */; };
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
 		FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* SignUpView.swift */; };
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
+		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
+		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
 		FBAD2C732B487756002A77BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* SignUp.swift */; };
@@ -30,7 +30,6 @@
 		FBAD2C7B2B49238A002A77BC /* SelectTelecomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C7A2B49238A002A77BC /* SelectTelecomView.swift */; };
 		FBAD2C9C2B49ADBB002A77BC /* LoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9B2B49ADBB002A77BC /* LoginMethod.swift */; };
 		FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* AllowView.swift */; };
-		FBD21B5F2B4B2CF200E2237A /* Navigator in Frameworks */ = {isa = PBXBuildFile; productRef = FBD21B5E2B4B2CF200E2237A /* Navigator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +48,9 @@
 		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		FB1C64132B47239200318FA7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		FB28DE992B4F012F004710D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
+		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
+		FB4479A22B50635900741424 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
@@ -65,12 +67,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB1C64002B45D21D00318FA7 /* ComposableArchitecture in Frameworks */,
 				FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */,
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
-				FBD21B5F2B4B2CF200E2237A /* Navigator in Frameworks */,
 				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
-				FB03FA8E2B4B174C00F2BDFA /* DependencyContainer in Frameworks */,
+				FB4479A12B505EB500741424 /* DataSource in Frameworks */,
 				FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +98,7 @@
 		FB1C63D12B459FC500318FA7 /* BlueClub-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */,
 				FB1C63E82B45A2E000318FA7 /* Module */,
 				FB1C63E72B45A17C00318FA7 /* Presenter */,
 				FB1C63E62B45A16100318FA7 /* App */,
@@ -131,6 +132,7 @@
 		FB1C63E82B45A2E000318FA7 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				FB28DE9C2B50505F004710D7 /* DataSource */,
 				FB0D21E92B4B3E6F0085670B /* Domain */,
 				FB96A81E2B4B2BB90094CB3D /* Architecture */,
 				FB1C64082B4710B000318FA7 /* Utility */,
@@ -170,6 +172,7 @@
 			children = (
 				FBAD2C9B2B49ADBB002A77BC /* LoginMethod.swift */,
 				FB28DE992B4F012F004710D7 /* LoginView.swift */,
+				FB4479A22B50635900741424 /* Login.swift */,
 				FB1C64122B47238600318FA7 /* SignUp */,
 			);
 			path = Login;
@@ -230,12 +233,10 @@
 			name = "BlueClub-iOS";
 			packageProductDependencies = (
 				FB1C63ED2B45A8C900318FA7 /* DesignSystem */,
-				FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */,
 				FB1C64092B47119200318FA7 /* Utility */,
-				FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */,
 				FB96A81F2B4B2BFF0094CB3D /* Architecture */,
-				FBD21B5E2B4B2CF200E2237A /* Navigator */,
 				FB0D21EA2B4B3EB00085670B /* Domain */,
+				FB4479A02B505EB500741424 /* DataSource */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -303,6 +304,7 @@
 				FBAD2C9C2B49ADBB002A77BC /* LoginMethod.swift in Sources */,
 				FBAD2C732B487756002A77BC /* SignUp.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
+				FB4479A32B50635900741424 /* Login.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
@@ -452,6 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
@@ -483,6 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
@@ -546,7 +550,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.6;
+				minimumVersion = 1.6.0;
 			};
 		};
 		FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */ = {
@@ -560,11 +564,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FB03FA8D2B4B174C00F2BDFA /* DependencyContainer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */;
-			productName = DependencyContainer;
-		};
 		FB0D21EA2B4B3EB00085670B /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
@@ -573,23 +572,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
 		};
-		FB1C63FF2B45D21D00318FA7 /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FB1C63FA2B45D1D600318FA7 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
-		};
 		FB1C64092B47119200318FA7 /* Utility */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Utility;
 		};
+		FB4479A02B505EB500741424 /* DataSource */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataSource;
+		};
 		FB96A81F2B4B2BFF0094CB3D /* Architecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Architecture;
-		};
-		FBD21B5E2B4B2CF200E2237A /* Navigator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */;
-			productName = Navigator;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
