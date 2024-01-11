@@ -9,6 +9,7 @@ import ComposableArchitecture
 import Domain
 import SwiftUI
 import DesignSystem
+import DependencyContainer
 
 @Reducer
 struct SignUp {
@@ -47,9 +48,12 @@ struct SignUp {
     }
     
     weak var cooridonator: AppCoordinator?
+    private let dependencies: Container
+    private var userRepository: UserRepositoriable { dependencies.resolve() }
     
-    init(cooridonator: AppCoordinator) {
+    init(cooridonator: AppCoordinator, container: Container = .live) {
         self.cooridonator = cooridonator
+        self.dependencies = container
     }
     
     var body: some Reducer<State, Action> {
@@ -63,8 +67,9 @@ struct SignUp {
             case .didTapBack:
                 switch state.currentStage {
                 case .job:
-                    cooridonator?.navigator?.pop()
-                    return .none
+                    return .run { send in
+                        await cooridonator?.navigator?.pop()
+                    }
                 case .startYear:
                     state.startYear = .none
                     return .send(.setStage(.job))
@@ -76,10 +81,20 @@ struct SignUp {
                 
             case .setStage(let stage):
                 state.currentStage = stage
-                if stage == .nickname {
+                switch stage {
+                case .nickname:
                     return .send(.showKeyboard)
+                case .welcome:
+                    let userInfo = RegisterUserInfo(
+                        nickname: state.nickname,
+                        job: state.selectedJob!,
+                        startYear: state.startYear!)
+                    return .run { send in
+                        userRepository.registInfo(userInfo)
+                    }
+                default:
+                    return .none
                 }
-                return .none
                 
             case .didSelectJob(let job):
                 state.selectedJob = job
@@ -98,8 +113,9 @@ struct SignUp {
                 return .none
                 
             case .didFinishSignUp:
-                cooridonator?.send(.home)
-                return .none
+                return .run { send in
+                    await cooridonator?.send(.home)
+                }
                 
             case .showKeyboard:
                 state.showKeyboard = true
@@ -151,26 +167,6 @@ extension SignUp {
                 return "닉네임 설정"
             case .welcome:
                 return "블루클럽 가입을 축하드립니다"
-            }
-        }
-    }
-    
-    enum JobOption: CaseIterable {
-        
-        case caddy, rider, delivery, insurance, freelancer
-        
-        var title: String {
-            switch self {
-            case .caddy:
-                return "골프캐디"
-            case .rider:
-                return "배달 라이더"
-            case .delivery:
-                return "택배 기사"
-            case .insurance:
-                return "보험 설계사"
-            case .freelancer:
-                return "기타·프리랜서"
             }
         }
     }

@@ -36,7 +36,7 @@ extension AppCoordinator {
         case home
     }
     
-    func send(_ action: Action) {
+    @MainActor func send(_ action: Action) {
         switch action {
             
         case .start(let scene):
@@ -64,6 +64,7 @@ extension AppCoordinator {
                 MainTab()
             }
             navigator?.start { MainTabView(store: store) }
+            window?.rootViewController = navigator?.view
         }
     }
 }

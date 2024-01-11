@@ -62,10 +62,8 @@ private extension SceneDelegate {
         
         // NOTE: - DataSouce
         Container.live
-            .register { AppleLoginManager() as AppleLoginRequestable }
+            .register { AppleLoginService() as AppleLoginServiceable }
             .register { UserRepository(dependencies: .live) as UserRepositoriable }
-        
-        // NOTE: - Domain
     }
 }
 

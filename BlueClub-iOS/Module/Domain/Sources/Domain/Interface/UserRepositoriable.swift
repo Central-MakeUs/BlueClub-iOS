@@ -9,5 +9,8 @@ import Foundation
 
 public protocol UserRepositoriable {
     
-    var requestUserInfo: (_ loginMethod: LoginMethod) async throws -> SocialLoginUserInfo { get set }
+    var requestUserInfo: (_ loginMethod: LoginMethod) async throws -> LoginUserInfo { get set }
+    var hasLogin: Bool { get }
+    var getUserInfo: () -> LoginUserInfo? { get set }
+    var registInfo: (RegisterUserInfo) -> Void { get set } // Job, StartYear, nickname
 }

@@ -16,7 +16,7 @@ let package = Package(
         .package(path: "../Domain"),
         .package(
             url: "https://github.com/insub4067/Navigator.git",
-            .upToNextMajor(from: "0.2.2")),
+            .upToNextMajor(from: "0.3.0")),
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
             .upToNextMajor(from: "1.6.0")),

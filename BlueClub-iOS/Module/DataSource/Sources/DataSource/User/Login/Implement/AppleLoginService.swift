@@ -8,13 +8,13 @@
 import Domain
 import AuthenticationServices
 
-public class AppleLoginManager: NSObject, AppleLoginRequestable {
+public class AppleLoginService: NSObject, AppleLoginServiceable {
     
-    private var continuation: CheckedContinuation<SocialLoginUserInfo, Error>?
+    private var continuation: CheckedContinuation<LoginUserInfo, Error>?
     
     public override init() { super.init() }
     
-    public lazy var request: () async throws -> Domain.SocialLoginUserInfo = {
+    public lazy var request: () async throws -> Domain.LoginUserInfo = {
         try await withCheckedThrowingContinuation { continuation in
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             let request = appleIDProvider.createRequest()
@@ -27,7 +27,7 @@ public class AppleLoginManager: NSObject, AppleLoginRequestable {
     }
 }
 
-extension AppleLoginManager: ASAuthorizationControllerDelegate {
+extension AppleLoginService: ASAuthorizationControllerDelegate {
 
     public func authorizationController(
         controller: ASAuthorizationController,
@@ -55,7 +55,7 @@ extension AppleLoginManager: ASAuthorizationControllerDelegate {
             name = familyName + givenName
         }
         
-        let userInfo = SocialLoginUserInfo(
+        let userInfo = LoginUserInfo(
             id: id,
             token: token,
             name: name,

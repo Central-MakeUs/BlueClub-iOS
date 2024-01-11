@@ -7,4 +7,4 @@
 
 import Foundation
 
-public protocol AppleLoginRequestable: LoginRequestable { }
+public protocol KakaoLoginServiceable: LoginServiceable { }

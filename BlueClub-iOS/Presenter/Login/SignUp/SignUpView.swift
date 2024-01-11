@@ -11,7 +11,6 @@ import DesignSystem
 import Domain
 import SwiftUI
 
-
 struct SignUpView: StoreView {
     
     typealias Reducer = SignUp
@@ -123,7 +122,7 @@ extension SignUpView {
     
     @ViewBuilder func jobSelectionContent() -> some View {
         VStack(spacing: 12) {
-            ForEach(SignUp.JobOption.allCases, id: \.title) { option in
+            ForEach(JobOption.allCases, id: \.title) { option in
                 PrimaryButton(
                     title: option.title,
                     disabled: viewStore.selectedJob != option,

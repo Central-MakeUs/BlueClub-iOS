@@ -7,18 +7,33 @@
 
 import Domain
 import DependencyContainer
-import Foundation
+import Architecture
 
 public class UserRepository: UserRepositoriable {
     
     private let dependencies: Container
-    private var appleLogin: AppleLoginRequestable { dependencies.resolve() }
+    private var appleLogin: AppleLoginServiceable { dependencies.resolve() }
+    
+    @UserDefault("loginUser") private var loginUser: LoginUserInfo?
+    @UserDefault("userInfo") private var userInfo: RegisterUserInfo?
     
     public init(dependencies: Container) {
         self.dependencies = dependencies
     }
-
-    public lazy var requestUserInfo: (Domain.LoginMethod) async throws -> Domain.SocialLoginUserInfo = { method in
-        try await self.appleLogin.request()
+    
+    public var hasLogin: Bool { loginUser != nil }
+    
+    public lazy var requestUserInfo: (LoginMethod) async throws -> LoginUserInfo = { method in
+        let user = try await self.appleLogin.request()
+        self.loginUser = user
+        return user
+    }
+    
+    public lazy var getUserInfo: () -> LoginUserInfo? = {
+        self.loginUser
+    }
+    
+    public lazy var registInfo: (RegisterUserInfo) -> Void = { userInfo in
+        self.userInfo = userInfo
     }
 }

@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/insub4067/Navigator.git",
       "state" : {
-        "revision" : "e1e9a9fbab9bbb79e317d24d27c60b1b01f52519",
-        "version" : "0.2.2"
+        "revision" : "5c92ef7d7acab221b37cdbec965abf65ea93a5b3",
+        "version" : "0.3.0"
       }
     },
     {

@@ -18,6 +18,7 @@ struct Login {
         case didSelectLoginMethod(LoginMethod)
     }
     
+    @Dependency(\.continuousClock) var clock
     weak var coordinator: AppCoordinator?
     private let dependencies: Container
     private var userRepository: UserRepositoriable { dependencies.resolve() }
@@ -36,18 +37,19 @@ struct Login {
                 switch method {
                 case .apple:
                     return .run { send in
-                        let result = try await userRepository.requestUserInfo(method)
-                        print(result)
+                        _ = try await userRepository.requestUserInfo(method)
+                        // TODO: - 서버에 회원가입한 유저인지 확인 요청
+                        // 맞다면 -> Home
+                        // await coordinator?.send(.home)
+                        // 아니라면 -> SignUp
+                        try await clock.sleep(for: .seconds(0.5))
+                        await coordinator?.send(.signup)
                     }
                 case .kakao:
-                    break
+                    return .none
                 case .naver:
-                    break
+                    return .none
                 }
-                
-                // TODO: - 회원가입 여부로 분기 처리
-                coordinator?.send(.signup)
-                return .none
             }
         }
     }
