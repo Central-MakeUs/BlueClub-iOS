@@ -13,14 +13,12 @@ import SwiftUI
 struct SignUpView: View {
     
     typealias Reducer = SignUp
-    
-    let store: StoreOf<Reducer>
     @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
     @FocusState var focusState: Bool?
     
     init(reducer: Reducer) {
-        self.store = .init(initialState: .init(), reducer: { reducer })
+        let store: StoreOf<Reducer> = .init(initialState: .init(), reducer: { reducer })
         self.viewStore = .init(store, observe: { $0 })
     }
     

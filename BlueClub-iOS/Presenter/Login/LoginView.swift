@@ -13,12 +13,10 @@ import DesignSystem
 struct LoginView: View {
     
     typealias Reducer = Login
-    
-    let store: StoreOf<Reducer>
     @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
     init(reducer: Reducer) {
-        self.store = .init(initialState: .init(), reducer: { reducer })
+        let store: StoreOf<Reducer> = .init(initialState: .init(), reducer: { reducer })
         self.viewStore = .init(store, observe: { $0 })
     }
     
@@ -51,7 +49,7 @@ struct LoginView: View {
                     title: method.buttonTitle,
                     foreground: method.foreground,
                     background: method.background,
-                    action: { store.send(.didSelectLoginMethod(method)) }
+                    action: { viewStore.send(.didSelectLoginMethod(method)) }
                 )
             }
         }.padding(.bottom, 70)

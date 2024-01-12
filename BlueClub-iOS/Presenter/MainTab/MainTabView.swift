@@ -12,12 +12,10 @@ import ComposableArchitecture
 struct MainTabView: View {
     
     typealias Reducer = MainTab
-    
-    let store: StoreOf<Reducer>
     @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
     init(state: Reducer.State) {
-        self.store = .init(initialState: state, reducer: { Reducer() })
+        let store: StoreOf<Reducer> = .init(initialState: state, reducer: { Reducer() })
         self.viewStore = .init(store, observe: { $0 })
     }
     
