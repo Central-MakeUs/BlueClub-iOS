@@ -85,12 +85,12 @@ struct SignUp {
                 case .nickname:
                     return .send(.showKeyboard)
                 case .welcome:
-                    let userInfo = RegisterUserInfo(
+                    let userInfo = UserInfo(
                         nickname: state.nickname,
                         job: state.selectedJob!,
                         startYear: state.startYear!)
                     return .run { send in
-                        userRepository.registInfo(userInfo)
+                        userRepository.registUserInfo(userInfo)
                     }
                 default:
                     return .none

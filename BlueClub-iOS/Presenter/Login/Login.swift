@@ -37,7 +37,7 @@ struct Login {
                 switch method {
                 case .apple:
                     return .run { send in
-                        _ = try await userRepository.requestUserInfo(method)
+                        _ = try await userRepository.requestLogin(method)
                         // TODO: - 서버에 회원가입한 유저인지 확인 요청
                         // 맞다면 -> Home
                         // await coordinator?.send(.home)

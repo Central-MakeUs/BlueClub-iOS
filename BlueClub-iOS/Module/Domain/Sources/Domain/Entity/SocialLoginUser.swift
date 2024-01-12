@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LoginUserInfo: Codable {
+public struct SocialLoginUser: Codable {
     
     public let id: String
     public let token: String

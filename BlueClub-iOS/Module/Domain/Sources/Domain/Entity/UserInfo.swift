@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RegisterUserInfo: Codable {
+public struct UserInfo: Codable {
     
     public var nickname: String
     public var job: JobOption
