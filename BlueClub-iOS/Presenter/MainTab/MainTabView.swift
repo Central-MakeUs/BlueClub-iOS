@@ -8,7 +8,6 @@
 import SwiftUI
 import DesignSystem
 import ComposableArchitecture
-import Architecture
 
 struct MainTabView: View {
     

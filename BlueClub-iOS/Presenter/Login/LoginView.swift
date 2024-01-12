@@ -8,7 +8,6 @@
 import SwiftUI
 import ComposableArchitecture
 import Domain
-import Architecture
 import DesignSystem
 
 struct LoginView: View {
