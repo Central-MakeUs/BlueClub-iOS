@@ -55,6 +55,7 @@ extension AppleLoginService: ASAuthorizationControllerDelegate {
             name = familyName + givenName
         }
         
+
         let userInfo = SocialLoginUser(
             id: id,
             token: token,

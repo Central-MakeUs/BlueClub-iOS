@@ -8,6 +8,7 @@
 import SwiftUI
 import Navigator
 import Architecture
+import DesignSystem
 
 final class AppCoordinator: Coordinatorable {
     var window: UIWindow?

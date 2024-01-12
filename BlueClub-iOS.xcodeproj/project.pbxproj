@@ -22,6 +22,7 @@
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
+		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
 		FBAD2C732B487756002A77BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* SignUp.swift */; };
@@ -51,6 +52,7 @@
 		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
 		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		FB1C63F62B45D15E00318FA7 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
+				FB8E68D12B517817007FF2C1 /* Home */,
 				FB1C63F72B45D1A500318FA7 /* MainTabView.swift */,
 				FB1C63FD2B45D1E500318FA7 /* MainTab.swift */,
 			);
@@ -187,6 +190,14 @@
 				FBAD2C792B487E5F002A77BC /* Sheet */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		FB8E68D12B517817007FF2C1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FB8E68D22B517820007FF2C1 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		FBAD2C742B487931002A77BC /* Splash */ = {
@@ -311,6 +322,7 @@
 				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
 				FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */,
 				FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */,
+				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
 			);

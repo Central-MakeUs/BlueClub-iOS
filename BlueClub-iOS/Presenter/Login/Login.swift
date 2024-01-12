@@ -20,7 +20,7 @@ struct Login {
         self.coordinator = coordinator
         self.dependencies = dependencies
     }
-    
+
     struct State: Equatable { }
     
     enum Action {
@@ -32,7 +32,6 @@ struct Login {
             switch action {
             case .didSelectLoginMethod(let method):
                 
-                // TODO: - 소셜 로그인 확인
                 switch method {
                 case .apple:
                     return .run { send in
