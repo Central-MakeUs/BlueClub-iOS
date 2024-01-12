@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "blueClub.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -25,10 +25,11 @@ struct MainTabView: StoreView {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        BaseView {
             content()
+        } footer: {
             tabBar()
-        }
+        }.ignoresSafeArea(edges: .top)
     }
 }
 
@@ -37,42 +38,52 @@ struct MainTabView: StoreView {
     @ViewBuilder func content() -> some View {
         TabView(selection: viewStore.$currentTab) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
-                Text(tab.title)
-                    .tag(tab)
-            }
+                if tab == .home {
+                    HomeView()
+                        .tag(tab)
+                } else {
+                    Text(tab.title)
+                        .tag(tab)
+                }
+            }.toolbar(.hidden, for: .tabBar)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     @ViewBuilder func tabBar() -> some View {
-        LazyVGrid(columns: Array(repeating: .init(spacing: 0), count: 4)) {
+        LazyVGrid(columns: Array(repeating: .init(), count: 3)) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
                 
                 let selected = viewStore.state.currentTab == tab
-                let icon = selected ? tab.selectedIcon : tab.icon
-                let color: Color = selected ? Color.colors(.primaryNormal) : Color.colors(.gray07)
+                let color: Color = selected
+                ? Color.colors(.primaryNormal) 
+                : Color.colors(.gray05)
 
-                VStack(spacing: 0) {
-                    Image.icons(icon)
-                        .padding(.top, 6)
+                VStack(spacing: 2.25) {
+                    Image.icons(tab.icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 28, height: 28)
                     Text(tab.title)
-                        .fontModifer(.caption2)
+                        .fontModifer(.sb3)
+                        .frame(height: 18)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(maxHeight: .infinity)
+                .frame(height: 48)
+                .frame(width: 80)
+                .padding(.top, 2)
                 .foregroundColor(color)
                 .onTapGesture {
                     viewStore.send(.didTap(tab))
                 }
             }
         }
-        .frame(height: 50)
+        .frame(height: 56)
+        .padding(.horizontal, 42)
         .background(Color.white)
-        .shadow(
-            color: .black.opacity(0.15),
-            radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/,
-            x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 4
-        )
+        .overlay(alignment: .top) {
+            Rectangle()
+                .frame(height: 1)
+                .foregroundStyle(Color.colors(.cg02))
+        }
     }
 }
 

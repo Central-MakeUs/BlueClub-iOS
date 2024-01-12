@@ -30,7 +30,7 @@ public struct BaseView<Header: View, Content: View, Footer: View>: View {
             content
             Spacer(minLength: 0)
             footer
-        }.hideKeyboardOnTapBackground()
+        }
     }
 }
 
@@ -48,5 +48,4 @@ public struct BaseView<Header: View, Content: View, Footer: View>: View {
     } content: {
         Text("Hello")
     }
-
 }

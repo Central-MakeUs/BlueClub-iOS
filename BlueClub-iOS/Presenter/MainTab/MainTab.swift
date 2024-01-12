@@ -38,7 +38,7 @@ struct MainTab {
 extension MainTab {
     
     enum TabItem: CaseIterable {
-        case home, note, community, myPage
+        case home, note, myPage
         
         var title: String {
             switch self {
@@ -46,8 +46,6 @@ extension MainTab {
                 return "홈"
             case .note:
                 return "근무수첩"
-            case .community:
-                return "커뮤니티"
             case .myPage:
                 return "마이페이지"
             }
@@ -56,24 +54,9 @@ extension MainTab {
         var icon: Icons {
             switch self {
             case .home:
-                return .home_outline
-            case .note:
-                return .calendar_outline
-            case .community:
-                return .chat_outline
-            case .myPage:
-                return .my_outline
-            }
-        }
-        
-        var selectedIcon: Icons {
-            switch self {
-            case .home:
                 return .home_solid
             case .note:
                 return .calendar_solid
-            case .community:
-                return .chat_solid
             case .myPage:
                 return .my_solid
             }

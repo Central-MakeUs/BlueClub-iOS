@@ -29,6 +29,7 @@ public enum Fonts {
     
     case caption1
     case caption2
+    case caption3
     
     var pretendard: Pretendard {
         switch self {
@@ -70,6 +71,8 @@ public enum Fonts {
             return .regular
         case .caption2:
             return .regular
+        case .caption3:
+            return .semiBold
         }
     }
     
@@ -113,6 +116,8 @@ public enum Fonts {
             return 12
         case .caption2:
             return 11
+        case .caption3:
+            return 10
         }
     }
     
@@ -156,6 +161,8 @@ public enum Fonts {
             return 18
         case .caption2:
             return 16
+        case .caption3:
+            return 14
         }
     }
     
@@ -163,7 +170,7 @@ public enum Fonts {
         
         switch self {
             
-        case .b1m, .b1, .b2m, .b2, .b3, .caption1, .caption2:
+        case .b1m, .b1, .b2m, .b2, .b3, .caption1, .caption2, .caption3:
             return -0.6
         default:
             return 0

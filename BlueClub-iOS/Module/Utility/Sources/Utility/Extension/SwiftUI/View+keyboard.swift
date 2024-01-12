@@ -22,10 +22,10 @@ public extension View {
             }
     }
     
-    @ViewBuilder func hideKeyboardOnTapBackground() -> some View {
+    @ViewBuilder func hideKeyboardOnTapBackground(_ color: Color = .white) -> some View {
         self
             .background(
-                Color(UIColor.systemBackground)
+                color
                     .onTapGesture {
                         UIApplication.shared.endEditing()
                     }

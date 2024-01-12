@@ -8,6 +8,7 @@
 import SwiftUI
 import Navigator
 import Architecture
+import DesignSystem
 
 final class AppCoordinator: Coordinatorable {
     var window: UIWindow?
@@ -64,7 +65,9 @@ extension AppCoordinator {
                 MainTab()
             }
             navigator?.start { MainTabView(store: store) }
-            window?.rootViewController = navigator?.view
+            let controller = navigator?.view
+            controller?.view.backgroundColor = .colors(.cg02)
+            window?.rootViewController = controller
         }
     }
 }
