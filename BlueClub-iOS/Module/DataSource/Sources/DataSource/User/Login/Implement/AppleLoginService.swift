@@ -10,11 +10,11 @@ import AuthenticationServices
 
 public class AppleLoginService: NSObject, AppleLoginServiceable {
     
-    private var continuation: CheckedContinuation<LoginUserInfo, Error>?
+    private var continuation: CheckedContinuation<SocialLoginUser, Error>?
     
     public override init() { super.init() }
     
-    public lazy var request: () async throws -> Domain.LoginUserInfo = {
+    public lazy var request: () async throws -> Domain.SocialLoginUser = {
         try await withCheckedThrowingContinuation { continuation in
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             let request = appleIDProvider.createRequest()
@@ -55,7 +55,8 @@ extension AppleLoginService: ASAuthorizationControllerDelegate {
             name = familyName + givenName
         }
         
-        let userInfo = LoginUserInfo(
+
+        let userInfo = SocialLoginUser(
             id: id,
             token: token,
             name: name,

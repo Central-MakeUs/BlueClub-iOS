@@ -9,5 +9,5 @@ import Foundation
 import Domain
 
 public protocol LoginServiceable {
-    var request: () async throws -> LoginUserInfo { get set }
+    var request: () async throws -> SocialLoginUser { get set }
 }

@@ -14,8 +14,8 @@ public class UserRepository: UserRepositoriable {
     private let dependencies: Container
     private var appleLogin: AppleLoginServiceable { dependencies.resolve() }
     
-    @UserDefault("loginUser") private var loginUser: LoginUserInfo?
-    @UserDefault("userInfo") private var userInfo: RegisterUserInfo?
+    @UserDefault("loginUser") private var loginUser: SocialLoginUser?
+    @UserDefault("userInfo") private var userInfo: UserInfo?
     
     public init(dependencies: Container) {
         self.dependencies = dependencies
@@ -23,17 +23,21 @@ public class UserRepository: UserRepositoriable {
     
     public var hasLogin: Bool { loginUser != nil }
     
-    public lazy var requestUserInfo: (LoginMethod) async throws -> LoginUserInfo = { method in
+    public lazy var requestLogin: (LoginMethod) async throws -> SocialLoginUser = { method in
         let user = try await self.appleLogin.request()
         self.loginUser = user
         return user
     }
     
-    public lazy var getUserInfo: () -> LoginUserInfo? = {
+    public lazy var getUser: () -> SocialLoginUser? = {
         self.loginUser
     }
     
-    public lazy var registInfo: (RegisterUserInfo) -> Void = { userInfo in
+    public lazy var registUserInfo: (UserInfo) -> Void = { userInfo in
         self.userInfo = userInfo
     }
+    
+    public lazy var getUserInfo: UserInfo? = {
+        self.userInfo
+    }()
 }

@@ -8,19 +8,16 @@
 import SwiftUI
 import DesignSystem
 import ComposableArchitecture
-import Architecture
 
-struct MainTabView: StoreView {
+struct MainTabView: View {
     
     typealias Reducer = MainTab
-    typealias Store = StoreOf<Reducer>
-    typealias ViewStore = ViewStoreOf<Reducer>
     
-    let store: Store
-    @ObservedObject var viewStore: ViewStore
+    let store: StoreOf<Reducer>
+    @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
-    init(store: Store = .init(initialState: .init(), reducer: { Reducer() })) {
-        self.store = store
+    init(state: Reducer.State) {
+        self.store = .init(initialState: state, reducer: { Reducer() })
         self.viewStore = .init(store, observe: { $0 })
     }
     
@@ -89,7 +86,5 @@ struct MainTabView: StoreView {
 
 
 #Preview {
-    MainTabView(store: .init(initialState: .init(), reducer: {
-        MainTabView.Reducer()
-    }))
+    MainTabView(state: .init())
 }
