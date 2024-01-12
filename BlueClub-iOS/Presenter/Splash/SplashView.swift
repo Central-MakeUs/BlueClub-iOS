@@ -31,11 +31,12 @@ struct SplashView: View {
         .background(Color.colors(.primaryNormal))
         .task {
             try? await Task.sleep(nanoseconds: 1_500_000_000)
-            if userRepository.hasLogin {
-                coordinator?.send(.home)
-            } else {
-                coordinator?.send(.login)
-            }
+//            if userRepository.hasLogin {
+//                coordinator?.send(.home)
+//            } else {
+//                coordinator?.send(.login)
+//            }
+            coordinator?.send(.login)
         }
     }
 }
