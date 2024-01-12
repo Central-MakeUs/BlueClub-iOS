@@ -272,7 +272,5 @@ fileprivate struct PercentToolTipView: View {
 }
 
 #Preview {
-    MainTabView(store: .init(initialState: .init(), reducer: {
-        MainTabView.Reducer()
-    }))
+    MainTabView(state: .init())
 }
