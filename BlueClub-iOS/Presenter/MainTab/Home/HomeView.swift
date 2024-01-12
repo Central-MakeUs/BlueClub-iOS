@@ -15,6 +15,8 @@ struct HomeView: View {
     let percent: CGFloat = 0.2
     
     @State var currentPage = 1
+    @State var indicatorPage = 1
+    @Namespace var animation
     
     var body: some View {
         BaseView {
@@ -105,10 +107,11 @@ extension HomeView {
     @ViewBuilder func bannerIndicator() -> some View {
         HStack(spacing: 4) {
             ForEach(1...3, id: \.self) { page in
-                if currentPage == page {
+                if indicatorPage == page {
                     RoundedRectangle(cornerRadius: 21)
                         .foregroundStyle(Color.white)
                         .frame(width: 12)
+                        .matchedGeometryEffect(id: "indicator", in: animation)
                 } else {
                     Circle()
                         .frame(width: 4)
@@ -119,6 +122,7 @@ extension HomeView {
         .frame(height: 4)
         .padding(.leading, 20)
         .padding(.top, 18)
+        .syncState($currentPage, sync: $indicatorPage)
     }
     
     @ViewBuilder func dayInfoView() -> some View {
