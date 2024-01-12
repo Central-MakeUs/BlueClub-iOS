@@ -5,26 +5,22 @@
 //  Created by 김인섭 on 1/5/24.
 //
 
-import Architecture
 import ComposableArchitecture
 import DesignSystem
 import Domain
 import SwiftUI
 
-
-struct SignUpView: StoreView {
+struct SignUpView: View {
     
     typealias Reducer = SignUp
-    typealias Store = StoreOf<Reducer>
-    typealias ViewStore = ViewStoreOf<Reducer>
     
-    let store: Store
-    @ObservedObject var viewStore: ViewStore
+    let store: StoreOf<Reducer>
+    @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
     @FocusState var focusState: Bool?
     
-    init(store: Store) {
-        self.store = store
+    init(reducer: Reducer) {
+        self.store = .init(initialState: .init(), reducer: { reducer })
         self.viewStore = .init(store, observe: { $0 })
     }
     
@@ -123,7 +119,7 @@ extension SignUpView {
     
     @ViewBuilder func jobSelectionContent() -> some View {
         VStack(spacing: 12) {
-            ForEach(SignUp.JobOption.allCases, id: \.title) { option in
+            ForEach(JobOption.allCases, id: \.title) { option in
                 PrimaryButton(
                     title: option.title,
                     disabled: viewStore.selectedJob != option,
@@ -273,7 +269,5 @@ extension SignUpView {
 }
 
 #Preview {
-    SignUpView(store: .init(initialState: .init(), reducer: {
-        SignUpView.Reducer(cooridonator: .init())
-    }))
+    SignUpView(reducer: .init(cooridonator: .init()))
 }

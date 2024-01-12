@@ -7,13 +7,18 @@
 
 import SwiftUI
 import DesignSystem
+import DependencyContainer
+import Domain
 
 struct SplashView: View {
     
     weak var coordinator: AppCoordinator?
+    private let dependencies: Container
+    private var userRepository: UserRepositoriable { dependencies.resolve() }
     
-    init(coordinator: AppCoordinator) {
+    init(coordinator: AppCoordinator, dependencies: Container = .live) {
         self.coordinator = coordinator
+        self.dependencies = dependencies
     }
     
     var body: some View {
@@ -25,9 +30,8 @@ struct SplashView: View {
         .frame(maxWidth: .infinity)
         .background(Color.colors(.primaryNormal))
         .task {
-            let hasLogin = false
             try? await Task.sleep(nanoseconds: 1_500_000_000)
-            if hasLogin {
+            if userRepository.hasLogin {
                 coordinator?.send(.home)
             } else {
                 coordinator?.send(.login)

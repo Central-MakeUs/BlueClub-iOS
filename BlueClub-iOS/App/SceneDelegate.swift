@@ -1,12 +1,14 @@
 //
 //  SceneDelegate.swift
 //  BlueClub-iOS
-//
+
 //  Created by 김인섭 on 1/3/24.
 //
 
 import SwiftUI
 import DependencyContainer
+import DataSource
+import Domain
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -15,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         coordinator.send(.start(scene))
-        configDepencies()
+        configDependencies()
         configDesignSystem()
     }
 
@@ -56,7 +58,16 @@ private extension SceneDelegate {
         UIFont.registerFonts()
     }
     
-    func configDepencies() {
+    func configDependencies() {
         
+        // NOTE: - DataSouce
+        Container.live
+            .register { AppleLoginService() as AppleLoginServiceable }
+            .register { UserRepository(dependencies: .live) as UserRepositoriable }
     }
+}
+
+extension Container {
+    
+    static let live = Container()
 }
