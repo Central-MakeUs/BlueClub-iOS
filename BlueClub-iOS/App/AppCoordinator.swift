@@ -47,23 +47,16 @@ extension AppCoordinator {
             window?.makeKeyAndVisible()
 
         case .login:
-            let store = LoginView.Store(initialState: .init()) {
-                Login(coordinator: self, dependencies: .live)
-            }
-            navigator?.start { LoginView(store: store) }
+            let reducer = Login(coordinator: self)
+            navigator?.start { LoginView(reducer: reducer) }
             window?.rootViewController = navigator?.view
             
         case .signup:
-            let store = SignUpView.Store(initialState: .init()) {
-                SignUp(cooridonator: self)
-            }
-            navigator?.push { SignUpView(store: store) }
+            let reducer = SignUp(cooridonator: self)
+            navigator?.push { SignUpView(reducer: reducer) }
             
         case .home:
-            let store = MainTabView.Store(initialState: .init()) {
-                MainTab()
-            }
-            navigator?.start { MainTabView(store: store) }
+            navigator?.start { MainTabView(state: .init()) }
             window?.rootViewController = navigator?.view
         }
     }

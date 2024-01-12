@@ -12,20 +12,19 @@ import DependencyContainer
 @Reducer
 struct Login {
     
-    struct State: Equatable { }
-    
-    enum Action {
-        case didSelectLoginMethod(LoginMethod)
-    }
-    
-    @Dependency(\.continuousClock) var clock
     weak var coordinator: AppCoordinator?
     private let dependencies: Container
     private var userRepository: UserRepositoriable { dependencies.resolve() }
     
-    init(coordinator: AppCoordinator, dependencies: Container) {
+    init(coordinator: AppCoordinator, dependencies: Container = .live) {
         self.coordinator = coordinator
         self.dependencies = dependencies
+    }
+    
+    struct State: Equatable { }
+    
+    enum Action {
+        case didSelectLoginMethod(LoginMethod)
     }
     
     var body: some Reducer<State, Action> {
@@ -42,7 +41,7 @@ struct Login {
                         // 맞다면 -> Home
                         // await coordinator?.send(.home)
                         // 아니라면 -> SignUp
-                        try await clock.sleep(for: .seconds(0.5))
+                        try await Task.sleep(for: .seconds(0.5))
                         await coordinator?.send(.signup)
                     }
                 case .kakao:

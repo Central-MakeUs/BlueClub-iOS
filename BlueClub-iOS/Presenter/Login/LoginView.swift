@@ -11,17 +11,15 @@ import Domain
 import Architecture
 import DesignSystem
 
-struct LoginView: StoreView {
+struct LoginView: View {
     
     typealias Reducer = Login
-    typealias Store = StoreOf<Reducer>
-    typealias ViewStore = ViewStoreOf<Reducer>
     
-    let store: Store
-    @ObservedObject var viewStore: ViewStore
+    let store: StoreOf<Reducer>
+    @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
-    init(store: Store) {
-        self.store = store
+    init(reducer: Reducer) {
+        self.store = .init(initialState: .init(), reducer: { reducer })
         self.viewStore = .init(store, observe: { $0 })
     }
     
@@ -62,7 +60,5 @@ struct LoginView: StoreView {
 }
 
 #Preview {
-    LoginView(store: .init(initialState: .init(), reducer: {
-        Login(coordinator: .init(), dependencies: .init())
-    }))
+    LoginView(reducer: .init(coordinator: .init(), dependencies: .init()))
 }
