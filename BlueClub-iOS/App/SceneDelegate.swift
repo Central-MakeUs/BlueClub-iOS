@@ -9,6 +9,7 @@ import SwiftUI
 import DependencyContainer
 import DataSource
 import Domain
+import KakaoSDKAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -48,8 +49,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // 카카오 로그인 하면 여기로 열림
+        // kakaoc54841ca9f7d5edce0ad7244305b9c8c://oauth?code=I8lj1oamAGIp0UXO6IHr_Mf-fPAu7rQoEu-OMHnbgG4rT0nQrqSsell4AX4KPXTaAAABjQFE0U8h5oEAb4_jFQ
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.handleOpenUrl(url: url)
+            }
+        }
+    }
 }
 
 private extension SceneDelegate {

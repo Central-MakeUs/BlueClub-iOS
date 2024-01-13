@@ -15,9 +15,6 @@ let package = Package(
     dependencies: [
         .package(path: "../Domain"),
         .package(path: "../Architecture")
-//        .package(
-//            url: "https://github.com/insub4067/DependencyContainer.git",
-//            .upToNextMajor(from: "1.0.2"))
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
