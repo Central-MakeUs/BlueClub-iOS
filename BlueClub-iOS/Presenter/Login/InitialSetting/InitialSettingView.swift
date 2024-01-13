@@ -35,7 +35,9 @@ struct InitialSettingView: View {
             allowView()
         } .onReceive(viewStore.nickname.publisher) { value in
             viewStore.send(.nicknameDidChange)
-        }.syncFocused($focusState, with: viewStore.$showKeyboard)
+        }
+        .hideKeyboardOnTapBackground()
+        .syncFocused($focusState, with: viewStore.$showKeyboard)
     }
 }
 

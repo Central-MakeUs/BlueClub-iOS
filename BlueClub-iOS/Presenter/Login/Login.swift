@@ -52,6 +52,15 @@ struct Login {
                         UserApi.shared.loginWithKakaoTalk { auth, error in
                             print(auth, error)
                         }
+                        
+//                        UserApi.shared.me() {(user, error) in
+//                            if let error = error {
+//                                print(error)
+//                            }
+//                            if let user {
+//                                print(user)
+//                            }
+//                        }
                     case false:
                         UserApi.shared.loginWithKakaoAccount { auth, error in
                             print(auth, error)

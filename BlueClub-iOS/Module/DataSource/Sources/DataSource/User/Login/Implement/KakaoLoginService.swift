@@ -21,7 +21,6 @@ public class KakaoLoginService: KakaoLoginServiceable {
                     guard let auth else {
                         return continuation.resume(throwing: SocialLoginError.KakaoAuthNotFound)
                     }
-                    
                 }
             } else {
                 UserApi.shared.loginWithKakaoAccount { auth, error in
