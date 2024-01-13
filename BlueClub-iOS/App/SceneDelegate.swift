@@ -54,7 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // kakaoc54841ca9f7d5edce0ad7244305b9c8c://oauth?code=I8lj1oamAGIp0UXO6IHr_Mf-fPAu7rQoEu-OMHnbgG4rT0nQrqSsell4AX4KPXTaAAABjQFE0U8h5oEAb4_jFQ
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                _ = AuthController.handleOpenUrl(url: url)
+                 _ = AuthController.handleOpenUrl(url: url)
             }
         }
     }

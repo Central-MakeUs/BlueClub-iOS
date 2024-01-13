@@ -8,6 +8,7 @@
 import Foundation
 
 public enum SocialLoginError: Error {
-    case invalidCredential
+    case appleCredentialNotFound
+    case KakaoAuthNotFound
     case tokenNotFound
 }
