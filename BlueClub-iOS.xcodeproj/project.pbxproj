@@ -39,7 +39,7 @@
 		FBD511312B5253E1005154CB /* Architecture in Resources */ = {isa = PBXBuildFile; fileRef = FB96A81E2B4B2BB90094CB3D /* Architecture */; };
 		FBD511322B5253E1005154CB /* Utility in Resources */ = {isa = PBXBuildFile; fileRef = FB1C64082B4710B000318FA7 /* Utility */; };
 		FBD511332B5253E2005154CB /* DesignSystem in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63E92B45A2F400318FA7 /* DesignSystem */; };
-		FBD511352B5254DF005154CB /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD511342B5254DF005154CB /* PrivateKey.swift */; };
+		FBD511372B525F5F005154CB /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD511362B525F5F005154CB /* PrivateKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +69,7 @@
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FBAD2C772B487E59002A77BC /* AllowSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowSheetView.swift; sourceTree = "<group>"; };
 		FBAD2C9F2B49C28E002A77BC /* AllowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowView.swift; sourceTree = "<group>"; };
-		FBD511342B5254DF005154CB /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		FBD511362B525F5F005154CB /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */,
-				FBD511342B5254DF005154CB /* PrivateKey.swift */,
+				FBD511362B525F5F005154CB /* PrivateKey.swift */,
 				FB1C63D22B459FC500318FA7 /* AppDelegate.swift */,
 				FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */,
 				FB1C63E02B459FC600318FA7 /* Info.plist */,
@@ -346,7 +346,7 @@
 				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
-				FBD511352B5254DF005154CB /* PrivateKey.swift in Sources */,
+				FBD511372B525F5F005154CB /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
