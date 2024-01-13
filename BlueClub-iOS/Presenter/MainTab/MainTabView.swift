@@ -33,10 +33,14 @@ struct MainTabView: View {
     @ViewBuilder func content() -> some View {
         TabView(selection: viewStore.$currentTab) {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
-                if tab == .home {
+                switch tab {
+                case .home:
                     HomeView()
                         .tag(tab)
-                } else {
+                case .note:
+                    ScheduleNoteView()
+                        .tag(tab)
+                case .myPage:
                     Text(tab.title)
                         .tag(tab)
                 }
