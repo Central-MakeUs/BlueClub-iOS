@@ -1,5 +1,5 @@
 //
-//  SignUp.swift
+//  InitialSetting.swift
 //  BlueClub-iOS
 //
 //  Created by 김인섭 on 1/6/24.
@@ -12,7 +12,7 @@ import DesignSystem
 import DependencyContainer
 
 @Reducer
-struct SignUp {
+struct InitialSetting {
     
     struct State: Equatable {
 
@@ -38,7 +38,7 @@ struct SignUp {
         case didSelectJob(JobOption)
         case didSelectLoginMethod(LoginMethod)
         case nicknameDidChange
-        case didFinishSignUp
+        case didFinishInitialSetting
         case showKeyboard
         
         // MARK: - Sheet
@@ -112,7 +112,7 @@ struct SignUp {
                 }
                 return .none
                 
-            case .didFinishSignUp:
+            case .didFinishInitialSetting:
                 return .run { send in
                     await cooridonator?.send(.home)
                 }
@@ -139,7 +139,7 @@ struct SignUp {
     }
 }
 
-extension SignUp {
+extension InitialSetting {
 
     enum Stage: CaseIterable {
         case job, startYear, nickname, welcome

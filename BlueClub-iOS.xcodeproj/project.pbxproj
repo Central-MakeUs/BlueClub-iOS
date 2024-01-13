@@ -21,14 +21,14 @@
 		FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTab.swift */; };
 		FB1C640A2B47119200318FA7 /* Utility in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C64092B47119200318FA7 /* Utility */; };
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
-		FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* SignUpView.swift */; };
+		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
 		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
-		FBAD2C732B487756002A77BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* SignUp.swift */; };
+		FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* InitialSetting.swift */; };
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
 		FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* AllowSheetView.swift */; };
 		FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* AllowView.swift */; };
@@ -49,7 +49,7 @@
 		FB1C63FD2B45D1E500318FA7 /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
 		FB1C64082B4710B000318FA7 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utility; sourceTree = "<group>"; };
 		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
-		FB1C64132B47239200318FA7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		FB1C64132B47239200318FA7 /* InitialSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingView.swift; sourceTree = "<group>"; };
 		FB28DE992B4F012F004710D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
 		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
-		FBAD2C722B487756002A77BC /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		FBAD2C722B487756002A77BC /* InitialSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetting.swift; sourceTree = "<group>"; };
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FBAD2C772B487E59002A77BC /* AllowSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowSheetView.swift; sourceTree = "<group>"; };
 		FBAD2C9F2B49C28E002A77BC /* AllowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowView.swift; sourceTree = "<group>"; };
@@ -180,20 +180,20 @@
 			children = (
 				FB28DE992B4F012F004710D7 /* LoginView.swift */,
 				FB4479A22B50635900741424 /* Login.swift */,
-				FB1C64122B47238600318FA7 /* SignUp */,
+				FB1C64122B47238600318FA7 /* InitialSetting */,
 			);
 			path = Login;
 			sourceTree = "<group>";
 		};
-		FB1C64122B47238600318FA7 /* SignUp */ = {
+		FB1C64122B47238600318FA7 /* InitialSetting */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C64132B47239200318FA7 /* SignUpView.swift */,
-				FBAD2C722B487756002A77BC /* SignUp.swift */,
+				FB1C64132B47239200318FA7 /* InitialSettingView.swift */,
+				FBAD2C722B487756002A77BC /* InitialSetting.swift */,
 				FBAD2C9E2B49C275002A77BC /* SubViews */,
 				FBAD2C792B487E5F002A77BC /* Sheet */,
 			);
-			path = SignUp;
+			path = InitialSetting;
 			sourceTree = "<group>";
 		};
 		FB8E68D12B517817007FF2C1 /* Home */ = {
@@ -318,14 +318,14 @@
 			files = (
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */,
-				FBAD2C732B487756002A77BC /* SignUp.swift in Sources */,
+				FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB4479A32B50635900741424 /* Login.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
-				FB1C64142B47239200318FA7 /* SignUpView.swift in Sources */,
+				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,
 				FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */,
 				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,

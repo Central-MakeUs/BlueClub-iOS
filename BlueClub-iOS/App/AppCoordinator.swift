@@ -33,7 +33,7 @@ extension AppCoordinator {
     enum Action: Equatable {
         case start(UIWindowScene)
         case login
-        case signup
+        case initialSetting
         case home
     }
     
@@ -52,9 +52,9 @@ extension AppCoordinator {
             navigator?.start { LoginView(reducer: reducer) }
             window?.rootViewController = navigator?.view
             
-        case .signup:
-            let reducer = SignUp(cooridonator: self)
-            navigator?.push { SignUpView(reducer: reducer) }
+        case .initialSetting:
+            let reducer = InitialSetting(cooridonator: self)
+            navigator?.push { InitialSettingView(reducer: reducer) }
             
         case .home:
             navigator?.start { MainTabView(state: .init()) }

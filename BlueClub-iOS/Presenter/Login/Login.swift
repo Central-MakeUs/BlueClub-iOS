@@ -40,10 +40,10 @@ struct Login {
                         // _ = try await userRepository.requestLogin(method)
                         // 맞다면 -> Home
                         // await coordinator?.send(.home)
-                        // 아니라면 -> SignUp
+                        // 아니라면 -> InitialSetting
                         
                         try await Task.sleep(for: .seconds(0.5))
-                        await coordinator?.send(.signup)
+                        await coordinator?.send(.initialSetting)
                     }
                 case .kakao:
                     let hasKakao = UserApi.isKakaoTalkLoginAvailable()

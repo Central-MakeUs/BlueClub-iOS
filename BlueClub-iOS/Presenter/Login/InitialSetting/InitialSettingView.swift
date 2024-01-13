@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  InitialSettingView.swift
 //  BlueClub-iOS
 //
 //  Created by 김인섭 on 1/5/24.
@@ -10,9 +10,9 @@ import DesignSystem
 import Domain
 import SwiftUI
 
-struct SignUpView: View {
+struct InitialSettingView: View {
     
-    typealias Reducer = SignUp
+    typealias Reducer = InitialSetting
     @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
     @FocusState var focusState: Bool?
@@ -40,7 +40,7 @@ struct SignUpView: View {
 }
 
 // MARK: - header
-extension SignUpView {
+extension InitialSettingView {
     
     @ViewBuilder func header() -> some View {
         if viewStore.currentStage != .welcome {
@@ -75,7 +75,7 @@ extension SignUpView {
             .frame(maxWidth: .infinity)
             .foregroundStyle(Color.colors(.cg03))
             .overlay(alignment: .leading) {
-                let widthPerStage = (UIApplication.shared.screenSize?.width ?? .zero) /  CGFloat(SignUp.Stage.allCases.count)
+                let widthPerStage = (UIApplication.shared.screenSize?.width ?? .zero) /  CGFloat(InitialSetting.Stage.allCases.count)
                 let width = widthPerStage * CGFloat(viewStore.currentStage.int)
                 Rectangle()
                     .frame(height: 4)
@@ -86,7 +86,7 @@ extension SignUpView {
 }
 
 // MARK: - content
-@MainActor extension SignUpView {
+@MainActor extension InitialSettingView {
     
     @ViewBuilder func content() -> some View {
         VStack(spacing: 0) {
@@ -218,7 +218,7 @@ extension SignUpView {
 }
 
 // MARK: - footer
-extension SignUpView {
+extension InitialSettingView {
     
     @ViewBuilder func footer() -> some View {
         switch viewStore.currentStage {
@@ -240,7 +240,7 @@ extension SignUpView {
         case .welcome:
             PrimaryButton(
                 title: "바로 시작하기",
-                action: { viewStore.send(.didFinishSignUp) }
+                action: { viewStore.send(.didFinishInitialSetting) }
             ).padding(.vertical, 20)
         default:
             EmptyView()
@@ -249,7 +249,7 @@ extension SignUpView {
 }
 
 // MARK: - sheet
-@MainActor extension SignUpView {
+@MainActor extension InitialSettingView {
     
     @ViewBuilder func selectYearView() -> some View {
         SelectYearView(
@@ -267,5 +267,5 @@ extension SignUpView {
 }
 
 #Preview {
-    SignUpView(reducer: .init(cooridonator: .init()))
+    InitialSettingView(reducer: .init(cooridonator: .init()))
 }
