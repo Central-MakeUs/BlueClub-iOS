@@ -35,7 +35,7 @@ struct SignUpView: View {
             allowView()
         } .onReceive(viewStore.nickname.publisher) { value in
             viewStore.send(.nicknameDidChange)
-        }.syncFocused($focusState, with: viewStore.$showKeyboard)
+        }.hideKeyboardOnTapBackground()
     }
 }
 
@@ -175,7 +175,8 @@ extension SignUpView {
                     text: viewStore.$nickname,
                     placeholder: "닉네임을 입력해주세요",
                     focusState: $focusState,
-                    focusValue: true)
+                    focusValue: true
+                ).syncFocused($focusState, with: viewStore.$showKeyboard)
                 HStack {
                     if let message = viewStore.message {
                         Text(message.message)
