@@ -31,6 +31,7 @@
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
 		FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* AllowSheetView.swift */; };
 		FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* AllowView.swift */; };
+		FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FBAD2C772B487E59002A77BC /* AllowSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowSheetView.swift; sourceTree = "<group>"; };
 		FBAD2C9F2B49C28E002A77BC /* AllowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowView.swift; sourceTree = "<group>"; };
+		FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueClubPrivateKey.swift; path = ../../../BlueClubPrivateKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		FB1C63E62B45A16100318FA7 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */,
 				FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */,
 				FB1C63D22B459FC500318FA7 /* AppDelegate.swift */,
 				FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */,
@@ -323,6 +326,7 @@
 				FBAD2C732B487756002A77BC /* SignUp.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB4479A32B50635900741424 /* Login.swift in Sources */,
+				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
