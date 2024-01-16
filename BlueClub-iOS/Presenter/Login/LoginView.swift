@@ -52,7 +52,7 @@ struct LoginView: View {
                     action: { viewStore.send(.didSelectLoginMethod(method)) }
                 )
             }
-        }.padding(.bottom, 70)
+        }.padding(.bottom, 20)
     }
 }
 

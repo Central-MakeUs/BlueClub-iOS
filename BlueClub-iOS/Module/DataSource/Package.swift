@@ -14,10 +14,9 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Domain"),
-        .package(path: "../Architecture")
-//        .package(
-//            url: "https://github.com/insub4067/DependencyContainer.git",
-//            .upToNextMajor(from: "1.0.2"))
+        .package(path: "../Architecture"),
+        .package(url: "https://github.com/kakao/kakao-ios-sdk",
+            .upToNextMajor(from: "2.20.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -26,7 +25,9 @@ let package = Package(
             name: "DataSource",
             dependencies: [
                 "Domain",
-                "Architecture"
+                "Architecture",
+                .product(name: "KakaoSDKUser",
+                         package: "kakao-ios-sdk")
             ]
         ),
         .testTarget(

@@ -35,7 +35,7 @@ extension AppleLoginService: ASAuthorizationControllerDelegate {
     ) {
         
         guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            continuation?.resume(throwing: SocialLoginError.invalidCredential)
+            continuation?.resume(throwing: SocialLoginError.appleCredentialNotFound)
             return
         }
 

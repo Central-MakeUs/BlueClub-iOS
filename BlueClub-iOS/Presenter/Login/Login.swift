@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Domain
 import DependencyContainer
+import KakaoSDKUser
 
 @Reducer
 struct Login {
@@ -39,12 +40,32 @@ struct Login {
                         // _ = try await userRepository.requestLogin(method)
                         // 맞다면 -> Home
                         // await coordinator?.send(.home)
-                        // 아니라면 -> SignUp
+                        // 아니라면 -> InitialSetting
                         
                         try await Task.sleep(for: .seconds(0.5))
-                        await coordinator?.send(.signup)
+                        await coordinator?.send(.initialSetting)
                     }
                 case .kakao:
+                    let hasKakao = UserApi.isKakaoTalkLoginAvailable()
+                    switch hasKakao {
+                    case true:
+                        UserApi.shared.loginWithKakaoTalk { auth, error in
+                            print(auth, error)
+                        }
+                        
+//                        UserApi.shared.me() {(user, error) in
+//                            if let error = error {
+//                                print(error)
+//                            }
+//                            if let user {
+//                                print(user)
+//                            }
+//                        }
+                    case false:
+                        UserApi.shared.loginWithKakaoAccount { auth, error in
+                            print(auth, error)
+                        }
+                    }
                     return .none
                 case .naver:
                     return .none
