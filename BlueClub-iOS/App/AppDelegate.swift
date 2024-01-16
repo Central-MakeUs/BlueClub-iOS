@@ -8,11 +8,13 @@
 import UIKit
 import DesignSystem
 import DependencyContainer
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        KakaoSDK.initSDK(appKey: PrivateKey.kakao.rawValue)
         return true
     }
 
