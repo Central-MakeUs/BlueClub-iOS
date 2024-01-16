@@ -7,13 +7,20 @@
 
 import SwiftUI
 import DesignSystem
+import ComposableArchitecture
 
 struct ScheduleNoteView: View {
     
-    let amount = 100000000
-    let progress: CGFloat = 0.8
-    var percent: Int { Int(100 * progress) }
-    var 만원단위: Int { Int(amount / 10000) }
+    typealias Reducer = ScheduleNote
+    @ObservedObject var viewStore: ViewStoreOf<Reducer>
+    
+    init(state: Reducer.State) {
+        let store: StoreOf<Reducer> = .init(
+            initialState: state,
+            reducer: { Reducer() })
+        self.viewStore = .init(store, observe: { $0 })
+    }
+
     let calendarColumns: [GridItem] = Array(repeating: .init(), count: 7)
     
     var body: some View {
@@ -26,7 +33,7 @@ struct ScheduleNoteView: View {
                 ])
         } content: {
             content()
-        }.background(Color.colors(.cg02))
+        }.onAppear { viewStore.send(.getDays) }
     }
 }
 
@@ -44,7 +51,9 @@ extension ScheduleNoteView {
         VStack(spacing: 0) {
             calendarHeader()
             calendarContent()
-        }.padding(.horizontal, 23)
+        }
+        .padding(.horizontal, 23)
+        .background(Color.colors(.cg01))
     }
     
     @ViewBuilder func contentHeader() -> some View {
@@ -60,10 +69,10 @@ extension ScheduleNoteView {
                     Spacer()
                 }.fontModifer(.sb2)
                 HStack(spacing: 4) {
-                    Text("\(amount)원")
+                    Text("\(viewStore.amount)원")
                         .fontModifer(.h5)
                         .foregroundStyle(Color.colors(.cg10))
-                    Text("\(percent)% 달성")
+                    Text("\(viewStore.percent)% 달성")
                         .fontModifer(.sb3)
                         .foregroundStyle(Color.colors(.primaryNormal))
                         .padding(.vertical, 3)
@@ -73,8 +82,8 @@ extension ScheduleNoteView {
                 }
             }
             VStack(spacing: 4) {
-                CustomProgressBar(progress: progress)
-                Text(String(만원단위) + "만원")
+                CustomProgressBar(progress: viewStore.progress)
+                Text(String(viewStore.만원단위) + "만원")
                     .fontModifer(.caption2)
                     .foregroundStyle(Color.colors(.cg05))
                     .frame(maxWidth: .infinity , alignment: .trailing)
@@ -89,17 +98,23 @@ extension ScheduleNoteView {
     @ViewBuilder func calendarHeader() -> some View {
         HStack(spacing: 10) {
             Button(action: {
-                
+                viewStore.send(.decreaseMonth)
             }, label: {
                 Image.icons(.arrow_left)
+                    .resizeWidth(16)
+                    .foregroundStyle(Color.colors(.gray06))
             })
-            Text("2024년 01월")
-                .fontModifer(.b1m)
-                .foregroundStyle(Color.colors(.gray08))
+            if let year = viewStore.currentYear, let month = viewStore.currentMonth {
+                Text("\(String(year))년 \(month)월")
+                    .fontModifer(.b1m)
+                    .foregroundStyle(Color.colors(.gray08))
+            }
             Button(action: {
-                
+                viewStore.send(.increaseMonth)
             }, label: {
                 Image.icons(.arrow_right)
+                    .resizeWidth(16)
+                    .foregroundStyle(Color.colors(.gray06))
             })
         }
         .frame(height: 24)
@@ -108,38 +123,29 @@ extension ScheduleNoteView {
     
     @ViewBuilder func calendarContent() -> some View {
         LazyVGrid(columns: Array(repeating: .init(), count: 7)) {
+            // calendarHeader
             ForEach(WeekDay.allCases, id: \.self) { day in
                 Text(day.title)
                     .fontModifer(.caption1)
                     .foregroundStyle(Color.colors(.gray07))
             }
-        }
-    }
-}
-
-enum WeekDay: CaseIterable {
-    case sun, mon, tues, wed, thurs, fri, sat
-    
-    var title: String {
-        switch self {
-        case .sun:
-            return "일"
-        case .mon:
-            return "월"
-        case .tues:
-            return "화"
-        case .wed:
-            return "수"
-        case .thurs:
-            return "목"
-        case .fri:
-            return "금"
-        case .sat:
-            return "토"
+        }.padding(.bottom, 6)
+        LazyVGrid(columns: Array(repeating: .init(), count: 7), spacing: 4) {
+            // calendarBody
+            ForEach(viewStore.days, id: \.?.day) { day in
+                VStack(spacing: 0) {
+                    Text(day != nil ? String(day!.day) : "")
+                        .fontModifer(.sb2)
+                        .foregroundStyle(Color.colors(.gray08))
+                        .padding(.top, 10)
+                        
+                    Spacer(minLength: 0)
+                }.frame(height: 52)
+            }
         }
     }
 }
 
 #Preview {
-    ScheduleNoteView()
+    ScheduleNoteView(state: .init())
 }

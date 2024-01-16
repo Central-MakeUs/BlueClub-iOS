@@ -38,7 +38,7 @@ struct MainTabView: View {
                     HomeView()
                         .tag(tab)
                 case .note:
-                    ScheduleNoteView()
+                    ScheduleNoteView(state: .init())
                         .tag(tab)
                 case .myPage:
                     Text(tab.title)
