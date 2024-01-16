@@ -177,7 +177,8 @@ extension InitialSettingView {
                     text: viewStore.$nickname,
                     placeholder: "닉네임을 입력해주세요",
                     focusState: $focusState,
-                    focusValue: true)
+                    focusValue: true
+                ).syncFocused($focusState, with: viewStore.$showKeyboard)
                 HStack {
                     if let message = viewStore.message {
                         Text(message.message)

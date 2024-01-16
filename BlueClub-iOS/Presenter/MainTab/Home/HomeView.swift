@@ -11,8 +11,8 @@ import DesignSystem
 struct HomeView: View {
     
     @State var tooltipWidth: CGFloat = .zero
-    @State var indicatorWidth: CGFloat = .zero
-    let percent: CGFloat = 0.2
+    @State var progressWidth: CGFloat = .zero
+    let progress: CGFloat = 0.2
     
     @State var currentPage = 1
     @State var indicatorPage = 1
@@ -20,34 +20,13 @@ struct HomeView: View {
     
     var body: some View {
         BaseView {
-            topBar()
+            AppBar(trailingIcons: [
+                (Icons.calendar_large, { }),
+                (Icons.notification1_large, { })
+            ])
         } content: {
             content()
         }.background(Color.colors(.cg02))
-    }
-}
-
-extension HomeView {
-    
-    @ViewBuilder func topBar() -> some View {
-        HStack(spacing: 16) {
-            Image("blueClub", bundle: .main)
-            Spacer()
-            Button(action: {
-                
-            }, label: {
-                Image.icons(.calendar_large)
-                    .foregroundStyle(Color.colors(.cg05))
-            })
-            Button(action: {
-                
-            }, label: {
-                Image.icons(.notification1_large)
-                    .foregroundStyle(Color.colors(.cg05))
-            })
-        }
-        .frame(height: 56)
-        .padding(.horizontal, 20)
     }
 }
 
@@ -178,21 +157,9 @@ extension HomeView {
     }
     
     @ViewBuilder func incomeIndicator() -> some View {
-        let percentWidth = indicatorWidth * percent
         VStack(spacing: 2) {
             Spacer(minLength: 0)
-            RadiusRectangle(
-                .colors(.cg03),
-                height: 12,
-                radius: 50
-            ).getSize { self.indicatorWidth = $0.width }
-            .overlay(alignment: .leading) {
-                RadiusRectangle(
-                    .colors(.primaryLight),
-                    height: 12,
-                    radius: 50
-                ).frame(width: percentWidth)
-            }
+            CustomProgressBar(progress: progress) { progressWidth = $0 }
             Text("1000만원")
                 .fontModifer(.caption2)
                 .foregroundStyle(Color.colors(.cg05))
@@ -200,10 +167,10 @@ extension HomeView {
         }
         .frame(height: 54)
         .overlay(alignment: .topLeading) {
-            PercentToolTipView(percent: percent)
+            PercentToolTipView(percent: progress)
                 .getSize { self.tooltipWidth = $0.width }
                 .padding(.bottom, 2)
-                .offset(x: percentWidth - (tooltipWidth / 2))
+                .offset(x: progressWidth - (tooltipWidth / 2))
         }
     }
     

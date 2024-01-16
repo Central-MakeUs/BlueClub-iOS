@@ -26,6 +26,8 @@
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
 		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
+		FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */; };
+		FB8E68D82B522235007FF2C1 /* ScheduleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
 		FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* InitialSetting.swift */; };
@@ -55,6 +57,8 @@
 		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
+		FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNote.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 		FB1C63F62B45D15E00318FA7 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
+				FB8E68D42B5221E5007FF2C1 /* ScheduleNote */,
 				FB8E68D12B517817007FF2C1 /* Home */,
 				FB1C63F72B45D1A500318FA7 /* MainTabView.swift */,
 				FB1C63FD2B45D1E500318FA7 /* MainTab.swift */,
@@ -202,6 +207,15 @@
 				FB8E68D22B517820007FF2C1 /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		FB8E68D42B5221E5007FF2C1 /* ScheduleNote */ = {
+			isa = PBXGroup;
+			children = (
+				FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */,
+				FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */,
+			);
+			path = ScheduleNote;
 			sourceTree = "<group>";
 		};
 		FBAD2C742B487931002A77BC /* Splash */ = {
@@ -316,12 +330,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB8E68D82B522235007FF2C1 /* ScheduleNote.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB4479A32B50635900741424 /* Login.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */,
+				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
@@ -473,6 +489,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
@@ -490,6 +507,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kim.BlueClub-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -506,6 +524,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
@@ -523,6 +542,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kim.BlueClub-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
