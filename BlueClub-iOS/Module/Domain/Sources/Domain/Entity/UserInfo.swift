@@ -11,11 +11,9 @@ public struct UserInfo: Codable {
     
     public var nickname: String
     public var job: JobOption
-    public var startYear: Int
     
-    public init(nickname: String, job: JobOption, startYear: Int) {
+    public init(nickname: String, job: JobOption) {
         self.nickname = nickname
         self.job = job
-        self.startYear = startYear
     }
 }

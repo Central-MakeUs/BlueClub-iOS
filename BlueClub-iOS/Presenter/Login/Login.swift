@@ -67,8 +67,6 @@ struct Login {
                         }
                     }
                     return .none
-                case .naver:
-                    return .none
                 }
             }
         }

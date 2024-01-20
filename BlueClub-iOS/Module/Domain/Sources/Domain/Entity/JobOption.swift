@@ -9,7 +9,7 @@ import Foundation
 
 public enum JobOption: CaseIterable, Codable {
     
-    case caddy, rider, delivery, insurance, freelancer
+    case caddy, rider, daily
     
     public var title: String {
         switch self {
@@ -17,12 +17,8 @@ public enum JobOption: CaseIterable, Codable {
             return "골프캐디"
         case .rider:
             return "배달 라이더"
-        case .delivery:
-            return "택배 기사"
-        case .insurance:
-            return "보험 설계사"
-        case .freelancer:
-            return "기타·프리랜서"
+        case .daily:
+            return "일용직 근로자"
         }
     }
 }

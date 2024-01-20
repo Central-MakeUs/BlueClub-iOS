@@ -9,13 +9,14 @@ import ComposableArchitecture
 import DesignSystem
 import Domain
 import SwiftUI
+import Combine
 
 struct InitialSettingView: View {
     
     typealias Reducer = InitialSetting
     @ObservedObject var viewStore: ViewStoreOf<Reducer>
     
-    @FocusState var focusState: Bool?
+    @FocusState var focus: Reducer.FocusItem?
     
     init(reducer: Reducer) {
         let store: StoreOf<Reducer> = .init(initialState: .init(), reducer: { reducer })
@@ -29,15 +30,18 @@ struct InitialSettingView: View {
             content()
         } footer: {
             footer()
-        }.sheet(isPresented: viewStore.$showSelectYearSheet) {
-            selectYearView()
         }.sheet(isPresented: viewStore.$showAllowSheet) {
-            allowView()
-        } .onReceive(viewStore.nickname.publisher) { value in
+            AllowSheetView(
+                isPresented: viewStore.$showAllowSheet,
+                onFinish: { viewStore.send(.didFinishAllow) }
+            ).presentationDetents([.height(488)])
+        }.onChange(of: viewStore.nickname) { _ in
             viewStore.send(.nicknameDidChange)
+        }.onReceive(Just(viewStore.targetIcome)) { _ in
+            viewStore.send(.targetIncomeDidChange)
         }
         .hideKeyboardOnTapBackground()
-        .syncFocused($focusState, with: viewStore.$showKeyboard)
+        .syncFocused($focus, with: viewStore.$focus)
     }
 }
 
@@ -94,11 +98,9 @@ extension InitialSettingView {
         VStack(spacing: 0) {
             switch viewStore.currentStage {
             case .job:
-                contentHeader()
                 jobSelectionContent()
-            case .startYear:
-                contentHeader()
-                startYearContent()
+            case .targetIncome:
+                targetIncomeContent()
             case .nickname:
                 nicknameContent()
             case .welcome:
@@ -108,84 +110,108 @@ extension InitialSettingView {
     }
     
     @ViewBuilder func contentHeader() -> some View {
-        Text("내 직업과 일치하는\n항목을 골라주세요")
-            .fontModifer(.h6)
-            .multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 20)
-            .padding(.top, 48)
-            .frame(height: 136)
-    }
-    
-    @ViewBuilder func jobSelectionContent() -> some View {
-        VStack(spacing: 12) {
-            ForEach(JobOption.allCases, id: \.title) { option in
-                PrimaryButton(
-                    title: option.title,
-                    disabled: viewStore.selectedJob != option,
-                    type: .outline,
-                    action: { viewStore.send(.didSelectJob(option), animation: .default) }
-                )
-            }
-        }
-    }
-    
-    @ViewBuilder func startYearContent() -> some View {
-        VStack(spacing: 12) {
-            PrimaryButton(
-                title: viewStore.selectedJob?.title ?? "",
-                disabled: false,
-                type: .outline,
-                action: { viewStore.send(.setStage(.job)) }
-            )
-            if let startYear = viewStore.startYear {
-                PrimaryButton(
-                    title: String(startYear),
-                    disabled: false,
-                    type: .outline,
-                    action: { viewStore.send(.showSelectYearSheet) }
-                )
-            } else {
-                AccessoryButton(
-                    title: "근무 시작년도를 선택해주세요",
-                    action: { viewStore.send(.showSelectYearSheet) }
-                )
-            }
-        }
-    }
-    
-    @ViewBuilder func nicknameContentHeader() -> some View {
         VStack(spacing: 4) {
-            Text("닉네임을 설정해주세요")
+            Spacer()
+            Text(viewStore.currentStage.headerTitle)
                 .fontModifer(.h6)
                 .foregroundStyle(Color.colors(.black))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("닉네임은 언제든 수정이 가능해요.")
+            Text(viewStore.currentStage.headerDescription)
                 .fontModifer(.b2m)
                 .foregroundStyle(Color.init(hex: "7C7C7C"))
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 22)
         }
-        .padding(.top, 62)
         .padding(.horizontal, 20)
+        .frame(height: 136)
+    }
+    
+    @ViewBuilder func jobSelectionContent() -> some View {
+        VStack(spacing: 0) {
+            contentHeader()
+            VStack(spacing: 12) {
+                ForEach(JobOption.allCases, id: \.title) { option in
+                    PrimaryButton(
+                        title: option.title,
+                        disabled: viewStore.selectedJob != option,
+                        type: .outline,
+                        action: {
+                            viewStore.send(.didSelectJob(option), animation: .default)
+                        }
+                    )
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder func targetIncomeContent() -> some View {
+        VStack(spacing: 0) {
+            contentHeader()
+            VStack(spacing: 2) {
+                HStack(spacing: 2) {
+                    TextField("", text: viewStore.$targetIcome)
+                        .keyboardType(.numberPad)
+                        .multilineTextAlignment(.trailing)
+                        .focused($focus, equals: .targetIcome)
+                    Text("원")
+                        .hide(when: viewStore.targetIcome.isEmpty)
+                }
+                .fontModifer(.b1)
+                .frame(height: 24)
+                .foregroundStyle(Color.colors(.gray10))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 16)
+                .background(alignment: .trailing, content: {
+                    if viewStore.targetIcome.isEmpty {
+                        Text("목표 금액 입력")
+                            .fontModifer(.b1)
+                            .foregroundStyle(Color.colors(.gray06))
+                            .padding(.trailing, 12)
+                    }
+                })
+                .roundedBackground(
+                    .colors(.gray01),
+                    radius: 8
+                )
+                if let message = viewStore.targetIcomeMessage {
+                    Text(message.message)
+                        .fontModifer(.caption1)
+                        .foregroundStyle(message.color)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .frame(height: 18)
+                        .padding(.horizontal, 8)
+                }
+            }.padding(.horizontal, 20)
+        }.onAppear { focus = .targetIcome }
     }
     
     @ViewBuilder func nicknameContent() -> some View {
-        VStack(spacing: 22) {
-            nicknameContentHeader()
+        VStack(spacing: 0) {
+            contentHeader()
             VStack(spacing: 2) {
                 TextInput(
                     text: viewStore.$nickname,
                     placeholder: "닉네임을 입력해주세요",
-                    focusState: $focusState,
-                    focusValue: true
-                ).syncFocused($focusState, with: viewStore.$showKeyboard)
+                    focusState: $focus,
+                    focusValue: .nickname
+                ).overlay(alignment: .trailing) {
+                    
+                    Text("중복확인")
+                        .fontModifer(.sb3)
+                        .foregroundStyle(Color.colors(.white))
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 6)
+                        .roundedBackground(
+                            viewStore.checkNicknameDisabled
+                            ? .colors(.gray04)
+                            : .colors(.gray10),
+                            radius: 4
+                        )
+                        .onTapGesture { viewStore.send(.checkNickname) }
+                        .padding(.trailing, 12)
+                }
+                
                 HStack {
-                    if let message = viewStore.message {
-                        Text(message.message)
-                            .fontModifer(.caption1)
-                            .foregroundStyle(message.color)
-                    }
-                    Spacer()
                     HStack(spacing: 3) {
                         Text("\(viewStore.nickname.count)")
                             .foregroundStyle(Color.colors(.gray07))
@@ -194,11 +220,17 @@ extension InitialSettingView {
                         Text("10")
                             .foregroundStyle(Color.colors(.gray07))
                     }.fontModifer(.caption1)
+                    Spacer()
+                    if let message = viewStore.nicknameMessage {
+                        Text(message.message)
+                            .fontModifer(.caption1)
+                            .foregroundStyle(message.color)
+                    }
                 }
                 .frame(height: 18)
                 .padding(.horizontal, 8)
             }.padding(.horizontal, 20)
-        }.onAppear { focusState = true }
+        }.onAppear { focus = .nickname }
     }
     
     @ViewBuilder func welcomeContent() -> some View {
@@ -225,21 +257,28 @@ extension InitialSettingView {
     
     @ViewBuilder func footer() -> some View {
         switch viewStore.currentStage {
-        case .startYear:
+        case .targetIncome:
+            let disabled = !viewStore.isTargetIcomeValid
             PrimaryButton(
                 title: "다음",
-                disabled: viewStore.startYear == .none,
+                disabled: disabled,
                 action: {
                     viewStore.send(.setStage(.nickname), animation: .default)
                 }
-            ).padding(.vertical, 20)
+            )
+            .padding(.vertical, 20)
+            .disabled(disabled)
         case .nickname:
+            let disabled = !viewStore.nicknameAvailable
             PrimaryButton(
                 title: "다음",
-                action: { 
+                disabled: disabled,
+                action: {
                     viewStore.send(.showAllowSheet)
                 }
-            ).padding(.vertical, 20)
+            )
+            .padding(.vertical, 20)
+            .disabled(disabled)
         case .welcome:
             PrimaryButton(
                 title: "바로 시작하기",
@@ -248,24 +287,6 @@ extension InitialSettingView {
         default:
             EmptyView()
         }
-    }
-}
-
-// MARK: - sheet
-@MainActor extension InitialSettingView {
-    
-    @ViewBuilder func selectYearView() -> some View {
-        SelectYearView(
-            isPresented: viewStore.$showSelectYearSheet,
-            selectedYear: viewStore.$startYear
-        ).presentationDetents([.height(460)])
-    }
-    
-    @ViewBuilder func allowView() -> some View {
-        AllowSheetView(
-            isPresented: viewStore.$showAllowSheet,
-            onFinish: { viewStore.send(.didFinishAllow) }
-        ).presentationDetents([.height(488)])
     }
 }
 
