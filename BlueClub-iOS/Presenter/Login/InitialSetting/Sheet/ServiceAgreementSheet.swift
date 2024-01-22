@@ -8,7 +8,7 @@
 import SwiftUI
 import DesignSystem
 
-struct AllowSheetView: View {
+struct ServiceAgreementSheet: View {
     
     @Binding var isPresented: Bool
     let onFinish: () -> Void
@@ -29,7 +29,7 @@ struct AllowSheetView: View {
                 title: "블루클럽을 이용하려면,\n정보 동의가 필요해요."
             )
         } content: {
-            AllowView(hasAllow: $hasAllow)
+            ServiceAgreementView(hasAllow: $hasAllow)
         } footer: {
             GrayButton(
                 title: "확인",
@@ -42,7 +42,7 @@ struct AllowSheetView: View {
     }
 }
 
-extension AllowSheetView {
+extension ServiceAgreementSheet {
     
     enum AllowRow: CaseIterable, Equatable {
         
@@ -77,5 +77,5 @@ extension AllowSheetView {
 }
 
 #Preview {
-    AllowSheetView(isPresented: .constant(true), onFinish: { })
+    ServiceAgreementSheet(isPresented: .constant(true), onFinish: { })
 }

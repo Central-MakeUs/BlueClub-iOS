@@ -31,7 +31,7 @@ struct InitialSettingView: View {
         } footer: {
             footer()
         }.sheet(isPresented: viewStore.$showAllowSheet) {
-            AllowSheetView(
+            ServiceAgreementSheet(
                 isPresented: viewStore.$showAllowSheet,
                 onFinish: { viewStore.send(.didFinishAllow) }
             ).presentationDetents([.height(488)])
@@ -237,11 +237,11 @@ extension InitialSettingView {
         VStack(spacing: 0) {
             Image("character", bundle: .main)
                 .padding(.top, 142)
-            Text("블루클럽 가입을 축하드립니다")
+            Text("블루클럽 가입을 축하드려요!")
                 .fontModifer(.h6)
                 .foregroundStyle(Color.colors(.black))
                 .padding(.top, 20)
-            Text("이제 열심히 근무 기록하고\n나의 근무활동을 자랑할 일만 남았어요!")
+            Text("이제 열심히 근무 기록하고\n나의 근무활동을 자유롭게 자랑해봐요")
                 .fontModifer(.sb2)
                 .foregroundStyle(Color.colors(.gray07))
                 .multilineTextAlignment(.center)

@@ -8,13 +8,13 @@
 import SwiftUI
 import DesignSystem
 
-struct AllowView: View {
+struct ServiceAgreementView: View {
     
     @Binding var hasAllow: Bool
-    @State var checked: [AllowRow] = []
+    @State var checked: [AgreementRow] = []
     
     var allChecked: Bool {
-        checked.count == AllowRow.allCases.count
+        checked.count == AgreementRow.allCases.count
     }
     
     var body: some View {
@@ -23,22 +23,18 @@ struct AllowView: View {
                 hasCheck: allChecked,
                 title: "약관 전체 동의",
                 onTap: {
-                    if allChecked {
-                        checked = []
-                    } else {
-                        checked = AllowRow.allCases
-                    }
+                    checked = allChecked ? [] : AgreementRow.allCases
                 }
             )
             listContent()
         }.onChange(of: checked, perform: { value in
-            hasAllow = AllowRow.mandatories.allSatisfy { value.contains($0) }
+            hasAllow = AgreementRow.mandatories.allSatisfy { value.contains($0) }
         })
     }
     
     @ViewBuilder func listContent() -> some View {
         VStack(spacing: 16) {
-            ForEach(AllowRow.allCases, id: \.title) { row in
+            ForEach(AgreementRow.allCases, id: \.title) { row in
                 CheckListCell(
                     hasCheck: checked.contains(row),
                     title: row.title,
@@ -49,9 +45,9 @@ struct AllowView: View {
     }
 }
 
-extension AllowView {
+extension ServiceAgreementView {
     
-    enum AllowRow: CaseIterable, Equatable {
+    enum AgreementRow: CaseIterable, Equatable {
         
         case 개인정보, 서비스, 제3자, 휴대푠, 마케팅
         
@@ -84,5 +80,5 @@ extension AllowView {
 }
 
 #Preview {
-    AllowView(hasAllow: .constant(true))
+    ServiceAgreementView(hasAllow: .constant(true))
 }
