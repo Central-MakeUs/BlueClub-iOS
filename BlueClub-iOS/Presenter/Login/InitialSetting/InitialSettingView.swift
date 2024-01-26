@@ -235,7 +235,7 @@ extension InitialSettingView {
     
     @ViewBuilder func welcomeContent() -> some View {
         VStack(spacing: 0) {
-            Image("character", bundle: .main)
+            Image("welcome", bundle: .main)
                 .padding(.top, 142)
             Text("블루클럽 가입을 축하드려요!")
                 .fontModifer(.h6)
