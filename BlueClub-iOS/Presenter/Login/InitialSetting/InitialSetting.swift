@@ -16,18 +16,23 @@ struct InitialSetting {
     
     struct State: Equatable {
 
-        @BindingState var showSelectYearSheet = false
         @BindingState var showAllowSheet = false
         
-        @BindingState var startYear: Int? = .none
+        @BindingState var targetIcome = ""
+        var targetIcomeMessage: InputStatusMessages?
         @BindingState var nickname = ""
+        var nicknameMessage: InputStatusMessages?
+        var checkNicknameDisabled: Bool {
+            (nickname.isEmpty && nicknameMessage == .none) ||
+            (!nickname.isEmpty && nicknameMessage != .none)
+        }
         @BindingState var hasAllow = false
-        @BindingState var showKeyboard: Bool? = false
-        
-        var message: Messages?
+        @BindingState var focus: FocusItem? 
         
         var currentStage: Stage = .job
         var selectedJob: JobOption? = .none
+        var nicknameAvailable = false
+        var isTargetIcomeValid = false
     }
     
     enum Action: BindableAction {
@@ -36,13 +41,12 @@ struct InitialSetting {
         case didTapBack
         case setStage(Stage)
         case didSelectJob(JobOption)
-        case didSelectLoginMethod(LoginMethod)
+        case targetIncomeDidChange
         case nicknameDidChange
+        case checkNickname
         case didFinishInitialSetting
-        case showKeyboard
         
         // MARK: - Sheet
-        case showSelectYearSheet
         case showAllowSheet
         case didFinishAllow
     }
@@ -70,45 +74,77 @@ struct InitialSetting {
                     return .run { send in
                         await cooridonator?.navigator?.pop()
                     }
-                case .startYear:
-                    state.startYear = .none
+                case .targetIncome:
                     return .send(.setStage(.job))
                 case .nickname:
-                    return .send(.setStage(.startYear))
+                    return .send(.setStage(.targetIncome))
                 case .welcome:
                     return .none
                 }
                 
             case .setStage(let stage):
                 state.currentStage = stage
-                switch stage {
-                case .nickname:
-                    return .send(.showKeyboard)
-                case .welcome:
+                if stage == .welcome {
                     let userInfo = UserInfo(
                         nickname: state.nickname,
-                        job: state.selectedJob!,
-                        startYear: state.startYear!)
-                    return .run { send in
-                        userRepository.registUserInfo(userInfo)
-                    }
-                default:
-                    return .none
+                        job: state.selectedJob!)
+                    userRepository.registUserInfo(userInfo)
                 }
+                return .none
                 
             case .didSelectJob(let job):
                 state.selectedJob = job
-                return .send(.setStage(.startYear))
-                
-            case .didSelectLoginMethod(let method):
-                switch method {
-                case .kakao, .naver, .apple:
-                    return .send(.showAllowSheet)
+                return .send(.setStage(.targetIncome))
+
+            case .targetIncomeDidChange:
+                let targetIcome = state.targetIcome.replacingOccurrences(of: ",", with: "")
+                if targetIcome.isEmpty {
+                    state.targetIcomeMessage = .none
                 }
+                if let number = Int(targetIcome) {
+                    state.targetIcome = formatNumber(number)
+                    switch number {
+                    case 100000...99990000:
+                        state.isTargetIcomeValid = true
+                        state.targetIcomeMessage = .목표금액기준만족
+                    case ..<100000:
+                        state.targetIcomeMessage = .목표금액기준미만
+                    case 99990001...:
+                        state.targetIcomeMessage = .목표금액초과
+                    default:
+                        break
+                    }
+                } else {
+                    state.targetIcome = ""
+                }
+                return .none
                 
             case .nicknameDidChange:
-                if state.nickname.count > 10 {
-                    state.nickname = String(state.nickname.prefix(10))
+                state.nicknameAvailable = false
+                let nickname = state.nickname
+                if nickname.isEmpty {
+                    state.nicknameMessage = .none
+                } else if nickname.count > 10 {
+                    state.nickname = String(nickname.prefix(10))
+                } else {
+                    state.nicknameMessage = validateNickname(nickname)
+                        ? .none
+                        : .닉네임유효성에러
+                }
+                return .none
+                
+            case .checkNickname:
+                guard !state.checkNicknameDisabled else {
+                    return .none
+                }
+                // TODO: - API 연결해서 중복 확인하기
+                let result = true
+                if true {
+                    state.nicknameAvailable = true
+                    state.nicknameMessage = .사용가능닉네임
+                } else {
+                    state.nicknameAvailable = false
+                    state.nicknameMessage = .중복닉네임
                 }
                 return .none
                 
@@ -116,15 +152,6 @@ struct InitialSetting {
                 return .run { send in
                     await cooridonator?.send(.home)
                 }
-                
-            case .showKeyboard:
-                state.showKeyboard = true
-                return .none
-                
-            // MARK: - Sheet
-            case .showSelectYearSheet:
-                state.showSelectYearSheet = true
-                return .none
                 
             case .showAllowSheet:
                 state.showAllowSheet = true
@@ -140,15 +167,19 @@ struct InitialSetting {
 }
 
 extension InitialSetting {
+    
+    enum FocusItem {
+        case targetIcome, nickname
+    }
 
     enum Stage: CaseIterable {
-        case job, startYear, nickname, welcome
+        case job, targetIncome, nickname, welcome
         
         var int: Int {
             switch self {
             case .job:
                 return 1
-            case .startYear:
+            case .targetIncome:
                 return 2
             case .nickname:
                 return 3
@@ -161,35 +192,90 @@ extension InitialSetting {
             switch self {
             case .job:
                 return "직업 설정"
-            case .startYear:
-                return "연차 설정"
+            case .targetIncome:
+                return "목표 금액 설정"
             case .nickname:
                 return "닉네임 설정"
             case .welcome:
                 return "블루클럽 가입을 축하드립니다"
             }
         }
+        
+        var headerTitle: String {
+            switch self {
+            case .job:
+                return "어떤일을 하고 계시나요?"
+            case .targetIncome:
+                return "매달 수입 목표를 입력해주세요"
+            case .nickname:
+                return "닉네임을 설정해주세요"
+            case .welcome:
+                return "블루클럽 가입을 축하드려요!"
+            }
+        }
+        
+        var headerDescription: String {
+            switch self {
+            case .job:
+                return "내 직업과 일치하는 항목을 골라주세요."
+            case .targetIncome:
+                return "목표 금액은 최소 10만원부터 입력해주세요."
+            case .nickname:
+                return "닉네임은 언제든 수정이 가능해요."
+            case .welcome:
+                return "이제 근무기록을 통해 관리하고\n나의 근무활동을 자유롭게 자랑해봐요"
+            }
+        }
     }
     
-    enum Messages {
-        case availableNickname, duplicateNickname
+    enum InputStatusMessages {
+        case 사용가능닉네임, 중복닉네임, 닉네임유효성에러, 목표금액기준미만, 목표금액기준만족, 목표금액초과
         
         var message: String {
             switch self {
-            case .availableNickname:
-                return "사용 가능한 닉네임 입니다."
-            case .duplicateNickname:
-                return "중복된 닉네임 입니다."
+            case .사용가능닉네임:
+                return "사용 가능한 닉네임입니다."
+            case .중복닉네임:
+                return "이미 사용 중인 닉네임입니다."
+            case .닉네임유효성에러:
+                return "띄어쓰기 없이 한글, 영문, 숫자만 가능해요"
+            case .목표금액기준미만:
+                return "10만원 이상 입력해주세요."
+            case .목표금액기준만족:
+                return "멋진 목표 금액이에요!"
+            case .목표금액초과:
+                return "9,999만원 이하 입력해주세요."
             }
         }
         
         var color: Color {
             switch self {
-            case .availableNickname:
+            case .사용가능닉네임, .목표금액기준만족:
                 return Color.colors(.primaryNormal)
-            case .duplicateNickname:
+            case .중복닉네임, .닉네임유효성에러, .목표금액기준미만, .목표금액초과:
                 return Color.colors(.error)
             }
         }
     }
+}
+
+fileprivate func formatNumber(_ number: Int) -> String {
+    formatter.string(from: NSNumber(value: number)) ?? ""
+}
+
+fileprivate var formatter: NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 0
+    formatter.maximumFractionDigits = 0
+    formatter.groupingSeparator = ","
+    formatter.usesGroupingSeparator = true
+    return formatter
+}
+
+fileprivate func validateNickname(_ string: String) -> Bool {
+    let pattern = "^[가-힣A-Za-z0-9]+$"
+    let regex = try? NSRegularExpression(pattern: pattern)
+    let range = NSRange(location: 0, length: string.utf16.count)
+    return regex?.firstMatch(in: string, options: [], range: range) != nil
 }

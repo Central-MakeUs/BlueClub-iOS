@@ -8,5 +8,5 @@
 import Foundation
 
 public enum LoginMethod: CaseIterable, Codable {
-    case kakao, naver, apple
+    case kakao, apple
 }

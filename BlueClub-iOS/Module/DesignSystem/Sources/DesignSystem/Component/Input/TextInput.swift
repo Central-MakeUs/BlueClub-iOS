@@ -14,22 +14,17 @@ public struct TextInput<T: Hashable>: View {
     let placeholder: String
     
     let focusState: FocusState<T?>.Binding
-    @Binding var followingState: T?
     let focusValue: T
     
     public init(
         text: Binding<String>,
         placeholder: String,
-        
         focusState: FocusState<T?>.Binding,
-        followingState: Binding<T?> = .constant(false),
         focusValue: T
     ) {
         self._text = text
         self.placeholder = placeholder
-        
         self.focusState = focusState
-        self._followingState = followingState
         self.focusValue = focusValue
     }
     
@@ -39,10 +34,7 @@ public struct TextInput<T: Hashable>: View {
                 Text(placeholder)
                     .fontModifer(.b1m)
                     .foregroundStyle(Color.colors(.gray05))
-            }
-            .focused(focusState, equals: focusValue)
-            .syncFocused(focusState, with: $followingState)
-            
+            }.focused(focusState, equals: focusValue)
             if !text.isEmpty {
                 Button(action: {
                     text = ""

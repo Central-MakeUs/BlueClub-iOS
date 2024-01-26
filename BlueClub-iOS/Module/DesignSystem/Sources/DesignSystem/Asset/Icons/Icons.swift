@@ -48,6 +48,8 @@ public enum Icons: String {
     case understroke
     case undo
     case x
+    case check_active
+    case check_deactive
     
     // MARK: - outline
     case add_outline

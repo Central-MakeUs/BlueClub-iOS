@@ -29,16 +29,11 @@ public struct CheckListCell: View {
                 Button {
                     onTapCheck()
                 } label: {
-                    Icons.check_circle_solid.image
-                        .foregroundStyle(
-                            hasCheck
-                            ? Color.colors(.primaryNormal)
-                            : Color.colors(.gray04)
-                        )
+                    Image.icons(hasCheck ? .check_active : .check_deactive)
                 }
                 Text(title)
                     .fontModifer(.b2m)
-                    .foregroundStyle(Color(hex: "7C7C7C"))
+                    .foregroundStyle(Color.colors(.gray07))
             }
             Spacer()
             Icons.arrow_right.image

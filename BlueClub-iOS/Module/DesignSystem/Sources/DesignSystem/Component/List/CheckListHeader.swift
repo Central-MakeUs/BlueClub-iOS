@@ -28,21 +28,16 @@ public struct CheckListHeader: View {
             onTapCell()
         }, label: {
             HStack(spacing: 12) {
-                Icons.check_circle_solid.image
-                    .foregroundStyle(
-                        hasCheck
-                        ? Color.colors(.primaryNormal)
-                        : Color.colors(.gray04)
-                    )
+                Image.icons(hasCheck ? .check_active : .check_deactive)
+                    .padding(.leading, 3)
                 Text(title)
-                    .foregroundStyle(Color(hex: "232323"))
+                    .foregroundStyle(Color.colors(.gray10))
                     .fontModifer(.sb1)
                 Spacer()
             }
-            .padding(16)
-            .background(Color.colors(.gray01))
-            .cornerRadius(12)
-            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .drawUnderline()
+            .padding(.horizontal, 30)
             .frame(height: 56)
         })
     }

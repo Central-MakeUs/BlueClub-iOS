@@ -29,12 +29,12 @@
 		FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */; };
 		FB8E68D82B522235007FF2C1 /* ScheduleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
-		FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C702B486053002A77BC /* SelectYearView.swift */; };
 		FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* InitialSetting.swift */; };
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
-		FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* AllowSheetView.swift */; };
-		FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* AllowView.swift */; };
+		FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */; };
+		FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */; };
 		FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */; };
+		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,12 +61,12 @@
 		FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNote.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
-		FBAD2C702B486053002A77BC /* SelectYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearView.swift; sourceTree = "<group>"; };
 		FBAD2C722B487756002A77BC /* InitialSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetting.swift; sourceTree = "<group>"; };
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		FBAD2C772B487E59002A77BC /* AllowSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowSheetView.swift; sourceTree = "<group>"; };
-		FBAD2C9F2B49C28E002A77BC /* AllowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowView.swift; sourceTree = "<group>"; };
+		FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementSheet.swift; sourceTree = "<group>"; };
+		FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementView.swift; sourceTree = "<group>"; };
 		FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueClubPrivateKey.swift; path = ../../../BlueClubPrivateKey.swift; sourceTree = "<group>"; };
+		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,6 @@
 			children = (
 				FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */,
 				FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */,
-				FBD511362B525F5F005154CB /* PrivateKey.swift */,
 				FB1C63D22B459FC500318FA7 /* AppDelegate.swift */,
 				FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */,
 				FB1C63E02B459FC600318FA7 /* Info.plist */,
@@ -164,6 +163,7 @@
 		FB1C63EF2B45A9A900318FA7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FB52E3D82B5E8AFB001169AB /* Lottie */,
 				FB1C63DB2B459FC600318FA7 /* Assets.xcassets */,
 				FB1C640D2B4719E300318FA7 /* Image.xcassets */,
 			);
@@ -202,6 +202,14 @@
 			path = InitialSetting;
 			sourceTree = "<group>";
 		};
+		FB52E3D82B5E8AFB001169AB /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				FBD812B92B63FDE4000FD1C0 /* splash.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		FB8E68D12B517817007FF2C1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,8 +238,7 @@
 		FBAD2C792B487E5F002A77BC /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				FBAD2C702B486053002A77BC /* SelectYearView.swift */,
-				FBAD2C772B487E59002A77BC /* AllowSheetView.swift */,
+				FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -239,7 +246,7 @@
 		FBAD2C9E2B49C275002A77BC /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				FBAD2C9F2B49C28E002A77BC /* AllowView.swift */,
+				FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -320,6 +327,7 @@
 			files = (
 				FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */,
 				FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */,
+				FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */,
 				FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,22 +341,20 @@
 			files = (
 				FB8E68D82B522235007FF2C1 /* ScheduleNote.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
-				FBAD2C782B487E59002A77BC /* AllowSheetView.swift in Sources */,
+				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB4479A32B50635900741424 /* Login.swift in Sources */,
 				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
-				FBAD2CA02B49C28E002A77BC /* AllowView.swift in Sources */,
+				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTab.swift in Sources */,
 				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,
-				FBAD2C712B486053002A77BC /* SelectYearView.swift in Sources */,
 				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
-				FBD511372B525F5F005154CB /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

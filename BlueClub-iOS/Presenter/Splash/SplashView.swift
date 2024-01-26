@@ -9,6 +9,7 @@ import SwiftUI
 import DesignSystem
 import DependencyContainer
 import Domain
+import LottieUI
 
 struct SplashView: View {
     
@@ -23,14 +24,18 @@ struct SplashView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            Image("character", bundle: .main)
+            Spacer()
+            LottieView("splash")
+                .loopMode(.repeat(.infinity))
+                .frame(width: 147, height: 147)
             Image("blueclub", bundle: .main)
+            Spacer()
         }
         .frame(maxHeight: .infinity)
         .frame(maxWidth: .infinity)
         .background(Color.colors(.primaryNormal))
         .task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
 //            if userRepository.hasLogin {
 //                coordinator?.send(.home)
 //            } else {
@@ -39,4 +44,8 @@ struct SplashView: View {
             coordinator?.send(.login)
         }
     }
+}
+
+#Preview {
+    SplashView(coordinator: .init(), dependencies: .live)
 }
