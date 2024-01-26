@@ -10,6 +10,7 @@ import DesignSystem
 
 struct HomeView: View {
     
+    
     @State var tooltipWidth: CGFloat = .zero
     @State var progressWidth: CGFloat = .zero
     let progress: CGFloat = 0.2

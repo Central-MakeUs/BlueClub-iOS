@@ -35,7 +35,7 @@ struct SplashView: View {
         .frame(maxWidth: .infinity)
         .background(Color.colors(.primaryNormal))
         .task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
 //            if userRepository.hasLogin {
 //                coordinator?.send(.home)
 //            } else {

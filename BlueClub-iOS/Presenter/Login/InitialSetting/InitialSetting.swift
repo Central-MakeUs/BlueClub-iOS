@@ -103,11 +103,17 @@ struct InitialSetting {
                 }
                 if let number = Int(targetIcome) {
                     state.targetIcome = formatNumber(number)
-                    let isValid = number >= 100_000
-                    state.isTargetIcomeValid = isValid
-                    state.targetIcomeMessage = isValid
-                        ? .목표금액기준만족
-                        : .목표금액기준미만
+                    switch number {
+                    case 100000...99990000:
+                        state.isTargetIcomeValid = true
+                        state.targetIcomeMessage = .목표금액기준만족
+                    case ..<100000:
+                        state.targetIcomeMessage = .목표금액기준미만
+                    case 99990001...:
+                        state.targetIcomeMessage = .목표금액초과
+                    default:
+                        break
+                    }
                 } else {
                     state.targetIcome = ""
                 }
@@ -223,7 +229,7 @@ extension InitialSetting {
     }
     
     enum InputStatusMessages {
-        case 사용가능닉네임, 중복닉네임, 닉네임유효성에러, 목표금액기준미만, 목표금액기준만족
+        case 사용가능닉네임, 중복닉네임, 닉네임유효성에러, 목표금액기준미만, 목표금액기준만족, 목표금액초과
         
         var message: String {
             switch self {
@@ -237,6 +243,8 @@ extension InitialSetting {
                 return "10만원 이상 입력해주세요."
             case .목표금액기준만족:
                 return "멋진 목표 금액이에요!"
+            case .목표금액초과:
+                return "9,999만원 이하 입력해주세요."
             }
         }
         
@@ -244,7 +252,7 @@ extension InitialSetting {
             switch self {
             case .사용가능닉네임, .목표금액기준만족:
                 return Color.colors(.primaryNormal)
-            case .중복닉네임, .닉네임유효성에러, .목표금액기준미만:
+            case .중복닉네임, .닉네임유효성에러, .목표금액기준미만, .목표금액초과:
                 return Color.colors(.error)
             }
         }
