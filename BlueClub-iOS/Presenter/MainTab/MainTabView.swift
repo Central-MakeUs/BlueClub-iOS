@@ -35,7 +35,7 @@ struct MainTabView: View {
             ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
                 switch tab {
                 case .home:
-                    HomeView()
+                    HomeView(state: .init())
                         .tag(tab)
                 case .note:
                     ScheduleNoteView(state: .init())
@@ -54,10 +54,10 @@ struct MainTabView: View {
                 
                 let selected = viewStore.state.currentTab == tab
                 let color: Color = selected
-                ? Color.colors(.primaryNormal) 
-                : Color.colors(.gray05)
+                    ? Color.colors(.primaryNormal)
+                    : Color.colors(.gray05)
 
-                VStack(spacing: 2.25) {
+                VStack(spacing: 2) {
                     Image.icons(tab.icon)
                         .resizable()
                         .scaledToFit()
@@ -66,17 +66,15 @@ struct MainTabView: View {
                         .fontModifer(.sb3)
                         .frame(height: 18)
                 }
-                .frame(height: 48)
-                .frame(width: 80)
-                .padding(.top, 2)
+                .frame(height: 40)
+                .frame(width: 64)
+                .padding(.vertical, 9)
                 .foregroundColor(color)
-                .onTapGesture {
-                    viewStore.send(.didTap(tab))
-                }
+                .onTapGesture { viewStore.send(.didTap(tab)) }
             }
         }
-        .frame(height: 56)
-        .padding(.horizontal, 42)
+        .frame(height: 58)
+        .padding(.horizontal, 36)
         .background(Color.white)
         .overlay(alignment: .top) {
             Rectangle()

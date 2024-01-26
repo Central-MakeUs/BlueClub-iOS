@@ -9,7 +9,7 @@ import SwiftUI
 import DesignSystem
 import DependencyContainer
 import Domain
-import LottieUI
+import Lottie
 
 struct SplashView: View {
     
@@ -25,8 +25,8 @@ struct SplashView: View {
     var body: some View {
         VStack(spacing: 16) {
             Spacer()
-            LottieView("splash")
-                .loopMode(.repeat(.infinity))
+            LottieView(animation: .named("splash"))
+                .playing(loopMode: .loop)
                 .frame(width: 147, height: 147)
             Image("blueclub", bundle: .main)
             Spacer()
@@ -41,7 +41,7 @@ struct SplashView: View {
 //            } else {
 //                coordinator?.send(.login)
 //            }
-            coordinator?.send(.login)
+            coordinator?.send(.home)
         }
     }
 }

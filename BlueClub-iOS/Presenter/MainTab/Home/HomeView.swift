@@ -7,9 +7,18 @@
 
 import SwiftUI
 import DesignSystem
+import ComposableArchitecture
+import Lottie
 
 struct HomeView: View {
     
+    typealias Reducer = Home
+    @ObservedObject var viewStore: ViewStoreOf<Reducer>
+    
+    init(state: Reducer.State) {
+        let store: StoreOf<Reducer> = .init(initialState: state, reducer: { Reducer() })
+        self.viewStore = .init(store, observe: { $0 })
+    }
     
     @State var tooltipWidth: CGFloat = .zero
     @State var progressWidth: CGFloat = .zero
@@ -35,13 +44,13 @@ extension HomeView {
     
     @ViewBuilder func contentHeader() -> some View {
         HStack(spacing: 8) {
-            Text("골프캐디")
+            Text(viewStore.job.title)
                 .fontModifer(.h5)
                 .foregroundStyle(Color.black)
             HStack(spacing: 4) {
                 Image(.dot)
-                Text("3년째 근무증")
-                    .fontModifer(.b3)
+                Text("\(viewStore.name)님")
+                    .fontModifer(.sb2)
                     .foregroundStyle(Color.colors(.gray08))
             }
             Spacer()
@@ -54,8 +63,7 @@ extension HomeView {
         ScrollView {
             LazyVStack(spacing: 0) {
                 contentHeader()
-                contentBody()
-                    .padding(.bottom, 39)
+                contentBody().padding(.bottom, 24)
                 contentFooter()
             }
         }
@@ -128,10 +136,16 @@ extension HomeView {
     }
     
     @ViewBuilder func incomeInfoView() -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 16) {
             incomeInfoHeader()
-            incomeIndicator()
-            CustomDivider()
+            if viewStore.달성수입 != .none {
+                incomeIndicator()
+            } else {
+                LottieView(animation: .named("progress"))
+                    .playing(loopMode: .loop)
+                    .frame(maxWidth: .infinity)
+            }
+            CustomDivider(padding: 0)
             incomeInfoFooter()
         }
         .padding(20)
@@ -147,12 +161,17 @@ extension HomeView {
                 .padding(.horizontal, 6)
                 .padding(.vertical, 3)
                 .roundedBackground(.colors(.primaryBackground), radius: 4)
-            let amount = 400000
-            Group {
-                Text("\(amount)") + Text("원")
+            if let 달성수입 = viewStore.달성수입 {
+                Group {
+                    Text("\(달성수입)") + Text("원")
+                }
+                .fontModifer(.h7)
+                .foregroundStyle(Color.colors(.cg10))
+            } else {
+                Text("수입을 기록해봐요")
+                    .fontModifer(.h7)
+                    .foregroundStyle(Color.colors(.cg04))
             }
-            .fontModifer(.h6)
-            .foregroundStyle(Color.colors(.cg10))
             Spacer()
         }.frame(height: 28)
     }
@@ -192,31 +211,38 @@ extension HomeView {
     }
     
     @ViewBuilder func contentFooter() -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 12) {
-                ForEach(1...10, id: \.self) { count in
-                    contentCell(index: count)
-                }
-            }.padding(.horizontal, 20)
-        }
+        LazyVGrid(columns: Array(repeating: .init(), count: 2), spacing: 10, content: {
+            ForEach(HomeFooterContent.allCases, id: \.self) { content in
+                contentCell(content: content)
+            }
+        }).padding(.horizontal, 20)
     }
     
-    @ViewBuilder func contentCell(index: Int) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            let image: ImageResource = index / 2 == 0 
-                ? .contentCharacter1
-                : .contentCharacter2
-            let text = index / 2 == 0
-                ? "자산을 더하는 수입관리 금융상품"
-                : "프리랜서들을 위한 연말정산 가이드"
-            Image(image)
-            Text(text)
-                .fontModifer(.sb2)
-                .foregroundStyle(Color.colors(.gray08))
+    @ViewBuilder func contentCell(content: HomeFooterContent) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            content.image
+            Text(content.title)
+                .fontModifer(.sb3)
+                .foregroundStyle(Color.colors(.gray06))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(content.description)
+                .fontModifer(.sb1)
+                .foregroundStyle(Color.colors(.gray09))
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 18)
-        .square(148)
+        .overlay(alignment: .topTrailing) {
+            if !content.hasOpen {
+                Text("오픈 예정")
+                    .fontModifer(.caption3)
+                    .foregroundStyle(Color.white)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 3)
+                    .roundedBackground(
+                        .colors(.primaryNormal),
+                        radius: 25)
+            }
+        }
+        .padding(16)
+        .frame(height: 116)
         .roundedBackground()
         .roundedBorder()
     }
@@ -243,6 +269,45 @@ fileprivate struct PercentToolTipView: View {
     }
 }
 
+enum HomeFooterContent: CaseIterable {
+    case incomeReportCollection, infoCollection
+    
+    var image: Image {
+        switch self {
+        case .incomeReportCollection:
+            return Image(.incomeReport)
+        case .infoCollection:
+            return Image(.infoCollection)
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .incomeReportCollection:
+            return "수입인증을 보관한"
+        case .infoCollection:
+            return "블로버를 위한"
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .incomeReportCollection:
+            return "자랑하기 모음집"
+        case .infoCollection:
+            return "근로 정보 모음집"
+        }
+    }
+    
+    var hasOpen: Bool {
+        switch self {
+        case .incomeReportCollection:
+            return true
+        case .infoCollection:
+            return false
+        }
+    }
+}
 #Preview {
     MainTabView(state: .init())
 }

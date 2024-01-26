@@ -23,6 +23,7 @@
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
 		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
+		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
 		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
@@ -35,6 +36,8 @@
 		FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */; };
 		FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */; };
 		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
+		FBD812C02B6404F0000FD1C0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* Home.swift */; };
+		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +70,8 @@
 		FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementView.swift; sourceTree = "<group>"; };
 		FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueClubPrivateKey.swift; path = ../../../BlueClubPrivateKey.swift; sourceTree = "<group>"; };
 		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
+		FBD812BF2B6404F0000FD1C0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,7 @@
 			files = (
 				FB07DF382B52638D00C4A9C8 /* KakaoSDKAuth in Frameworks */,
 				FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */,
+				FB3E75D62B6410E600D48993 /* Lottie in Frameworks */,
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
 				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
 				FB07DF3A2B5263A500C4A9C8 /* KakaoSDKUser in Frameworks */,
@@ -206,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				FBD812B92B63FDE4000FD1C0 /* splash.json */,
+				FBD812C12B64077E000FD1C0 /* progress.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				FB8E68D22B517820007FF2C1 /* HomeView.swift */,
+				FBD812BF2B6404F0000FD1C0 /* Home.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -276,6 +284,7 @@
 				FB07DF352B52637E00C4A9C8 /* KakaoSDKCommon */,
 				FB07DF372B52638D00C4A9C8 /* KakaoSDKAuth */,
 				FB07DF392B5263A500C4A9C8 /* KakaoSDKUser */,
+				FB3E75D52B6410E600D48993 /* Lottie */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -310,6 +319,7 @@
 				FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */,
 				FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */,
 				FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
@@ -326,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */,
+				FBD812C22B64077E000FD1C0 /* progress.json in Resources */,
 				FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */,
 				FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */,
 				FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */,
@@ -345,6 +356,7 @@
 				FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB4479A32B50635900741424 /* Login.swift in Sources */,
+				FBD812C02B6404F0000FD1C0 /* Home.swift in Sources */,
 				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
@@ -601,6 +613,14 @@
 				minimumVersion = 1.6.0;
 			};
 		};
+		FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
 		FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/insub4067/Navigator.git";
@@ -646,6 +666,11 @@
 		FB1C64092B47119200318FA7 /* Utility */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Utility;
+		};
+		FB3E75D52B6410E600D48993 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		FB4479A02B505EB500741424 /* DataSource */ = {
 			isa = XCSwiftPackageProductDependency;
