@@ -154,12 +154,7 @@ extension HomeView {
     
     @ViewBuilder func incomeInfoHeader() -> some View {
         HStack(spacing: 8) {
-            Text("달성 수입")
-                .fontModifer(.sb3)
-                .foregroundStyle(Color.colors(.primaryNormal))
-                .padding(.horizontal, 6)
-                .padding(.vertical, 3)
-                .roundedBackground(.colors(.primaryBackground), radius: 4)
+            ChipView("달성 수입")
             if let 달성수입 = viewStore.달성수입 {
                 Group {
                     Text("\(달성수입)") + Text("원")

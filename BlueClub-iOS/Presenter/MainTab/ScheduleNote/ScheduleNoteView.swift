@@ -77,12 +77,7 @@ extension ScheduleNoteView {
             
             // 달성 수입
             HStack(spacing: 8) {
-                Text("달성 수입")
-                    .fontModifer(.sb3)
-                    .foregroundStyle(Color.colors(.primaryNormal))
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 3)
-                    .roundedBackground(.colors(.primaryBackground), radius: 4)
+                ChipView("달성 수입")
                 Group {
                     Text("\(100000000)") + Text("원")
                 }
