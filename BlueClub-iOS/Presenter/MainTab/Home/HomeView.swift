@@ -31,7 +31,6 @@ struct HomeView: View {
     var body: some View {
         BaseView {
             AppBar(trailingIcons: [
-                (Icons.calendar_large, { }),
                 (Icons.notification1_large, { })
             ])
         } content: {
@@ -248,7 +247,7 @@ extension HomeView {
     }
 }
 
-fileprivate struct PercentToolTipView: View {
+struct PercentToolTipView: View {
     
     let percent: CGFloat
     var percentString: String {

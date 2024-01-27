@@ -15,9 +15,11 @@ struct ScheduleNote {
         
         static func == (lhs: ScheduleNote.State, rhs: ScheduleNote.State) -> Bool {
             lhs.monthIndex == rhs.monthIndex &&
-            lhs.days.count == rhs.days.count
+            lhs.days.count == rhs.days.count &&
+            lhs.hasExpand == rhs.hasExpand
         }
         
+        var hasExpand = false
         var amount = 5_000_000
         var progress = 0.8
         var percent: Int { Int(progress * 100) }
@@ -25,19 +27,32 @@ struct ScheduleNote {
         var days: [Day?] = []
         
         var monthIndex = 0 // 0은 이번달, 1은 다음달, -1은 전달
-        var currentYear: Int?
-        var currentMonth: Int?
+        var currentYear: Int? // 현재 달력에 보여지는 연
+        var currentMonth: Int? // 현재 달력에 보여지는 월
+        
+        var today: Day?
     }
     enum Action {
+        case getTdoay
         case getDays // yearInt, monthInt
         case getDaysOf(Int, Int)
         case increaseMonth
         case decreaseMonth
+        case toggleExpand
     }
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+                
+            case .getTdoay:
+                let date = Calendar.current.date(byAdding: .month, value: state.monthIndex, to: .now)!
+                let (yearInt, monthInt, dayInt) = dateToInts(date)
+                state.today = dayOf(
+                    year: yearInt,
+                    month: monthInt,
+                    day: dayInt)
+                return .none
                 
             case .getDays:
                 let date = Calendar.current.date(byAdding: .month, value: state.monthIndex, to: .now)!
@@ -48,7 +63,10 @@ struct ScheduleNote {
                 
             case .getDaysOf(let year, let month):
                 
-                guard let date = dateOf(year: year, month: month, day: 1),
+                guard let date = dateOf(
+                    year: year,
+                    month: month,
+                    day: 1),
                       let dayCount = daysOfMonth(date: date)
                 else { return .none }
                 
@@ -78,6 +96,10 @@ struct ScheduleNote {
             case .decreaseMonth:
                 state.monthIndex -= 1
                 return .run { send in await send(.getDays) }
+                
+            case .toggleExpand:
+                state.hasExpand.toggle()
+                return .none
             }
         }
     }
@@ -121,11 +143,21 @@ extension ScheduleNote {
     }
 }
 
-struct Day {
+struct Day: Equatable {
     let year: Int
     let month: Int
     let day: Int
     let weekday: WeekDay
+    
+    func isSameDay(year: Int?, month: Int?, day: Int?) -> Bool {
+        
+        guard let year, let month, let day
+        else { return false }
+        
+        return self.year == year &&
+            self.month == month &&
+            self.day == day
+    }
 }
 
 enum WeekDay: Int, CaseIterable {
