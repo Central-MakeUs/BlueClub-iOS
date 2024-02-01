@@ -41,7 +41,7 @@ struct MainTabView: View {
                     ScheduleNoteView(state: .init())
                         .tag(tab)
                 case .myPage:
-                    Text(tab.title)
+                    MyPageView()
                         .tag(tab)
                 }
             }.toolbar(.hidden, for: .tabBar)

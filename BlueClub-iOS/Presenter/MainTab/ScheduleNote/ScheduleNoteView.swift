@@ -43,6 +43,9 @@ struct ScheduleNoteView: View {
             viewStore.send(.getDays)
             viewStore.send(.getTdoay)
         }
+        .sheet(isPresented: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is Presented@*/.constant(false)/*@END_MENU_TOKEN@*/, content: {
+            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Sheet Content")/*@END_MENU_TOKEN@*/
+        })
     }
 }
 

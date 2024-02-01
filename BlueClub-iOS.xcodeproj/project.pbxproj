@@ -23,6 +23,7 @@
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
 		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
+		FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211A2B6BE55E00099B5D /* MyPageView.swift */; };
 		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
@@ -58,6 +59,7 @@
 		FB28DE992B4F012F004710D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
 		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
+		FB2C211A2B6BE55E00099B5D /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		FB1C63F62B45D15E00318FA7 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
+				FB2C21192B6BE55200099B5D /* MyPage */,
 				FB8E68D42B5221E5007FF2C1 /* ScheduleNote */,
 				FB8E68D12B517817007FF2C1 /* Home */,
 				FB1C63F72B45D1A500318FA7 /* MainTabView.swift */,
@@ -206,6 +209,14 @@
 				FBAD2C792B487E5F002A77BC /* Sheet */,
 			);
 			path = InitialSetting;
+			sourceTree = "<group>";
+		};
+		FB2C21192B6BE55200099B5D /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				FB2C211A2B6BE55E00099B5D /* MyPageView.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		FB52E3D82B5E8AFB001169AB /* Lottie */ = {
@@ -355,6 +366,7 @@
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
+				FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */,
 				FB4479A32B50635900741424 /* Login.swift in Sources */,
 				FBD812C02B6404F0000FD1C0 /* Home.swift in Sources */,
 				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
