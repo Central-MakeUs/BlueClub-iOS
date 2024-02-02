@@ -9,10 +9,19 @@ import SwiftUI
 import DesignSystem
 
 struct BoastCollectionView: View {
+    
+    weak var coordinator: HomeCoordinator?
+    
+    init(coordinator: HomeCoordinator) {
+        self.coordinator = coordinator
+    }
+    
     var body: some View {
         BaseView {
             AppBar(
-                leadingIcon: (Icons.arrow_left, { }),
+                leadingIcon: (Icons.arrow_left, {
+                    coordinator?.navigator.pop()
+                }),
                 title: "자랑하기 모음집")
         } content: {
             ScrollView {
@@ -58,5 +67,5 @@ struct BoastCollectionView: View {
 }
 
 #Preview {
-    BoastCollectionView()
+    BoastCollectionView(coordinator: .init(navigator: .init()))
 }

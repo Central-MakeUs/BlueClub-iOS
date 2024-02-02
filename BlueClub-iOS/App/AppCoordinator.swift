@@ -13,18 +13,11 @@ import DesignSystem
 final class AppCoordinator: Coordinatorable {
     var window: UIWindow?
     
-    var navigator: Navigator? = {
+    var navigator: Navigator = {
         let nController = UINavigationController()
         nController.setNavigationBarHidden(true, animated: true)
         return .init(navigationController: nController)
     }()
-    
-    var child: (any Coordinatorable)? = .none
-    weak var parent: (any Coordinatorable)? = .none
-    
-    func start(parent: (any Coordinatorable)?) {
-        self.parent = parent
-    }
 }
 
 
@@ -49,16 +42,16 @@ extension AppCoordinator {
 
         case .login:
             let reducer = Login(coordinator: self)
-            navigator?.start { LoginView(reducer: reducer) }
-            window?.rootViewController = navigator?.view
+            navigator.start { LoginView(reducer: reducer) }
+            window?.rootViewController = navigator.view
             
         case .initialSetting:
             let reducer = InitialSetting(cooridonator: self)
-            navigator?.push { InitialSettingView(reducer: reducer) }
+            navigator.push { InitialSettingView(reducer: reducer) }
             
         case .home:
-            navigator?.start { MainTabView(state: .init()) }
-            window?.rootViewController = navigator?.view
+            navigator.start { MainTabView(navigator: self.navigator) }
+            window?.rootViewController = navigator.view
         }
     }
 }

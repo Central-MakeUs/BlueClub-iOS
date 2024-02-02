@@ -10,8 +10,5 @@ import Navigator
 
 public protocol Coordinatorable: AnyObject, Actionable, Navigatable {
 
-    var child: (any Coordinatorable)? { get set }
-    var parent: (any Coordinatorable)? { get set }
-    
-    @MainActor func start(parent: (any Coordinatorable)?)
+
 }

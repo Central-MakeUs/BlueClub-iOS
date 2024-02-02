@@ -10,5 +10,5 @@ import Navigator
 
 public protocol Navigatable {
         
-    var navigator: Navigator? { get set }
+    var navigator: Navigator { get set }
 }

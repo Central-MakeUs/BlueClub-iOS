@@ -9,7 +9,7 @@ import Foundation
 
 public protocol Actionable {
     
-    associatedtype Action: Equatable
+    associatedtype Action
     
     @MainActor func send(_ action: Action)
 }

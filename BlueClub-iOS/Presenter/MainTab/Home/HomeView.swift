@@ -7,17 +7,15 @@
 
 import SwiftUI
 import DesignSystem
-import ComposableArchitecture
 import Lottie
 
 struct HomeView: View {
     
-    typealias Reducer = Home
-    @ObservedObject var viewStore: ViewStoreOf<Reducer>
+    @StateObject var viewModel: HomeViewModel
     
-    init(state: Reducer.State) {
-        let store: StoreOf<Reducer> = .init(initialState: state, reducer: { Reducer() })
-        self.viewStore = .init(store, observe: { $0 })
+    init(coordinator: HomeCoordinator) {
+        let viewModel = HomeViewModel(coodinator: coordinator)
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     @State var tooltipWidth: CGFloat = .zero
@@ -30,7 +28,7 @@ struct HomeView: View {
     
     var body: some View {
         BaseView {
-            AppBar(trailingIcons: [
+            TitleBar(trailingIcons: [
                 (Icons.notification1_large, { })
             ])
         } content: {
@@ -43,12 +41,12 @@ extension HomeView {
     
     @ViewBuilder func contentHeader() -> some View {
         HStack(spacing: 8) {
-            Text(viewStore.job.title)
+            Text(viewModel.job.title)
                 .fontModifer(.h5)
                 .foregroundStyle(Color.black)
             HStack(spacing: 4) {
                 Image(.dot)
-                Text("\(viewStore.name)님")
+                Text("\(viewModel.name)님")
                     .fontModifer(.sb2)
                     .foregroundStyle(Color.colors(.gray08))
             }
@@ -137,7 +135,7 @@ extension HomeView {
     @ViewBuilder func incomeInfoView() -> some View {
         VStack(spacing: 16) {
             incomeInfoHeader()
-            if viewStore.달성수입 != .none {
+            if viewModel.달성수입 != .none {
                 incomeIndicator()
             } else {
                 LottieView(animation: .named("progress"))
@@ -155,7 +153,7 @@ extension HomeView {
     @ViewBuilder func incomeInfoHeader() -> some View {
         HStack(spacing: 8) {
             ChipView("달성 수입")
-            if let 달성수입 = viewStore.달성수입 {
+            if let 달성수입 = viewModel.달성수입 {
                 Group {
                     Text("\(달성수입)") + Text("원")
                 }
@@ -207,7 +205,11 @@ extension HomeView {
     @ViewBuilder func contentFooter() -> some View {
         LazyVGrid(columns: Array(repeating: .init(), count: 2), spacing: 10, content: {
             ForEach(HomeFooterContent.allCases, id: \.self) { content in
-                contentCell(content: content)
+                Button(action: {
+                    viewModel.send(.didTapFooterButton(content))
+                }, label: {
+                    contentCell(content: content)
+                })
             }
         }).padding(.horizontal, 20)
     }
@@ -303,5 +305,5 @@ enum HomeFooterContent: CaseIterable {
     }
 }
 #Preview {
-    MainTabView(state: .init())
+    MainTabView(navigator: .init())
 }

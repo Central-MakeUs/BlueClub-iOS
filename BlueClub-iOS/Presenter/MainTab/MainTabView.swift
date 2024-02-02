@@ -7,16 +7,15 @@
 
 import SwiftUI
 import DesignSystem
-import ComposableArchitecture
+import Navigator
 
 struct MainTabView: View {
     
-    typealias Reducer = MainTab
-    @ObservedObject var viewStore: ViewStoreOf<Reducer>
+    @StateObject var viewModel: MainTabViewModel
     
-    init(state: Reducer.State) {
-        let store: StoreOf<Reducer> = .init(initialState: state, reducer: { Reducer() })
-        self.viewStore = .init(store, observe: { $0 })
+    init(navigator: Navigator) {
+        let viewModel = MainTabViewModel(navigator: navigator)
+        self._viewModel = .init(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -31,11 +30,11 @@ struct MainTabView: View {
 @MainActor private extension MainTabView {
     
     @ViewBuilder func content() -> some View {
-        TabView(selection: viewStore.$currentTab) {
-            ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
+        TabView(selection: $viewModel.currentTab) {
+            ForEach(MainTabItem.allCases, id: \.self) { tab in
                 switch tab {
                 case .home:
-                    HomeView(state: .init())
+                    HomeView(coordinator: viewModel.homeCoordinator)
                         .tag(tab)
                 case .note:
                     ScheduleNoteView(state: .init())
@@ -50,9 +49,9 @@ struct MainTabView: View {
     
     @ViewBuilder func tabBar() -> some View {
         LazyVGrid(columns: Array(repeating: .init(), count: 3)) {
-            ForEach(MainTab.TabItem.allCases, id: \.title) { tab in
+            ForEach(MainTabItem.allCases, id: \.self) { tab in
                 
-                let selected = viewStore.state.currentTab == tab
+                let selected = viewModel.currentTab == tab
                 let color: Color = selected
                     ? Color.colors(.primaryNormal)
                     : Color.colors(.gray05)
@@ -70,7 +69,9 @@ struct MainTabView: View {
                 .frame(width: 64)
                 .padding(.vertical, 9)
                 .foregroundColor(color)
-                .onTapGesture { viewStore.send(.didTap(tab)) }
+                .onTapGesture {
+                    viewModel.send(.didTapTab(tab))
+                }
             }
         }
         .frame(height: 58)
@@ -86,5 +87,5 @@ struct MainTabView: View {
 
 
 #Preview {
-    MainTabView(state: .init())
+    MainTabView(navigator: .init())
 }

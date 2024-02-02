@@ -72,7 +72,7 @@ struct InitialSetting {
                 switch state.currentStage {
                 case .job:
                     return .run { send in
-                        await cooridonator?.navigator?.pop()
+                        await cooridonator?.navigator.pop()
                     }
                 case .targetIncome:
                     return .send(.setStage(.job))
