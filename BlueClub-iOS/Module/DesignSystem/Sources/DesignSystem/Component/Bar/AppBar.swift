@@ -2,55 +2,76 @@
 //  SwiftUIView.swift
 //  
 //
-//  Created by 김인섭 on 1/13/24.
+//  Created by 김인섭 on 1/12/24.
 //
 
 import SwiftUI
 
 public struct AppBar: View {
     
+    let leadingIcon: (Icons, () -> Void)
     let title: String?
-    let trailingIcons: [(Icons, () -> Void)]
+    let trailingIcon: (Icons, () -> Void)?
+    let isTrailingButtonActive: Bool
+    let trailingButton: (String, () -> Void)?
     
     public init(
-        title: String? = .none,
-        trailingIcons: [(Icons, () -> Void)]
+        leadingIcon: (Icons, () -> Void),
+        title: String?,
+        trailingIcon: (Icons, () -> Void)? = .none,
+        isTrailingButtonActive: Bool = true,
+        trailingButton: (String, () -> Void)? = .none
     ) {
+        self.leadingIcon = leadingIcon
         self.title = title
-        self.trailingIcons = trailingIcons
+        self.trailingIcon = trailingIcon
+        self.isTrailingButtonActive = isTrailingButtonActive
+        self.trailingButton = trailingButton
     }
     
-    
     public var body: some View {
-        HStack(spacing: 16) {
-            if let title {
-                Text(title)
-                    .fontModifer(.h6)
-                    .foregroundStyle(Color.colors(.gray10))
-            } else {
-                Image(.blueClub)
-            }
+        HStack {
+            Button(action: {
+                leadingIcon.1()
+            }, label: {
+                Image.icons(leadingIcon.0)
+            }).buttonStyle(PlainButtonStyle())
             Spacer()
-            ForEach(trailingIcons, id: \.0) { icon in
+            if let trailingIcon {
                 Button(action: {
-                    icon.1()
+                    trailingIcon.1()
                 }, label: {
-                    icon.0.image
-                        .foregroundStyle(Color.colors(.cg05))
-                })
+                    Image.icons(trailingIcon.0)
+                }).buttonStyle(PlainButtonStyle())
+            }
+            if let trailingButton {
+                Button {
+                    trailingButton.1()
+                } label: {
+                    Text(trailingButton.0)
+                        .fontModifer(.sb1)
+                        .foregroundStyle(Color.colors(
+                            isTrailingButtonActive
+                            ? .primaryNormal
+                            : .gray05
+                        ))
+                }
             }
         }
-        .frame(height: 56)
-        .padding(.horizontal, 20)
+        .frame(height: 28)
+        .padding(12)
+        .overlay {
+            if let title {
+                Text(title)
+                    .fontModifer(.sb1)
+            }
+        }
     }
 }
 
 #Preview {
     AppBar(
-        title: "근무수첩",
-        trailingIcons: [
-            (Icons.add_large, { }),
-            (Icons.notification1_large, { })
-        ]
+        leadingIcon: (Icons.arrow_left, { }),
+        title: "설정"
     )
 }

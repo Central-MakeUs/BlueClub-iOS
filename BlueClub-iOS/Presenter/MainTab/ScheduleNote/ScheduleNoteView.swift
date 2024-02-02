@@ -29,7 +29,7 @@ struct ScheduleNoteView: View {
     
     var body: some View {
         BaseView {
-            AppBar(
+            TitleBar(
                 title: "근무수첩",
                 trailingIcons: [
                     (Icons.setting_solid, { }),

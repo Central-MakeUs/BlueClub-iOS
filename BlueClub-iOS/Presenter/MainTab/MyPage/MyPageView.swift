@@ -11,7 +11,7 @@ import DesignSystem
 struct MyPageView: View {
     var body: some View {
         BaseView {
-            AppBar(
+            TitleBar(
                 title: "마이페이지",
                 trailingIcons: [
                     (Icons.notification1_large, { })
@@ -65,7 +65,11 @@ private extension MyPageView {
             .padding(20)
             LazyVGrid(columns: Array(repeating: .init(), count: 3), spacing: 16) {
                 ForEach(HeaderBottomButton.allCases, id: \.self) { button in
-                    headerBottomButton(button)
+                    Button {
+                        
+                    } label: {
+                        headerBottomButton(button)
+                    }
                 }
             }
             .padding(.horizontal, 16)
