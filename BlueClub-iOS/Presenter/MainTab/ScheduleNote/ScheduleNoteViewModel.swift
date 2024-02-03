@@ -28,8 +28,8 @@ final class ScheduleNoteViewModel: ObservableObject {
     }
     
     // MARK: - Data
+    @Published var showInputView = false
     @Published var hasExpand = false
-    
     @Published var 목표수입 = 10_000_000
     @Published var 달성수입 = 5_000_000
     var progress: CGFloat { CGFloat(목표수입 / 달성수입) }
@@ -57,6 +57,9 @@ extension ScheduleNoteViewModel: Actionable {
         case increaseMonth
         case decreaseMonth
         case getDays
+        
+        case didTapGearIcon
+        case didTapGoalSetting
     }
     
     @MainActor func send(_ action: Action) {
@@ -75,6 +78,9 @@ extension ScheduleNoteViewModel: Actionable {
             
         case .getDays:
             break
+         
+        case .didTapGearIcon, .didTapGoalSetting:
+            coordinator?.send(.goalInput(self))
             
         }
     }

@@ -8,6 +8,7 @@
 import Foundation
 import Navigator
 import Architecture
+import UIKit
 
 final class ScheduleNoteCoordinator {
     
@@ -21,16 +22,21 @@ final class ScheduleNoteCoordinator {
 extension ScheduleNoteCoordinator: Coordinatorable {
     
     enum Action {
-        case didTapGearIcon
-        case didTapGoalSetting
+        case goalInput(ScheduleNoteViewModel)
     }
     
     @MainActor func send(_ action: Action) {
         switch action {
             
-        case .didTapGearIcon, .didTapGoalSetting:
-            break
-        
+        case .goalInput(let viewModel):
+            let height = UIApplication.shared.screenSize.height - 300
+            let parameter = BottomSheetParameter(
+                minHeight: height,
+                maxHeight: height)
+            let view = GoalInputSheetView(
+                viewModel: viewModel,
+                coordinator: self)
+            navigator.bottomSheet(parameter) { view }
         }
     }
 }

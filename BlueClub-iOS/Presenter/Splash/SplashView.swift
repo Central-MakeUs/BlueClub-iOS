@@ -41,7 +41,9 @@ struct SplashView: View {
 //            } else {
 //                coordinator?.send(.login)
 //            }
-            coordinator?.send(.home)
+            
+            coordinator?.send(.login)
+//            coordinator?.send(.home)
         }
     }
 }

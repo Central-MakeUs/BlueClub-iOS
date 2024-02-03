@@ -30,7 +30,9 @@ struct ScheduleNoteView: View {
             TitleBar(
                 title: "근무수첩",
                 trailingIcons: [
-                    (Icons.setting_solid, { }),
+                    (Icons.setting_solid, { 
+                        viewModel.send(.didTapGearIcon)
+                    }),
                     (Icons.notification1_large, { })
                 ])
         } content: {
@@ -108,7 +110,7 @@ extension ScheduleNoteView {
                 CustomDivider(padding: 0)
                 // 나의 목표수입 설정
                 Button(action: {
-                    
+                    viewModel.send(.didTapGoalSetting)
                 }, label: {
                     HStack(spacing: 4) {
                         Text("나의 목표수입 설정")
@@ -171,6 +173,7 @@ extension ScheduleNoteView {
         
         LazyVGrid(columns: Array(repeating: .init(), count: 7), spacing: 6) {
             // calendarBody
+            
             ForEach(viewModel.days, id: \.?.day) { day in
                 VStack(spacing: 4) {
                     

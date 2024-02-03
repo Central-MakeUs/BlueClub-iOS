@@ -26,8 +26,8 @@ public extension UIApplication {
         window?.rootViewController
     }
     
-    var screenSize: CGRect? {
-        rootController?.view.frame
+    var screenSize: CGRect {
+        rootController?.view.frame ?? .zero
     }
     
     func endEditing() {

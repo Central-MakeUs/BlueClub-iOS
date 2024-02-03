@@ -81,7 +81,7 @@ extension InitialSettingView {
             .frame(maxWidth: .infinity)
             .foregroundStyle(Color.colors(.cg03))
             .overlay(alignment: .leading) {
-                let widthPerStage = (UIApplication.shared.screenSize?.width ?? .zero) /  CGFloat(InitialSetting.Stage.allCases.count)
+                let widthPerStage = (UIApplication.shared.screenSize.width) /  CGFloat(InitialSetting.Stage.allCases.count)
                 let width = widthPerStage * CGFloat(viewStore.currentStage.int)
                 Rectangle()
                     .frame(height: 4)
@@ -147,41 +147,52 @@ extension InitialSettingView {
     @ViewBuilder func targetIncomeContent() -> some View {
         VStack(spacing: 0) {
             contentHeader()
-            VStack(spacing: 2) {
-                HStack(spacing: 2) {
-                    TextField("", text: viewStore.$targetIcome)
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.trailing)
-                        .focused($focus, equals: .targetIcome)
-                    Text("원")
-                        .hide(when: viewStore.targetIcome.isEmpty)
-                }
-                .fontModifer(.b1)
-                .frame(height: 24)
-                .foregroundStyle(Color.colors(.gray10))
-                .padding(.horizontal, 12)
-                .padding(.vertical, 16)
-                .background(alignment: .trailing, content: {
-                    if viewStore.targetIcome.isEmpty {
-                        Text("목표 금액 입력")
-                            .fontModifer(.b1)
-                            .foregroundStyle(Color.colors(.gray06))
-                            .padding(.trailing, 12)
-                    }
-                })
-                .roundedBackground(
-                    .colors(.gray01),
-                    radius: 8
-                )
-                if let message = viewStore.targetIcomeMessage {
-                    Text(message.message)
-                        .fontModifer(.caption1)
-                        .foregroundStyle(message.color)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .frame(height: 18)
-                        .padding(.horizontal, 8)
-                }
-            }.padding(.horizontal, 20)
+            
+            let message: (String, Color)? = viewStore.targetIcomeMessage != nil
+            ? (viewStore.targetIcomeMessage!.message, viewStore.targetIcomeMessage!.color)
+            : .none
+            
+            GoalInput(
+                text: viewStore.$targetIcome,
+                message: message,
+                focusState: $focus,
+                focusValue: .targetIcome)
+            
+//            VStack(spacing: 2) {
+//                HStack(spacing: 2) {
+//                    TextField("", text: viewStore.$targetIcome)
+//                        .keyboardType(.numberPad)
+//                        .multilineTextAlignment(.trailing)
+//                        .focused($focus, equals: .targetIcome)
+//                    Text("원")
+//                        .hide(when: viewStore.targetIcome.isEmpty)
+//                }
+//                .fontModifer(.b1)
+//                .frame(height: 24)
+//                .foregroundStyle(Color.colors(.gray10))
+//                .padding(.horizontal, 12)
+//                .padding(.vertical, 16)
+//                .background(alignment: .trailing, content: {
+//                    if viewStore.targetIcome.isEmpty {
+//                        Text("목표 금액 입력")
+//                            .fontModifer(.b1)
+//                            .foregroundStyle(Color.colors(.gray06))
+//                            .padding(.trailing, 12)
+//                    }
+//                })
+//                .roundedBackground(
+//                    .colors(.gray01),
+//                    radius: 8
+//                )
+//                if let message = viewStore.targetIcomeMessage {
+//                    Text(message.message)
+//                        .fontModifer(.caption1)
+//                        .foregroundStyle(message.color)
+//                        .frame(maxWidth: .infinity, alignment: .trailing)
+//                        .frame(height: 18)
+//                        .padding(.horizontal, 8)
+//                }
+//            }.padding(.horizontal, 20)
         }.onAppear { focus = .targetIcome }
     }
     

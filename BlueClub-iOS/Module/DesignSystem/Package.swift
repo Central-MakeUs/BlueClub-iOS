@@ -13,14 +13,15 @@ let package = Package(
             targets: ["DesignSystem"]),
     ],
     dependencies: [
-        .package(path: "../Utility")
+        .package(path: "../Utility"),
+        .package(path: "../Architecture")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DesignSystem",
-            dependencies: ["Utility"],
+            dependencies: ["Utility", "Architecture"],
             path: "Sources",
             resources: [.process("Resource")]
         )
