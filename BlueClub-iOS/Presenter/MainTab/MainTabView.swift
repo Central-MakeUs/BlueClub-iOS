@@ -37,7 +37,7 @@ struct MainTabView: View {
                     HomeView(coordinator: viewModel.homeCoordinator)
                         .tag(tab)
                 case .note:
-                    ScheduleNoteView(state: .init())
+                    ScheduleNoteView(viewModel: .init(coordinator: viewModel.scheudleNoteCoordinator))
                         .tag(tab)
                 case .myPage:
                     MyPageView()

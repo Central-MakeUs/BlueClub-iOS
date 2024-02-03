@@ -7,25 +7,23 @@
 
 import SwiftUI
 import DesignSystem
-import ComposableArchitecture
+import Domain
 
 struct ScheduleNoteView: View {
     
-    typealias Reducer = ScheduleNote
-    @ObservedObject var viewStore: ViewStoreOf<Reducer>
+    @StateObject var viewModel: ScheduleNoteViewModel
+    
+    init(viewModel: ScheduleNoteViewModel) {
+        self._viewModel = .init(wrappedValue: viewModel)
+    }
     
     let progress: CGFloat = 0.2
     @State var progressWidth: CGFloat = .zero
     @State var tooltipWidth: CGFloat = .zero
-    
-    init(state: Reducer.State) {
-        let store: StoreOf<Reducer> = .init(
-            initialState: state,
-            reducer: { Reducer() })
-        self.viewStore = .init(store, observe: { $0 })
-    }
 
-    let calendarColumns: [GridItem] = Array(repeating: .init(), count: 7)
+    let calendarColumns: [GridItem] = Array(
+        repeating: .init(),
+        count: 7)
     
     var body: some View {
         BaseView {
@@ -39,13 +37,6 @@ struct ScheduleNoteView: View {
             content()
         }
         .background(Color.colors(.cg01))
-        .onAppear {
-            viewStore.send(.getDays)
-            viewStore.send(.getTdoay)
-        }
-        .sheet(isPresented: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is Presented@*/.constant(false)/*@END_MENU_TOKEN@*/, content: {
-            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Sheet Content")/*@END_MENU_TOKEN@*/
-        })
     }
 }
 
@@ -88,16 +79,16 @@ extension ScheduleNoteView {
                 .foregroundStyle(Color.colors(.cg10))
                 Spacer()
                 Button(action: {
-                    viewStore.send(.toggleExpand, animation: .default)
+                    viewModel.send(.toggleHasExpand)
                 }, label: {
-                    let degree: Double = viewStore.hasExpand ? 180 : 0
+                    let degree: Double = viewModel.hasExpand ? 180 : 0
                     Image.icons(.arrow_bottom)
                         .foregroundStyle(Color.colors(.gray06))
                         .rotationEffect(.degrees(degree))
                 })
             }
             
-            if viewStore.hasExpand {
+            if viewModel.hasExpand {
                 // Progress
                 VStack(spacing: 2) {
                     Spacer(minLength: 0)
@@ -142,19 +133,22 @@ extension ScheduleNoteView {
     @ViewBuilder func calendarHeader() -> some View {
         HStack(spacing: 4) {
             Button(action: {
-                viewStore.send(.decreaseMonth)
+                viewModel.send(.decreaseMonth)
             }, label: {
                 Image(.polygonLeft)
                     .foregroundStyle(Color.colors(.gray06))
             })
-            if let year = viewStore.currentYear, let month = viewStore.currentMonth {
-                Text("\(String(year))년 \(month)월")
-                    .fontModifer(.sb2)
-                    .foregroundStyle(Color.colors(.gray08))
-                    .frame(width: 100)
-            }
+            
+            let year = viewModel.currentYear
+            let month = viewModel.currentMonth
+            
+            Text("\(String(year))년 \(month)월")
+                .fontModifer(.sb2)
+                .foregroundStyle(Color.colors(.gray08))
+                .frame(width: 100)
+            
             Button(action: {
-                viewStore.send(.increaseMonth)
+                viewModel.send(.increaseMonth)
             }, label: {
                 Image(.polygonRight)
                     .foregroundStyle(Color.colors(.gray06))
@@ -177,14 +171,14 @@ extension ScheduleNoteView {
         
         LazyVGrid(columns: Array(repeating: .init(), count: 7), spacing: 6) {
             // calendarBody
-            ForEach(viewStore.days, id: \.?.day) { day in
+            ForEach(viewModel.days, id: \.?.day) { day in
                 VStack(spacing: 4) {
                     
-                    let isToday = viewStore.today?.isSameDay(
+                    let isToday = viewModel.today.isSameDay(
                         year: day?.year,
                         month: day?.month,
                         day: day?.day
-                    ) ?? false
+                    )
                     
                     Text(day != nil ? String(day!.day) : "")
                         .fontModifer(.sb2)
@@ -212,5 +206,9 @@ extension ScheduleNoteView {
 }
 
 #Preview {
-    ScheduleNoteView(state: .init())
+    ScheduleNoteView(
+        viewModel: .init(
+            dependencies: .live,
+            coordinator: .init(navigator: .init())
+        ))
 }

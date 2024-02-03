@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol UserRepositoriable {
+public protocol UserServiceable {
     
     var hasLogin: Bool { get }
     

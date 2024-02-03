@@ -18,6 +18,9 @@ final class MainTabViewModel: ObservableObject {
     lazy var homeCoordinator: HomeCoordinator = {
         .init(navigator: self.navigator)
     }()
+    lazy var scheudleNoteCoordinator: ScheduleNoteCoordinator = {
+        .init(navigator: self.navigator)
+    }()
     
     init(navigator: Navigator) {
         self.navigator = navigator

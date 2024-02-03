@@ -26,12 +26,13 @@
 		FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211A2B6BE55E00099B5D /* MyPageView.swift */; };
 		FB2C211E2B6D4BC100099B5D /* BoastCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211D2B6D4BC100099B5D /* BoastCollectionView.swift */; };
 		FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */; };
+		FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */; };
 		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* Login.swift */; };
 		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
 		FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */; };
-		FB8E68D82B522235007FF2C1 /* ScheduleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */; };
+		FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
 		FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* InitialSetting.swift */; };
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
@@ -64,10 +65,11 @@
 		FB2C211A2B6BE55E00099B5D /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		FB2C211D2B6D4BC100099B5D /* BoastCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastCollectionView.swift; sourceTree = "<group>"; };
 		FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteCoordinator.swift; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
-		FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNote.swift; sourceTree = "<group>"; };
+		FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteViewModel.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
 		FBAD2C722B487756002A77BC /* InitialSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetting.swift; sourceTree = "<group>"; };
@@ -255,7 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */,
-				FB8E68D72B522235007FF2C1 /* ScheduleNote.swift */,
+				FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */,
+				FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */,
 			);
 			path = ScheduleNote;
 			sourceTree = "<group>";
@@ -376,7 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB2C211E2B6D4BC100099B5D /* BoastCollectionView.swift in Sources */,
-				FB8E68D82B522235007FF2C1 /* ScheduleNote.swift in Sources */,
+				FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSetting.swift in Sources */,
@@ -388,6 +391,7 @@
 				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
+				FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTabViewModel.swift in Sources */,
 				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,

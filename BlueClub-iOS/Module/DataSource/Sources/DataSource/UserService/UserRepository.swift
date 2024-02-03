@@ -9,7 +9,7 @@ import Domain
 import DependencyContainer
 import Architecture
 
-public class UserRepository: UserRepositoriable {
+public class UserRepository: UserServiceable {
     
     private let dependencies: Container
     private var appleLogin: AppleLoginServiceable { dependencies.resolve() }

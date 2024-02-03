@@ -53,7 +53,7 @@ struct InitialSetting {
     
     weak var cooridonator: AppCoordinator?
     private let dependencies: Container
-    private var userRepository: UserRepositoriable { dependencies.resolve() }
+    private var userRepository: UserServiceable { dependencies.resolve() }
     
     init(cooridonator: AppCoordinator, container: Container = .live) {
         self.cooridonator = cooridonator

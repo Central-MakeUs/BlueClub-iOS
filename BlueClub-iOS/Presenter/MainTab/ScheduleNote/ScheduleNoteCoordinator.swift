@@ -1,5 +1,5 @@
 //
-//  HomeCoordinator.swift
+//  ScheduleCoordinator.swift
 //  BlueClub-iOS
 //
 //  Created by 김인섭 on 2/3/24.
@@ -9,7 +9,7 @@ import Foundation
 import Navigator
 import Architecture
 
-final class HomeCoordinator {
+final class ScheduleNoteCoordinator {
     
     var navigator: Navigator
     
@@ -18,18 +18,19 @@ final class HomeCoordinator {
     }
 }
 
-extension HomeCoordinator: Coordinatorable {
+extension ScheduleNoteCoordinator: Coordinatorable {
     
     enum Action {
-        case boastCollection
+        case didTapGearIcon
+        case didTapGoalSetting
     }
     
     @MainActor func send(_ action: Action) {
         switch action {
             
-        case .boastCollection:
-            let view = BoastCollectionView(coordinator: self)
-            navigator.push { view }
+        case .didTapGearIcon, .didTapGoalSetting:
+            break
+        
         }
     }
 }
