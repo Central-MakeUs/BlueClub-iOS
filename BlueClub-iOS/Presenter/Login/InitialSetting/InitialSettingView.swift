@@ -143,13 +143,13 @@ extension InitialSettingView {
         VStack(spacing: 0) {
             contentHeader()
             
-            let message: (String, Color)? = viewModel.targetIcomeMessage != nil
-            ? (viewModel.targetIcomeMessage!.message, viewModel.targetIcomeMessage!.color)
-            : .none
+//            let message: (String, Color)? = viewModel.targetIcomeMessage != nil
+//            ? (viewModel.targetIcomeMessage!.message, viewModel.targetIcomeMessage!.color)
+//            : .none
             
             GoalInput(
-                text: $viewModel.targetIncome,
-                message: message,
+                text: $viewModel.targetIncome, 
+                isValid: $viewModel.isTargetIcomeValid,
                 focusState: $focus,
                 focusValue: .targetIcome)
         }.onAppear { focus = .targetIcome }

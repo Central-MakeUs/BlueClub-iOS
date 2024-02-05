@@ -7,10 +7,12 @@
 
 import SwiftUI
 import DesignSystem
+import Combine
 
 struct GoalInputSheetView: View {
     
     @State var text = ""
+    @State var isValid = false
     @FocusState var focus: Bool?
     
     @StateObject var viewModel: ScheduleNoteViewModel
@@ -29,13 +31,18 @@ struct GoalInputSheetView: View {
             header()
         } content: {
             GoalInput(
-                text: $text,
-                message: .none,
+                text: $text, 
+                isValid: $isValid,
                 focusState: $focus,
                 focusValue: true)
         } footer: {
-            footer()
-        }.onAppear { focus = true }
+            PrimaryButton(
+                title: "다음",
+                disabled: !isValid,
+                action: { }
+            ).padding(.vertical, 20)
+        }
+        .onAppear { focus = true }
     }
     
     @ViewBuilder func header() -> some View {
@@ -59,14 +66,6 @@ struct GoalInputSheetView: View {
         .padding(.horizontal, 30)
         .padding(.top, 32)
         .padding(.bottom, 14)
-    }
-    
-    @ViewBuilder func footer() -> some View {
-        PrimaryButton(
-            title: "다음",
-            disabled: false,
-            action: { }
-        ).padding(.vertical, 20)
     }
 }
 

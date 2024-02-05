@@ -33,20 +33,20 @@ final class InitialSettingViewModel: ObservableObject {
     // MARK: - Datas
     @Published var showAllowSheet = false
     @Published var targetIncome = ""
-    var targetIcomeMessage: InputStatusMessages?
     @Published var nickname = ""
-    var nicknameMessage: InputStatusMessages?
+    @Published var nicknameMessage: InputStatusMessages?
     var checkNicknameDisabled: Bool {
         (nickname.isEmpty && nicknameMessage == .none) ||
         (!nickname.isEmpty && nicknameMessage != .none)
     }
+    
     @Published var hasAllow = false
     @Published var focus: FocusItem?
     
-    var currentStage: Stage = .job
-    var selectedJob: JobOption? = .none
-    var nicknameAvailable = false
-    var isTargetIcomeValid = false
+    @Published var currentStage: Stage = .job
+    @Published var selectedJob: JobOption? = .none
+    @Published var nicknameAvailable = false
+    @Published var isTargetIcomeValid = false
 }
 
 extension InitialSettingViewModel: Actionable {
@@ -55,7 +55,6 @@ extension InitialSettingViewModel: Actionable {
         case didTapBack
         case setStage(Stage)
         case didSelectJob(JobOption)
-        case targetIncomeDidChange
         case nicknameDidChange
         case checkNickname
         case didFinishInitialSetting
@@ -87,28 +86,6 @@ extension InitialSettingViewModel: Actionable {
         case .didSelectJob(let job):
             self.selectedJob = job
             self.send(.setStage(.targetIncome))
-
-        case .targetIncomeDidChange:
-            let targetIcome = self.targetIncome.replacingOccurrences(of: ",", with: "")
-            if targetIcome.isEmpty {
-                self.targetIcomeMessage = .none
-            }
-            if let number = Int(targetIcome) {
-                self.targetIncome = formatNumber(number)
-                switch number {
-                case 100000...99990000:
-                    self.isTargetIcomeValid = true
-                    self.targetIcomeMessage = .목표금액기준만족
-                case ..<100000:
-                    self.targetIcomeMessage = .목표금액기준미만
-                case 99990001...:
-                    self.targetIcomeMessage = .목표금액초과
-                default:
-                    break
-                }
-            } else {
-                self.targetIncome = ""
-            }
             
         case .nicknameDidChange:
             self.nicknameAvailable = false
@@ -175,11 +152,6 @@ extension InitialSettingViewModel: Actionable {
                 .receive(on: DispatchQueue.main)
                 .sink { value in
                     self.send(.nicknameDidChange)
-                }.store(in: &cancellables)
-            $targetIncome
-                .receive(on: DispatchQueue.main)
-                .sink { value in
-                    self.send(.targetIncomeDidChange)
                 }.store(in: &cancellables)
         }
     }
