@@ -25,19 +25,10 @@ final class HomeViewModel: ObservableObject {
 extension HomeViewModel: Actionable {
 
     enum Action: Equatable {
-        case didTapFooterButton(HomeFooterContent)
+        
     }
     
     func send(_ action: Action) {
-        switch action {
-            
-        case .didTapFooterButton(let button):
-            switch button {
-            case .incomeReportCollection:
-                coodinator?.send(.boastCollection)
-            case .infoCollection:
-                break
-            }
-        }
+        
     }
 }

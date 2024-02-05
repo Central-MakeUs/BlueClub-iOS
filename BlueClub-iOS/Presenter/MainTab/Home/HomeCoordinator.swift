@@ -21,14 +21,14 @@ final class HomeCoordinator {
 extension HomeCoordinator: Coordinatorable {
     
     enum Action {
-        case boastCollection
+        case notification
     }
     
     @MainActor func send(_ action: Action) {
         switch action {
             
-        case .boastCollection:
-            let view = BoastCollectionView(coordinator: self)
+        case .notification:
+            let view = NotificationView(coordinator: self)
             navigator.push { view }
         }
     }

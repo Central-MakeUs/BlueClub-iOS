@@ -28,6 +28,7 @@
 		FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */; };
 		FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */; };
 		FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */; };
+		FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEC2B714E520005DBCB /* NotificationView.swift */; };
 		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* LoginViewModel.swift */; };
@@ -68,6 +69,7 @@
 		FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputSheetView.swift; sourceTree = "<group>"; };
+		FB302BEC2B714E520005DBCB /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		FB1C63F62B45D15E00318FA7 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
+				FB302BEA2B714E350005DBCB /* Common */,
 				FB2C21192B6BE55200099B5D /* MyPage */,
 				FB8E68D42B5221E5007FF2C1 /* ScheduleNote */,
 				FB8E68D12B517817007FF2C1 /* Home */,
@@ -241,6 +244,22 @@
 				FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */,
 			);
 			path = GoalInputSheet;
+			sourceTree = "<group>";
+		};
+		FB302BEA2B714E350005DBCB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FB302BEB2B714E3D0005DBCB /* Notification */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FB302BEB2B714E3D0005DBCB /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				FB302BEC2B714E520005DBCB /* NotificationView.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		FB52E3D82B5E8AFB001169AB /* Lottie */ = {
@@ -392,6 +411,7 @@
 				FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
+				FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */,

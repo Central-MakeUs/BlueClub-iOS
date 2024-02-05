@@ -29,7 +29,9 @@ struct HomeView: View {
     var body: some View {
         BaseView {
             TitleBar(trailingIcons: [
-                (Icons.notification1_large, { })
+                (Icons.notification1_large, { 
+                    viewModel.coodinator?.send(.notification)
+                })
             ])
         } content: {
             content()
@@ -206,7 +208,7 @@ extension HomeView {
         LazyVGrid(columns: Array(repeating: .init(), count: 2), spacing: 10, content: {
             ForEach(HomeFooterContent.allCases, id: \.self) { content in
                 Button(action: {
-                    viewModel.send(.didTapFooterButton(content))
+                    
                 }, label: {
                     contentCell(content: content)
                 }).disabled(true)

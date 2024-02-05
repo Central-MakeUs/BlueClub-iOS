@@ -23,6 +23,8 @@ extension ScheduleNoteCoordinator: Coordinatorable {
     
     enum Action {
         case goalInput(ScheduleNoteViewModel)
+        case notification
+        
     }
     
     @MainActor func send(_ action: Action) {
@@ -37,6 +39,10 @@ extension ScheduleNoteCoordinator: Coordinatorable {
                 viewModel: viewModel,
                 coordinator: self)
             navigator.bottomSheet(parameter) { view }
+            
+        case .notification:
+            let view = NotificationView(coordinator: self)
+            navigator.push { view }
         }
     }
 }

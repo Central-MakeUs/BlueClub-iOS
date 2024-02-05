@@ -33,7 +33,9 @@ struct ScheduleNoteView: View {
                     (Icons.setting_solid, { 
                         viewModel.send(.didTapGearIcon)
                     }),
-                    (Icons.notification1_large, { })
+                    (Icons.notification1_large, { 
+                        viewModel.coordinator?.send(.notification)
+                    })
                 ])
         } content: {
             content()

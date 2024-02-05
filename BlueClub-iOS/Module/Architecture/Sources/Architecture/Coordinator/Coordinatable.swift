@@ -10,5 +10,11 @@ import Navigator
 
 public protocol Coordinatorable: AnyObject, Actionable, Navigatable {
 
+}
 
+public extension Coordinatorable {
+    
+    @MainActor func pop() {
+        self.navigator.pop()
+    }
 }
