@@ -5,7 +5,6 @@
 //  Created by 김인섭 on 1/5/24.
 //
 
-import ComposableArchitecture
 import DesignSystem
 import Domain
 import SwiftUI
@@ -13,14 +12,11 @@ import Combine
 
 struct InitialSettingView: View {
     
-    typealias Reducer = InitialSetting
-    @ObservedObject var viewStore: ViewStoreOf<Reducer>
+    @StateObject var viewModel: InitialSettingViewModel
+    @FocusState var focus: InitialSettingViewModel.FocusItem?
     
-    @FocusState var focus: Reducer.FocusItem?
-    
-    init(reducer: Reducer) {
-        let store: StoreOf<Reducer> = .init(initialState: .init(), reducer: { reducer })
-        self.viewStore = .init(store, observe: { $0 })
+    init(viewModel: InitialSettingViewModel) {
+        self._viewModel = .init(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -30,18 +26,15 @@ struct InitialSettingView: View {
             content()
         } footer: {
             footer()
-        }.sheet(isPresented: viewStore.$showAllowSheet) {
+        }.sheet(isPresented: $viewModel.showAllowSheet) {
             ServiceAgreementSheet(
-                isPresented: viewStore.$showAllowSheet,
-                onFinish: { viewStore.send(.didFinishAllow) }
+                isPresented: $viewModel.showAllowSheet,
+                onFinish: { viewModel.send(.didFinishAllow) }
             ).presentationDetents([.height(488)])
-        }.onChange(of: viewStore.nickname) { _ in
-            viewStore.send(.nicknameDidChange)
-        }.onReceive(Just(viewStore.targetIcome)) { _ in
-            viewStore.send(.targetIncomeDidChange)
         }
         .hideKeyboardOnTapBackground()
-        .syncFocused($focus, with: viewStore.$focus)
+        .syncFocused($focus, with: $viewModel.focus)
+        .onAppear { viewModel.send(.observe) }
     }
 }
 
@@ -49,7 +42,7 @@ struct InitialSettingView: View {
 extension InitialSettingView {
     
     @ViewBuilder func header() -> some View {
-        if viewStore.currentStage != .welcome {
+        if viewModel.currentStage != .welcome {
             VStack(spacing: 0) {
                 topBar()
                 indicator()
@@ -60,7 +53,7 @@ extension InitialSettingView {
     @ViewBuilder func topBar() -> some View {
         HStack {
             Button(action: {
-                viewStore.send(.didTapBack)
+                viewModel.send(.didTapBack)
             }, label: {
                 Image.icons(.arrow_left)
             })
@@ -70,7 +63,7 @@ extension InitialSettingView {
         .frame(height: 28)
         .padding(12)
         .overlay {
-            Text(viewStore.currentStage.title)
+            Text(viewModel.currentStage.title)
                 .fontModifer(.sb1)
         }
     }
@@ -81,13 +74,13 @@ extension InitialSettingView {
             .frame(maxWidth: .infinity)
             .foregroundStyle(Color.colors(.cg03))
             .overlay(alignment: .leading) {
-                let widthPerStage = (UIApplication.shared.screenSize.width) /  CGFloat(InitialSetting.Stage.allCases.count)
-                let width = widthPerStage * CGFloat(viewStore.currentStage.int)
+                let widthPerStage = (UIApplication.shared.screenSize.width) /  CGFloat(InitialSettingViewModel.Stage.allCases.count)
+                let width = widthPerStage * CGFloat(viewModel.currentStage.int)
                 Rectangle()
                     .frame(height: 4)
                     .frame(width: width)
                     .foregroundStyle(Color.colors(.primaryNormal))
-            }.animation(.default, value: viewStore.currentStage)
+            }.animation(.default, value: viewModel.currentStage)
     }
 }
 
@@ -96,7 +89,7 @@ extension InitialSettingView {
     
     @ViewBuilder func content() -> some View {
         VStack(spacing: 0) {
-            switch viewStore.currentStage {
+            switch viewModel.currentStage {
             case .job:
                 jobSelectionContent()
             case .targetIncome:
@@ -112,11 +105,11 @@ extension InitialSettingView {
     @ViewBuilder func contentHeader() -> some View {
         VStack(spacing: 4) {
             Spacer()
-            Text(viewStore.currentStage.headerTitle)
+            Text(viewModel.currentStage.headerTitle)
                 .fontModifer(.h6)
                 .foregroundStyle(Color.colors(.black))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(viewStore.currentStage.headerDescription)
+            Text(viewModel.currentStage.headerDescription)
                 .fontModifer(.b2m)
                 .foregroundStyle(Color.init(hex: "7C7C7C"))
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -133,10 +126,12 @@ extension InitialSettingView {
                 ForEach(JobOption.allCases, id: \.title) { option in
                     PrimaryButton(
                         title: option.title,
-                        disabled: viewStore.selectedJob != option,
+                        disabled: viewModel.selectedJob != option,
                         type: .outline,
                         action: {
-                            viewStore.send(.didSelectJob(option), animation: .default)
+                            withAnimation {
+                                viewModel.send(.didSelectJob(option))
+                            }
                         }
                     )
                 }
@@ -148,51 +143,15 @@ extension InitialSettingView {
         VStack(spacing: 0) {
             contentHeader()
             
-            let message: (String, Color)? = viewStore.targetIcomeMessage != nil
-            ? (viewStore.targetIcomeMessage!.message, viewStore.targetIcomeMessage!.color)
+            let message: (String, Color)? = viewModel.targetIcomeMessage != nil
+            ? (viewModel.targetIcomeMessage!.message, viewModel.targetIcomeMessage!.color)
             : .none
             
             GoalInput(
-                text: viewStore.$targetIcome,
+                text: $viewModel.targetIncome,
                 message: message,
                 focusState: $focus,
                 focusValue: .targetIcome)
-            
-//            VStack(spacing: 2) {
-//                HStack(spacing: 2) {
-//                    TextField("", text: viewStore.$targetIcome)
-//                        .keyboardType(.numberPad)
-//                        .multilineTextAlignment(.trailing)
-//                        .focused($focus, equals: .targetIcome)
-//                    Text("원")
-//                        .hide(when: viewStore.targetIcome.isEmpty)
-//                }
-//                .fontModifer(.b1)
-//                .frame(height: 24)
-//                .foregroundStyle(Color.colors(.gray10))
-//                .padding(.horizontal, 12)
-//                .padding(.vertical, 16)
-//                .background(alignment: .trailing, content: {
-//                    if viewStore.targetIcome.isEmpty {
-//                        Text("목표 금액 입력")
-//                            .fontModifer(.b1)
-//                            .foregroundStyle(Color.colors(.gray06))
-//                            .padding(.trailing, 12)
-//                    }
-//                })
-//                .roundedBackground(
-//                    .colors(.gray01),
-//                    radius: 8
-//                )
-//                if let message = viewStore.targetIcomeMessage {
-//                    Text(message.message)
-//                        .fontModifer(.caption1)
-//                        .foregroundStyle(message.color)
-//                        .frame(maxWidth: .infinity, alignment: .trailing)
-//                        .frame(height: 18)
-//                        .padding(.horizontal, 8)
-//                }
-//            }.padding(.horizontal, 20)
         }.onAppear { focus = .targetIcome }
     }
     
@@ -201,7 +160,7 @@ extension InitialSettingView {
             contentHeader()
             VStack(spacing: 2) {
                 TextInput(
-                    text: viewStore.$nickname,
+                    text: $viewModel.nickname,
                     placeholder: "닉네임을 입력해주세요",
                     focusState: $focus,
                     focusValue: .nickname
@@ -213,18 +172,18 @@ extension InitialSettingView {
                         .padding(.vertical, 6)
                         .padding(.horizontal, 6)
                         .roundedBackground(
-                            viewStore.checkNicknameDisabled
+                            viewModel.checkNicknameDisabled
                             ? .colors(.gray04)
                             : .colors(.gray10),
                             radius: 4
                         )
-                        .onTapGesture { viewStore.send(.checkNickname) }
+                        .onTapGesture { viewModel.send(.checkNickname) }
                         .padding(.trailing, 12)
                 }
                 
                 HStack {
                     HStack(spacing: 3) {
-                        Text("\(viewStore.nickname.count)")
+                        Text("\(viewModel.nickname.count)")
                             .foregroundStyle(Color.colors(.gray07))
                         Text("/")
                             .foregroundStyle(Color.colors(.gray05))
@@ -232,7 +191,7 @@ extension InitialSettingView {
                             .foregroundStyle(Color.colors(.gray07))
                     }.fontModifer(.caption1)
                     Spacer()
-                    if let message = viewStore.nicknameMessage {
+                    if let message = viewModel.nicknameMessage {
                         Text(message.message)
                             .fontModifer(.caption1)
                             .foregroundStyle(message.color)
@@ -267,25 +226,27 @@ extension InitialSettingView {
 extension InitialSettingView {
     
     @ViewBuilder func footer() -> some View {
-        switch viewStore.currentStage {
+        switch viewModel.currentStage {
         case .targetIncome:
-            let disabled = !viewStore.isTargetIcomeValid
+            let disabled = !viewModel.isTargetIcomeValid
             PrimaryButton(
                 title: "다음",
                 disabled: disabled,
                 action: {
-                    viewStore.send(.setStage(.nickname), animation: .default)
+                    withAnimation {
+                        viewModel.send(.setStage(.nickname))
+                    }
                 }
             )
             .padding(.vertical, 20)
             .disabled(disabled)
         case .nickname:
-            let disabled = !viewStore.nicknameAvailable
+            let disabled = !viewModel.nicknameAvailable
             PrimaryButton(
                 title: "다음",
                 disabled: disabled,
                 action: {
-                    viewStore.send(.showAllowSheet)
+                    viewModel.send(.showAllowSheet)
                 }
             )
             .padding(.vertical, 20)
@@ -293,7 +254,7 @@ extension InitialSettingView {
         case .welcome:
             PrimaryButton(
                 title: "바로 시작하기",
-                action: { viewStore.send(.didFinishInitialSetting) }
+                action: { viewModel.send(.didFinishInitialSetting) }
             ).padding(.vertical, 20)
         default:
             EmptyView()
@@ -302,5 +263,5 @@ extension InitialSettingView {
 }
 
 #Preview {
-    InitialSettingView(reducer: .init(cooridonator: .init()))
+    InitialSettingView(viewModel: .init(cooridonator: .init()))
 }

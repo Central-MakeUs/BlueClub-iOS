@@ -10,12 +10,14 @@ import DesignSystem
 import DependencyContainer
 import Domain
 import Lottie
+import Utility
 
 struct SplashView: View {
     
+    // MARK: - Depedenceis
     weak var coordinator: AppCoordinator?
     private let dependencies: Container
-    private var userRepository: UserServiceable { dependencies.resolve() }
+    private var userRepository: UserRepositoriable { dependencies.resolve() }
     
     init(coordinator: AppCoordinator, dependencies: Container = .live) {
         self.coordinator = coordinator
@@ -36,15 +38,14 @@ struct SplashView: View {
         .background(Color.colors(.primaryNormal))
         .task {
             try? await Task.sleep(nanoseconds: 1_000_000_000)
-//            if userRepository.hasLogin {
-//                coordinator?.send(.home)
-//            } else {
-//                coordinator?.send(.login)
-//            }
-            
-            coordinator?.send(.login)
-//            coordinator?.send(.home)
+            let user = userRepository.getLoginUser()
+            guard user != nil else {
+                coordinator?.send(.login)
+                return
+            }
+            coordinator?.send(.home)
         }
+        .onAppear { printLog() }
     }
 }
 

@@ -46,9 +46,7 @@ struct GoalInputSheetView: View {
                     .foregroundStyle(Color.colors(.gray10))
                 Spacer()
                 Button {
-                    Task {
-                        await coordinator?.navigator.dismiss()
-                    }
+                    coordinator?.navigator.dismiss()
                 } label: {
                     Image.icons(.x)
                         .foregroundStyle(Color.colors(.gray10))

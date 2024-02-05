@@ -9,4 +9,13 @@ import Foundation
 
 public enum LoginMethod: CaseIterable, Codable {
     case kakao, apple
+    
+    public var title: String {
+        switch self {
+        case .kakao:
+            return "KAKAO"
+        case .apple:
+            return "APPLE"
+        }
+    }
 }

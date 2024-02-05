@@ -15,19 +15,23 @@ let package = Package(
     dependencies: [
         .package(path: "../Domain"),
         .package(path: "../Architecture"),
-        .package(url: "https://github.com/kakao/kakao-ios-sdk",
-            .upToNextMajor(from: "2.20.0"))
+        .package(
+            url: "https://github.com/kakao/kakao-ios-sdk",
+            .upToNextMajor(from: "2.20.0")),
+        .package(
+            url: "https://github.com/MightyCombine/MightyCombine.git",
+            .upToNextMajor(from: "1.1.7"))
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DataSource",
             dependencies: [
                 "Domain",
                 "Architecture",
-                .product(name: "KakaoSDKUser",
-                         package: "kakao-ios-sdk")
+                "MightyCombine",
+                .product(
+                    name: "KakaoSDKUser",
+                    package: "kakao-ios-sdk")
             ]
         ),
         .testTarget(

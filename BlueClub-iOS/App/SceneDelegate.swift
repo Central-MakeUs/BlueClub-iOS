@@ -10,16 +10,21 @@ import DependencyContainer
 import DataSource
 import Domain
 import KakaoSDKAuth
+import MightyCombine
+import Utility
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    private let coordinator = AppCoordinator()
+    private var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
-        coordinator.send(.start(scene))
+        printLog()
+        coordinator = .init()
+        coordinator?.send(.start(scene))
         configDependencies()
         configDesignSystem()
+        configMightyCombine()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -51,7 +56,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // 카카오 로그인 하면 여기로 열림
-        // kakaoc54841ca9f7d5edce0ad7244305b9c8c://oauth?code=I8lj1oamAGIp0UXO6IHr_Mf-fPAu7rQoEu-OMHnbgG4rT0nQrqSsell4AX4KPXTaAAABjQFE0U8h5oEAb4_jFQ
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
                  _ = AuthController.handleOpenUrl(url: url)
@@ -68,11 +72,22 @@ private extension SceneDelegate {
     
     func configDependencies() {
         
-        // NOTE: - DataSouce
         Container.live
+        // MARK: - UserRepository
+            .register { KakaoLoginService() as KakaoLoginServiceable }
             .register { AppleLoginService() as AppleLoginServiceable }
-            .register { UserRepository(dependencies: .live) as UserServiceable }
+            .register { UserRepository(dependencies: .live) as UserRepositoriable }
+        // MARK: - Date
             .register { DateService() as DateServiceable }
+        // MARK: - Api
+            .register { AuthService() as AuthServiceable }
+            .register { UserService() as UserServiceable }
+    }
+    
+    func configMightyCombine() {
+        URLSession.printLog = true
+        URLSession.requestLogStyle = .prettyJson
+        URLSession.responseLogStyle = .prettyJson
     }
 }
 

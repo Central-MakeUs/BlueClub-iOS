@@ -6,18 +6,16 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
 import Domain
 import DesignSystem
+import Utility
 
 struct LoginView: View {
+
+    @StateObject var viewModel: LoginViewModel
     
-    typealias Reducer = Login
-    @ObservedObject var viewStore: ViewStoreOf<Reducer>
-    
-    init(reducer: Reducer) {
-        let store: StoreOf<Reducer> = .init(initialState: .init(), reducer: { reducer })
-        self.viewStore = .init(store, observe: { $0 })
+    init(viewModel: LoginViewModel) {
+        self._viewModel = .init(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -26,6 +24,8 @@ struct LoginView: View {
             Spacer()
             buttons()
         }
+        .loadingSpinner(viewModel.isLoading)
+        .onAppear { printLog() }
     }
     
     @ViewBuilder func header() -> some View {
@@ -49,7 +49,9 @@ struct LoginView: View {
                     title: method.buttonTitle,
                     foreground: method.foreground,
                     background: method.background,
-                    action: { viewStore.send(.didSelectLoginMethod(method)) }
+                    action: {
+                        viewModel.send(.didSelectLoginMethod(method))
+                    }
                 )
             }
         }.padding(.bottom, 20)
@@ -96,5 +98,5 @@ extension LoginMethod {
 }
 
 #Preview {
-    LoginView(reducer: .init(coordinator: .init(), dependencies: .init()))
+    LoginView(viewModel: .init(coordinator: .init()))
 }

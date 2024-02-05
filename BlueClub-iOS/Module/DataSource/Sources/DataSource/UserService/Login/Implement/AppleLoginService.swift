@@ -38,12 +38,6 @@ extension AppleLoginService: ASAuthorizationControllerDelegate {
             continuation?.resume(throwing: SocialLoginError.appleCredentialNotFound)
             return
         }
-
-        guard let tokenData = credential.identityToken,
-              let token = String(data: tokenData, encoding: .utf8) else {
-            continuation?.resume(throwing: SocialLoginError.tokenNotFound)
-            return
-        }
         
         let id = credential.user
         let email = credential.email
@@ -58,7 +52,6 @@ extension AppleLoginService: ASAuthorizationControllerDelegate {
 
         let userInfo = SocialLoginUser(
             id: id,
-            token: token,
             name: name,
             email: email,
             loginMethod: .apple

@@ -8,6 +8,7 @@
 import SwiftUI
 import DesignSystem
 import Navigator
+import Utility
 
 struct MainTabView: View {
     
@@ -23,7 +24,9 @@ struct MainTabView: View {
             content()
         } footer: {
             tabBar()
-        }.ignoresSafeArea(edges: .top)
+        }
+        .ignoresSafeArea(edges: .top)
+        .onAppear { printLog() }
     }
 }
 

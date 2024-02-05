@@ -41,13 +41,16 @@ extension AppCoordinator {
             window?.makeKeyAndVisible()
 
         case .login:
-            let reducer = Login(coordinator: self)
-            navigator.start { LoginView(reducer: reducer) }
+            let viewModel = LoginViewModel(coordinator: self)
+            navigator.start { LoginView(viewModel: viewModel) }
             window?.rootViewController = navigator.view
             
         case .initialSetting:
-            let reducer = InitialSetting(cooridonator: self)
-            navigator.push { InitialSettingView(reducer: reducer) }
+            let viewModel = InitialSettingViewModel(cooridonator: self)
+            navigator.push {
+                InitialSettingView(viewModel: viewModel)
+            }
+            break
             
         case .home:
             navigator.start { MainTabView(navigator: self.navigator) }

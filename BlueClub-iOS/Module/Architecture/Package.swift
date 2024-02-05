@@ -18,9 +18,6 @@ let package = Package(
             url: "https://github.com/insub4067/Navigator.git",
             .upToNextMajor(from: "0.3.0")),
         .package(
-            url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-            .upToNextMajor(from: "1.6.0")),
-        .package(
             url: "https://github.com/insub4067/DependencyContainer.git",
             .upToNextMajor(from: "1.0.2"))
     ],
@@ -32,10 +29,7 @@ let package = Package(
             dependencies: [
                 "Domain",
                 "Navigator",
-                "DependencyContainer",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture")
+                "DependencyContainer"
             ]
         ),
         .testTarget(

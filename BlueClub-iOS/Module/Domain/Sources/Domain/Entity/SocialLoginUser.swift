@@ -10,22 +10,19 @@ import Foundation
 public struct SocialLoginUser: Codable {
     
     public let id: String
-    public let token: String
-    public var name: String?
-    public var email: String?
+    public var name: String
+    public var email: String
     public let loginMethod: LoginMethod
     
     public init(
         id: String,
-        token: String,
         name: String?,
         email: String?,
         loginMethod: LoginMethod
     ) {
         self.id = id
-        self.token = token
-        self.name = name
-        self.email = email
+        self.name = name ?? ""
+        self.email = email ?? ""
         self.loginMethod = loginMethod
     }
 }
