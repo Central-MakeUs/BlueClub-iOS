@@ -209,7 +209,7 @@ extension HomeView {
                     viewModel.send(.didTapFooterButton(content))
                 }, label: {
                     contentCell(content: content)
-                })
+                }).disabled(true)
             }
         }).padding(.horizontal, 20)
     }
@@ -271,7 +271,7 @@ enum HomeFooterContent: CaseIterable {
     var image: Image {
         switch self {
         case .incomeReportCollection:
-            return Image(.incomeReport)
+            return Image(.communityChat)
         case .infoCollection:
             return Image(.infoCollection)
         }
@@ -280,7 +280,7 @@ enum HomeFooterContent: CaseIterable {
     var title: String {
         switch self {
         case .incomeReportCollection:
-            return "수입인증을 보관한"
+            return "같은 직군끼리"
         case .infoCollection:
             return "블로버를 위한"
         }
@@ -289,19 +289,14 @@ enum HomeFooterContent: CaseIterable {
     var description: String {
         switch self {
         case .incomeReportCollection:
-            return "자랑하기 모음집"
+            return "정보교류 커뮤니티"
         case .infoCollection:
             return "근로 정보 모음집"
         }
     }
     
     var hasOpen: Bool {
-        switch self {
-        case .incomeReportCollection:
-            return true
-        case .infoCollection:
-            return false
-        }
+        return false
     }
 }
 #Preview {
