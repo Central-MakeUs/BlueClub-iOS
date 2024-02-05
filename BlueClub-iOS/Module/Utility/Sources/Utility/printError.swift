@@ -10,10 +10,11 @@ import Foundation
 public func printError(
     _ error: Error,
     file: String = #file,
+    line: Int = #line,
     function: String = #function
 ) {
     #if DEBUG
     let fileName = (file as NSString).lastPathComponent
-    print("❌ Error: \(error) occurred in \(fileName), function: \(function)")
+    print("❌ Error: \(error) occurred in \(fileName) at line \(line), function: \(function)")
     #endif
 }
