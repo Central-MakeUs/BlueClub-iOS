@@ -29,6 +29,8 @@
 		FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */; };
 		FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */; };
 		FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEC2B714E520005DBCB /* NotificationView.swift */; };
+		FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */; };
+		FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */; };
 		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* LoginViewModel.swift */; };
@@ -40,6 +42,11 @@
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
 		FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */; };
 		FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */; };
+		FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF432B7283FD006F4763 /* WonInput.swift */; };
+		FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF452B728417006F4763 /* CustomStepper.swift */; };
+		FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */; };
+		FBB8EF4A2B7285D9006F4763 /* CustomDoubleStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */; };
+		FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF4B2B728627006F4763 /* CustomTextField.swift */; };
 		FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */; };
 		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
 		FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */; };
@@ -70,6 +77,8 @@
 		FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputSheetView.swift; sourceTree = "<group>"; };
 		FB302BEC2B714E520005DBCB /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
+		FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditViewModel.swift; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
@@ -80,6 +89,11 @@
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementSheet.swift; sourceTree = "<group>"; };
 		FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementView.swift; sourceTree = "<group>"; };
+		FBB8EF432B7283FD006F4763 /* WonInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonInput.swift; sourceTree = "<group>"; };
+		FBB8EF452B728417006F4763 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
+		FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeSheet.swift; sourceTree = "<group>"; };
+		FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDoubleStepper.swift; sourceTree = "<group>"; };
+		FBB8EF4B2B728627006F4763 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueClubPrivateKey.swift; path = ../../../BlueClubPrivateKey.swift; sourceTree = "<group>"; };
 		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -262,6 +276,16 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		FB302BEE2B71566D0005DBCB /* ScheduleEdit */ = {
+			isa = PBXGroup;
+			children = (
+				FBB8EF422B7283E6006F4763 /* SubView */,
+				FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */,
+				FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */,
+			);
+			path = ScheduleEdit;
+			sourceTree = "<group>";
+		};
 		FB52E3D82B5E8AFB001169AB /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +309,7 @@
 		FB8E68D42B5221E5007FF2C1 /* ScheduleNote */ = {
 			isa = PBXGroup;
 			children = (
+				FB302BEE2B71566D0005DBCB /* ScheduleEdit */,
 				FB2C21232B6DEB9100099B5D /* GoalInputSheet */,
 				FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */,
 				FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */,
@@ -315,6 +340,18 @@
 				FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		FBB8EF422B7283E6006F4763 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				FBB8EF432B7283FD006F4763 /* WonInput.swift */,
+				FBB8EF452B728417006F4763 /* CustomStepper.swift */,
+				FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */,
+				FBB8EF4B2B728627006F4763 /* CustomTextField.swift */,
+				FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */,
+			);
+			path = SubView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,9 +452,15 @@
 				FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */,
+				FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */,
 				FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */,
+				FBB8EF4A2B7285D9006F4763 /* CustomDoubleStepper.swift in Sources */,
 				FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */,
+				FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */,
+				FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */,
+				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
 				FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */,
+				FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */,
 				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
@@ -430,6 +473,7 @@
 				FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
+				FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

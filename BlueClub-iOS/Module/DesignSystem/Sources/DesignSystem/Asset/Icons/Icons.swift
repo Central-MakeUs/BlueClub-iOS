@@ -30,6 +30,7 @@ public enum Icons: String {
     case checkpx
     case close_circle
     case download
+    case dropdown
     case font_size
     case font
     case history

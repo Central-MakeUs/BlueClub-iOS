@@ -55,7 +55,7 @@ extension ScheduleNoteView {
             }
         }.overlay(alignment: .bottomTrailing) {
             Button(action: {
-                
+                viewModel.coordinator?.send(.scheduleEdit)
             }, label: {
                 Image(.floatingButton)
             }).padding(20)
