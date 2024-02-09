@@ -12,9 +12,11 @@ import Architecture
 final class HomeCoordinator {
     
     var navigator: Navigator
+    weak var parent: MainTabViewModel?
     
-    init(navigator: Navigator) {
+    init(navigator: Navigator, parent: MainTabViewModel?) {
         self.navigator = navigator
+        self.parent = parent
     }
 }
 
@@ -22,6 +24,7 @@ extension HomeCoordinator: Coordinatorable {
     
     enum Action {
         case notification
+        case scheduleNoteEdit
     }
     
     @MainActor func send(_ action: Action) {
@@ -30,6 +33,10 @@ extension HomeCoordinator: Coordinatorable {
         case .notification:
             let view = NotificationView(coordinator: self)
             navigator.push { view }
+            
+        case .scheduleNoteEdit:
+            parent?.send(.scheduleNoteEdit)
+            
         }
     }
 }

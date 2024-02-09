@@ -190,7 +190,7 @@ extension HomeView {
     
     @ViewBuilder func incomeInfoFooter() -> some View {
         Button(action: {
-            
+            viewModel.coodinator?.send(.scheduleNoteEdit)
         }, label: {
             HStack(spacing: 4) {
                 Text("근무 기록하고 달성률 채우러 가기")

@@ -14,12 +14,16 @@ final class MainTabViewModel: ObservableObject {
     
     @Published var currentTab: MainTabItem = .home
     
-    let homeCoordinator: HomeCoordinator
+    let navigator: Navigator
+    
+    lazy var homeCoordinator: HomeCoordinator = {
+        .init(navigator: navigator, parent: self)
+    }()
     let scheudleNoteCoordinator: ScheduleNoteCoordinator
     let myPageCoordinator: MyPageCoordinator
     
     init(navigator: Navigator) {
-        self.homeCoordinator = .init(navigator: navigator)
+        self.navigator = navigator
         self.scheudleNoteCoordinator = .init(navigator: navigator)
         self.myPageCoordinator = .init(navigator: navigator)
     }
@@ -28,6 +32,7 @@ final class MainTabViewModel: ObservableObject {
 extension MainTabViewModel: Actionable {
     
     enum Action {
+        case scheduleNoteEdit
         case didTapTab(MainTabItem)
     }
     
@@ -36,6 +41,10 @@ extension MainTabViewModel: Actionable {
             
         case .didTapTab(let tabItem):
             self.currentTab = tabItem
+            
+        case .scheduleNoteEdit:
+            self.currentTab = .note
+            scheudleNoteCoordinator.send(.scheduleEdit)
         }
     }
 }

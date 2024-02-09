@@ -67,5 +67,5 @@ struct BoastCollectionView: View {
 }
 
 #Preview {
-    BoastCollectionView(coordinator: .init(navigator: .init()))
+    BoastCollectionView(coordinator: .init(navigator: .init(), parent: .none))
 }
