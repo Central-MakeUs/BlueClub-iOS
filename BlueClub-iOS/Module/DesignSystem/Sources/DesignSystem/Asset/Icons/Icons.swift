@@ -51,6 +51,7 @@ public enum Icons: String {
     case x
     case check_active
     case check_deactive
+    case file02
     
     // MARK: - outline
     case add_outline

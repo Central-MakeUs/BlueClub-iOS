@@ -10,14 +10,39 @@ import DependencyContainer
 import Domain
 import Architecture
 import DataSource
+import UIKit
+import Combine
 
 class ScheduleEditViewModel: ObservableObject {
     
     // MARK: - Datas
+    var isAvailable: Bool {
+        switch self.job {
+        case .caddy:
+            return scheduleType != nil &&
+            roundingCount > 0 &&
+            !caddyFee.isEmpty
+        case .rider:
+            return scheduleType != nil &&
+            deliveryCount > 0 &&
+            !deliveryIncome.isEmpty
+        case .temporary:
+            return scheduleType != nil &&
+            !siteName.isEmpty &&
+            !dayPay.isEmpty
+        }
+    }
+    private var cancellables = Set<AnyCancellable>()
+
+    @Published var keyboardAppeared = false
     @Published var showScheduleTypeSheet = false
     @Published var job: JobOption = .caddy
     @Published var scheduleType: ScheduleType?
     @Published var date: Date = .now
+    @Published var showMemoSheet = false
+    @Published var memo = ""
+    @Published var spend = ""
+    @Published var saving = ""
     
     // MARK: - Cadday Datas
     @Published var roundingCount = 0
@@ -33,27 +58,38 @@ class ScheduleEditViewModel: ObservableObject {
     
     // MARK: - Temporary Datas
     @Published var siteName = ""
-    @Published var dayIncome = ""
+    @Published var dayPay = ""
     @Published var category = ""
     @Published var gongsu: Double = 0.0
     
     // MARK: - Dependencies
     weak var coordinator: ScheduleNoteCoordinator?
-//    private let dependencies: Container
-//    private var userRepository: UserRepositoriable { dependencies.resolve() }
+    private let dependencies: Container
+    private var userRepository: UserRepositoriable { dependencies.resolve() }
     
-    private var userRepository: UserRepositoriable = UserRepository(dependencies: .live)
-    
-//    init(
-//        coordinator: ScheduleNoteCoordinator,
-//        dependencies: Container
-//    ) {
-//        self.coordinator = coordinator
-//        self.dependencies = dependencies
-//    }
-    
-    init(coordinator: ScheduleNoteCoordinator) {
+    init(
+        coordinator: ScheduleNoteCoordinator,
+        dependencies: Container = .live
+    ) {
         self.coordinator = coordinator
+        self.dependencies = dependencies
+        
+        NotificationCenter
+            .default
+            .publisher(for: UIResponder.keyboardWillShowNotification)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                self.keyboardAppeared = true
+            }).store(in: &cancellables)
+
+          // 키보드가 사라질 때
+          NotificationCenter
+            .default
+            .publisher(for: UIResponder.keyboardWillHideNotification)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                self.keyboardAppeared = false
+            }).store(in: &cancellables)
     }
 }
 

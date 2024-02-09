@@ -58,6 +58,7 @@
 		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
 		FBE1129C2B75D0F90064D1A9 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */; };
 		FBE112A02B75D44F0064D1A9 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */; };
+		FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
 		FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
+		FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,6 +380,7 @@
 				FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */,
 				FBB8EF4B2B728627006F4763 /* CustomTextField.swift */,
 				FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */,
+				FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */,
 				FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */,
 				FB81AEF62B752D5600AF6E7C /* JobSelectSheet.swift in Sources */,
+				FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */,
 				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
 				FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */,
 				FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */,

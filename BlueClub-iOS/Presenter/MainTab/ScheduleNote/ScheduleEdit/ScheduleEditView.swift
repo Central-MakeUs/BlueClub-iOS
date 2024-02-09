@@ -18,11 +18,6 @@ struct ScheduleEditView: View {
         self._viewModel = .init(wrappedValue: viewModel)
     }
     
-    @State var isActive = false
-    var buttonBackground: Color {
-        isActive ? .colors(.black) : .colors(.gray04)
-    }
-    
     var body: some View {
         BaseView {
             topBar()
@@ -30,6 +25,7 @@ struct ScheduleEditView: View {
             content()
         } footer: {
             bottomButton()
+                .hide(when: viewModel.keyboardAppeared)
         }
         .onAppear { viewModel.send(.fetchUserInfo) }
         .sheet(isPresented: $viewModel.showScheduleTypeSheet) {
@@ -37,6 +33,11 @@ struct ScheduleEditView: View {
                 .environmentObject(viewModel)
                 .presentationDetents([.height(282)])
         }
+        .sheet(isPresented: $viewModel.showMemoSheet, content: {
+            MemoSheet(
+                isPresented: $viewModel.showMemoSheet,
+                text: $viewModel.memo)
+        })
     }
 }
 
@@ -48,7 +49,7 @@ extension ScheduleEditView {
                 viewModel.coordinator?.pop()
             }),
             title: .none,
-            isTrailingButtonActive: true,
+            isTrailingButtonActive: viewModel.isAvailable,
             trailingButton: ("저장", { }))
     }
     
@@ -67,19 +68,47 @@ extension ScheduleEditView {
                         temporaryContentRows()
                     }
                 }
+                memoPreview()
                 plusButtons()
                 contentFooter()
+            }.hideKeyboardOnTapBackground()
+        }.scrollDismissesKeyboard(.immediately)
+    }
+    
+    @ViewBuilder func memoPreview() -> some View {
+        if !viewModel.memo.isEmpty {
+            VStack {
+                HStack(spacing: 4) {
+                    Image.icons(.file02)
+                    Text("메모")
+                        .fontModifer(.b1m)
+                        .foregroundStyle(Color.colors(.cg06))
+                    Spacer()
+                }
+                .frame(height: 24)
+                Text(viewModel.memo)
+                    .fontModifer(.b1m)
+                    .foregroundStyle(Color.colors(.gray10))
+                    .lineLimit(1)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(16)
+                    .roundedBorder()
             }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
         }
     }
     
     @ViewBuilder func plusButtons() -> some View {
         HStack(spacing: 8) {
-            Button(action: {
-                
-            }, label: {
-                plusLabel(title: "메모")
-            })
+            if viewModel.memo.isEmpty {
+                Button(action: {
+                    viewModel.showMemoSheet = true
+                }, label: {
+                    plusLabel(title: "메모")
+                })
+            }
             Button(action: {
                 
             }, label: {
@@ -184,7 +213,7 @@ extension ScheduleEditView {
             title: "일당",
             isMandatory: true
         ) {
-            WonInput(text: $viewModel.dayIncome)
+            WonInput(text: $viewModel.dayPay)
         }
         listCell(
             image: .init(.coinDollar),
@@ -292,7 +321,9 @@ extension ScheduleEditView {
         CustomButton(
             title: "수입 자랑하기✌️",
             foreground: .colors(.white),
-            background: buttonBackground,
+            background: viewModel.isAvailable
+                ? .colors(.black)
+                : .colors(.gray04),
             action: { }
         ).padding(.vertical, 20)
     }
@@ -324,10 +355,10 @@ extension ScheduleEditView {
                     Text("123")
                 }
                 contentFooterCell(title: "지출액") {
-                    Text("123")
+                    WonInput(text: $viewModel.spend)
                 }
                 contentFooterCell(title: "저축액") {
-                    Text("123")
+                    WonInput(text: $viewModel.saving)
                 }
             }
             .padding(.top, 20)
