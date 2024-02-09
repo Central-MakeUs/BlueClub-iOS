@@ -74,7 +74,7 @@ private extension MyPageView {
             LazyVGrid(columns: Array(repeating: .init(), count: 3), spacing: 16) {
                 ForEach(MyPageHeaderButton.allCases, id: \.self) { button in
                     Button {
-                        
+                        viewModel.send(.didTapButton(button))
                     } label: {
                         headerBottomButton(button)
                     }

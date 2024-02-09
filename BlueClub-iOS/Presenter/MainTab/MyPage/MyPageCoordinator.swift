@@ -7,6 +7,7 @@
 
 import Navigator
 import Architecture
+import UIKit
 
 final class MyPageCoordinator {
     
@@ -50,11 +51,13 @@ extension MyPageCoordinator: Coordinatorable {
             break
             
         case .ask:
-            break
+            guard let url = URL(string: "https://pf.kakao.com/_mxkCiG") else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
         case .service:
-            break
-            
+            guard let url = URL(string: "https://forms.gle/AtRshbAM2FBKMgAX8") else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        
         case .announcement:
             let view = AnnouncementView(coordinator: self)
             navigator.push { view }

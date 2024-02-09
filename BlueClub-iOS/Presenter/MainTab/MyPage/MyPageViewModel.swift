@@ -57,9 +57,9 @@ extension MyPageViewModel: Actionable {
             case .friend:
                 break
             case .ask:
-                break
+                coordinator.send(.ask)
             case .service:
-                break
+                coordinator.send(.service)
             }
             
         case .didTapListItem(let item):
