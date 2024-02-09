@@ -21,7 +21,15 @@ extension MyPageCoordinator: Coordinatorable {
     
     enum Action {
         case notification
+        
+        // MARK: - Header
         case profileEdit
+        case inviteFriend
+        case ask
+        case service
+        
+        case announcement
+        case notificationSetting
     }
     
     func send(_ action: Action) {
@@ -31,10 +39,27 @@ extension MyPageCoordinator: Coordinatorable {
             let view = NotificationView(coordinator: self)
             navigator.push { view }
             
+        // MARK: - Header
         case .profileEdit:
             let viewModel = ProfileEditViewModel(coordinator: self)
             let view = ProfileEditView(viewModel: viewModel)
             navigator.push { view }
+            
+        case .inviteFriend:
+            break
+            
+        case .ask:
+            break
+            
+        case .service:
+            break
+            
+        case .announcement:
+            let view = AnnouncementView()
+            navigator.push { view }
+            
+        case .notificationSetting:
+            break
         }
     }
 }

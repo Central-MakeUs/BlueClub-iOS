@@ -56,6 +56,7 @@
 		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
 		FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */; };
 		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
+		FBE1129C2B75D0F90064D1A9 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
+		FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				FB2C211A2B6BE55E00099B5D /* MyPageView.swift */,
+				FBE1129A2B75D0E40064D1A9 /* Announcement */,
 				FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */,
 				FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */,
 				FB81AEF02B751C8E00AF6E7C /* ProfileEdit */,
@@ -377,6 +380,14 @@
 			path = SubView;
 			sourceTree = "<group>";
 		};
+		FBE1129A2B75D0E40064D1A9 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */,
+			);
+			path = Announcement;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -474,6 +485,7 @@
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
 				FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */,
+				FBE1129C2B75D0F90064D1A9 /* AnnouncementView.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */,
 				FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */,

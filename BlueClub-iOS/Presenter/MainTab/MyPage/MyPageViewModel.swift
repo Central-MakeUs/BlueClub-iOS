@@ -39,6 +39,8 @@ extension MyPageViewModel: Actionable {
     enum Action {
         case notification
         case profileEdit
+        case didTapButton(MyPageHeaderButton)
+        case didTapListItem(MyPageItemRow)
     }
     
     func send(_ action: Action) {
@@ -49,7 +51,30 @@ extension MyPageViewModel: Actionable {
             
         case .profileEdit:
             coordinator.send(.profileEdit)
-
+            
+        case .didTapButton(let headerButton):
+            switch headerButton {
+            case .friend:
+                break
+            case .ask:
+                break
+            case .service:
+                break
+            }
+            
+        case .didTapListItem(let item):
+            switch item {
+            case .announcement:
+                coordinator.send(.announcement)
+            case .notificationSetting:
+                break
+            case .termsOf:
+                break
+            case .privacy:
+                break
+            case .versionInfo:
+                break
+            }
         }
     }
 }

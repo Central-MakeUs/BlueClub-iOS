@@ -32,12 +32,8 @@ struct MyPageView: View {
             ScrollView {
                 LazyVStack {
                     header()
-                    ForEach(ItemRow.allCases, id: \.self) { row in
-                        Button(action: {
-                            
-                        }, label: {
-                            rowCell(row)
-                        })
+                    ForEach(MyPageItemRow.allCases, id: \.self) { row in
+                        rowCell(row)
                     }
                     footer()
                 }
@@ -76,7 +72,7 @@ private extension MyPageView {
             .frame(height: 74)
             .padding(20)
             LazyVGrid(columns: Array(repeating: .init(), count: 3), spacing: 16) {
-                ForEach(HeaderBottomButton.allCases, id: \.self) { button in
+                ForEach(MyPageHeaderButton.allCases, id: \.self) { button in
                     Button {
                         
                     } label: {
@@ -98,7 +94,7 @@ private extension MyPageView {
         .padding(.vertical, 14)
     }
     
-    @ViewBuilder func headerBottomButton(_ button: HeaderBottomButton) -> some View {
+    @ViewBuilder func headerBottomButton(_ button: MyPageHeaderButton) -> some View {
         VStack(spacing: 4) {
             button.image
             Text(button.title)
@@ -108,7 +104,7 @@ private extension MyPageView {
         .frame(width: 80, height: 82)
     }
     
-    @ViewBuilder func rowCell(_ row: ItemRow) -> some View {
+    @ViewBuilder func rowCell(_ row: MyPageItemRow) -> some View {
         if row == .versionInfo {
             HStack {
                 HStack(alignment: .bottom, spacing: 8) {
@@ -138,7 +134,7 @@ private extension MyPageView {
             .padding(.horizontal, 30)
         } else {
             Button(action: {
-                
+                viewModel.send(.didTapListItem(row))
             }, label: {
                 HStack {
                     Text(row.title)
@@ -178,11 +174,11 @@ private extension MyPageView {
     }
 }
 
-enum HeaderBottomButton: CaseIterable {
+enum MyPageHeaderButton: CaseIterable {
     
     case friend
     case ask
-    case servie
+    case service
     
     var image: Image {
         switch self {
@@ -190,7 +186,7 @@ enum HeaderBottomButton: CaseIterable {
             return .init(.userPlus)
         case .ask:
             return .init(.envelope)
-        case .servie:
+        case .service:
             return .init(.commentSquare)
         }
     }
@@ -201,13 +197,13 @@ enum HeaderBottomButton: CaseIterable {
             return "친구 초대"
         case .ask:
             return "문의하기"
-        case .servie:
+        case .service:
             return "서비스 의견함"
         }
     }
 }
 
-enum ItemRow: CaseIterable {
+enum MyPageItemRow: CaseIterable {
     case announcement
     case notificationSetting
     case termsOf

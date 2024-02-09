@@ -22,8 +22,8 @@ enum RequestHeader {
         [
             "Content-Type": "application/json;charset=UTF-8",
             "accept": "application/json;charset=UTF-8",
-            "Authorization": accessToken,
-            "Authorization-refresh": refreshToken
+            "Authorization": "Bearer " + accessToken,
+            "Authorization-refresh": "Bearer " + refreshToken
         ]
     }
 }
