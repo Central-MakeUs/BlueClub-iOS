@@ -29,6 +29,7 @@ extension MyPageCoordinator: Coordinatorable {
         case service
         
         case announcement
+        case announcementDetail
         case notificationSetting
     }
     
@@ -55,7 +56,11 @@ extension MyPageCoordinator: Coordinatorable {
             break
             
         case .announcement:
-            let view = AnnouncementView()
+            let view = AnnouncementView(coordinator: self)
+            navigator.push { view }
+            
+        case .announcementDetail:
+            let view = AnnouncementDetailView(coordinator: self)
             navigator.push { view }
             
         case .notificationSetting:

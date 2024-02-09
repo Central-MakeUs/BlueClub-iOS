@@ -57,6 +57,7 @@
 		FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */; };
 		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
 		FBE1129C2B75D0F90064D1A9 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */; };
+		FBE112A02B75D44F0064D1A9 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
 		FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
+		FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */,
+				FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */,
 			);
 			path = Announcement;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
 				FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */,
 				FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */,
+				FBE112A02B75D44F0064D1A9 /* AnnouncementDetailView.swift in Sources */,
 				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,

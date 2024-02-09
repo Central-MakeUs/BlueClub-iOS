@@ -14,7 +14,7 @@ struct AnnouncementView: View {
     @State var hasAllow = false
     @State var isEmpty = true
     
-    weak var coordinator: (any Coordinatorable)?
+    weak var coordinator: MyPageCoordinator?
     
     var body: some View {
         BaseView {
@@ -40,9 +40,15 @@ struct AnnouncementView: View {
     
     @ViewBuilder func listView() -> some View {
         ScrollView {
-            LazyVStack(spacing: 8) {
+            LazyVStack(spacing: 10) {
                 ForEach((1..<20)) { _ in
-                    listCell()
+                    Button(action: {
+                        Task {
+                            await coordinator?.send(.announcementDetail)
+                        }
+                    }, label: {
+                        listCell()
+                    })
                 }
             }
             .padding(20)
@@ -52,23 +58,33 @@ struct AnnouncementView: View {
     @ViewBuilder func listCell() -> some View {
         VStack(spacing: 8) {
             HStack(spacing: 8) {
-                Image(.bellIcon)
-                Text("알림내용입니다. 알림내용입니다. 알림내용입니다.")
+                Image(.myPageIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24)
+                Text("공지내용입니다. 공지내용 입니다아.")
                     .fontModifer(.sb1)
                     .foregroundStyle(Color.colors(.black))
+                Spacer()
                 Image(.newBadge)
                     .padding(.trailing, 6)
             }
             .frame(height: 24)
             VStack(alignment: .leading, spacing: 8) {
-                Text("본문내용입니다. 본문내용입니다. 본문내용입니다. 본문내용입니다. 본문내용입니다.")
+                Text("본문내용입니다. 본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다.")
                     .fontModifer(.b2)
                     .foregroundStyle(Color.colors(.gray07))
                     .multilineTextAlignment(.leading)
-                Text("8시간 전")
-                    .fontModifer(.caption1)
-                    .foregroundStyle(Color.colors(.gray06))
-                    .frame(alignment: .leading)
+                HStack {
+                    Text("더보기")
+                        .fontModifer(.caption1)
+                        .foregroundStyle(Color.colors(.primaryNormal))
+                        .frame(alignment: .leading)
+                    Spacer()
+                    Text("23.12.08")
+                        .fontModifer(.caption1)
+                        .foregroundStyle(Color.colors(.gray06))
+                }
             }.padding(.leading, 32)
         }
         .padding(20)
