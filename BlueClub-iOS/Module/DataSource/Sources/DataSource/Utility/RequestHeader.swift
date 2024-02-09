@@ -16,4 +16,14 @@ enum RequestHeader {
         "Content-Type": "application/json;charset=UTF-8",
         "accept": "application/json;charset=UTF-8"
     ]
+    
+    // (accessToken, refreshToken)
+    static func withTokens(accessToken: String, refreshToken: String) -> [String: String] {
+        [
+            "Content-Type": "application/json;charset=UTF-8",
+            "accept": "application/json;charset=UTF-8",
+            "Authorization": accessToken,
+            "Authorization-refresh": refreshToken
+        ]
+    }
 }

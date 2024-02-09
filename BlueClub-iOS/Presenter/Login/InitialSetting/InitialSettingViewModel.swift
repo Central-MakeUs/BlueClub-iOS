@@ -13,6 +13,7 @@ import DataSource
 import Architecture
 import Utility
 import Combine
+import DesignSystem
 
 final class InitialSettingViewModel: ObservableObject {
     
@@ -24,6 +25,7 @@ final class InitialSettingViewModel: ObservableObject {
     private var userRepository: UserRepositoriable { dependencies.resolve() }
     private var authApi: AuthServiceable { dependencies.resolve() }
     private var userApi: UserServiceable { dependencies.resolve() }
+    private var validateNickname: ValidateUserNameUseCase { dependencies.resolve() }
     
     init(cooridonator: AppCoordinator, container: Container = .live) {
         self.cooridonator = cooridonator
@@ -35,9 +37,8 @@ final class InitialSettingViewModel: ObservableObject {
     @Published var targetIncome = ""
     @Published var nickname = ""
     @Published var nicknameMessage: InputStatusMessages?
-    var checkNicknameDisabled: Bool {
-        (nickname.isEmpty && nicknameMessage == .none) ||
-        (!nickname.isEmpty && nicknameMessage != .none)
+    var checkNicknameValid: Bool {
+        !nickname.isEmpty && nicknameMessage == .none
     }
     
     @Published var hasAllow = false
@@ -58,8 +59,7 @@ extension InitialSettingViewModel: Actionable {
         case nicknameDidChange
         case checkNickname
         case didFinishInitialSetting
-        case observe
-        
+
         // MARK: - Sheet
         case showAllowSheet
         case didFinishAllow
@@ -89,20 +89,14 @@ extension InitialSettingViewModel: Actionable {
             
         case .nicknameDidChange:
             self.nicknameAvailable = false
-            let nickname = self.nickname
-            if nickname.isEmpty {
-                self.nicknameMessage = .none
-            } else if nickname.count > 10 {
-                self.nickname = String(nickname.prefix(10))
-            } else {
-                self.nicknameMessage = validateNickname(nickname)
-                    ? .none
-                    : .닉네임유효성에러
-            }
+            self.nickname = String(nickname.prefix(10))
+            self.nicknameMessage = validateNickname.execute(nickname)
+            ? .none
+            : .닉네임유효성에러
             
         case .checkNickname:
-            guard !self.checkNicknameDisabled else { return }
-            Task {
+            guard self.checkNicknameValid else { return }
+            Task { 
                 do {
                     let success = try await authApi.duplicate(self.nickname)
                     guard success else { return }
@@ -146,13 +140,6 @@ extension InitialSettingViewModel: Actionable {
         case .didFinishAllow:
             self.showAllowSheet = false
             self.currentStage = .welcome
-
-        case .observe:
-            $nickname
-                .receive(on: DispatchQueue.main)
-                .sink { value in
-                    self.send(.nicknameDidChange)
-                }.store(in: &cancellables)
         }
     }
 }
@@ -219,36 +206,6 @@ extension InitialSettingViewModel {
             }
         }
     }
-    
-    enum InputStatusMessages {
-        case 사용가능닉네임, 중복닉네임, 닉네임유효성에러, 목표금액기준미만, 목표금액기준만족, 목표금액초과
-        
-        var message: String {
-            switch self {
-            case .사용가능닉네임:
-                return "사용 가능한 닉네임입니다."
-            case .중복닉네임:
-                return "이미 사용 중인 닉네임입니다."
-            case .닉네임유효성에러:
-                return "띄어쓰기 없이 한글, 영문, 숫자만 가능해요"
-            case .목표금액기준미만:
-                return "10만원 이상 입력해주세요."
-            case .목표금액기준만족:
-                return "멋진 목표 금액이에요!"
-            case .목표금액초과:
-                return "9,999만원 이하 입력해주세요."
-            }
-        }
-        
-        var color: Color {
-            switch self {
-            case .사용가능닉네임, .목표금액기준만족:
-                return Color.colors(.primaryNormal)
-            case .중복닉네임, .닉네임유효성에러, .목표금액기준미만, .목표금액초과:
-                return Color.colors(.error)
-            }
-        }
-    }
 }
 
 fileprivate func formatNumber(_ number: Int) -> String {
@@ -265,9 +222,9 @@ fileprivate var formatter: NumberFormatter {
     return formatter
 }
 
-fileprivate func validateNickname(_ string: String) -> Bool {
-    let pattern = "^[가-힣A-Za-z0-9]+$"
-    let regex = try? NSRegularExpression(pattern: pattern)
-    let range = NSRange(location: 0, length: string.utf16.count)
-    return regex?.firstMatch(in: string, options: [], range: range) != nil
-}
+//fileprivate func validateNickname(_ string: String) -> Bool {
+//    let pattern = "^[가-힣A-Za-z0-9]+$"
+//    let regex = try? NSRegularExpression(pattern: pattern)
+//    let range = NSRange(location: 0, length: string.utf16.count)
+//    return regex?.firstMatch(in: string, options: [], range: range) != nil
+//}

@@ -7,14 +7,25 @@
 
 import SwiftUI
 import DesignSystem
+import Domain
 
 struct MyPageView: View {
+    
+    @StateObject var viewModel: MyPageViewModel
+    var user: AuthDTO? { viewModel.user }
+    
+    init(viewModel: MyPageViewModel) {
+        self._viewModel = .init(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         BaseView {
             TitleBar(
                 title: "마이페이지",
                 trailingIcons: [
-                    (Icons.notification1_large, { })
+                    (Icons.notification1_large, { 
+                        viewModel.send(.notification)
+                    })
                 ]
             )
         } content: {
@@ -31,7 +42,8 @@ struct MyPageView: View {
                     footer()
                 }
             }
-        }.background(Color.colors(.cg01))
+        }
+        .background(Color.colors(.cg01))
     }
 }
 
@@ -43,21 +55,21 @@ private extension MyPageView {
                 Image(.myPageIcon)
                 VStack(alignment: .leading, spacing: 2) {
                     Button(action: {
-                        
+                        viewModel.send(.profileEdit)
                     }, label: {
                         HStack(spacing: 4) {
-                            Text("골프캐디")
+                            Text(user?.job ?? "")
                                 .fontModifer(.h7)
                                 .foregroundStyle(Color.colors(.black))
                             Image.icons(.arrow_right)
                                 .foregroundStyle(Color.colors(.gray08))
                         }
                     })
-                    Text("가나다라마바사아자차님")
+                    Text(user?.nickname ?? ""  + "님")
                         .fontModifer(.sb2)
                         .foregroundStyle(Color.colors(.cg06))
                     Spacer(minLength: 0)
-                    ChipView("목표수입 1000만원")
+                    ChipView("목표수입 \(viewModel.monthlyTarget)만원")
                 }
                 Spacer()
             }
@@ -103,7 +115,7 @@ private extension MyPageView {
                     Text(row.title)
                         .fontModifer(.b1m)
                         .foregroundStyle(Color.colors(.black))
-                    Text("00.00.0")
+                    Text(viewModel.appVersion)
                         .fontModifer(.b2m)
                         .foregroundStyle(Color.colors(.gray05))
                 }.frame(height: 24)
@@ -219,5 +231,8 @@ enum ItemRow: CaseIterable {
 }
 
 #Preview {
-    MyPageView()
+    MyPageView(
+        viewModel: .init(
+            coordinator: .init(
+                navigator: .init())))
 }

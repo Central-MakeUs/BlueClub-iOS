@@ -32,9 +32,10 @@ public struct TextInput<T: Hashable>: View {
         HStack(alignment: .bottom, spacing: 12) {
             TextField(text: $text) {
                 Text(placeholder)
-                    .fontModifer(.b1m)
-                    .foregroundStyle(Color.colors(.gray05))
-            }.focused(focusState, equals: focusValue)
+                    .fontModifer(.b1)
+            }
+            .focused(focusState, equals: focusValue)
+            .foregroundStyle(Color.colors(.gray05))
             if !text.isEmpty {
                 Button(action: {
                     text = ""

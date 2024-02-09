@@ -16,7 +16,7 @@ public struct AuthDTO: Codable {
     public var profileImage: String?
     public var job: String?
     public var monthlyTargetIncome: Int?
-    public var role: String
+    public var role: String?
     public var socialType: String?
     public var socialId: String?
     

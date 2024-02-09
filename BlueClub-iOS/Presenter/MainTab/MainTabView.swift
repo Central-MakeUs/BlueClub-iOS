@@ -40,10 +40,14 @@ struct MainTabView: View {
                     HomeView(coordinator: viewModel.homeCoordinator)
                         .tag(tab)
                 case .note:
-                    ScheduleNoteView(viewModel: .init(coordinator: viewModel.scheudleNoteCoordinator))
+                    ScheduleNoteView(
+                        viewModel: .init(
+                            coordinator: viewModel.scheudleNoteCoordinator))
                         .tag(tab)
                 case .myPage:
-                    MyPageView()
+                    MyPageView(
+                        viewModel: .init(
+                            coordinator: viewModel.myPageCoordinator))
                         .tag(tab)
                 }
             }.toolbar(.hidden, for: .tabBar)

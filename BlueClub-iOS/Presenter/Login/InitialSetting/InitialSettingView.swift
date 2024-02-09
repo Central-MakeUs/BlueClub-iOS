@@ -34,7 +34,9 @@ struct InitialSettingView: View {
         }
         .hideKeyboardOnTapBackground()
         .syncFocused($focus, with: $viewModel.focus)
-        .onAppear { viewModel.send(.observe) }
+        .onChange(of: viewModel.nickname, perform: { _ in
+            viewModel.send(.nicknameDidChange)
+        })
     }
 }
 
@@ -142,11 +144,6 @@ extension InitialSettingView {
     @ViewBuilder func targetIncomeContent() -> some View {
         VStack(spacing: 0) {
             contentHeader()
-            
-//            let message: (String, Color)? = viewModel.targetIcomeMessage != nil
-//            ? (viewModel.targetIcomeMessage!.message, viewModel.targetIcomeMessage!.color)
-//            : .none
-            
             GoalInput(
                 text: $viewModel.targetIncome, 
                 isValid: $viewModel.isTargetIcomeValid,
@@ -158,48 +155,19 @@ extension InitialSettingView {
     @ViewBuilder func nicknameContent() -> some View {
         VStack(spacing: 0) {
             contentHeader()
-            VStack(spacing: 2) {
+            NicknameInputContainer(
+                nickname: viewModel.nickname,
+                isValid: viewModel.checkNicknameValid,
+                message: viewModel.nicknameMessage,
+                onTapCheck: { viewModel.send(.checkNickname) }
+            ) {
                 TextInput(
                     text: $viewModel.nickname,
                     placeholder: "닉네임을 입력해주세요",
                     focusState: $focus,
                     focusValue: .nickname
-                ).overlay(alignment: .trailing) {
-                    
-                    Text("중복확인")
-                        .fontModifer(.sb3)
-                        .foregroundStyle(Color.colors(.white))
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 6)
-                        .roundedBackground(
-                            viewModel.checkNicknameDisabled
-                            ? .colors(.gray04)
-                            : .colors(.gray10),
-                            radius: 4
-                        )
-                        .onTapGesture { viewModel.send(.checkNickname) }
-                        .padding(.trailing, 12)
-                }
-                
-                HStack {
-                    HStack(spacing: 3) {
-                        Text("\(viewModel.nickname.count)")
-                            .foregroundStyle(Color.colors(.gray07))
-                        Text("/")
-                            .foregroundStyle(Color.colors(.gray05))
-                        Text("10")
-                            .foregroundStyle(Color.colors(.gray07))
-                    }.fontModifer(.caption1)
-                    Spacer()
-                    if let message = viewModel.nicknameMessage {
-                        Text(message.message)
-                            .fontModifer(.caption1)
-                            .foregroundStyle(message.color)
-                    }
-                }
-                .frame(height: 18)
-                .padding(.horizontal, 8)
-            }.padding(.horizontal, 20)
+                )
+            }
         }.onAppear { focus = .nickname }
     }
     
@@ -255,6 +223,7 @@ extension InitialSettingView {
             PrimaryButton(
                 title: "바로 시작하기",
                 action: { viewModel.send(.didFinishInitialSetting) }
+                
             ).padding(.vertical, 20)
         default:
             EmptyView()

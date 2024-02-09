@@ -46,26 +46,13 @@ struct GoalInputSheetView: View {
     }
     
     @ViewBuilder func header() -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text("매달 목표 수입 설정")
-                    .fontModifer(.h6)
-                    .foregroundStyle(Color.colors(.gray10))
-                Spacer()
-                Button {
-                    coordinator?.navigator.dismiss()
-                } label: {
-                    Image.icons(.x)
-                        .foregroundStyle(Color.colors(.gray10))
-                }
+        SheetHeader(
+            title: "매달 목표 수입 설정",
+            description: "목표 금액은 최소 10만 원부터 입력해주세요.",
+            dismiss: {
+                coordinator?.navigator.dismiss()
             }
-            Text("목표 금액은 최소 10만 원부터 입력해주세요.")
-                .fontModifer(.b2m)
-                .foregroundStyle(Color(hex: "7C7C7C"))
-        }
-        .padding(.horizontal, 30)
-        .padding(.top, 32)
-        .padding(.bottom, 14)
+        )
     }
 }
 

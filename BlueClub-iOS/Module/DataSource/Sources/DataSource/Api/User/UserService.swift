@@ -12,19 +12,21 @@ import Architecture
 
 public class UserService: UserServiceable {
     
-    @UserDefault("accessToken") private var accessToken: String?
-    @UserDefault("refreshToken") private var refreshToken: String?
+    private let userRespository: UserRepositoriable
+    private var tokens: (String, String) {
+        userRespository.getTokens()
+    }
     
-    public init() { }
+    public init(userRespository: UserRepositoriable) {
+        self.userRespository = userRespository
+    }
+    
     private let path = "/user"
     
     public func detailsPost(_ dto: DetailsDTO) async throws {
-        
-        var header = RequestHeader.post
-        if let accessToken, let refreshToken {
-            header["Authorization"] = "Bearer \(accessToken)"
-            header["Authorization-refresh"] = "Bearer \(refreshToken)"
-        }
+        let header = RequestHeader.withTokens(
+            accessToken: tokens.0,
+            refreshToken: tokens.1)
         return try await EndPoint
             .init(Const.baseUrl)
             .urlPaths([path, "/details"])
@@ -37,28 +39,28 @@ public class UserService: UserServiceable {
             .asyncThrows
     }
     
-    public func detailsPatch() async throws {
-//        try init EndPoint
-//            .init(Const.baseUrl)
-//            .urlPaths([path, "/details"])
-//            .httpMethod(.put)
+    public func detailsPatch(_ dto: DetailsDTO) async throws {
+        let header = RequestHeader.withTokens(
+            accessToken: tokens.0,
+            refreshToken: tokens.1)
+        let body: [String : Any] = [
+            "nickname": dto.nickname,
+            "job": dto.job,
+            "monthlyTargetIncome": dto.monthlyTargetIncome
+        ]
+        return try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([path, "/details"])
+            .httpMethod(.patch)
+            .httpBody(body)
+            .httpHeaders(header)
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<Empty>.self)
+            .tryMap { try serverResponseHandler($0) }
+            .asyncThrows
     }
     
     public func withdrawal() async throws {
         
-    }
-}
-
-extension UserService: TokenAccessible {
-    public func registAccessToken(_ token: String) {
-        self.accessToken = token
-    }
-    
-    public func registRefreshToken(_ token: String) {
-        self.refreshToken = token
-    }
-    
-    public func getTokens() -> (String?, String?) {
-        (self.accessToken, self.refreshToken)
     }
 }

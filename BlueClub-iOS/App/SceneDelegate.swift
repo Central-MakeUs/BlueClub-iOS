@@ -81,7 +81,9 @@ private extension SceneDelegate {
             .register { DateService() as DateServiceable }
         // MARK: - Api
             .register { AuthService() as AuthServiceable }
-            .register { UserService() as UserServiceable }
+            .register { UserService(userRespository: Container.live.resolve()) as UserServiceable }
+        // MARK: - UseCase
+            .register { ValidateUserNameUseCase() }
     }
     
     func configMightyCombine() {

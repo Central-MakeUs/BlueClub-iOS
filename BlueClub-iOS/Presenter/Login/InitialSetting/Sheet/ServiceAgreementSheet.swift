@@ -25,8 +25,8 @@ struct ServiceAgreementSheet: View {
     var body: some View {
         BaseView {
             SheetHeader(
-                dismiss: { isPresented = false },
-                title: "블루클럽을 이용하려면,\n정보 동의가 필요해요."
+                title: "블루클럽을 이용하려면,\n정보 동의가 필요해요.",
+                dismiss: { isPresented = false }
             )
         } content: {
             ServiceAgreementView(hasAllow: $hasAllow)

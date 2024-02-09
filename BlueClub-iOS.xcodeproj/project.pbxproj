@@ -34,6 +34,11 @@
 		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
 		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
 		FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* LoginViewModel.swift */; };
+		FB81AEED2B751A7F00AF6E7C /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */; };
+		FB81AEEF2B751B6500AF6E7C /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */; };
+		FB81AEF22B751C9900AF6E7C /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEF12B751C9900AF6E7C /* ProfileEditView.swift */; };
+		FB81AEF42B7524C100AF6E7C /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEF32B7524C100AF6E7C /* ProfileEditViewModel.swift */; };
+		FB81AEF62B752D5600AF6E7C /* JobSelectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEF52B752D5600AF6E7C /* JobSelectSheet.swift */; };
 		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
 		FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */; };
 		FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */; };
@@ -80,6 +85,11 @@
 		FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
 		FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditViewModel.swift; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		FB81AEF12B751C9900AF6E7C /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		FB81AEF32B7524C100AF6E7C /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		FB81AEF52B752D5600AF6E7C /* JobSelectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectSheet.swift; sourceTree = "<group>"; };
 		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
 		FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteViewModel.swift; sourceTree = "<group>"; };
@@ -240,6 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				FB2C211A2B6BE55E00099B5D /* MyPageView.swift */,
+				FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */,
+				FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */,
+				FB81AEF02B751C8E00AF6E7C /* ProfileEdit */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -293,6 +306,16 @@
 				FBD812C12B64077E000FD1C0 /* progress.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		FB81AEF02B751C8E00AF6E7C /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				FB81AEF12B751C9900AF6E7C /* ProfileEditView.swift */,
+				FB81AEF32B7524C100AF6E7C /* ProfileEditViewModel.swift */,
+				FB81AEF52B752D5600AF6E7C /* JobSelectSheet.swift */,
+			);
+			path = ProfileEdit;
 			sourceTree = "<group>";
 		};
 		FB8E68D12B517817007FF2C1 /* Home */ = {
@@ -446,6 +469,7 @@
 			files = (
 				FB2C211E2B6D4BC100099B5D /* BoastCollectionView.swift in Sources */,
 				FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */,
+				FB81AEED2B751A7F00AF6E7C /* MyPageViewModel.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
 				FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */,
@@ -458,6 +482,7 @@
 				FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */,
 				FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */,
 				FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */,
+				FB81AEF62B752D5600AF6E7C /* JobSelectSheet.swift in Sources */,
 				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
 				FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */,
 				FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */,
@@ -465,11 +490,14 @@
 				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
+				FB81AEF42B7524C100AF6E7C /* ProfileEditViewModel.swift in Sources */,
 				FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
 				FB1C63FE2B45D1E500318FA7 /* MainTabViewModel.swift in Sources */,
+				FB81AEEF2B751B6500AF6E7C /* MyPageCoordinator.swift in Sources */,
 				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,
 				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
+				FB81AEF22B751C9900AF6E7C /* ProfileEditView.swift in Sources */,
 				FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,

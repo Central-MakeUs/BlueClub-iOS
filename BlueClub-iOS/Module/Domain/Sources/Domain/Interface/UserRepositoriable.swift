@@ -25,5 +25,5 @@ public protocol UserInfoAccessible {
 public protocol TokenAccessible {
     func registAccessToken(_ token: String)
     func registRefreshToken(_ token: String)
-    func getTokens() -> (String?, String?)
+    func getTokens() -> (String, String)
 }

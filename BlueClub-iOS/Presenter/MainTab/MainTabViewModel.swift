@@ -14,16 +14,14 @@ final class MainTabViewModel: ObservableObject {
     
     @Published var currentTab: MainTabItem = .home
     
-    var navigator: Navigator
-    lazy var homeCoordinator: HomeCoordinator = {
-        .init(navigator: self.navigator)
-    }()
-    lazy var scheudleNoteCoordinator: ScheduleNoteCoordinator = {
-        .init(navigator: self.navigator)
-    }()
+    let homeCoordinator: HomeCoordinator
+    let scheudleNoteCoordinator: ScheduleNoteCoordinator
+    let myPageCoordinator: MyPageCoordinator
     
     init(navigator: Navigator) {
-        self.navigator = navigator
+        self.homeCoordinator = .init(navigator: navigator)
+        self.scheudleNoteCoordinator = .init(navigator: navigator)
+        self.myPageCoordinator = .init(navigator: navigator)
     }
 }
 

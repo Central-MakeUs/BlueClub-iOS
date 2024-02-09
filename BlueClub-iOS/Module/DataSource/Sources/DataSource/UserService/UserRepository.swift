@@ -19,8 +19,6 @@ public class UserRepository: LoginAccessible {
     // MARK: - Data
     @UserDefault("loginUser") private var loginUser: SocialLoginUser?
     @UserDefault("userInfo") private var userInfo: AuthDTO?
-    @UserDefault("accessToken") private var accessToken: String?
-    @UserDefault("refreshToken") private var refreshToken: String?
     
     public init(dependencies: Container) {
         self.dependencies = dependencies
@@ -69,14 +67,19 @@ extension UserRepository: UserInfoAccessible {
 extension UserRepository: TokenAccessible {
 
     public func registAccessToken(_ token: String) {
-        self.accessToken = token
+        var new = self.userInfo
+        new?.accessToken = token
+        self.userInfo = new
     }
     
     public func registRefreshToken(_ token: String) {
-        self.refreshToken = token
+        var new = self.userInfo
+        new?.refreshToken = token
+        self.userInfo = new
     }
     
-    public func getTokens() -> (String?, String?) {
-        (self.accessToken, self.refreshToken)
+    public func getTokens() -> (String, String) {
+        (self.userInfo?.accessToken ?? "",
+         self.userInfo?.refreshToken ?? "")
     }
 }
