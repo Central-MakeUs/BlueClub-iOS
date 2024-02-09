@@ -24,6 +24,8 @@ struct AnnouncementDetailView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     header()
+                    CustomDivider(padding: 0)
+                        .padding(.horizontal, 20)
                     content()
                 }
             }
