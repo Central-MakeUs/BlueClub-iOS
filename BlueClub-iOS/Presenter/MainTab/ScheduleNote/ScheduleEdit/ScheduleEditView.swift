@@ -71,7 +71,9 @@ extension ScheduleEditView {
                 memoPreview()
                 plusButtons()
                 contentFooter()
-            }.hideKeyboardOnTapBackground()
+            }
+            .padding(.bottom, 120)
+            .hideKeyboardOnTapBackground()
         }.scrollDismissesKeyboard(.immediately)
     }
     
@@ -352,7 +354,17 @@ extension ScheduleEditView {
                     title: "총 수입",
                     chipTitle: "자동계산"
                 ) {
-                    Text("123")
+                    Group {
+                        if let totalSum =  viewModel.totalSum {
+                            Text(totalSum + " 원")
+                                .fontModifer(.b1m)
+                                .foregroundStyle(Color.colors(.gray10))
+                        } else {
+                            Text("계산 중이에요")
+                                .fontModifer(.b1m)
+                                .foregroundStyle(Color.colors(.primaryNormal))
+                        }
+                    }
                 }
                 contentFooterCell(title: "지출액") {
                     WonInput(text: $viewModel.spend)

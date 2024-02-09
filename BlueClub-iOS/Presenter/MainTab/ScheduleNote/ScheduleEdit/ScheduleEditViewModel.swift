@@ -62,6 +62,25 @@ class ScheduleEditViewModel: ObservableObject {
     @Published var category = ""
     @Published var gongsu: Double = 0.0
     
+    var totalSum: String? {
+        switch self.job {
+        case .caddy:
+            let caddyFeeInt = caddyFee.removeComma()
+            let overFeeInt = overFee.removeComma() ?? 0
+            guard let caddyFeeInt else { return nil }
+            let sum = caddyFeeInt + overFeeInt
+            return sum.withComma()
+        case .rider:
+            let deliveryIncomeInt = deliveryIncome.removeComma()
+            let promotionIncomeInt = promotionIncome.removeComma() ?? 0
+            guard let deliveryIncomeInt else { return nil }
+            let sum = deliveryIncomeInt + promotionIncomeInt
+            return sum.withComma()
+        case .temporary:
+            return dayPay
+        }
+    }
+    
     // MARK: - Dependencies
     weak var coordinator: ScheduleNoteCoordinator?
     private let dependencies: Container

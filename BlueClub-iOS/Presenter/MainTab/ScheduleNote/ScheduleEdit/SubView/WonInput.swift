@@ -8,6 +8,7 @@
 import SwiftUI
 import DesignSystem
 import Combine
+import Utility
 
 struct WonInput: View {
     
@@ -32,7 +33,9 @@ struct WonInput: View {
                     .foregroundStyle(Color.colors(.gray04))
             }
         })
-        .onReceive(Just(text)) { _ in handleTextChanged() }
+        .onReceive(Just(text)) { _ in
+            handleTextChanged()
+        }
     }
 }
 
