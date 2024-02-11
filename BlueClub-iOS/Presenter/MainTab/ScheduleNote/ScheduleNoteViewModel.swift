@@ -11,30 +11,27 @@ import Domain
 import DataSource
 import DependencyContainer
 import SwiftUI
+import Utility
 
 final class ScheduleNoteViewModel: ObservableObject {
     
     // MARK: - Dependencies
+    weak var coordinator: ScheduleNoteCoordinator?
     private let dependencies: Container
     private var dateService: DateServiceable { dependencies.resolve() }
-    weak var coordinator: ScheduleNoteCoordinator?
+    private var monthlyGoalApi: MonthlyGoalNetworkable { dependencies.resolve() }
     
     init(
-        dependencies: Container = .live,
-        coordinator: ScheduleNoteCoordinator
+        coordinator: ScheduleNoteCoordinator,
+        dependencies: Container = .live
     ) {
-        self.dependencies = dependencies
         self.coordinator = coordinator
+        self.dependencies = dependencies
     }
     
-    // MARK: - Data
-    @Published var showInputView = false
-    @Published var hasExpand = false
-    @Published var 목표수입 = 10_000_000
-    @Published var 달성수입 = 5_000_000
-    var progress: CGFloat { CGFloat(목표수입 / 달성수입) }
-    var percent: Int { Int(progress * 100) }
     
+    @Published var hasExpand = false
+    @Published var goal: MonthlyGoalDTO?
     @Published var monthIndex = 0
     var currentYear: Int {
         let (year, _, _) = dateService.toDayInt(monthIndex)
@@ -58,8 +55,10 @@ extension ScheduleNoteViewModel: Actionable {
         case decreaseMonth
         case getDays
         
+        case fetchGoal
         case didTapGearIcon
-        case didTapGoalSetting
+        case didTapMonthlyGoalSetting
+        case setMonthlyGoal(Int)
     }
     
     @MainActor func send(_ action: Action) {
@@ -78,10 +77,36 @@ extension ScheduleNoteViewModel: Actionable {
             
         case .getDays:
             break
+            
+        case .fetchGoal:
+            Task {
+                do {
+                    let (year, month, _) = dateService.toDayInt(self.monthIndex)
+                    self.goal = try await monthlyGoalApi.get(
+                        year: year,
+                        month: month)
+                } catch {
+                    printError(error)
+                }
+            }
          
-        case .didTapGearIcon, .didTapGoalSetting:
+        case .didTapGearIcon, .didTapMonthlyGoalSetting:
             coordinator?.send(.goalInput(self))
             
+        case .setMonthlyGoal(let target):
+            Task { @MainActor in
+                do {
+                    self.coordinator?.navigator.dismiss()
+                    let (year, month, _) = dateService.toDayInt(monthIndex)
+                    try await monthlyGoalApi.post(
+                        year: year,
+                        month: month,
+                        targetIncome: target)
+                    self.send(.fetchGoal)
+                } catch {
+                    printError(error)
+                }
+            }
         }
     }
 }

@@ -45,12 +45,12 @@ extension HomeView {
     
     @ViewBuilder func contentHeader() -> some View {
         HStack(spacing: 8) {
-            Text(viewModel.user?.job ?? "")
+            Text(viewModel.user?.job ?? "       ")
                 .fontModifer(.h5)
                 .foregroundStyle(Color.black)
             HStack(spacing: 4) {
                 Image(.dot)
-                Text("\(viewModel.user?.nickname ?? "")님")
+                Text("\(viewModel.user?.nickname ?? "     ")님")
                     .fontModifer(.sb2)
                     .foregroundStyle(Color.colors(.gray08))
             }
@@ -58,6 +58,9 @@ extension HomeView {
         }
         .frame(height: 66)
         .padding(.horizontal, 30)
+        .if(viewModel.user == nil) {
+            $0.redacted(reason: .placeholder)
+        }
     }
     
     @ViewBuilder func content() -> some View {
@@ -233,10 +236,9 @@ extension HomeView {
     
     @ViewBuilder func incomeIndicator(_ record: DiaryRecordDTO) -> some View {
         
-        let progress = CGFloat(record.progress / 100)
         VStack(spacing: 2) {
             Spacer(minLength: 0)
-            CustomProgressBar(progress: progress) {
+            CustomProgressBar(progress: record.progorssFloat) {
                 progressWidth = $0
             }
             Text("\(record.totalIncome.withComma())만원")
@@ -246,7 +248,7 @@ extension HomeView {
         }
         .frame(height: 54)
         .overlay(alignment: .topLeading) {
-            PercentToolTipView(percent: progress)
+            PercentToolTipView(progress: record.progorssFloat)
                 .getSize { self.tooltipWidth = $0.width }
                 .padding(.bottom, 2)
                 .offset(x: progressWidth - (tooltipWidth / 2))
@@ -313,9 +315,9 @@ extension HomeView {
 
 struct PercentToolTipView: View {
     
-    let percent: CGFloat
+    let progress: CGFloat
     var percentString: String {
-        String(Int(percent * 100))
+        String(Int(progress * 100))
     }
     var body: some View {
         Text(percentString + "%")

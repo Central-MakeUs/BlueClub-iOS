@@ -12,3 +12,4 @@ public protocol DiaryNetworkable {
     func diary(_ dto: DiaryDTO) async throws
     func record() async throws -> DiaryRecordDTO
 }
+

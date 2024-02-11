@@ -13,8 +13,9 @@ import Architecture
 public class UserNetwork: UserNetworkable {
     
     private let userRespository: UserRepositoriable
-    private var token: String {
-        userRespository.getToken()
+    private var header: [String: String] {
+        let token = userRespository.getToken()
+        return RequestHeader.withToken(accessToken: token)
     }
     
     public init(userRespository: UserRepositoriable) {
@@ -24,8 +25,7 @@ public class UserNetwork: UserNetworkable {
     private let path = "/user"
     
     public func detailsPost(_ dto: DetailsDTO) async throws {
-        let header = RequestHeader.withToken(accessToken: token)
-        return try await EndPoint
+        try await EndPoint
             .init(Const.baseUrl)
             .urlPaths([path, "/details"])
             .httpMethod(.post)
@@ -33,12 +33,11 @@ public class UserNetwork: UserNetworkable {
             .httpHeaders(header)
             .responseHandler { try httpResponseHandler($0) }
             .requestPublisher(expect: ServerResponse<Empty>.self)
-            .tryMap { try serverResponseHandler($0) }
+            .tryMap { try handleServerResponseCode($0) }
             .asyncThrows
     }
     
     public func detailsPatch(_ dto: DetailsDTO) async throws {
-        let header = RequestHeader.withToken(accessToken: token)
         let body: [String : Any] = [
             "nickname": dto.nickname,
             "job": dto.job,
@@ -52,7 +51,7 @@ public class UserNetwork: UserNetworkable {
             .httpHeaders(header)
             .responseHandler { try httpResponseHandler($0) }
             .requestPublisher(expect: ServerResponse<Empty>.self)
-            .tryMap { try serverResponseHandler($0) }
+            .tryMap { try handleServerResponseCode($0) }
             .asyncThrows
     }
     

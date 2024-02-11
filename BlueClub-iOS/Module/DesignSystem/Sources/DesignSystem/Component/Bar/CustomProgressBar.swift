@@ -37,7 +37,9 @@ public struct CustomProgressBar: View {
                 .colors(.primaryLight),
                 height: 12,
                 radius: 50
-            ).frame(width: progressWidth)
+            )
+            .frame(minWidth: 14)
+            .frame(width: progressWidth)
         }
     }
 }

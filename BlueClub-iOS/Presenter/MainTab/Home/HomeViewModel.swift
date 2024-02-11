@@ -18,7 +18,7 @@ final class HomeViewModel: ObservableObject {
     private let container: Container
     private var dateService: DateServiceable { container.resolve() }
     private var userRepository: UserRepositoriable { container.resolve() }
-    private var diaryNetwork: DiaryNetworkable { container.resolve() }
+    private var diaryApi: DiaryNetworkable { container.resolve() }
     
     init(
         coodinator: HomeCoordinator,
@@ -44,12 +44,12 @@ extension HomeViewModel: Actionable {
         switch action {
             
         case .fetchData:
-            Task {
+            Task { @MainActor in 
                 do {
+                    self.user = userRepository.getUserInfo()
                     let (_, month, _) = dateService.toDayInt(0)
                     self.currentMonth = String(month)
-                    self.user = userRepository.getUserInfo()
-                    self.record = try await diaryNetwork.record()
+                    self.record = try await diaryApi.record()
                 } catch {
                     printError(error)
                 }

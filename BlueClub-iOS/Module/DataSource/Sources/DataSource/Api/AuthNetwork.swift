@@ -42,13 +42,7 @@ public class AuthNetwork: AuthNetworkable {
             .httpHeaders(RequestHeader.post)
             .responseHandler { try httpResponseHandler($0) }
             .requestPublisher(expect: ServerResponse<AuthDTO>.self)
-            .tryMap {
-                try serverResponseHandler($0)
-                guard let result = $0.result else {
-                    throw ServerError.resultNotFound
-                }
-                return result
-            }
+            .tryMap { try handleServerResponseResult($0) }
             .asyncThrows
     }
     
@@ -73,7 +67,7 @@ public class AuthNetwork: AuthNetworkable {
             }
             .requestPublisher(expect: ServerResponse<Empty>.self)
             .tryMap {
-                try serverResponseHandler($0)
+                try handleServerResponseCode($0)
                 return true
             }
             .asyncThrows

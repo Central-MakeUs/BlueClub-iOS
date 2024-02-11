@@ -10,6 +10,7 @@ import MightyCombine
 
 public struct DiaryNetwork: DiaryNetworkable {
     
+    private let path = "/diary"
     private let dateSerivce: DateServiceable
     private let userRespository: UserRepositoriable
     private var token: String {
@@ -24,13 +25,12 @@ public struct DiaryNetwork: DiaryNetworkable {
         self.dateSerivce = dateSerivce
     }
     
-    private let path = "/diary"
-    
     public func diary(_ dto: Domain.DiaryDTO) async throws {
         
     }
     
     public func record() async throws -> Domain.DiaryRecordDTO {
+        
         let (year, month, _) = dateSerivce.dateToInts(.now)
         var monthString = String(month)
         let header = RequestHeader.withToken(accessToken: token)
@@ -45,13 +45,7 @@ public struct DiaryNetwork: DiaryNetworkable {
             .httpHeaders(header)
             .responseHandler { try httpResponseHandler($0) }
             .requestPublisher(expect: ServerResponse<DiaryRecordDTO>.self)
-            .tryMap {
-                try serverResponseHandler($0)
-                guard let result = $0.result else {
-                    throw ServerError.resultNotFound
-                }
-                return result
-            }
+            .tryMap { try handleServerResponseResult($0) }
             .asyncThrows
     }
 }

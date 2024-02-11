@@ -18,6 +18,10 @@ final class AppCoordinator: Coordinatorable {
         nController.setNavigationBarHidden(true, animated: true)
         return .init(navigationController: nController)
     }()
+    
+    private var mainTab: MainTabView {
+        .init(navigator: self.navigator)
+    }
 }
 
 
@@ -53,7 +57,7 @@ extension AppCoordinator {
             break
             
         case .home:
-            navigator.start { MainTabView(navigator: self.navigator) }
+            navigator.start { mainTab }
             window?.rootViewController = navigator.view
         }
     }

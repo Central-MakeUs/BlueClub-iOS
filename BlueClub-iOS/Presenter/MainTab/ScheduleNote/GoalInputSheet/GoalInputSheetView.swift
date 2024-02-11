@@ -39,7 +39,10 @@ struct GoalInputSheetView: View {
             PrimaryButton(
                 title: "다음",
                 disabled: !isValid,
-                action: { }
+                action: {
+                    guard let target = text.removeComma() else { return }
+                    viewModel.send(.setMonthlyGoal(target))
+                }
             ).padding(.vertical, 20)
         }
         .onAppear { focus = true }

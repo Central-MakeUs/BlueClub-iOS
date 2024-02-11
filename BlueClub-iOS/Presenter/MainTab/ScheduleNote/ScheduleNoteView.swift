@@ -17,7 +17,6 @@ struct ScheduleNoteView: View {
         self._viewModel = .init(wrappedValue: viewModel)
     }
     
-    let progress: CGFloat = 0.2
     @State var progressWidth: CGFloat = .zero
     @State var tooltipWidth: CGFloat = .zero
 
@@ -41,6 +40,7 @@ struct ScheduleNoteView: View {
             content()
         }
         .background(Color.colors(.cg01))
+        .onAppear { viewModel.send(.fetchGoal) }
     }
 }
 
@@ -77,10 +77,15 @@ extension ScheduleNoteView {
             HStack(spacing: 8) {
                 ChipView("달성 수입")
                 Group {
-                    Text("\(100000000)") + Text("원")
+                    Text("\(viewModel.goal?.totalIncome ?? 0)")
+                    + Text("원")
                 }
                 .fontModifer(.h7)
                 .foregroundStyle(Color.colors(.cg10))
+                .if(viewModel.goal == nil) {
+                    $0.redacted(reason: .placeholder)
+                }
+                
                 Spacer()
                 Button(action: {
                     viewModel.send(.toggleHasExpand)
@@ -93,37 +98,44 @@ extension ScheduleNoteView {
             }
             
             if viewModel.hasExpand {
-                // Progress
-                VStack(spacing: 2) {
-                    Spacer(minLength: 0)
-                    CustomProgressBar(progress: progress) { progressWidth = $0 }
-                    Text("1000만원")
-                        .fontModifer(.caption2)
-                        .foregroundStyle(Color.colors(.cg05))
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                .frame(height: 54)
-                .overlay(alignment: .topLeading) {
-                    PercentToolTipView(percent: progress)
-                        .getSize { self.tooltipWidth = $0.width }
-                        .padding(.bottom, 2)
-                        .offset(x: progressWidth - (tooltipWidth / 2))
-                }
-                CustomDivider(padding: 0)
-                // 나의 목표수입 설정
-                Button(action: {
-                    viewModel.send(.didTapGoalSetting)
-                }, label: {
-                    HStack(spacing: 4) {
-                        Text("나의 목표수입 설정")
-                        Image.icons(.arrow_right)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 16)
+                if let goal = viewModel.goal {
+                    // Progress
+                    VStack(spacing: 2) {
+                        Spacer(minLength: 0)
+                        CustomProgressBar(progress: goal.progorssFloat) { progressWidth = $0 }
+                        Text(goal.targeIncomeLabel)
+                            .fontModifer(.caption2)
+                            .foregroundStyle(Color.colors(.cg05))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                     }
-                    .fontModifer(.b2)
-                    .foregroundStyle(Color.colors(.cg06))
-                })
+                    .frame(height: 54)
+                    .overlay(alignment: .topLeading) {
+                        let offset = goal.progress == 0
+                            ? progressWidth - (tooltipWidth / 2) + 7
+                            : progressWidth - (tooltipWidth / 2)
+                        
+                        PercentToolTipView(progress: goal.progorssFloat)
+                            .getSize { self.tooltipWidth = $0.width }
+                            .padding(.bottom, 2)
+                            .offset(x: offset)
+                    }
+                    .padding(.horizontal, 4)
+                    CustomDivider(padding: 0)
+                    // 나의 목표수입 설정
+                    Button(action: {
+                        viewModel.send(.didTapMonthlyGoalSetting)
+                    }, label: {
+                        HStack(spacing: 4) {
+                            Text("나의 목표수입 설정")
+                            Image.icons(.arrow_right)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16)
+                        }
+                        .fontModifer(.b2)
+                        .foregroundStyle(Color.colors(.cg06))
+                    })
+                }
             }
         }
         .padding(16)
@@ -213,7 +225,8 @@ extension ScheduleNoteView {
 #Preview {
     ScheduleNoteView(
         viewModel: .init(
-            dependencies: .live,
-            coordinator: .init(navigator: .init())
-        ))
+            coordinator: .init(
+                navigator: .init())
+            ,dependencies: .live)
+        )
 }

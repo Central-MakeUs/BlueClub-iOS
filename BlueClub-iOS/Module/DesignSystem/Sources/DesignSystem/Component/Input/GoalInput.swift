@@ -115,12 +115,3 @@ fileprivate var formatter: NumberFormatter {
     formatter.usesGroupingSeparator = true
     return formatter
 }
-
-
-//#Preview {
-//    GoalInput(
-//        text: .init(projectedValue: ""),
-//        message: <#T##(String, Color)?#>,
-//        focusState: .init(,
-//        focusValue: true)
-//}

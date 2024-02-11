@@ -8,13 +8,23 @@
 import Foundation
 import Domain
 
-func serverResponseHandler<T: Codable>(_ response: ServerResponse<T>) throws {
+func handleServerResponseCode<T: Codable>(_ response: ServerResponse<T>) throws {
     switch response.code {
     case "CREATED", "SUCCESS":
         return
     default:
         throw ServerError.unknownError
     }
+}
+
+func handleServerResponseResult<T: Codable>(_ response: ServerResponse<T>) throws -> T {
+    guard response.code == "SUCCESS" ||
+          response.code == "CREATED"
+    else { throw ServerError.unknownError }
+    guard let result = response.result else {
+        throw ServerError.resultNotFound
+    }
+    return result
 }
 
 func httpResponseHandler(_ response: HTTPURLResponse) throws {
