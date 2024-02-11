@@ -8,6 +8,7 @@
 import SwiftUI
 import DesignSystem
 import Lottie
+import Domain
 
 struct HomeView: View {
     
@@ -20,7 +21,6 @@ struct HomeView: View {
     
     @State var tooltipWidth: CGFloat = .zero
     @State var progressWidth: CGFloat = .zero
-    let progress: CGFloat = 0.2
     
     @State var currentPage = 1
     @State var indicatorPage = 1
@@ -35,7 +35,9 @@ struct HomeView: View {
             ])
         } content: {
             content()
-        }.background(Color.colors(.cg02))
+        }
+        .background(Color.colors(.cg02))
+        .onAppear { viewModel.send(.fetchData) }
     }
 }
 
@@ -43,12 +45,12 @@ extension HomeView {
     
     @ViewBuilder func contentHeader() -> some View {
         HStack(spacing: 8) {
-            Text(viewModel.job.title)
+            Text(viewModel.user?.job ?? "")
                 .fontModifer(.h5)
                 .foregroundStyle(Color.black)
             HStack(spacing: 4) {
                 Image(.dot)
-                Text("\(viewModel.name)님")
+                Text("\(viewModel.user?.nickname ?? "")님")
                     .fontModifer(.sb2)
                     .foregroundStyle(Color.colors(.gray08))
             }
@@ -114,19 +116,80 @@ extension HomeView {
     
     @ViewBuilder func dayInfoView() -> some View {
         HStack(spacing: 16) {
-            Image(.coin)
-            Text("28일 연속 코인 획득중이에요")
-                .fontModifer(.sb2)
-                .foregroundStyle(Color.colors(.gray09))
-            Text("기록갱신")
-                .fontModifer(.caption3)
-                .foregroundStyle(Color.colors(.cg06))
-                .frame(height: 14)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 3)
-                .roundedBackground(.colors(.cg02), radius: 4)
-                .padding(.leading, -8)
-            Spacer()
+            if let record = viewModel.record, 
+               let month = viewModel.currentMonth,
+               let user = viewModel.user {
+                if record.totalIncome == 0 {
+                    Image(.faceCoin)
+                    Text("\(month)월 \(user.nickname)님의 첫 기록이 기다려져요!")
+                        .fontModifer(.sb2)
+                        .foregroundStyle(Color.colors(.gray09))
+                        .lineLimit(2)
+                    Spacer()
+                } else if record.totalDay == 1, record.straightDay == 1 {
+                    Image(.coin)
+                        .overlay(alignment: .topTrailing) {
+                            Text(String(record.totalDay))
+                                .fontModifer(.caption3)
+                                .foregroundStyle(Color.colors(.white))
+                                .roundedBackground(.colors(.cg07))
+                        }
+                    Text("\(user.nickname)님 이번달 시작이 좋아요!")
+                        .fontModifer(.sb2)
+                        .foregroundStyle(Color.colors(.gray09))
+                        .lineLimit(2)
+                    Spacer()
+                    ChipView("NEW", style: .red)
+                } else if record.totalDay > 0, record.straightDay == 0 {
+                    Image(.emptyCoin)
+                        .overlay(alignment: .topTrailing) {
+                            Text(String(record.totalDay))
+                                .fontModifer(.caption3)
+                                .foregroundStyle(Color.colors(.white))
+                                .roundedBackground(.colors(.cg07))
+                        }
+                    Text("\(user.nickname)님 깜빡하신 근무기록은 없으신가요?")
+                        .fontModifer(.sb2)
+                        .foregroundStyle(Color.colors(.gray09))
+                        .lineLimit(2)
+                    Spacer()
+                } else if record.isRenew {
+                    Image(.coin)
+                        .overlay(alignment: .topTrailing) {
+                            Text(String(record.totalDay))
+                                .fontModifer(.caption3)
+                                .foregroundStyle(Color.colors(.white))
+                                .roundedBackground(.colors(.cg07))
+                        }
+                    Text("\(record.straightDay)일 연속 코인 획득중이에요")
+                        .fontModifer(.sb2)
+                        .foregroundStyle(Color.colors(.gray09))
+                        .lineLimit(2)
+                    Spacer()
+                    ChipView("기록갱신", style: .red)
+                } else if record.straightMonth > 1 {
+                    Image(.coin)
+                        .overlay(alignment: .topTrailing) {
+                            Text(String(record.totalDay))
+                                .fontModifer(.caption3)
+                                .foregroundStyle(Color.colors(.white))
+                                .roundedBackground(.colors(.cg07))
+                        }
+                    Text("\(record.straightDay)일 연속 코인 획득중이에요")
+                        .fontModifer(.sb2)
+                        .foregroundStyle(Color.colors(.gray09))
+                        .lineLimit(2)
+                    Spacer()
+                    ChipView("\(record.straightMonth)달연속", style: .red)
+                }
+            } else {
+                Image(.emptyCoin)
+                Text("           ")
+                    .fontModifer(.sb2)
+                    .foregroundStyle(Color.colors(.gray09))
+                    .redacted(reason: .placeholder)
+                Spacer()
+            }
         }
         .padding(.horizontal, 20)
         .frame(height: 62)
@@ -137,8 +200,8 @@ extension HomeView {
     @ViewBuilder func incomeInfoView() -> some View {
         VStack(spacing: 16) {
             incomeInfoHeader()
-            if viewModel.달성수입 != .none {
-                incomeIndicator()
+            if let record = viewModel.record, record.totalIncome > 0 {
+                incomeIndicator(record)
             } else {
                 LottieView(animation: .named("progress"))
                     .playing(loopMode: .loop)
@@ -155,26 +218,28 @@ extension HomeView {
     @ViewBuilder func incomeInfoHeader() -> some View {
         HStack(spacing: 8) {
             ChipView("달성 수입")
-            if let 달성수입 = viewModel.달성수입 {
-                Group {
-                    Text("\(달성수입)") + Text("원")
+            Group {
+                if let totalIncome = viewModel.record?.totalIncome, totalIncome > 0 {
+                    Text("\(totalIncome.withComma())") + Text("원")
+                        .foregroundColor(.colors(.cg10))
+                } else {
+                    Text("수입을 기록해봐요")
+                        .foregroundStyle(Color.colors(.cg04))
                 }
-                .fontModifer(.h7)
-                .foregroundStyle(Color.colors(.cg10))
-            } else {
-                Text("수입을 기록해봐요")
-                    .fontModifer(.h7)
-                    .foregroundStyle(Color.colors(.cg04))
-            }
+            }.fontModifer(.h7)
             Spacer()
         }.frame(height: 28)
     }
     
-    @ViewBuilder func incomeIndicator() -> some View {
+    @ViewBuilder func incomeIndicator(_ record: DiaryRecordDTO) -> some View {
+        
+        let progress = CGFloat(record.progress / 100)
         VStack(spacing: 2) {
             Spacer(minLength: 0)
-            CustomProgressBar(progress: progress) { progressWidth = $0 }
-            Text("1000만원")
+            CustomProgressBar(progress: progress) {
+                progressWidth = $0
+            }
+            Text("\(record.totalIncome.withComma())만원")
                 .fontModifer(.caption2)
                 .foregroundStyle(Color.colors(.cg05))
                 .frame(maxWidth: .infinity, alignment: .trailing)

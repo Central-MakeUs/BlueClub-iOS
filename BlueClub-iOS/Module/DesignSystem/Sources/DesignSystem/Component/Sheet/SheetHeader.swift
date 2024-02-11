@@ -51,10 +51,3 @@ public struct SheetHeader: View {
         .padding(.bottom, 14)
     }
 }
-
-#Preview {
-    SheetHeader(
-        title: "블루 피플을 이용하려면,\n정보 동의가 필요해요.",
-        dismiss: { }
-    )
-}

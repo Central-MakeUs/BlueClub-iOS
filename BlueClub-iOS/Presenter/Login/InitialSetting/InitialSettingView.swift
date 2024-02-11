@@ -29,7 +29,9 @@ struct InitialSettingView: View {
         }.sheet(isPresented: $viewModel.showAllowSheet) {
             ServiceAgreementSheet(
                 isPresented: $viewModel.showAllowSheet,
-                onFinish: { viewModel.send(.didFinishAllow) }
+                onFinish: { tos in
+                    viewModel.send(.didFinishAllow(tos))
+                }
             ).presentationDetents([.height(488)])
         }
         .hideKeyboardOnTapBackground()
@@ -222,7 +224,7 @@ extension InitialSettingView {
         case .welcome:
             PrimaryButton(
                 title: "바로 시작하기",
-                action: { viewModel.send(.didFinishInitialSetting) }
+                action: { viewModel.send(.home) }
                 
             ).padding(.vertical, 20)
         default:

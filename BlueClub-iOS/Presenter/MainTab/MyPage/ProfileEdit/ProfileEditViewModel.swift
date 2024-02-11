@@ -54,8 +54,8 @@ class ProfileEditViewModel: ObservableObject {
     private let container: Container
     private var userRepository: UserRepositoriable { container.resolve() }
     private var validateNickname: ValidateUserNameUseCase { container.resolve() }
-    private var authService: AuthServiceable { container.resolve() }
-    private var userService: UserServiceable { container.resolve() }
+    private var authService: AuthNetworkable { container.resolve() }
+    private var userService: UserNetworkable { container.resolve() }
     
     init(
         coordinator: MyPageCoordinator,
@@ -136,7 +136,7 @@ extension ProfileEditViewModel: Actionable {
             Task {
                 do {
                     guard nicknameValid else { return }
-                    let success = try await self.authService.duplicate(self.nickname)
+                    let success = try await self.authService.duplicated(self.nickname)
                     guard success else { return }
                     self.nicknameMessage = ("사용 가능한 닉네임입니다.", .colors(.primaryNormal))
                     self.nicknameAvailable = true

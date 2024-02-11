@@ -24,7 +24,6 @@
 		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
 		FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211A2B6BE55E00099B5D /* MyPageView.swift */; };
-		FB2C211E2B6D4BC100099B5D /* BoastCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211D2B6D4BC100099B5D /* BoastCollectionView.swift */; };
 		FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */; };
 		FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */; };
 		FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */; };
@@ -80,7 +79,6 @@
 		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
 		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
 		FB2C211A2B6BE55E00099B5D /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
-		FB2C211D2B6D4BC100099B5D /* BoastCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastCollectionView.swift; sourceTree = "<group>"; };
 		FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputSheetView.swift; sourceTree = "<group>"; };
@@ -264,14 +262,6 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
-		FB2C211C2B6D4B8A00099B5D /* BoastCollection */ = {
-			isa = PBXGroup;
-			children = (
-				FB2C211D2B6D4BC100099B5D /* BoastCollectionView.swift */,
-			);
-			path = BoastCollection;
-			sourceTree = "<group>";
-		};
 		FB2C21232B6DEB9100099B5D /* GoalInputSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,7 +318,6 @@
 		FB8E68D12B517817007FF2C1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				FB2C211C2B6D4B8A00099B5D /* BoastCollection */,
 				FB8E68D22B517820007FF2C1 /* HomeView.swift */,
 				FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */,
 				FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */,
@@ -484,7 +473,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB2C211E2B6D4BC100099B5D /* BoastCollectionView.swift in Sources */,
 				FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */,
 				FB81AEED2B751A7F00AF6E7C /* MyPageViewModel.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,

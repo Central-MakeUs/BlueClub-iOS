@@ -11,6 +11,7 @@ import DesignSystem
 struct ServiceAgreementView: View {
     
     @Binding var hasAllow: Bool
+    @Binding var hasAllowTos: Bool
     @State var checked: [AgreementRow] = []
     
     var allChecked: Bool {
@@ -29,6 +30,7 @@ struct ServiceAgreementView: View {
             listContent()
         }.onChange(of: checked, perform: { value in
             hasAllow = AgreementRow.mandatories.allSatisfy { value.contains($0) }
+            hasAllowTos = value.contains(.마케팅)
         })
     }
     
@@ -80,5 +82,5 @@ extension ServiceAgreementView {
 }
 
 #Preview {
-    ServiceAgreementView(hasAllow: .constant(true))
+    ServiceAgreementView(hasAllow: .constant(true), hasAllowTos: .constant(false))
 }

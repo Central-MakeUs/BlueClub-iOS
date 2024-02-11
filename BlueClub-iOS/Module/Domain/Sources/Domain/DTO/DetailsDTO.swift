@@ -12,7 +12,8 @@ public struct DetailsDTO: Codable {
     public let nickname: String
     public let job: String
     public let monthlyTargetIncome: Int
-    public var tosAgree: Bool
+    public let tosAgree: Bool
+    public let pushAgree: Bool
     
     public init(
         nickname: String,
@@ -24,5 +25,6 @@ public struct DetailsDTO: Codable {
         self.job = job
         self.monthlyTargetIncome = monthlyTargetIncome
         self.tosAgree = tosAgree
+        self.pushAgree = true
     }
 }

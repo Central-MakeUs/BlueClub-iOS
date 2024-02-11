@@ -11,12 +11,13 @@ import DesignSystem
 struct ServiceAgreementSheet: View {
     
     @Binding var isPresented: Bool
-    let onFinish: () -> Void
+    let onFinish: (Bool) -> Void
     @State var hasAllow = false
+    @State var hasAllowTos = false
     
     init(
         isPresented: Binding<Bool>,
-        onFinish: @escaping () -> Void
+        onFinish: @escaping (Bool) -> Void
     ) {
         self._isPresented = isPresented
         self.onFinish = onFinish
@@ -29,12 +30,14 @@ struct ServiceAgreementSheet: View {
                 dismiss: { isPresented = false }
             )
         } content: {
-            ServiceAgreementView(hasAllow: $hasAllow)
+            ServiceAgreementView(
+                hasAllow: $hasAllow,
+                hasAllowTos: $hasAllowTos)
         } footer: {
             GrayButton(
                 title: "확인",
                 disabled: !hasAllow,
-                action: { onFinish() }
+                action: { onFinish(hasAllowTos) }
             )
             .padding(.vertical, 20)
             .disabled(!hasAllow)
@@ -77,5 +80,5 @@ extension ServiceAgreementSheet {
 }
 
 #Preview {
-    ServiceAgreementSheet(isPresented: .constant(true), onFinish: { })
+    ServiceAgreementSheet(isPresented: .constant(true), onFinish: { _ in })
 }

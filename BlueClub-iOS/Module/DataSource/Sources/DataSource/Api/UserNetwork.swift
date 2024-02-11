@@ -10,11 +10,11 @@ import MightyCombine
 import Domain
 import Architecture
 
-public class UserService: UserServiceable {
+public class UserNetwork: UserNetworkable {
     
     private let userRespository: UserRepositoriable
-    private var tokens: (String, String) {
-        userRespository.getTokens()
+    private var token: String {
+        userRespository.getToken()
     }
     
     public init(userRespository: UserRepositoriable) {
@@ -24,9 +24,7 @@ public class UserService: UserServiceable {
     private let path = "/user"
     
     public func detailsPost(_ dto: DetailsDTO) async throws {
-        let header = RequestHeader.withTokens(
-            accessToken: tokens.0,
-            refreshToken: tokens.1)
+        let header = RequestHeader.withToken(accessToken: token)
         return try await EndPoint
             .init(Const.baseUrl)
             .urlPaths([path, "/details"])
@@ -40,9 +38,7 @@ public class UserService: UserServiceable {
     }
     
     public func detailsPatch(_ dto: DetailsDTO) async throws {
-        let header = RequestHeader.withTokens(
-            accessToken: tokens.0,
-            refreshToken: tokens.1)
+        let header = RequestHeader.withToken(accessToken: token)
         let body: [String : Any] = [
             "nickname": dto.nickname,
             "job": dto.job,

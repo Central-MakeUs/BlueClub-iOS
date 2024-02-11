@@ -23,8 +23,8 @@ final class InitialSettingViewModel: ObservableObject {
     weak var cooridonator: AppCoordinator?
     private let dependencies: Container
     private var userRepository: UserRepositoriable { dependencies.resolve() }
-    private var authApi: AuthServiceable { dependencies.resolve() }
-    private var userApi: UserServiceable { dependencies.resolve() }
+    private var authApi: AuthNetworkable { dependencies.resolve() }
+    private var userApi: UserNetworkable { dependencies.resolve() }
     private var validateNickname: ValidateUserNameUseCase { dependencies.resolve() }
     
     init(cooridonator: AppCoordinator, container: Container = .live) {
@@ -42,6 +42,7 @@ final class InitialSettingViewModel: ObservableObject {
     }
     
     @Published var hasAllow = false
+    @Published var hasAllowTos = false
     @Published var focus: FocusItem?
     
     @Published var currentStage: Stage = .job
@@ -58,11 +59,12 @@ extension InitialSettingViewModel: Actionable {
         case didSelectJob(JobOption)
         case nicknameDidChange
         case checkNickname
-        case didFinishInitialSetting
+        case home
+        case registUser
 
         // MARK: - Sheet
         case showAllowSheet
-        case didFinishAllow
+        case didFinishAllow(Bool)
     }
     
     func send(_ action: Action) {
@@ -98,7 +100,7 @@ extension InitialSettingViewModel: Actionable {
             guard self.checkNicknameValid else { return }
             Task { 
                 do {
-                    let success = try await authApi.duplicate(self.nickname)
+                    let success = try await authApi.duplicated(self.nickname)
                     guard success else { return }
                     self.nicknameAvailable = true
                     self.nicknameMessage = .사용가능닉네임
@@ -111,8 +113,19 @@ extension InitialSettingViewModel: Actionable {
                 }
             }
             
-        case .didFinishInitialSetting:
+        case .home:
+            cooridonator?.send(.home)
             
+        case .showAllowSheet:
+            self.showAllowSheet = true
+            
+        case .didFinishAllow(let tos):
+            self.showAllowSheet = false
+            self.hasAllowTos = tos
+            self.currentStage = .welcome
+            self.send(.registUser)
+            
+        case .registUser:
             let targetIncome = self.targetIncome
                 .replacingOccurrences(of: ",", with: "")
             
@@ -125,7 +138,8 @@ extension InitialSettingViewModel: Actionable {
                     let dto = DetailsDTO(
                         nickname: self.nickname,
                         job: selectedJob.title,
-                        monthlyTargetIncome: targetIncome)
+                        monthlyTargetIncome: targetIncome,
+                        tosAgree: hasAllowTos)
                     userRepository.updateUserInfo(dto)
                     try await userApi.detailsPost(dto)
                     cooridonator?.send(.home)
@@ -134,12 +148,6 @@ extension InitialSettingViewModel: Actionable {
                 }
             }
             
-        case .showAllowSheet:
-            self.showAllowSheet = true
-            
-        case .didFinishAllow:
-            self.showAllowSheet = false
-            self.currentStage = .welcome
         }
     }
 }

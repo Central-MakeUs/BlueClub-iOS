@@ -21,7 +21,7 @@ final class LoginViewModel: ObservableObject {
     weak var coordinator: AppCoordinator?
     private let dependencies: Container
     private var userRepository: UserRepositoriable { dependencies.resolve() }
-    private var authApi: AuthServiceable { dependencies.resolve() }
+    private var authApi: AuthNetworkable { dependencies.resolve() }
     
     init(coordinator: AppCoordinator, dependencies: Container = .live) {
         self.coordinator = coordinator

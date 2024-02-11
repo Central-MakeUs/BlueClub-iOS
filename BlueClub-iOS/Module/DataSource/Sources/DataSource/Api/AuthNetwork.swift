@@ -9,9 +9,17 @@ import Foundation
 import MightyCombine
 import Domain
 
-public class AuthService: AuthServiceable {
+public class AuthNetwork: AuthNetworkable {
     
-    public init() { }
+    private let userRespository: UserRepositoriable
+    private var token: String {
+        userRespository.getToken()
+    }
+    
+    public init(userRespository: UserRepositoriable) {
+        self.userRespository = userRespository
+    }
+    
     
     private let path = "/auth"
     
@@ -44,13 +52,13 @@ public class AuthService: AuthServiceable {
             .asyncThrows
     }
     
-    public func duplicate(_ nickname: String) async throws -> Bool {
+    public func duplicated(_ nickname: String) async throws -> Bool {
         
         try await EndPoint
             .init(Const.baseUrl)
             .urlPaths([path, "/duplicated"])
             .urlQueries(["nickname": nickname])
-            .httpHeaders(RequestHeader.get)
+            .httpHeaders(RequestHeader.withToken(accessToken: token))
             .responseHandler { response in
                 switch response.statusCode {
                 case (200...299):

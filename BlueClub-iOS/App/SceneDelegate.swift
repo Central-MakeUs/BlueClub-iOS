@@ -80,8 +80,15 @@ private extension SceneDelegate {
         // MARK: - Date
             .register { DateService() as DateServiceable }
         // MARK: - Api
-            .register { AuthService() as AuthServiceable }
-            .register { UserService(userRespository: Container.live.resolve()) as UserServiceable }
+            .register { 
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return AuthNetwork(userRespository: userRepository) as AuthNetworkable }
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return UserNetwork(userRespository: userRepository) as UserNetworkable }
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return DiaryNetwork(userRespository: userRepository) as DiaryNetworkable}
         // MARK: - UseCase
             .register { ValidateUserNameUseCase() }
     }

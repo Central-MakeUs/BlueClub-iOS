@@ -78,8 +78,7 @@ extension UserRepository: TokenAccessible {
         self.userInfo = new
     }
     
-    public func getTokens() -> (String, String) {
-        (self.userInfo?.accessToken ?? "",
-         self.userInfo?.refreshToken ?? "")
+    public func getToken() -> String {
+        self.userInfo?.accessToken ?? ""
     }
 }

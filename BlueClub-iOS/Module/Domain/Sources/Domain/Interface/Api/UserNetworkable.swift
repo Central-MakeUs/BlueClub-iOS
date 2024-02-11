@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import Domain
 
-public protocol UserServiceable {
+public protocol UserNetworkable {
     
     func detailsPost(_ dto: DetailsDTO) async throws
     func detailsPatch(_ dto: DetailsDTO) async throws
