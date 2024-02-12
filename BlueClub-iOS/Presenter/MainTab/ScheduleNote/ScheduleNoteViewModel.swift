@@ -20,6 +20,7 @@ final class ScheduleNoteViewModel: ObservableObject {
     private let dependencies: Container
     private var dateService: DateServiceable { dependencies.resolve() }
     private var monthlyGoalApi: MonthlyGoalNetworkable { dependencies.resolve() }
+    private var diaryApi: DiaryNetworkable { dependencies.resolve() }
     
     init(
         coordinator: ScheduleNoteCoordinator,
@@ -29,11 +30,16 @@ final class ScheduleNoteViewModel: ObservableObject {
         self.dependencies = dependencies
     }
     
-    
     @Published var hasExpand = false
     @Published var sholdReloadProgressBar = false
     @Published var goal: MonthlyGoalDTO?
     @Published var monthIndex = 0
+    
+    @Published var diaryList: [DiaryListDTO.MonthlyRecord] = []
+    var diaryListCount: Int {
+        diaryList.count
+    }
+    
     var currentYear: Int {
         let (year, _, _) = dateService.toDayInt(monthIndex)
         return year
@@ -54,12 +60,15 @@ extension ScheduleNoteViewModel: Actionable {
         case toggleHasExpand
         case increaseMonth
         case decreaseMonth
-        case getDays
         
         case fetchGoal
+        case fetchDiaryList
         case didTapGearIcon
         case didTapMonthlyGoalSetting
         case setMonthlyGoal(Int)
+        case scheduleEdit
+        case scheduleEditById(Int)
+        case scheduleEditByDate(Date)
     }
     
     @MainActor func send(_ action: Action) {
@@ -72,21 +81,31 @@ extension ScheduleNoteViewModel: Actionable {
             
         case .increaseMonth:
             monthIndex += 1
+            self.send(.fetchGoal)
+            self.send(.fetchDiaryList)
             
         case .decreaseMonth:
             monthIndex -= 1
-            
-        case .getDays:
-            break
+            self.send(.fetchGoal)
+            self.send(.fetchDiaryList)
             
         case .fetchGoal:
-            Task {
+            Task { @MainActor in
                 do {
                     let (year, month, _) = dateService.toDayInt(self.monthIndex)
                     self.goal = try await monthlyGoalApi.get(
                         year: year,
                         month: month)
                     self.sholdReloadProgressBar.toggle()
+                } catch {
+                    printError(error)
+                }
+            }
+            
+        case .fetchDiaryList:
+            Task { @MainActor in
+                do {
+                    self.diaryList = try await diaryApi.list(monthIndex: self.monthIndex)
                 } catch {
                     printError(error)
                 }
@@ -109,6 +128,15 @@ extension ScheduleNoteViewModel: Actionable {
                     printError(error)
                 }
             }
+            
+        case .scheduleEdit:
+            self.coordinator?.send(.scheduleEdit)
+            
+        case .scheduleEditById(let id):
+            coordinator?.send(.scheduleEditById(id))
+            
+        case .scheduleEditByDate(let date):
+            coordinator?.send(.scheduleEditByDate(date))
         }
     }
 }

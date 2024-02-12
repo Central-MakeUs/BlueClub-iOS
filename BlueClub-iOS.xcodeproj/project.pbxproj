@@ -11,7 +11,6 @@
 		FB07DF382B52638D00C4A9C8 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FB07DF372B52638D00C4A9C8 /* KakaoSDKAuth */; };
 		FB07DF3A2B5263A500C4A9C8 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = FB07DF392B5263A500C4A9C8 /* KakaoSDKUser */; };
 		FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = FB0D21EA2B4B3EB00085670B /* Domain */; };
-		FB14F2682B7A04240060AF79 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FB14F2672B7A04240060AF79 /* Alamofire */; };
 		FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D22B459FC500318FA7 /* AppDelegate.swift */; };
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
 		FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DB2B459FC600318FA7 /* Assets.xcassets */; };
@@ -125,7 +124,6 @@
 				FB3E75D62B6410E600D48993 /* Lottie in Frameworks */,
 				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
 				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
-				FB14F2682B7A04240060AF79 /* Alamofire in Frameworks */,
 				FB07DF3A2B5263A500C4A9C8 /* KakaoSDKUser in Frameworks */,
 				FB4479A12B505EB500741424 /* DataSource in Frameworks */,
 				FB07DF362B52637E00C4A9C8 /* KakaoSDKCommon in Frameworks */,
@@ -411,7 +409,6 @@
 				FB07DF372B52638D00C4A9C8 /* KakaoSDKAuth */,
 				FB07DF392B5263A500C4A9C8 /* KakaoSDKUser */,
 				FB3E75D52B6410E600D48993 /* Lottie */,
-				FB14F2672B7A04240060AF79 /* Alamofire */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -446,7 +443,6 @@
 				FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */,
 				FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				FB14F2662B7A04240060AF79 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
@@ -752,14 +748,6 @@
 				minimumVersion = 1.0.2;
 			};
 		};
-		FB14F2662B7A04240060AF79 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.1;
-			};
-		};
 		FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -805,11 +793,6 @@
 		FB0D21EA2B4B3EB00085670B /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
-		};
-		FB14F2672B7A04240060AF79 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FB14F2662B7A04240060AF79 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		FB1C63ED2B45A8C900318FA7 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;

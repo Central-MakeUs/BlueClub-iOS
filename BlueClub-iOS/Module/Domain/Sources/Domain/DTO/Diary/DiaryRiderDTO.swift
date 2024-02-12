@@ -7,13 +7,14 @@
 
 import Foundation
 
-public struct DiaryRiderDTO: Codable {
+public struct DiaryRiderDTO: DiaryDTO {
+    
     public let worktype: String
     public let memo: String
     public let income: Int
     public let expenditure: Int
     public let saving: Int
-    public let date: String
+    public let date: String?
     public let numberOfDeliveries: Int
     public let incomeOfDeliveries: Int
     public let numberOfPromotions: Int
@@ -25,7 +26,7 @@ public struct DiaryRiderDTO: Codable {
         income: Int,
         expenditure: Int,
         saving: Int,
-        date: String,
+        date: String?,
         numberOfDeliveries: Int,
         incomeOfDeliveries: Int,
         numberOfPromotions: Int,

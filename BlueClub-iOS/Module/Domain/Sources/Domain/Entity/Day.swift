@@ -13,6 +13,9 @@ public struct Day: Equatable {
     public let month: Int
     public let day: Int
     public let weekday: WeekDay
+    public var combinedDateString: String {
+        combine(year: year, month: month, day: day)
+    }
     
     public init(
         year: Int,
@@ -42,4 +45,16 @@ public struct Day: Equatable {
             self.month == month &&
             self.day == day
     }
+}
+
+fileprivate func combine(year: Int, month: Int, day: Int) -> String {
+    var monthString = String(month)
+    if 10 > month {
+        monthString = "0" + monthString
+    }
+    var dayString = String(day)
+    if 10 > day {
+        dayString = "0" + dayString
+    }
+    return String(year) + "-" + monthString + "-" + dayString
 }

@@ -27,11 +27,9 @@ struct ScheduleEditView: View {
             bottomButton()
                 .hide(when: viewModel.keyboardAppeared)
         }
-        .task {
-            viewModel.send(.fetchUserInfo)
-            try? await Task.sleep(for: .seconds(0.5))
-            viewModel.send(.showScheduleTypeSheet)
-        }
+        .onAppear { viewModel.send(.fetchUserInfo) }
+        .loadingSpinner(viewModel.isLoading)
+        .disabled(viewModel.isLoading)
         .sheet(isPresented: $viewModel.showScheduleTypeSheet) {
             ScheduleTypeSheet()
                 .environmentObject(viewModel)
@@ -73,14 +71,36 @@ extension ScheduleEditView {
                     case .dayWorker:
                         temporaryContentRows()
                     }
+                    memoPreview()
+                    plusButtons()
+                    contentFooter()
+                } else {
+                    dayOffPlaceholder()
                 }
-                memoPreview()
-                plusButtons()
-                contentFooter()
             }
             .padding(.bottom, 120)
             .hideKeyboardOnTapBackground()
         }.scrollDismissesKeyboard(.immediately)
+    }
+    
+    @ViewBuilder func dayOffPlaceholder() -> some View {
+        VStack(spacing: 20) {
+            Image(.coinSmile)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 98)
+            VStack(spacing: 8) {
+                Text("오늘 하루는 제대로 충전해요")
+                    .fontModifer(.h6)
+                    .foregroundStyle(Color.colors(.black))
+                Text("휴무도 꾸준히 기록하는 습관\n너무 잘하고 있어요!")
+                    .fontModifer(.sb2)
+                    .foregroundStyle(Color.colors(.gray07))
+                    .lineLimit(2)
+            }
+            .multilineTextAlignment(.center)
+        }
+        .padding(.top, 74)
     }
     
     @ViewBuilder func memoPreview() -> some View {

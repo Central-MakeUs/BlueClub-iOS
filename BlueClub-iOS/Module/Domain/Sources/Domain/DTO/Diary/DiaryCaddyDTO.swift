@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct DiaryCaddyDTO: Codable {
+public struct DiaryCaddyDTO: DiaryDTO {
     public let worktype: String
     public let memo: String
     public let income: Int
     public let expenditure: Int
     public let saving: Int
-    public let date: String
+    public let date: String?
     public let rounding: Int
     public let caddyFee: Int
     public let overFee: Int
@@ -25,7 +25,7 @@ public struct DiaryCaddyDTO: Codable {
         income: Int,
         expenditure: Int,
         saving: Int,
-        date: String,
+        date: String?,
         rounding: Int,
         caddyFee: Int,
         overFee: Int,
@@ -44,3 +44,4 @@ public struct DiaryCaddyDTO: Codable {
     }
 }
 
+public protocol DiaryDTO: Codable { }

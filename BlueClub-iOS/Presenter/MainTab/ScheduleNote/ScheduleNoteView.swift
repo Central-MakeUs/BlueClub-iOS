@@ -40,7 +40,10 @@ struct ScheduleNoteView: View {
             content()
         }
         .background(Color.colors(.cg01))
-        .onAppear { viewModel.send(.fetchGoal) }
+        .onAppear {
+            viewModel.send(.fetchGoal)
+            viewModel.send(.fetchDiaryList)
+        }
     }
 }
 
@@ -50,12 +53,12 @@ extension ScheduleNoteView {
             LazyVStack(spacing: 0) {
                 contentHeader()
                 calendarView()
-                // 기록
-                // 기록 리스트
+                diaryListHeader()
+                diaryList()
             }
         }.overlay(alignment: .bottomTrailing) {
             Button(action: {
-                viewModel.coordinator?.send(.scheduleEdit)
+                viewModel.send(.scheduleEdit)
             }, label: {
                 Image(.floatingButton)
             }).padding(20)
@@ -199,36 +202,196 @@ extension ScheduleNoteView {
             // calendarBody
             
             ForEach(viewModel.days, id: \.?.day) { day in
-                VStack(spacing: 4) {
-                    
-                    let isToday = viewModel.today.isSameDay(
-                        year: day?.year,
-                        month: day?.month,
-                        day: day?.day
-                    )
-                    
-                    Text(day != nil ? String(day!.day) : "")
-                        .fontModifer(.sb2)
-                        .foregroundStyle(
-                            isToday
-                            ? Color.colors(.primaryNormal)
-                            : Color.colors(.gray08))
-                        .frame(height: 36)
-                        .if(isToday, {
-                            $0.background(Image(.todayBackground))
-                        })
-                    
-                    Spacer(minLength: 0)
-                    if isToday {
-                        Text("Today")
-                            .font(.pretendard(.medium, size: 9))
-                            .foregroundStyle(Color.colors(.primaryNormal))
-                    }
+                let diary: DiaryListDTO.MonthlyRecord? = viewModel.diaryList.first {
+                    $0.date == day?.combinedDateString
                 }
-                .frame(height: 50)
-                .frame(width: 40)
+                Button {
+                    if let diary {
+                        viewModel.send(.scheduleEditById(diary.id))
+                    } else if diary == nil, let day {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                        let date = dateFormatter.date(from: day.combinedDateString)
+                        guard let date else { return }
+                        viewModel.send(.scheduleEditByDate(date))
+                    }
+                } label: {
+                    calendarCell(day, diary: diary)
+                }
             }
         }
+    }
+    
+    @ViewBuilder func calendarCell(_ day: Day?, diary: DiaryListDTO.MonthlyRecord?) -> some View {
+        VStack(spacing: 4) {
+            let isToday = viewModel.today.isSameDay(
+                year: day?.year,
+                month: day?.month,
+                day: day?.day
+            )
+            if let day {
+                Text(String(day.day))
+                    .fontModifer(.sb2)
+                    .foregroundStyle(
+                        diary != nil
+                        ? Color.colors(.white)
+                        : isToday
+                        ? Color.colors(.primaryNormal)
+                        : Color.colors(.gray08))
+                    .frame(height: 36)
+                    .if(diary != nil) {
+                        $0.background(
+                            Image(.coin)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 36))}
+                    .if(diary == nil && isToday) {
+                        $0.background(
+                            Image(.todayBackground)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 36))}
+                Spacer(minLength: 0)
+                if let diary {
+                    Text(diary.incomeLabel)
+                        .font(.pretendard(.medium, size: 9))
+                        .foregroundStyle(Color.colors(.cg06))
+                } else if isToday {
+                    Text("Today")
+                        .font(.pretendard(.medium, size: 9))
+                        .foregroundStyle(Color.colors(.primaryNormal))
+                }
+            }
+        }
+        .frame(height: 50)
+        .frame(width: 40)
+    }
+    
+    @ViewBuilder func diaryListHeader() -> some View {
+        HStack(alignment: .top, spacing: 4) {
+            Text("\(viewModel.currentMonth)월 기록")
+                .foregroundStyle(Color.colors(.gray10))
+            if viewModel.diaryListCount != 0 {
+                Text("\(viewModel.diaryListCount)")
+                    .foregroundStyle(Color.colors(.primaryNormal))
+            }
+            Spacer()
+        }
+        .fontModifer(.sb1)
+        .frame(height: 22)
+        .padding(.top, 24)
+        .padding(.horizontal, 20)
+        .frame(height: 62)
+    }
+    
+    @ViewBuilder func diaryList() -> some View {
+        if viewModel.diaryList.isEmpty {
+            Button {
+                viewModel.send(.scheduleEdit)
+            } label: {
+                firstDiaryButton()
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 12)
+        } else {
+            ForEach(viewModel.diaryList) { diary in
+                Button {
+                    
+                } label: {
+                    DiaryListCell(diary: diary)
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 12)
+            }
+        }
+    }
+    
+    @ViewBuilder func firstDiaryButton() -> some View {
+        HStack {
+            Text("\(viewModel.currentMonth)월의 첫 근무기록 남기러가기")
+                .fontModifer(.sb2)
+            Spacer()
+            Image.icons(.arrow_right)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20)
+        }
+        .padding(.vertical, 20)
+        .padding(.horizontal, 16)
+        .frame(height: 60)
+        .roundedBorder(Color.colors(.primaryNormal))
+    }
+}
+
+struct DiaryListCell: View {
+    
+    let diary: DiaryListDTO.MonthlyRecord
+    
+    var body: some View {
+        HStack(spacing: 6) {
+            Text(formatDateString(diary.date))
+                .fontModifer(.sb2)
+                .foregroundStyle(Color.colors(.gray07))
+                .padding(.trailing, 4)
+            switch diary.worktype {
+            case "근무":
+                ChipView("근무")
+                infoView(
+                    income: diary.income,
+                    count: diary.cases)
+            case "조퇴":
+                ChipView("조퇴", style: .gray)
+                infoView(
+                    income: diary.income,
+                    count: diary.cases)
+            case "휴무":
+                ChipView("휴무", style: .red)
+                Text("오늘은 충전하는 날")
+                    .fontModifer(.sb2)
+                    .foregroundStyle(Color.colors(.gray05))
+            default:
+                EmptyView()
+            }
+            Spacer()
+            Image.icons(.arrow_right)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20)
+                .foregroundStyle(Color.colors(.gray08))
+        }
+        .frame(height: 20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 16)
+        .roundedBorder()
+    }
+    
+    @ViewBuilder func infoView(income: Int, count: Int?) -> some View {
+        HStack(spacing: 2) {
+            Text("\(income)")
+            if let count {
+                Text("·")
+                Text("\(count)건")
+            }
+        }
+        .fontModifer(.sb2)
+        .foregroundStyle(Color.colors(.gray10))
+    }
+    
+    func formatDateString(_ input: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let date = inputFormatter.date(from: input) else { return "" }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "ko_KR")
+        outputFormatter.dateFormat = "dd.MM '월'"
+        
+        let output = outputFormatter.string(from: date)
+        return output
     }
 }
 

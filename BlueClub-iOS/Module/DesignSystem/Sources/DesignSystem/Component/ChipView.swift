@@ -34,7 +34,7 @@ public struct ChipView: View {
 extension ChipView {
     
     public enum Style {
-        case blue, red
+        case blue, red, gray
         
         var foreground: Color {
             switch self {
@@ -42,6 +42,8 @@ extension ChipView {
                 return .colors(.primaryNormal)
             case .red:
                 return .colors(.error)
+            case .gray:
+                return .colors(.cg06)
             }
         }
         
@@ -51,6 +53,8 @@ extension ChipView {
                 return .colors(.primaryBackground)
             case .red:
                 return .init(hex: "FFF1F1")
+            case .gray:
+                return .colors(.cg02)
             }
         }
     }
