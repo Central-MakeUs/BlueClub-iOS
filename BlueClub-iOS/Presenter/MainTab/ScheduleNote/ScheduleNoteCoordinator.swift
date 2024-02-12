@@ -9,6 +9,7 @@ import Foundation
 import Navigator
 import Architecture
 import UIKit
+import DependencyContainer
 
 final class ScheduleNoteCoordinator {
     

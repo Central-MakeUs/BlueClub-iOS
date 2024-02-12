@@ -8,6 +8,7 @@
 import SwiftUI
 import DesignSystem
 import Domain
+import WebKit
 
 struct MyPageView: View {
     
@@ -40,6 +41,20 @@ struct MyPageView: View {
             }
         }
         .background(Color.colors(.cg01))
+        .onAppear {
+            viewModel.send(.fetchAppVersion)
+            viewModel.send(.fetchUser)
+        }
+        .sheet(isPresented: $viewModel.show이용약관) {
+            if let url = URL(string: "https://www.notion.so/0905a99459cf470f908018d20f0d8d72?pvs=4") {
+                WebView(url: url)
+            }
+        }
+        .sheet(isPresented: $viewModel.show개인정보) {
+            if let url = URL(string: "https://www.notion.so/ded29418f6604ad993b0d664a653c4d7?pvs=4") {
+                WebView(url: url)
+            }
+        }
     }
 }
 
@@ -111,7 +126,7 @@ private extension MyPageView {
                     Text(row.title)
                         .fontModifer(.b1m)
                         .foregroundStyle(Color.colors(.black))
-                    Text(viewModel.appVersion)
+                    Text(viewModel.appVersion ?? "")
                         .fontModifer(.b2m)
                         .foregroundStyle(Color.colors(.gray05))
                 }.frame(height: 24)

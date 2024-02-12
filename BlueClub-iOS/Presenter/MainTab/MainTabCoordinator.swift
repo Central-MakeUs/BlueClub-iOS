@@ -9,12 +9,16 @@ import SwiftUI
 import DesignSystem
 import Architecture
 import Navigator
+import Domain
+import DependencyContainer
 
 final class MainTabCoordinator: ObservableObject {
     
     @Published var currentTab: MainTabItem = .home
     
     let navigator: Navigator
+    private let container: Container
+    private var dateService: DateServiceable { container.resolve() }
     
     lazy var homeCoordinator: HomeCoordinator = {
         .init(navigator: navigator, parent: self)
@@ -22,8 +26,13 @@ final class MainTabCoordinator: ObservableObject {
     let scheudleNoteCoordinator: ScheduleNoteCoordinator
     let myPageCoordinator: MyPageCoordinator
     
-    init(navigator: Navigator) {
+    init(
+        navigator: Navigator, 
+        container: Container = .live
+    ) {
         self.navigator = navigator
+        self.container = container
+        
         self.scheudleNoteCoordinator = .init(navigator: navigator)
         self.myPageCoordinator = .init(navigator: navigator)
     }
@@ -48,7 +57,8 @@ extension MainTabCoordinator: Actionable {
             
         case .scheduleNoteEdit:
             self.currentTab = .note
-            scheudleNoteCoordinator.send(.scheduleEdit)
+            let dateString = dateService.getToday().combinedDateString
+            scheudleNoteCoordinator.send(.scheduleEditByDate(dateString))
         }
     }
 }

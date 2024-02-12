@@ -10,6 +10,7 @@ import DependencyContainer
 import DataSource
 import Architecture
 import Domain
+import UIKit
 
 class MyPageViewModel: ObservableObject {
     
@@ -17,11 +18,13 @@ class MyPageViewModel: ObservableObject {
     private let dependencies: Container
     private var userRepository: UserRepositoriable { dependencies.resolve() }
     
-    var user: AuthDTO?
+    @Published var show이용약관 = false
+    @Published var show개인정보 = false
+    @Published var user: AuthDTO?
+    @Published var appVersion: String?
     var monthlyTarget: Int {
         (user?.monthlyTargetIncome ?? 0) / 10000
     }
-    @Published var appVersion: String
     
     init(
         coordinator: MyPageCoordinator,
@@ -29,14 +32,14 @@ class MyPageViewModel: ObservableObject {
     ) {
         self.coordinator = coordinator
         self.dependencies = dependencies
-        self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        self.user = userRepository.getUserInfo()
     }
 }
 
 extension MyPageViewModel: Actionable {
     
     enum Action {
+        case fetchUser
+        case fetchAppVersion
         case notice
         case profileEdit
         case didTapButton(MyPageHeaderButton)
@@ -45,6 +48,12 @@ extension MyPageViewModel: Actionable {
     
     func send(_ action: Action) {
         switch action {
+            
+        case .fetchUser:
+            self.user = userRepository.getUserInfo()
+            
+        case .fetchAppVersion:
+            self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
             
         case .notice:
             coordinator.send(.notice)
@@ -66,12 +75,19 @@ extension MyPageViewModel: Actionable {
             switch item {
             case .notice:
                 coordinator.send(.notice)
+                
             case .notificationSetting:
-                break
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+                
             case .termsOf:
-                break
+                self.show이용약관 = true
+                
             case .privacy:
-                break
+                self.show개인정보 = true
+                
             case .versionInfo:
                 break
             }

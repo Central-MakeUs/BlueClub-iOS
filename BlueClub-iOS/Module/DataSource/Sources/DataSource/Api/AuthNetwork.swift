@@ -85,6 +85,7 @@ public class AuthNetwork: AuthNetworkable {
             .urlQueries(["token": token])
             .httpHeaders(header)
             .httpMethod(.post)
+            .responseLogStyle(.none)
             .responseHandler { try httpResponseHandler($0) }
             .requestPublisher(expect: ServerResponse<AuthDTO>.self)
             .tryMap { try handleServerResponseCode($0) }
