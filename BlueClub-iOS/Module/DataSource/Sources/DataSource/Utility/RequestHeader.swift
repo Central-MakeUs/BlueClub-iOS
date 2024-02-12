@@ -17,11 +17,18 @@ enum RequestHeader {
         "accept": "application/json;charset=UTF-8"
     ]
     
-    // (accessToken, refreshToken)
     static func withToken(accessToken: String) -> [String: String] {
         [
             "Content-Type": "application/json;charset=UTF-8",
             "accept": "application/json;charset=UTF-8",
+            "Authorization": "Bearer " + accessToken
+        ]
+    }
+    
+    static func multiPartWithToken(accessToken: String) -> [String: String] {
+        [
+            "accept": "application/json;charset=UTF-8",
+            "Content-Type": "multipart/form-data",
             "Authorization": "Bearer " + accessToken
         ]
     }

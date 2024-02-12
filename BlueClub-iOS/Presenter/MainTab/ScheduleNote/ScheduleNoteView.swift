@@ -99,27 +99,11 @@ extension ScheduleNoteView {
             
             if viewModel.hasExpand {
                 if let goal = viewModel.goal {
-                    // Progress
-                    VStack(spacing: 2) {
-                        Spacer(minLength: 0)
-                        CustomProgressBar(progress: goal.progorssFloat) { progressWidth = $0 }
-                        Text(goal.targeIncomeLabel)
-                            .fontModifer(.caption2)
-                            .foregroundStyle(Color.colors(.cg05))
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    if viewModel.sholdReloadProgressBar {
+                        headerProgressBar(goal)
+                    } else {
+                        headerProgressBar(goal)
                     }
-                    .frame(height: 54)
-                    .overlay(alignment: .topLeading) {
-                        let offset = goal.progress == 0
-                            ? progressWidth - (tooltipWidth / 2) + 7
-                            : progressWidth - (tooltipWidth / 2)
-                        
-                        PercentToolTipView(progress: goal.progorssFloat)
-                            .getSize { self.tooltipWidth = $0.width }
-                            .padding(.bottom, 2)
-                            .offset(x: offset)
-                    }
-                    .padding(.horizontal, 4)
                     CustomDivider(padding: 0)
                     // 나의 목표수입 설정
                     Button(action: {
@@ -144,6 +128,32 @@ extension ScheduleNoteView {
         .roundedBorder()
         .padding(.horizontal, 20)
         .padding(.vertical, 4)
+    }
+    
+    @ViewBuilder func headerProgressBar(_ goal: MonthlyGoalDTO) -> some View {
+        // Progress
+        VStack(spacing: 2) {
+            Spacer(minLength: 0)
+            CustomProgressBar(progress: goal.progorssFloat) {
+                progressWidth = $0
+            }
+            Text(goal.targeIncomeLabel)
+                .fontModifer(.caption2)
+                .foregroundStyle(Color.colors(.cg05))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .frame(height: 54)
+        .overlay(alignment: .topLeading) {
+            let offset = goal.progress == 0
+                ? progressWidth - (tooltipWidth / 2) + 7
+                : progressWidth - (tooltipWidth / 2)
+            
+            PercentToolTipView(progress: goal.progorssFloat)
+                .getSize { self.tooltipWidth = $0.width }
+                .padding(.bottom, 2)
+                .offset(x: offset)
+        }
+        .padding(.horizontal, 4)
     }
     
     @ViewBuilder func calendarHeader() -> some View {

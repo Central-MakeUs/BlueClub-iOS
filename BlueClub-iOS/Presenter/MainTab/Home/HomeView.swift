@@ -132,10 +132,7 @@ extension HomeView {
                 } else if record.totalDay == 1, record.straightDay == 1 {
                     Image(.coin)
                         .overlay(alignment: .topTrailing) {
-                            Text(String(record.totalDay))
-                                .fontModifer(.caption3)
-                                .foregroundStyle(Color.colors(.white))
-                                .roundedBackground(.colors(.cg07))
+                            coinTrailingLabel(record.totalDay)
                         }
                     Text("\(user.nickname)님 이번달 시작이 좋아요!")
                         .fontModifer(.sb2)
@@ -146,10 +143,7 @@ extension HomeView {
                 } else if record.totalDay > 0, record.straightDay == 0 {
                     Image(.emptyCoin)
                         .overlay(alignment: .topTrailing) {
-                            Text(String(record.totalDay))
-                                .fontModifer(.caption3)
-                                .foregroundStyle(Color.colors(.white))
-                                .roundedBackground(.colors(.cg07))
+                            coinTrailingLabel(record.totalDay)
                         }
                     Text("\(user.nickname)님 깜빡하신 근무기록은 없으신가요?")
                         .fontModifer(.sb2)
@@ -159,10 +153,7 @@ extension HomeView {
                 } else if record.isRenew {
                     Image(.coin)
                         .overlay(alignment: .topTrailing) {
-                            Text(String(record.totalDay))
-                                .fontModifer(.caption3)
-                                .foregroundStyle(Color.colors(.white))
-                                .roundedBackground(.colors(.cg07))
+                            coinTrailingLabel(record.totalDay)
                         }
                     Text("\(record.straightDay)일 연속 코인 획득중이에요")
                         .fontModifer(.sb2)
@@ -173,10 +164,7 @@ extension HomeView {
                 } else if record.straightMonth > 1 {
                     Image(.coin)
                         .overlay(alignment: .topTrailing) {
-                            Text(String(record.totalDay))
-                                .fontModifer(.caption3)
-                                .foregroundStyle(Color.colors(.white))
-                                .roundedBackground(.colors(.cg07))
+                            coinTrailingLabel(record.totalDay)
                         }
                     Text("\(record.straightDay)일 연속 코인 획득중이에요")
                         .fontModifer(.sb2)
@@ -203,12 +191,10 @@ extension HomeView {
     @ViewBuilder func incomeInfoView() -> some View {
         VStack(spacing: 16) {
             incomeInfoHeader()
-            if let record = viewModel.record, record.totalIncome > 0 {
-                incomeIndicator(record)
+            if viewModel.shouldReloadProgressBar {
+                incomeIndicator(viewModel.record)
             } else {
-                LottieView(animation: .named("progress"))
-                    .playing(loopMode: .loop)
-                    .frame(maxWidth: .infinity)
+                incomeIndicator(viewModel.record)
             }
             CustomDivider(padding: 0)
             incomeInfoFooter()
@@ -234,24 +220,26 @@ extension HomeView {
         }.frame(height: 28)
     }
     
-    @ViewBuilder func incomeIndicator(_ record: DiaryRecordDTO) -> some View {
-        
+    @ViewBuilder func incomeIndicator(_ record: DiaryRecordDTO?) -> some View {
         VStack(spacing: 2) {
             Spacer(minLength: 0)
-            CustomProgressBar(progress: record.progorssFloat) {
+            CustomProgressBar(progress: record?.progorssFloat ?? 0) {
                 progressWidth = $0
             }
-            Text("\(record.totalIncome.withComma())만원")
+            Text(record?.targetIncomLabel ?? "0만원")
                 .fontModifer(.caption2)
                 .foregroundStyle(Color.colors(.cg05))
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .frame(height: 54)
         .overlay(alignment: .topLeading) {
-            PercentToolTipView(progress: record.progorssFloat)
+            let offset = record?.progress == 0
+                ? progressWidth - (tooltipWidth / 2) + 7
+                : progressWidth - (tooltipWidth / 2)
+            PercentToolTipView(progress: record?.progorssFloat ?? 0.0)
                 .getSize { self.tooltipWidth = $0.width }
                 .padding(.bottom, 2)
-                .offset(x: progressWidth - (tooltipWidth / 2))
+                .offset(x: offset)
         }
     }
     
@@ -310,6 +298,15 @@ extension HomeView {
         .frame(height: 116)
         .roundedBackground()
         .roundedBorder()
+    }
+    
+    @ViewBuilder func coinTrailingLabel(_ int: Int) -> some View {
+        Text(String(int))
+            .fontModifer(.caption3)
+            .foregroundStyle(Color.colors(.white))
+            .padding(.horizontal, 4)
+            .padding(.vertical, 2)
+            .roundedBackground(.colors(.cg07))
     }
 }
 

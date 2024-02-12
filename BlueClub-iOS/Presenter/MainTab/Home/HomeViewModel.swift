@@ -31,6 +31,7 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Datas
     @Published var user: AuthDTO?
     @Published var record: DiaryRecordDTO?
+    @Published var shouldReloadProgressBar = false
     @Published var currentMonth: String?
 }
 
@@ -50,6 +51,7 @@ extension HomeViewModel: Actionable {
                     let (_, month, _) = dateService.toDayInt(0)
                     self.currentMonth = String(month)
                     self.record = try await diaryApi.record()
+                    self.shouldReloadProgressBar.toggle()
                 } catch {
                     printError(error)
                 }

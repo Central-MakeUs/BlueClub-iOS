@@ -12,6 +12,9 @@ import Architecture
 import DataSource
 import UIKit
 import Combine
+import Utility
+
+import Alamofire
 
 class ScheduleEditViewModel: ObservableObject {
     
@@ -19,17 +22,17 @@ class ScheduleEditViewModel: ObservableObject {
     var isAvailable: Bool {
         switch self.job {
         case .caddy:
-            return scheduleType != nil &&
+            return workType != nil &&
             roundingCount > 0 &&
             !caddyFee.isEmpty
         case .rider:
-            return scheduleType != nil &&
+            return workType != nil &&
             deliveryCount > 0 &&
             !deliveryIncome.isEmpty
-        case .temporary:
-            return scheduleType != nil &&
-            !siteName.isEmpty &&
-            !dayPay.isEmpty
+        case .dayWorker:
+            return workType != nil &&
+            !placeName.isEmpty &&
+            !dailyWage.isEmpty
         }
     }
     private var cancellables = Set<AnyCancellable>()
@@ -37,11 +40,11 @@ class ScheduleEditViewModel: ObservableObject {
     @Published var keyboardAppeared = false
     @Published var showScheduleTypeSheet = false
     @Published var job: JobOption = .caddy
-    @Published var scheduleType: ScheduleType?
+    @Published var workType: WorkType?
     @Published var date: Date = .now
     @Published var showMemoSheet = false
     @Published var memo = ""
-    @Published var spend = ""
+    @Published var expenditure = ""
     @Published var saving = ""
     
     // MARK: - Cadday Datas
@@ -57,27 +60,25 @@ class ScheduleEditViewModel: ObservableObject {
     @Published var promotionIncome = ""
     
     // MARK: - Temporary Datas
-    @Published var siteName = ""
-    @Published var dayPay = ""
-    @Published var category = ""
-    @Published var gongsu: Double = 0.0
+    @Published var placeName = ""
+    @Published var dailyWage = ""
+    @Published var typeOfJob = ""
+    @Published var numberOfWork: Double = 0.0
     
     var totalSum: String? {
         switch self.job {
         case .caddy:
             let caddyFeeInt = caddyFee.removeComma()
-            let overFeeInt = overFee.removeComma() ?? 0
-            guard let caddyFeeInt else { return nil }
+            let overFeeInt = overFee.removeComma()
             let sum = caddyFeeInt + overFeeInt
             return sum.withComma()
         case .rider:
             let deliveryIncomeInt = deliveryIncome.removeComma()
-            let promotionIncomeInt = promotionIncome.removeComma() ?? 0
-            guard let deliveryIncomeInt else { return nil }
+            let promotionIncomeInt = promotionIncome.removeComma()
             let sum = deliveryIncomeInt + promotionIncomeInt
             return sum.withComma()
-        case .temporary:
-            return dayPay
+        case .dayWorker:
+            return dailyWage
         }
     }
     
@@ -85,6 +86,7 @@ class ScheduleEditViewModel: ObservableObject {
     weak var coordinator: ScheduleNoteCoordinator?
     private let dependencies: Container
     private var userRepository: UserRepositoriable { dependencies.resolve() }
+    private var diaryApi: DiaryNetworkable { dependencies.resolve() }
     
     init(
         coordinator: ScheduleNoteCoordinator,
@@ -116,7 +118,12 @@ extension ScheduleEditViewModel: Actionable {
 
     enum Action {
         case fetchUserInfo
-        case didTapScheduleType
+        case showScheduleTypeSheet
+        case save
+        case saveCadday
+        case saveRider
+        case saveDailyWorker
+        case saveDayOff
     }
     
     func send(_ action: Action) {
@@ -125,13 +132,100 @@ extension ScheduleEditViewModel: Actionable {
 //            let userInfo = userRepository.getUserInfo()
 //            self.job = .init(title: userInfo?.job ?? "")
             break
-        case .didTapScheduleType:
+            
+        case .showScheduleTypeSheet:
             self.showScheduleTypeSheet = true
+            
+        case .save:
+            guard self.workType != .dayOff else {
+                return self.send(.saveDayOff)
+            }
+            
+            switch self.job {
+            case .caddy:
+                self.send(.saveCadday)
+            case .rider:
+                self.send(.saveRider)
+            case .dayWorker:
+                self.send(.saveDailyWorker)
+            }
+            
+        case .saveCadday:
+            let dto: DiaryCaddyDTO = .init(
+                worktype: self.workType?.title ?? "근무",
+                memo: self.memo,
+                income: self.totalSum?.removeComma() ?? 0,
+                expenditure: self.expenditure.removeComma(),
+                saving: self.saving.removeComma(),
+                date: formatDate(self.date),
+                rounding: self.roundingCount,
+                caddyFee: self.caddyFee.removeComma(),
+                overFee: self.overFee.removeComma(),
+                topdressing: self.topDressing)
+            Task {
+                do {
+                    try await diaryApi.diary(dto, job: .caddy)
+                } catch {
+                    printError(error)
+                }
+            }
+            
+        case .saveRider:
+            let dto: DiaryRiderDTO = .init(
+                worktype: self.workType?.title ?? "근무",
+                memo: self.memo,
+                income: self.totalSum?.removeComma() ?? 0,
+                expenditure: self.expenditure.removeComma(),
+                saving: self.saving.removeComma(),
+                date: formatDate(self.date),
+                numberOfDeliveries: self.deliveryCount,
+                incomeOfDeliveries: self.deliveryIncome.removeComma(),
+                numberOfPromotions: self.promotionCount,
+                incomeOfPromotions: self.promotionIncome.removeComma())
+            Task {
+                do {
+                    try await diaryApi.diary(dto, job: .caddy)
+                    self.coordinator?.navigator.dismiss()
+                } catch {
+                    printError(error)
+                }
+            }
+            
+        case .saveDailyWorker:
+            let dto: DiaryDayWorkerDTO = .init(
+                worktype: self.workType?.title ?? "근무",
+                memo: self.memo,
+                income: self.totalSum?.removeComma() ?? 0,
+                expenditure: self.expenditure.removeComma(),
+                saving: self.saving.removeComma(),
+                date: formatDate(self.date),
+                place: self.placeName,
+                dailyWage: self.dailyWage.removeComma(),
+                typeOfJob: self.typeOfJob,
+                numberOfWork: self.numberOfWork)
+            Task {
+                do {
+                    try await diaryApi.diary(dto, job: .caddy)
+                    self.coordinator?.navigator.dismiss()
+                } catch {
+                    printError(error)
+                }
+            }
+            
+        case .saveDayOff:
+            Task {
+                do {
+                    try await diaryApi.diaryDayOff(date: formatDate(self.date))
+                    self.coordinator?.navigator.dismiss()
+                } catch {
+                    printError(error)
+                }
+            }
         }
     }
 }
 
-enum ScheduleType: CaseIterable {
+enum WorkType: CaseIterable {
     case work, skipOff, dayOff
     
     var title: String {
@@ -144,4 +238,10 @@ enum ScheduleType: CaseIterable {
             return "휴무"
         }
     }
+}
+
+fileprivate func formatDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.string(from: date)
 }

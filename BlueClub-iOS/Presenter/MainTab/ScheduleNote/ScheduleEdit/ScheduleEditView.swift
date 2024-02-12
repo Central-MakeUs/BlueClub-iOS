@@ -27,7 +27,11 @@ struct ScheduleEditView: View {
             bottomButton()
                 .hide(when: viewModel.keyboardAppeared)
         }
-        .onAppear { viewModel.send(.fetchUserInfo) }
+        .task {
+            viewModel.send(.fetchUserInfo)
+            try? await Task.sleep(for: .seconds(0.5))
+            viewModel.send(.showScheduleTypeSheet)
+        }
         .sheet(isPresented: $viewModel.showScheduleTypeSheet) {
             ScheduleTypeSheet()
                 .environmentObject(viewModel)
@@ -50,7 +54,9 @@ extension ScheduleEditView {
             }),
             title: .none,
             isTrailingButtonActive: viewModel.isAvailable,
-            trailingButton: ("저장", { }))
+            trailingButton: ("저장", { 
+                viewModel.send(.save)
+            }))
     }
     
     @ViewBuilder func content() -> some View {
@@ -58,13 +64,13 @@ extension ScheduleEditView {
             LazyVStack {
                 contentHeader()
                 근무형태()
-                if viewModel.scheduleType != .dayOff {
+                if viewModel.workType != .dayOff {
                     switch viewModel.job {
                     case .caddy:
                         caddyContentRows()
                     case .rider:
                         riderContentRows()
-                    case .temporary:
+                    case .dayWorker:
                         temporaryContentRows()
                     }
                 }
@@ -111,11 +117,11 @@ extension ScheduleEditView {
                     plusLabel(title: "메모")
                 })
             }
-            Button(action: {
-                
-            }, label: {
-                plusLabel(title: "사진 첨부")
-            })
+//            Button(action: {
+//                
+//            }, label: {
+//                plusLabel(title: "사진 첨부")
+//            })
             Spacer()
         }
         .padding(.horizontal, 20)
@@ -207,7 +213,7 @@ extension ScheduleEditView {
             isMandatory: true
         ) {
             CustomTextField(
-                text: $viewModel.siteName,
+                text: $viewModel.placeName,
                 placeholder: "근무 현장명 입력")
         }
         listCell(
@@ -215,21 +221,21 @@ extension ScheduleEditView {
             title: "일당",
             isMandatory: true
         ) {
-            WonInput(text: $viewModel.dayPay)
+            WonInput(text: $viewModel.dailyWage)
         }
         listCell(
             image: .init(.coinDollar),
             title: "직종"
         ) {
             CustomTextField(
-                text: $viewModel.siteName,
+                text: $viewModel.placeName,
                 placeholder: "직종명 입력")
         }
         listCell(
             image: .init(.coinDollar),
             title: "공수"
         ) {
-            CustomDoubleStepper(count: $viewModel.gongsu)
+            CustomDoubleStepper(count: $viewModel.numberOfWork)
         }
     }
     
@@ -262,13 +268,13 @@ extension ScheduleEditView {
             isMandatory: true
         ) {
             Button(action: {
-                viewModel.send(.didTapScheduleType)
+                viewModel.send(.showScheduleTypeSheet)
             }, label: {
                 HStack(spacing: 4) {
-                    Text(viewModel.scheduleType?.title ?? "선택")
+                    Text(viewModel.workType?.title ?? "선택")
                         .fontModifer(.b1m)
                         .foregroundStyle(Color.colors(
-                            viewModel.scheduleType != nil
+                            viewModel.workType != nil
                             ? .gray10
                             : .gray04
                         ))
@@ -367,7 +373,7 @@ extension ScheduleEditView {
                     }
                 }
                 contentFooterCell(title: "지출액") {
-                    WonInput(text: $viewModel.spend)
+                    WonInput(text: $viewModel.expenditure)
                 }
                 contentFooterCell(title: "저축액") {
                     WonInput(text: $viewModel.saving)

@@ -31,6 +31,7 @@ final class ScheduleNoteViewModel: ObservableObject {
     
     
     @Published var hasExpand = false
+    @Published var sholdReloadProgressBar = false
     @Published var goal: MonthlyGoalDTO?
     @Published var monthIndex = 0
     var currentYear: Int {
@@ -85,6 +86,7 @@ extension ScheduleNoteViewModel: Actionable {
                     self.goal = try await monthlyGoalApi.get(
                         year: year,
                         month: month)
+                    self.sholdReloadProgressBar.toggle()
                 } catch {
                     printError(error)
                 }

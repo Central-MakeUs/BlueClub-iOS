@@ -9,8 +9,8 @@ import Foundation
 
 public extension String {
     
-    func removeComma() -> Int? {
+    func removeComma() -> Int {
         let clean = self.replacingOccurrences(of: ",", with: "")
-        return Int(clean)
+        return Int(clean) ?? 0
     }
 }

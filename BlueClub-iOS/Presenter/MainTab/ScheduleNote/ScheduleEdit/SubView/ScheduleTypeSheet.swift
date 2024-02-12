@@ -22,9 +22,9 @@ struct ScheduleTypeSheet: View {
             )
         } content: {
             VStack {
-                ForEach(ScheduleType.allCases, id: \.self) { type in
+                ForEach(WorkType.allCases, id: \.self) { type in
                     Button(action: {
-                        self.viewModel.scheduleType = type
+                        self.viewModel.workType = type
                         viewModel.showScheduleTypeSheet = false
                     }, label: {
                         SheetCellRow(title: type.title)

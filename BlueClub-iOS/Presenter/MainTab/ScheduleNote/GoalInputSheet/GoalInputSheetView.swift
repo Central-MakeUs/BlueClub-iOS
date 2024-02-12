@@ -40,7 +40,7 @@ struct GoalInputSheetView: View {
                 title: "다음",
                 disabled: !isValid,
                 action: {
-                    guard let target = text.removeComma() else { return }
+                    let target = text.removeComma()
                     viewModel.send(.setMonthlyGoal(target))
                 }
             ).padding(.vertical, 20)

@@ -17,6 +17,9 @@ public struct DiaryRecordDTO: Codable {
     public let totalIncome: Int
     public let progress: Int
     public var progorssFloat: CGFloat {
-        CGFloat(progress / 100)
+        CGFloat(progress) * 0.01
+    }
+    public var targetIncomLabel: String {
+        String(targetIncome / 10000) + "만원"
     }
 }

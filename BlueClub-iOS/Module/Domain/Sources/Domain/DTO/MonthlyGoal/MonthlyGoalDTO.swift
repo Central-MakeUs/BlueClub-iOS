@@ -12,7 +12,7 @@ public struct MonthlyGoalDTO: Codable {
     public let totalIncome: Int
     public let progress: Int
     public var progorssFloat: CGFloat {
-        CGFloat(progress / 100)
+        CGFloat(progress) * 0.01
     }
     public var targeIncomeLabel: String {
         String(targetIncome / 10000) + "만원"
