@@ -21,7 +21,7 @@ final class MyPageCoordinator {
 extension MyPageCoordinator: Coordinatorable {
     
     enum Action {
-        case notification
+        
         case login
         
         // MARK: - Header
@@ -30,17 +30,12 @@ extension MyPageCoordinator: Coordinatorable {
         case ask
         case service
         
-        case announcement
-        case announcementDetail
+        case notice
         case notificationSetting
     }
     
     func send(_ action: Action) {
         switch action {
-            
-        case .notification:
-            let view = NotificationView(coordinator: self)
-            navigator.push { view }
             
         case .login:
             guard let coordinator = SceneDelegate.coordinator
@@ -66,12 +61,8 @@ extension MyPageCoordinator: Coordinatorable {
             guard let url = URL(string: "https://forms.gle/AtRshbAM2FBKMgAX8") else { return }
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
-        case .announcement:
-            let view = AnnouncementView(coordinator: self)
-            navigator.push { view }
-            
-        case .announcementDetail:
-            let view = AnnouncementDetailView(coordinator: self)
+        case .notice:
+            let view = NoticeListView(navigator: self.navigator)
             navigator.push { view }
             
         case .notificationSetting:

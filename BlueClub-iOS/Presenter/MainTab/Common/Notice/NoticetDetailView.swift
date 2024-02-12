@@ -8,16 +8,24 @@
 import SwiftUI
 import DesignSystem
 import Architecture
+import Domain
+import Navigator
 
-struct AnnouncementDetailView: View {
+struct NoticeDetailView: View {
     
-    weak var coordinator: MyPageCoordinator?
+    weak var navigator: Navigator?
+    private let notice: NoticeDTO
+    
+    init(navigator: Navigator? = nil, notice: NoticeDTO) {
+        self.navigator = navigator
+        self.notice = notice
+    }
     
     var body: some View {
         BaseView {
             AppBar(
                 leadingIcon: (Icons.arrow_left, {
-                    coordinator?.pop()
+                    navigator?.pop()
                 }),
                 title: "공지사항")
         } content: {
@@ -34,13 +42,13 @@ struct AnnouncementDetailView: View {
     
     @ViewBuilder func header() -> some View {
         VStack(spacing: 8) {
-            Text("공지사항 내용입니다. 공지사항 내용입니다.공지사항 내용입니다.공지사항 내용입니다.")
+            Text(notice.title)
                 .lineLimit(.max)
                 .fontModifer(.h7)
                 .foregroundStyle(Color.colors(.gray10))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-            Text("23.12.08")
+            Text(notice.dateString)
                 .fontModifer(.b3)
                 .foregroundStyle(Color.colors(.gray06))
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -49,7 +57,7 @@ struct AnnouncementDetailView: View {
     }
     
     @ViewBuilder func content() -> some View {
-        Text("본문내용입니다. 본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다. 본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다. 본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다.")
+        Text(notice.content)
             .lineLimit(.max)
             .fontModifer(.b1)
             .foregroundStyle(Color.colors(.gray09))
@@ -57,8 +65,4 @@ struct AnnouncementDetailView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(20)
     }
-}
-
-#Preview {
-    AnnouncementDetailView()
 }

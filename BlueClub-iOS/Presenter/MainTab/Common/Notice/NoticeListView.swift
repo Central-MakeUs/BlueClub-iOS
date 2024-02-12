@@ -8,24 +8,38 @@
 import SwiftUI
 import DesignSystem
 import Architecture
+import Navigator
+import DependencyContainer
+import Domain
+import Utility
 
-struct AnnouncementView: View {
+struct NoticeListView: View {
     
-    @State var hasAllow = false
-    @State var isEmpty = true
+    @State var noticeList: [NoticeDTO] = []
+
+    // MARK: - Dependencies
+    private weak var navigator: Navigator?
+    private let container: Container
+    private var noticeApi: NoticeNetworkable { container.resolve() }
     
-    weak var coordinator: MyPageCoordinator?
+    init(
+        navigator: Navigator,
+        container: Container = .live
+    ) {
+        self.navigator = navigator
+        self.container = container
+    }
     
     var body: some View {
         BaseView {
             AppBar(
                 leadingIcon: (Icons.arrow_left, {
-                    coordinator?.pop()
+                    navigator?.pop()
                 }),
                 title: "공지사항")
         } content: {
             Group {
-                if isEmpty {
+                if noticeList.isEmpty {
                     emptyPlaceholder()
                 } else {
                     listView()
@@ -35,19 +49,27 @@ struct AnnouncementView: View {
                 maxWidth: .infinity,
                 maxHeight: .infinity)
             .background(Color.colors(.gray01))
+        }.task {
+            do {
+                self.noticeList = try await noticeApi.getAll(lastId: nil)
+            } catch {
+                printError(error)
+            }
         }
     }
     
     @ViewBuilder func listView() -> some View {
         ScrollView {
             LazyVStack(spacing: 10) {
-                ForEach((1..<20)) { _ in
+                ForEach(self.noticeList) { notice in
                     Button(action: {
                         Task {
-                            await coordinator?.send(.announcementDetail)
+                            await navigator?.push {
+                                NoticeDetailView(notice: notice)
+                            }
                         }
                     }, label: {
-                        listCell()
+                        listCell(notice)
                     })
                 }
             }
@@ -55,14 +77,14 @@ struct AnnouncementView: View {
         }
     }
     
-    @ViewBuilder func listCell() -> some View {
+    @ViewBuilder func listCell(_ notice: NoticeDTO) -> some View {
         VStack(spacing: 8) {
             HStack(spacing: 8) {
                 Image(.myPageIcon)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24)
-                Text("공지내용입니다. 공지내용 입니다아.")
+                Text(notice.title)
                     .fontModifer(.sb1)
                     .foregroundStyle(Color.colors(.black))
                 Spacer()
@@ -71,17 +93,14 @@ struct AnnouncementView: View {
             }
             .frame(height: 24)
             VStack(alignment: .leading, spacing: 8) {
-                Text("본문내용입니다. 본문내용입니다.본문내용입니다.본문내용입니다.본문내용입니다.")
+                Text(notice.content)
                     .fontModifer(.b2)
                     .foregroundStyle(Color.colors(.gray07))
                     .multilineTextAlignment(.leading)
+                    .lineLimit(.max)
                 HStack {
-                    Text("더보기")
-                        .fontModifer(.caption1)
-                        .foregroundStyle(Color.colors(.primaryNormal))
-                        .frame(alignment: .leading)
                     Spacer()
-                    Text("23.12.08")
+                    Text(notice.dateString)
                         .fontModifer(.caption1)
                         .foregroundStyle(Color.colors(.gray06))
                 }
@@ -99,28 +118,10 @@ struct AnnouncementView: View {
                 Text("아직 게시된 공지글이 없어요")
                     .fontModifer(.h6)
                     .foregroundStyle(Color.colors(.black))
-                if hasAllow {
-                    Text("새로운 소식이 생기면\n푸시 알림으로 가장 먼저 알려 드릴게요!")
-                        .fontModifer(.sb2)
-                        .foregroundStyle(Color.colors(.gray07))
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text("푸시 알림에 동의해 주시면\n새로운 소식을 가장 먼저 알려 드릴게요!")
-                        .fontModifer(.sb2)
-                        .foregroundStyle(Color.colors(.gray07))
-                        .multilineTextAlignment(.center)
-                }
-            }
-            if !hasAllow {
-                CustomButton(
-                    title: "알림 설정하러 가기",
-                    foreground: .colors(.white),
-                    background: .colors(.primaryNormal),
-                    action: {
-                        hasAllow = true
-                        isEmpty = false
-                    }
-                ).padding(.horizontal, 55)
+                Text("새로운 소식이 생기면\n푸시 알림으로 가장 먼저 알려 드릴게요!")
+                    .fontModifer(.sb2)
+                    .foregroundStyle(Color.colors(.gray07))
+                    .multilineTextAlignment(.center)
             }
             Spacer()
         }.padding(.top, 138)
@@ -128,5 +129,5 @@ struct AnnouncementView: View {
 }
 
 #Preview {
-    AnnouncementView()
+    NoticeListView(navigator: .init())
 }

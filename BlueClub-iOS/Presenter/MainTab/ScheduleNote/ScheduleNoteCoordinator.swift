@@ -23,7 +23,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
     
     enum Action {
         case goalInput(ScheduleNoteViewModel)
-        case notification
+        case notice
         case scheduleEdit
         case scheduleEditById(Int?)
         case scheduleEditByDate(String)
@@ -43,8 +43,8 @@ extension ScheduleNoteCoordinator: Coordinatorable {
                 coordinator: self)
             navigator.bottomSheet(parameter) { view }
             
-        case .notification:
-            let view = NotificationView(coordinator: self)
+        case .notice:
+            let view = NoticeListView(navigator: self.navigator)
             navigator.push { view }
             
         case .scheduleEdit:

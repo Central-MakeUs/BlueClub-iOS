@@ -31,7 +31,7 @@ struct HomeView: View {
         BaseView {
             TitleBar(trailingIcons: [
                 (Icons.notification1_large, { 
-                    viewModel.coodinator?.send(.notification)
+                    viewModel.coodinator?.send(.notice)
                 })
             ])
         } content: {

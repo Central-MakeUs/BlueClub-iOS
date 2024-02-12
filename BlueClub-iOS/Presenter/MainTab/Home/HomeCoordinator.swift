@@ -23,15 +23,15 @@ final class HomeCoordinator {
 extension HomeCoordinator: Coordinatorable {
     
     enum Action {
-        case notification
+        case notice
         case scheduleNoteEdit
     }
     
     @MainActor func send(_ action: Action) {
         switch action {
             
-        case .notification:
-            let view = NotificationView(coordinator: self)
+        case .notice:
+            let view = NoticeListView(navigator: self.navigator)
             navigator.push { view }
             
         case .scheduleNoteEdit:

@@ -33,7 +33,7 @@ struct ScheduleNoteView: View {
                         viewModel.send(.didTapGearIcon)
                     }),
                     (Icons.notification1_large, { 
-                        viewModel.coordinator?.send(.notification)
+                        viewModel.coordinator?.send(.notice)
                     })
                 ])
         } content: {

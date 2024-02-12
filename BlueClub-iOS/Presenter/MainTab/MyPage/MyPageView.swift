@@ -24,7 +24,7 @@ struct MyPageView: View {
                 title: "마이페이지",
                 trailingIcons: [
                     (Icons.notification1_large, { 
-                        viewModel.send(.notification)
+                        viewModel.send(.notice)
                     })
                 ]
             )
@@ -204,7 +204,7 @@ enum MyPageHeaderButton: CaseIterable {
 }
 
 enum MyPageItemRow: CaseIterable {
-    case announcement
+    case notice
     case notificationSetting
     case termsOf
     case privacy
@@ -212,7 +212,7 @@ enum MyPageItemRow: CaseIterable {
     
     var title: String {
         switch self {
-        case .announcement:
+        case .notice:
             return "공지사항"
         case .notificationSetting:
             return "알림 설정"

@@ -36,7 +36,6 @@
 		FB2D44732B7A4CE700BAB000 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44722B7A4CE700BAB000 /* FirebaseMessaging */; };
 		FB2D44752B7A4F5300BAB000 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB2D44742B7A4F5300BAB000 /* GoogleService-Info.plist */; };
 		FB2D44782B7A57E200BAB000 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */; };
-		FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEC2B714E520005DBCB /* NotificationView.swift */; };
 		FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */; };
 		FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */; };
 		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
@@ -64,8 +63,8 @@
 		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
 		FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */; };
 		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
-		FBE1129C2B75D0F90064D1A9 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */; };
-		FBE112A02B75D44F0064D1A9 /* AnnouncementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */; };
+		FBE1129C2B75D0F90064D1A9 /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */; };
+		FBE112A02B75D44F0064D1A9 /* NoticetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */; };
 		FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +92,6 @@
 		FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputSheetView.swift; sourceTree = "<group>"; };
 		FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCell.swift; sourceTree = "<group>"; };
 		FB2D44742B7A4F5300BAB000 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FB302BEC2B714E520005DBCB /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
 		FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditViewModel.swift; sourceTree = "<group>"; };
 		FB4479A22B50635900741424 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -120,8 +118,8 @@
 		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
-		FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
-		FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailView.swift; sourceTree = "<group>"; };
+		FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
+		FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticetDetailView.swift; sourceTree = "<group>"; };
 		FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -273,7 +271,6 @@
 			isa = PBXGroup;
 			children = (
 				FB2C211A2B6BE55E00099B5D /* MyPageView.swift */,
-				FBE1129A2B75D0E40064D1A9 /* Announcement */,
 				FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */,
 				FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */,
 				FB81AEF02B751C8E00AF6E7C /* ProfileEdit */,
@@ -300,17 +297,9 @@
 		FB302BEA2B714E350005DBCB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				FB302BEB2B714E3D0005DBCB /* Notification */,
+				FBE1129A2B75D0E40064D1A9 /* Notice */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		FB302BEB2B714E3D0005DBCB /* Notification */ = {
-			isa = PBXGroup;
-			children = (
-				FB302BEC2B714E520005DBCB /* NotificationView.swift */,
-			);
-			path = Notification;
 			sourceTree = "<group>";
 		};
 		FB302BEE2B71566D0005DBCB /* ScheduleEdit */ = {
@@ -402,13 +391,13 @@
 			path = SubView;
 			sourceTree = "<group>";
 		};
-		FBE1129A2B75D0E40064D1A9 /* Announcement */ = {
+		FBE1129A2B75D0E40064D1A9 /* Notice */ = {
 			isa = PBXGroup;
 			children = (
-				FBE1129B2B75D0F90064D1A9 /* AnnouncementView.swift */,
-				FBE1129F2B75D44F0064D1A9 /* AnnouncementDetailView.swift */,
+				FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */,
+				FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */,
 			);
-			path = Announcement;
+			path = Notice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,9 +504,8 @@
 				FB81AEED2B751A7F00AF6E7C /* MyPageViewModel.swift in Sources */,
 				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
-				FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */,
-				FBE1129C2B75D0F90064D1A9 /* AnnouncementView.swift in Sources */,
+				FBE1129C2B75D0F90064D1A9 /* NoticeListView.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */,
 				FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */,
@@ -531,7 +519,7 @@
 				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
 				FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */,
 				FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */,
-				FBE112A02B75D44F0064D1A9 /* AnnouncementDetailView.swift in Sources */,
+				FBE112A02B75D44F0064D1A9 /* NoticetDetailView.swift in Sources */,
 				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
 				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
 				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,

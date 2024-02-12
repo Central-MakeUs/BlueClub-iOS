@@ -37,7 +37,7 @@ class MyPageViewModel: ObservableObject {
 extension MyPageViewModel: Actionable {
     
     enum Action {
-        case notification
+        case notice
         case profileEdit
         case didTapButton(MyPageHeaderButton)
         case didTapListItem(MyPageItemRow)
@@ -46,8 +46,8 @@ extension MyPageViewModel: Actionable {
     func send(_ action: Action) {
         switch action {
             
-        case .notification:
-            coordinator.send(.notification)
+        case .notice:
+            coordinator.send(.notice)
             
         case .profileEdit:
             coordinator.send(.profileEdit)
@@ -64,8 +64,8 @@ extension MyPageViewModel: Actionable {
             
         case .didTapListItem(let item):
             switch item {
-            case .announcement:
-                coordinator.send(.announcement)
+            case .notice:
+                coordinator.send(.notice)
             case .notificationSetting:
                 break
             case .termsOf:
