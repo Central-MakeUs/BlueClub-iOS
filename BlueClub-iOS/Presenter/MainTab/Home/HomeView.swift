@@ -103,7 +103,7 @@ extension HomeView {
         .tabViewStyle(.page(indexDisplayMode: .never))
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .frame(width: UIApplication.shared.screenSize.width - 40)
-        .frame(maxHeight: 96)
+        .frame(minHeight: 96)
         .overlay(alignment: .topLeading) { bannerIndicator() }
     }
     

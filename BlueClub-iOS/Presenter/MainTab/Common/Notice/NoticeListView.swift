@@ -88,8 +88,8 @@ struct NoticeListView: View {
                     .fontModifer(.sb1)
                     .foregroundStyle(Color.colors(.black))
                 Spacer()
-                Image(.newBadge)
-                    .padding(.trailing, 6)
+//                Image(.newBadge)
+//                    .padding(.trailing, 6)
             }
             .frame(height: 24)
             VStack(alignment: .leading, spacing: 8) {
