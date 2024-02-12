@@ -13,6 +13,7 @@ import Combine
 import SwiftUI
 import Utility
 import DataSource
+import Navigator
 
 class ProfileEditViewModel: ObservableObject {
     
@@ -54,8 +55,8 @@ class ProfileEditViewModel: ObservableObject {
     private let container: Container
     private var userRepository: UserRepositoriable { container.resolve() }
     private var validateNickname: ValidateUserNameUseCase { container.resolve() }
-    private var authService: AuthNetworkable { container.resolve() }
-    private var userService: UserNetworkable { container.resolve() }
+    private var authApi: AuthNetworkable { container.resolve() }
+    private var userApi: UserNetworkable { container.resolve() }
     
     init(
         coordinator: MyPageCoordinator,
@@ -78,7 +79,9 @@ extension ProfileEditViewModel: Actionable {
         case didTapEdit
         case getImage
         case showJobSelect
+        case logoutAlert
         case logout
+        case withdrawAlert
         case withdraw
         case nicknameDidChange
         case chekcDuplicate
@@ -97,7 +100,7 @@ extension ProfileEditViewModel: Actionable {
                         nickname: self.nickname,
                         job: self.job.title,
                         monthlyTargetIncome: monthlyGoalInt)
-                    try await userService.detailsPatch(dto)
+                    try await userApi.detailsPatch(dto)
                     
                     var user = userRepository.getUserInfo()
                     user?.nickname = dto.nickname
@@ -118,11 +121,55 @@ extension ProfileEditViewModel: Actionable {
         case .showJobSelect:
             self.showJobSelect = true
             
+        case .logoutAlert:
+            let alert = AlertParameter(
+                title: "로그아웃",
+                message: "로그아웃 하시겠습니까?",
+                buttons: [
+                    .init(title: "취소"),
+                    .init(title: "로그아웃", action: { [weak self] in
+                        Task {
+                            self?.send(.logout)
+                        }
+                    })
+                ])
+            self.coordinator.navigator.alert(alert)
+            
         case .logout:
-            break
+            Task {
+                do {
+                    try await authApi.logout()
+                    userRepository.reset()
+                    coordinator.send(.login)
+                } catch {
+                    printError(error)
+                }
+            }
+            
+        case .withdrawAlert:
+            let alert = AlertParameter(
+                title: "회원탈퇴",
+                message: "탈퇴시 계정은 삭제되며 복구되지 않아요.\n회원 탈퇴하시겠습니까?",
+                buttons: [
+                    .init(title: "취소"),
+                    .init(title: "탈퇴", action: { [weak self] in
+                        Task {
+                            self?.send(.withdraw)
+                        }
+                    })
+                ])
+            self.coordinator.navigator.alert(alert)
             
         case .withdraw:
-            break
+            Task {
+                do {
+                    try await userApi.withdrawal()
+                    userRepository.reset()
+                    coordinator.send(.login)
+                } catch {
+                    printError(error)
+                }
+            }
             
         case .nicknameDidChange:
             self.nicknameAvailable = false
@@ -136,7 +183,7 @@ extension ProfileEditViewModel: Actionable {
             Task {
                 do {
                     guard nicknameValid else { return }
-                    let success = try await self.authService.duplicated(self.nickname)
+                    let success = try await self.authApi.duplicated(self.nickname)
                     guard success else { return }
                     self.nicknameMessage = ("사용 가능한 닉네임입니다.", .colors(.primaryNormal))
                     self.nicknameAvailable = true

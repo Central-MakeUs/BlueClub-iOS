@@ -61,13 +61,13 @@ extension ProfileEditView {
             .resizable()
             .scaledToFit()
             .frame(width: 100)
-            .overlay(alignment: .bottomTrailing, content: {
-                Button(action: {
-                    
-                }, label: {
-                    Image(.profileCamera)
-                })
-            })
+//            .overlay(alignment: .bottomTrailing, content: {
+//                Button(action: {
+//                    
+//                }, label: {
+//                    Image(.profileCamera)
+//                })
+//            })
             .padding(.vertical, 24)
     }
     
@@ -142,7 +142,7 @@ extension ProfileEditView {
     @ViewBuilder func footer() -> some View {
         HStack(spacing: 16) {
             Button(action: {
-                
+                viewModel.send(.logoutAlert)
             }, label: {
                 footerCell(title: "로그아웃")
             })
@@ -150,7 +150,7 @@ extension ProfileEditView {
                 .frame(width: 1)
                 .foregroundStyle(Color.colors(.gray03))
             Button(action: {
-                
+                viewModel.send(.withdrawAlert)
             }, label: {
                 footerCell(title: "회원탈퇴")
             })

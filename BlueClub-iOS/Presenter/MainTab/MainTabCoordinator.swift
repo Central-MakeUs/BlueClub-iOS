@@ -10,7 +10,7 @@ import DesignSystem
 import Architecture
 import Navigator
 
-final class MainTabViewModel: ObservableObject {
+final class MainTabCoordinator: ObservableObject {
     
     @Published var currentTab: MainTabItem = .home
     
@@ -29,15 +29,19 @@ final class MainTabViewModel: ObservableObject {
     }
 }
 
-extension MainTabViewModel: Actionable {
+extension MainTabCoordinator: Actionable {
     
     enum Action {
+        case login
         case scheduleNoteEdit
         case didTapTab(MainTabItem)
     }
     
     @MainActor func send(_ action: Action) {
         switch action {
+            
+        case .login:
+            break
             
         case .didTapTab(let tabItem):
             self.currentTab = tabItem

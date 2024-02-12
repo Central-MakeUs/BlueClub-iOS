@@ -12,9 +12,9 @@ import Architecture
 final class HomeCoordinator {
     
     var navigator: Navigator
-    weak var parent: MainTabViewModel?
+    private weak var parent: MainTabCoordinator?
     
-    init(navigator: Navigator, parent: MainTabViewModel?) {
+    init(navigator: Navigator, parent: MainTabCoordinator) {
         self.navigator = navigator
         self.parent = parent
     }

@@ -15,13 +15,13 @@ import Utility
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    private var coordinator: AppCoordinator?
+    static var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         printLog()
-        coordinator = .init()
-        coordinator?.send(.start(scene))
+        Self.coordinator = .init()
+        Self.coordinator?.send(.start(scene))
         configDependencies()
         configDesignSystem()
         configMightyCombine()

@@ -11,6 +11,7 @@ public typealias UserRepositoriable = LoginAccessible & UserInfoAccessible & Tok
 
 public protocol LoginAccessible {
     var hasLogin: Bool { get }
+    func reset()
     func requestLogin(_ loginMethod: LoginMethod) async throws -> SocialLoginUser
     func registLoginUser(_ user: SocialLoginUser)
     func getLoginUser() -> SocialLoginUser?

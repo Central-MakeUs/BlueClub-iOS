@@ -26,6 +26,11 @@ public class UserRepository: LoginAccessible {
     
     public var hasLogin: Bool { loginUser != nil }
     
+    public func reset() {
+        self.loginUser = nil
+        self.userInfo = nil
+    }
+    
     public func requestLogin(_ loginMethod: Domain.LoginMethod) async throws -> Domain.SocialLoginUser {
         switch loginMethod {
         case .apple:

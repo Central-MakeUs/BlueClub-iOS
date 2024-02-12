@@ -56,6 +56,14 @@ public class UserNetwork: UserNetworkable {
     }
     
     public func withdrawal() async throws {
-        
+        try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([path, "/withdrawal"])
+            .httpMethod(.delete)
+            .httpHeaders(header)
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<Empty>.self)
+            .tryMap { try handleServerResponseCode($0) }
+            .asyncThrows
     }
 }

@@ -22,6 +22,7 @@ extension MyPageCoordinator: Coordinatorable {
     
     enum Action {
         case notification
+        case login
         
         // MARK: - Header
         case profileEdit
@@ -40,6 +41,13 @@ extension MyPageCoordinator: Coordinatorable {
         case .notification:
             let view = NotificationView(coordinator: self)
             navigator.push { view }
+            
+        case .login:
+            guard let coordinator = SceneDelegate.coordinator
+            else { return }
+            let viewModel = LoginViewModel(coordinator: coordinator)
+            let view = LoginView(viewModel: viewModel)
+            navigator.start { view }
             
         // MARK: - Header
         case .profileEdit:

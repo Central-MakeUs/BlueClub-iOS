@@ -12,10 +12,10 @@ import Utility
 
 struct MainTabView: View {
     
-    @StateObject var viewModel: MainTabViewModel
+    @StateObject var viewModel: MainTabCoordinator
     
     init(navigator: Navigator) {
-        let viewModel = MainTabViewModel(navigator: navigator)
+        let viewModel = MainTabCoordinator(navigator: navigator)
         self._viewModel = .init(wrappedValue: viewModel)
     }
     

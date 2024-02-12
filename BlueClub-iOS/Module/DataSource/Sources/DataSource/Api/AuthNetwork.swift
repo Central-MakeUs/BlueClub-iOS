@@ -47,12 +47,12 @@ public class AuthNetwork: AuthNetworkable {
     }
     
     public func duplicated(_ nickname: String) async throws -> Bool {
-        
-        try await EndPoint
+        let header = RequestHeader.withToken(accessToken: token)
+        return try await EndPoint
             .init(Const.baseUrl)
             .urlPaths([path, "/duplicated"])
             .urlQueries(["nickname": nickname])
-            .httpHeaders(RequestHeader.withToken(accessToken: token))
+            .httpHeaders(header)
             .responseHandler { response in
                 switch response.statusCode {
                 case (200...299):
@@ -74,6 +74,15 @@ public class AuthNetwork: AuthNetworkable {
     }
     
     public func logout() async throws {
-        
+        let header = RequestHeader.withToken(accessToken: token)
+        return try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([path, "/logout"])
+            .httpHeaders(header)
+            .httpMethod(.post)
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<AuthDTO>.self)
+            .tryMap { try handleServerResponseCode($0) }
+            .asyncThrows
     }
 }

@@ -47,6 +47,7 @@ struct ScheduleNoteView: View {
     }
 }
 
+// MARK: - SubView
 extension ScheduleNoteView {
     @ViewBuilder func content() -> some View {
         ScrollView {
@@ -158,6 +159,10 @@ extension ScheduleNoteView {
         }
         .padding(.horizontal, 4)
     }
+}
+
+// MARK: - Calendar SubView
+extension ScheduleNoteView {
     
     @ViewBuilder func calendarHeader() -> some View {
         HStack(spacing: 4) {
@@ -199,8 +204,6 @@ extension ScheduleNoteView {
         .frame(height: 18)
         
         LazyVGrid(columns: Array(repeating: .init(), count: 7), spacing: 6) {
-            // calendarBody
-            
             ForEach(viewModel.days, id: \.?.day) { day in
                 let diary: DiaryListDTO.MonthlyRecord? = viewModel.diaryList.first {
                     $0.date == day?.combinedDateString
@@ -268,6 +271,10 @@ extension ScheduleNoteView {
         .frame(height: 50)
         .frame(width: 40)
     }
+}
+
+// MARK: - Diary SubView
+extension ScheduleNoteView {
     
     @ViewBuilder func diaryListHeader() -> some View {
         HStack(alignment: .top, spacing: 4) {
@@ -298,7 +305,7 @@ extension ScheduleNoteView {
         } else {
             ForEach(viewModel.diaryList) { diary in
                 Button {
-                    
+                    viewModel.send(.scheduleEditById(diary.id))
                 } label: {
                     DiaryListCell(diary: diary)
                 }
@@ -322,76 +329,6 @@ extension ScheduleNoteView {
         .padding(.horizontal, 16)
         .frame(height: 60)
         .roundedBorder(Color.colors(.primaryNormal))
-    }
-}
-
-struct DiaryListCell: View {
-    
-    let diary: DiaryListDTO.MonthlyRecord
-    
-    var body: some View {
-        HStack(spacing: 6) {
-            Text(formatDateString(diary.date))
-                .fontModifer(.sb2)
-                .foregroundStyle(Color.colors(.gray07))
-                .padding(.trailing, 4)
-            switch diary.worktype {
-            case "근무":
-                ChipView("근무")
-                infoView(
-                    income: diary.income,
-                    count: diary.cases)
-            case "조퇴":
-                ChipView("조퇴", style: .gray)
-                infoView(
-                    income: diary.income,
-                    count: diary.cases)
-            case "휴무":
-                ChipView("휴무", style: .red)
-                Text("오늘은 충전하는 날")
-                    .fontModifer(.sb2)
-                    .foregroundStyle(Color.colors(.gray05))
-            default:
-                EmptyView()
-            }
-            Spacer()
-            Image.icons(.arrow_right)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20)
-                .foregroundStyle(Color.colors(.gray08))
-        }
-        .frame(height: 20)
-        .padding(.vertical, 20)
-        .padding(.horizontal, 16)
-        .roundedBorder()
-    }
-    
-    @ViewBuilder func infoView(income: Int, count: Int?) -> some View {
-        HStack(spacing: 2) {
-            Text("\(income)")
-            if let count {
-                Text("·")
-                Text("\(count)건")
-            }
-        }
-        .fontModifer(.sb2)
-        .foregroundStyle(Color.colors(.gray10))
-    }
-    
-    func formatDateString(_ input: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        
-        guard let date = inputFormatter.date(from: input) else { return "" }
-        
-        let outputFormatter = DateFormatter()
-        outputFormatter.locale = Locale(identifier: "ko_KR")
-        outputFormatter.dateFormat = "dd.MM '월'"
-        
-        let output = outputFormatter.string(from: date)
-        return output
     }
 }
 

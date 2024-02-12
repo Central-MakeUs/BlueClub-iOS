@@ -18,7 +18,7 @@
 		FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63ED2B45A8C900318FA7 /* DesignSystem */; };
 		FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */; };
 		FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F72B45D1A500318FA7 /* MainTabView.swift */; };
-		FB1C63FE2B45D1E500318FA7 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTabViewModel.swift */; };
+		FB1C63FE2B45D1E500318FA7 /* MainTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTabCoordinator.swift */; };
 		FB1C640A2B47119200318FA7 /* Utility in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C64092B47119200318FA7 /* Utility */; };
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
 		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
@@ -27,6 +27,7 @@
 		FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */; };
 		FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */; };
 		FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */; };
+		FB2D44662B7A407E00BAB000 /* DiaryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */; };
 		FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEC2B714E520005DBCB /* NotificationView.swift */; };
 		FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */; };
 		FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */; };
@@ -71,7 +72,7 @@
 		FB1C63E92B45A2F400318FA7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = text; name = DesignSystem; path = "BlueClub-iOS/Module/DesignSystem"; sourceTree = SOURCE_ROOT; };
 		FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FB1C63F72B45D1A500318FA7 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		FB1C63FD2B45D1E500318FA7 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
+		FB1C63FD2B45D1E500318FA7 /* MainTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabCoordinator.swift; sourceTree = "<group>"; };
 		FB1C64082B4710B000318FA7 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utility; sourceTree = "<group>"; };
 		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		FB1C64132B47239200318FA7 /* InitialSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingView.swift; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 		FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteCoordinator.swift; sourceTree = "<group>"; };
 		FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputSheetView.swift; sourceTree = "<group>"; };
+		FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCell.swift; sourceTree = "<group>"; };
 		FB302BEC2B714E520005DBCB /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
 		FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditViewModel.swift; sourceTree = "<group>"; };
@@ -224,7 +226,7 @@
 				FB8E68D42B5221E5007FF2C1 /* ScheduleNote */,
 				FB8E68D12B517817007FF2C1 /* Home */,
 				FB1C63F72B45D1A500318FA7 /* MainTabView.swift */,
-				FB1C63FD2B45D1E500318FA7 /* MainTabViewModel.swift */,
+				FB1C63FD2B45D1E500318FA7 /* MainTabCoordinator.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -268,6 +270,14 @@
 				FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */,
 			);
 			path = GoalInputSheet;
+			sourceTree = "<group>";
+		};
+		FB2D44642B7A406800BAB000 /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */,
+			);
+			path = Subview;
 			sourceTree = "<group>";
 		};
 		FB302BEA2B714E350005DBCB /* Common */ = {
@@ -328,6 +338,7 @@
 		FB8E68D42B5221E5007FF2C1 /* ScheduleNote */ = {
 			isa = PBXGroup;
 			children = (
+				FB2D44642B7A406800BAB000 /* Subview */,
 				FB302BEE2B71566D0005DBCB /* ScheduleEdit */,
 				FB2C21232B6DEB9100099B5D /* GoalInputSheet */,
 				FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */,
@@ -500,8 +511,9 @@
 				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
 				FB81AEF42B7524C100AF6E7C /* ProfileEditViewModel.swift in Sources */,
 				FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */,
+				FB2D44662B7A407E00BAB000 /* DiaryListCell.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
-				FB1C63FE2B45D1E500318FA7 /* MainTabViewModel.swift in Sources */,
+				FB1C63FE2B45D1E500318FA7 /* MainTabCoordinator.swift in Sources */,
 				FB81AEEF2B751B6500AF6E7C /* MyPageCoordinator.swift in Sources */,
 				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,
 				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
