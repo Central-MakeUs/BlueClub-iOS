@@ -212,13 +212,7 @@ extension ScheduleNoteView {
                     if let diary {
                         viewModel.send(.scheduleEditById(diary.id))
                     } else if diary == nil, let day {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd"
-                        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-                        let date = dateFormatter.date(from: day.combinedDateString)
-                        guard let date else { return }
-                        viewModel.send(.scheduleEditByDate(date))
+                        viewModel.send(.scheduleEditByDate(day.combinedDateString))
                     }
                 } label: {
                     calendarCell(day, diary: diary)

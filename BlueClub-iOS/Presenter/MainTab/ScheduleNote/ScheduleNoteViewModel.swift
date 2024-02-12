@@ -68,7 +68,7 @@ extension ScheduleNoteViewModel: Actionable {
         case setMonthlyGoal(Int)
         case scheduleEdit
         case scheduleEditById(Int)
-        case scheduleEditByDate(Date)
+        case scheduleEditByDate(String)
     }
     
     @MainActor func send(_ action: Action) {

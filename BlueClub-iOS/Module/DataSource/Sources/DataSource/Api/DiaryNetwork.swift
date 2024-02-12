@@ -32,16 +32,34 @@ public struct DiaryNetwork {
 
 extension DiaryNetwork: DiaryNetworkable {
     
-    public func getDiary<T>(job: JobOption, id: Int) async throws -> T where T : DiaryDTO {
+    public func getDiaryById<T>(job: JobOption, id: Int) async throws -> T where T : DiaryDTO {
         let header = RequestHeader.withToken(accessToken: self.token)
         
         return try await EndPoint
             .init(Const.baseUrl)
-            .urlPaths([self.path, "/\(id)"])
+            .urlPaths([
+                self.path,
+                "/\(id)"])
             .urlQueries([
-                "job": job.title,
-                "date": ""
-            ])
+                "job": job.queryString])
+            .httpMethod(.get)
+            .httpHeaders(header)
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<T>.self)
+            .tryMap { try handleServerResponseResult($0) }
+            .asyncThrows
+    }
+    
+    public func getDiaryByDate<T: DiaryDTO>(job: JobOption, date: Date) async throws -> T where T : DiaryDTO {
+        let header = RequestHeader.withToken(accessToken: self.token)
+        
+        return try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([
+                self.path])
+            .urlQueries([
+                "job": job.queryString,
+                "date": formatDate(date)])
             .httpMethod(.get)
             .httpHeaders(header)
             .responseHandler { try httpResponseHandler($0) }
@@ -72,7 +90,7 @@ extension DiaryNetwork: DiaryNetworkable {
         
         return try await EndPoint
             .init(Const.baseUrl)
-            .urlQueries(["job": job.title])
+            .urlQueries(["job": job.queryString])
             .urlPaths([self.path])
             .httpHeaders(header)
             .httpMethod(.post)
@@ -180,4 +198,10 @@ fileprivate func combineAsPath(year: Int, month: Int) -> String {
         monthString = "0" + monthString
     }
     return String(year) + "-" + monthString
+}
+
+fileprivate func formatDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    return dateFormatter.string(from: date)
 }

@@ -36,7 +36,8 @@ class ScheduleEditViewModel: ObservableObject {
             !dailyWage.isEmpty
         }
     }
-    private var origianalDiaryId: Int?
+    // MARK: - (ID, Date)
+    private var origianalDiary: (Int, String)?
     
     @Published var isLoading = false
     @Published var keyboardAppeared = false
@@ -86,6 +87,10 @@ class ScheduleEditViewModel: ObservableObject {
         }
     }
     
+    var dateFormatted: String {
+        formatDate(date)
+    }
+    
     // MARK: - Dependencies
     weak var coordinator: ScheduleNoteCoordinator?
     private let dependencies: Container
@@ -122,9 +127,9 @@ extension ScheduleEditViewModel: Actionable {
 
     enum Action {
         case fetchUserInfo
+        case editByDate(String)
         case fetchDetail(Int)
-        case handlerFetchedDiary(any DiaryDTO)
-        case setDate(Date)
+        case handleFetchedDiary(Int, any DiaryDTO)
         
         case showScheduleTypeSheet
         case save
@@ -139,62 +144,83 @@ extension ScheduleEditViewModel: Actionable {
             let userInfo = userRepository.getUserInfo()
             self.job = .init(title: userInfo?.job ?? "")
             
+        case .editByDate(let date):
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            let date = dateFormatter.date(from: date)
+            guard let date else { return }
+            self.date = date
+            
         case .fetchDetail(let diaryId):
             Task { @MainActor in
                 do {
                     self.isLoading = true
-                    self.origianalDiaryId = diaryId
                     switch self.job {
                     case .caddy:
-                        let diary: DiaryCaddyDTO = try await diaryApi.getDiary(
+                        let diary: DiaryCaddyDTO = try await diaryApi.getDiaryById(
                             job: self.job,
                             id: diaryId)
-                        self.send(.handlerFetchedDiary(diary))
+                        self.send(.handleFetchedDiary(
+                            diaryId,
+                            diary))
                     case .rider:
-                        let diary: DiaryRiderDTO = try await diaryApi.getDiary(
+                        let diary: DiaryRiderDTO = try await diaryApi.getDiaryById(
                             job: self.job,
                             id: diaryId)
-                        self.send(.handlerFetchedDiary(diary))
+                        self.send(.handleFetchedDiary(
+                            diaryId,
+                            diary))
                     case .dayWorker:
-                        let diary: DiaryDayWorkerDTO = try await diaryApi.getDiary(
+                        let diary: DiaryDayWorkerDTO = try await diaryApi.getDiaryById(
                             job: self.job,
                             id: diaryId)
-                        self.send(.handlerFetchedDiary(diary))
+                        self.send(.handleFetchedDiary(
+                            diaryId,
+                            diary))
                     }
                 } catch {
                     printError(error)
                 }
             }
             
-        case .handlerFetchedDiary(let diary):
+        case .handleFetchedDiary(let id, let diary):
             if let diary = diary as? DiaryCaddyDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.roundingCount = diary.rounding
                 self.caddyFee = diary.caddyFee.withComma()
                 self.overFee = diary.overFee.withComma()
                 self.topDressing = diary.topdressing
+                self.date = diary.dateDate
+                
+                self.origianalDiary = (id, formatDate(diary.dateDate))
             } else if let diary = diary as? DiaryRiderDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.deliveryCount = diary.numberOfDeliveries
                 self.deliveryIncome = diary.incomeOfDeliveries.withComma()
                 self.promotionCount = diary.numberOfPromotions
                 self.promotionIncome = diary.incomeOfPromotions.withComma()
+                self.date = diary.dateDate 
+                
+                self.origianalDiary = (id, formatDate(diary.dateDate))
             } else if let diary = diary as? DiaryDayWorkerDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.placeName = diary.place
                 self.dailyWage = diary.dailyWage.withComma()
                 self.typeOfJob = diary.typeOfJob
                 self.numberOfWork = diary.numberOfWork
+                self.date = diary.dateDate
+                
+                self.origianalDiary = (id, formatDate(diary.dateDate))
             }
             self.isLoading = false
-            
-        case .setDate(let date):
-            self.date = date
             
         case .showScheduleTypeSheet:
             self.showScheduleTypeSheet = true
             
         case .save:
+            guard self.isAvailable else { return }
             switch self.job {
             case .caddy:
                 self.send(.saveCaddy)
@@ -218,9 +244,10 @@ extension ScheduleEditViewModel: Actionable {
                 topdressing: self.topDressing)
             Task {
                 do {
-                    if let origianalDiaryId {
+                    if let origianalDiary, 
+                       origianalDiary.1 == self.dateFormatted {
                         try await diaryApi.diaryPatch(
-                            id: origianalDiaryId,
+                            id: origianalDiary.0,
                             dto: dto,
                             job: .caddy)
                     } else {
@@ -246,9 +273,10 @@ extension ScheduleEditViewModel: Actionable {
                 incomeOfPromotions: self.promotionIncome.removeComma())
             Task {
                 do {
-                    if let origianalDiaryId {
+                    if let origianalDiary, 
+                       origianalDiary.1 == self.dateFormatted {
                         try await diaryApi.diaryPatch(
-                            id: origianalDiaryId,
+                            id: origianalDiary.0,
                             dto: dto,
                             job: .rider)
                     } else {
@@ -276,9 +304,10 @@ extension ScheduleEditViewModel: Actionable {
                 numberOfWork: self.numberOfWork)
             Task {
                 do {
-                    if let origianalDiaryId {
+                    if let origianalDiary,
+                       origianalDiary.1 == self.dateFormatted {
                         try await diaryApi.diaryPatch(
-                            id: origianalDiaryId,
+                            id: origianalDiary.0,
                             dto: dto,
                             job: .dayWorker)
                     } else {

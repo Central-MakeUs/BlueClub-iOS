@@ -92,6 +92,9 @@ private extension SceneDelegate {
             .register {
                 let userRepository: UserRepositoriable = Container.live.resolve()
                 return MonthlyGoalNetwork(userRespository: userRepository) as MonthlyGoalNetworkable }
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return FileNetwork(userRespository: userRepository) as FileNetworkable }
         // MARK: - UseCase
             .register { ValidateUserNameUseCase() }
     }

@@ -14,11 +14,18 @@ public struct DiaryDayWorkerDTO: DiaryDTO {
     public let income: Int
     public let expenditure: Int
     public let saving: Int
-    public let date: String?
+    public let date: String
     public let place: String
     public let dailyWage: Int
     public let typeOfJob: String
     public let numberOfWork: Double
+    
+    public var dateDate: Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return dateFormatter.date(from: date) ?? .now
+    }
     
     public init(
         worktype: String,
@@ -26,7 +33,7 @@ public struct DiaryDayWorkerDTO: DiaryDTO {
         income: Int,
         expenditure: Int,
         saving: Int,
-        date: String?,
+        date: String,
         place: String,
         dailyWage: Int,
         typeOfJob: String,

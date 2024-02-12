@@ -72,7 +72,7 @@ struct DiaryListCell: View {
         
         let outputFormatter = DateFormatter()
         outputFormatter.locale = Locale(identifier: "ko_KR")
-        outputFormatter.dateFormat = "dd.MM '월'"
+        outputFormatter.dateFormat = "MM.dd '월'"
         
         let output = outputFormatter.string(from: date)
         return output

@@ -26,7 +26,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
         case notification
         case scheduleEdit
         case scheduleEditById(Int?)
-        case scheduleEditByDate(Date)
+        case scheduleEditByDate(String)
         
     }
     
@@ -62,7 +62,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
             
         case .scheduleEditByDate(let date):
             let viewModel = ScheduleEditViewModel(coordinator: self)
-            viewModel.send(.setDate(date))
+            viewModel.send(.editByDate(date))
             let view = ScheduleEditView(viewModel: viewModel)
             navigator.push { view }
             

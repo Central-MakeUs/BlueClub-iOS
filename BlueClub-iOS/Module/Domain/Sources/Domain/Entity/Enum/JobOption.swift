@@ -34,4 +34,15 @@ public enum JobOption: CaseIterable, Codable {
             return "일용직 근로자"
         }
     }
+    
+    public var queryString: String {
+        switch self {
+        case .caddy:
+            return "골프캐디"
+        case .rider:
+            return "배달라이더"
+        case .dayWorker:
+            return "일용직근로자"
+        }
+    }
 }

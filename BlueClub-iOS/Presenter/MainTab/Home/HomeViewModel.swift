@@ -19,6 +19,7 @@ final class HomeViewModel: ObservableObject {
     private var dateService: DateServiceable { container.resolve() }
     private var userRepository: UserRepositoriable { container.resolve() }
     private var diaryApi: DiaryNetworkable { container.resolve() }
+    private var fileApi: FileNetworkable { container.resolve() }
     
     init(
         coodinator: HomeCoordinator,
@@ -29,6 +30,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     // MARK: - Datas
+    @Published var banners: [String] = []
     @Published var user: AuthDTO?
     @Published var record: DiaryRecordDTO?
     @Published var shouldReloadProgressBar = false
@@ -38,11 +40,17 @@ final class HomeViewModel: ObservableObject {
 extension HomeViewModel: Actionable {
 
     enum Action: Equatable {
+        case fetchBanner
         case fetchData
     }
     
     func send(_ action: Action) {
         switch action {
+            
+        case .fetchBanner:
+            Task { @MainActor in
+                self.banners = try await fileApi.homeBanner()
+            }
             
         case .fetchData:
             Task { @MainActor in 

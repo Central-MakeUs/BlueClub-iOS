@@ -9,7 +9,8 @@ import Foundation
 
 public protocol DiaryNetworkable {
     
-    func getDiary<T: DiaryDTO>(job: JobOption, id: Int) async throws -> T
+    func getDiaryById<T: DiaryDTO>(job: JobOption, id: Int) async throws -> T
+    func getDiaryByDate<T: DiaryDTO>(job: JobOption, date: Date) async throws -> T
     @discardableResult func diaryPost(_ dto: Encodable, job: JobOption) async throws -> Int
     @discardableResult func diaryPatch(id: Int, dto: Encodable, job: JobOption) async throws -> Int
     

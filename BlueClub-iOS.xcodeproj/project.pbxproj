@@ -35,6 +35,7 @@
 		FB2D44712B7A4CC000BAB000 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44702B7A4CC000BAB000 /* FirebaseAppCheck */; };
 		FB2D44732B7A4CE700BAB000 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44722B7A4CE700BAB000 /* FirebaseMessaging */; };
 		FB2D44752B7A4F5300BAB000 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB2D44742B7A4F5300BAB000 /* GoogleService-Info.plist */; };
+		FB2D44782B7A57E200BAB000 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */; };
 		FB302BED2B714E520005DBCB /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEC2B714E520005DBCB /* NotificationView.swift */; };
 		FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */; };
 		FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */; };
@@ -133,6 +134,7 @@
 				FB2D446D2B7A4CC000BAB000 /* FirebaseAnalyticsSwift in Frameworks */,
 				FB07DF382B52638D00C4A9C8 /* KakaoSDKAuth in Frameworks */,
 				FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */,
+				FB2D44782B7A57E200BAB000 /* SDWebImageSwiftUI in Frameworks */,
 				FB2D44712B7A4CC000BAB000 /* FirebaseAppCheck in Frameworks */,
 				FB2D446B2B7A4CC000BAB000 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				FB3E75D62B6410E600D48993 /* Lottie in Frameworks */,
@@ -441,6 +443,7 @@
 				FB2D446E2B7A4CC000BAB000 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				FB2D44702B7A4CC000BAB000 /* FirebaseAppCheck */,
 				FB2D44722B7A4CE700BAB000 /* FirebaseMessaging */,
+				FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */,
 			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
@@ -476,6 +479,7 @@
 				FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FB2D44762B7A57E200BAB000 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
@@ -791,6 +795,14 @@
 				minimumVersion = 10.21.0;
 			};
 		};
+		FB2D44762B7A57E200BAB000 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.6;
+			};
+		};
 		FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -874,6 +886,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44762B7A57E200BAB000 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		FB3E75D52B6410E600D48993 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

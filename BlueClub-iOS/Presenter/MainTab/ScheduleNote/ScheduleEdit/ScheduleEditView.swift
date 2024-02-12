@@ -24,8 +24,10 @@ struct ScheduleEditView: View {
         } content: {
             content()
         } footer: {
+            // TODO: - 백로그
             bottomButton()
-                .hide(when: viewModel.keyboardAppeared)
+//                .hide(when: viewModel.keyboardAppeared)
+                .hide(when: true)
         }
         .onAppear { viewModel.send(.fetchUserInfo) }
         .loadingSpinner(viewModel.isLoading)

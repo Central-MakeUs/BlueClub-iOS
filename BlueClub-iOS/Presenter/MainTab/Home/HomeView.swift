@@ -9,6 +9,7 @@ import SwiftUI
 import DesignSystem
 import Lottie
 import Domain
+import SDWebImageSwiftUI
 
 struct HomeView: View {
     
@@ -37,7 +38,10 @@ struct HomeView: View {
             content()
         }
         .background(Color.colors(.cg02))
-        .onAppear { viewModel.send(.fetchData) }
+        .onAppear {
+            viewModel.send(.fetchBanner)
+            viewModel.send(.fetchData)
+        }
     }
 }
 
@@ -83,38 +87,47 @@ extension HomeView {
     
     @ViewBuilder func rotateBanner() -> some View {
         TabView(selection: $currentPage) {
-            ForEach(1...3, id: \.self) { page in
-                Color.colors(.primaryNormal)
-                    .tag(page)
+            ForEach(viewModel.banners, id: \.self) { banner in
+                WebImage(url: .init(string: banner))
+                    .placeholder {
+                        Color.colors(.primaryNormal)
+                            .overlay {
+                                ProgressView()
+                            }
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIApplication.shared.screenSize.width - 40)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .frame(height: 96)
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(alignment: .topLeading) {
-            bannerIndicator()
-        }
+        .frame(width: UIApplication.shared.screenSize.width - 40)
+        .frame(maxHeight: 96)
+        .overlay(alignment: .topLeading) { bannerIndicator() }
     }
     
     @ViewBuilder func bannerIndicator() -> some View {
-        HStack(spacing: 4) {
-            ForEach(1...3, id: \.self) { page in
-                if indicatorPage == page {
-                    RoundedRectangle(cornerRadius: 21)
-                        .foregroundStyle(Color.white)
-                        .frame(width: 12)
-                        .matchedGeometryEffect(id: "indicator", in: animation)
-                } else {
-                    Circle()
-                        .frame(width: 4)
-                        .foregroundStyle(Color.colors(.white).opacity(0.5))
+        if viewModel.banners.count > 1 {
+            HStack(spacing: 4) {
+                ForEach(1...viewModel.banners.count, id: \.self) { page in
+                    if indicatorPage == page {
+                        RoundedRectangle(cornerRadius: 21)
+                            .foregroundStyle(Color.white)
+                            .frame(width: 12)
+                            .matchedGeometryEffect(id: "indicator", in: animation)
+                    } else {
+                        Circle()
+                            .frame(width: 4)
+                            .foregroundStyle(Color.colors(.white).opacity(0.5))
+                    }
                 }
             }
+            .frame(height: 4)
+            .padding(.leading, 20)
+            .padding(.top, 18)
+            .syncState($currentPage, sync: $indicatorPage)
         }
-        .frame(height: 4)
-        .padding(.leading, 20)
-        .padding(.top, 18)
-        .syncState($currentPage, sync: $indicatorPage)
     }
     
     @ViewBuilder func dayInfoView() -> some View {
