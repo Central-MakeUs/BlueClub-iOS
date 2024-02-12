@@ -404,9 +404,13 @@ extension ScheduleEditView {
             .padding(.top, 20)
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
-            Text("목표수입 0% 기여")
+            Text("목표수입 \(viewModel.contributePercent ?? 0)% 기여")
                 .frame(maxWidth: .infinity)
-                .foregroundStyle(Color.colors(.cg06))
+                .foregroundStyle(
+                    viewModel.contributePercent != nil
+                    ? Color.colors(.primaryNormal)
+                    : Color.colors(.cg06)
+                )
                 .fontModifer(.b1m)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
@@ -448,5 +452,6 @@ fileprivate func format(date: Date) -> String {
 #Preview {
     ScheduleEditView(
         viewModel: .init(
-            coordinator: .init(navigator: .init())))
+            coordinator: .init(navigator: .init()),
+            targetIncome: 100000))
 }

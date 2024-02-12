@@ -19,6 +19,7 @@ import Alamofire
 class ScheduleEditViewModel: ObservableObject {
     
     // MARK: - Datas
+    private let targetIncome: Int
     var isAvailable: Bool {
         if workType == .dayOff { return true }
         switch self.job {
@@ -91,6 +92,15 @@ class ScheduleEditViewModel: ObservableObject {
         formatDate(date)
     }
     
+    var contributePercent: Int? {
+        let sum = self.totalSum?.removeComma()
+        guard
+            let sum,
+            sum >= 10000
+        else { return nil }
+        return Int((Double(sum) / Double(targetIncome)) * 100)
+    }
+    
     // MARK: - Dependencies
     weak var coordinator: ScheduleNoteCoordinator?
     private let dependencies: Container
@@ -99,10 +109,12 @@ class ScheduleEditViewModel: ObservableObject {
     
     init(
         coordinator: ScheduleNoteCoordinator,
-        dependencies: Container = .live
+        dependencies: Container = .live,
+        targetIncome: Int
     ) {
         self.coordinator = coordinator
         self.dependencies = dependencies
+        self.targetIncome = targetIncome
         
         NotificationCenter
             .default

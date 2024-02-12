@@ -130,13 +130,20 @@ extension ScheduleNoteViewModel: Actionable {
             }
             
         case .scheduleEdit:
-            self.coordinator?.send(.scheduleEdit)
+            guard let goal else { return }
+            self.coordinator?.send(.scheduleEdit(goal.targetIncome))
             
         case .scheduleEditById(let id):
-            coordinator?.send(.scheduleEditById(id))
+            guard let goal else { return }
+            coordinator?.send(.scheduleEditById(
+                goal.targetIncome,
+                id))
             
         case .scheduleEditByDate(let date):
-            coordinator?.send(.scheduleEditByDate(date))
+            guard let goal else { return }
+            coordinator?.send(.scheduleEditByDate(
+                goal.targetIncome,
+                date))
         }
     }
 }

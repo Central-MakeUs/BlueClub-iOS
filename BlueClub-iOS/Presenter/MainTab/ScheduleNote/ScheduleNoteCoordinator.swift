@@ -25,9 +25,9 @@ extension ScheduleNoteCoordinator: Coordinatorable {
     enum Action {
         case goalInput(ScheduleNoteViewModel)
         case notice
-        case scheduleEdit
-        case scheduleEditById(Int?)
-        case scheduleEditByDate(String)
+        case scheduleEdit(Int)
+        case scheduleEditById(Int, Int?) // targetIncome, Id
+        case scheduleEditByDate(Int, String) // targetIncome. DateString
         
     }
     
@@ -48,21 +48,27 @@ extension ScheduleNoteCoordinator: Coordinatorable {
             let view = NoticeListView(navigator: self.navigator)
             navigator.push { view }
             
-        case .scheduleEdit:
-            let viewModel = ScheduleEditViewModel(coordinator: self)
+        case .scheduleEdit(let target):
+            let viewModel = ScheduleEditViewModel(
+                coordinator: self,
+                targetIncome: target)
             let view = ScheduleEditView(viewModel: viewModel)
             navigator.push { view }
             
-        case .scheduleEditById(let diaryId):
-            let viewModel = ScheduleEditViewModel(coordinator: self)
+        case .scheduleEditById(let target, let diaryId):
+            let viewModel = ScheduleEditViewModel(
+                coordinator: self,
+                targetIncome: target)
             if let diaryId {
                 viewModel.send(.fetchDetail(diaryId))
             }
             let view = ScheduleEditView(viewModel: viewModel)
             navigator.push { view }
             
-        case .scheduleEditByDate(let date):
-            let viewModel = ScheduleEditViewModel(coordinator: self)
+        case .scheduleEditByDate(let target, let date):
+            let viewModel = ScheduleEditViewModel(
+                coordinator: self,
+                targetIncome: target)
             viewModel.send(.editByDate(date))
             let view = ScheduleEditView(viewModel: viewModel)
             navigator.push { view }

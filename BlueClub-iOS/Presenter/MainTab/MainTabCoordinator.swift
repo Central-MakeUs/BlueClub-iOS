@@ -42,7 +42,7 @@ extension MainTabCoordinator: Actionable {
     
     enum Action {
         case login
-        case scheduleNoteEdit
+        case scheduleNoteEdit(Int)
         case didTapTab(MainTabItem)
     }
     
@@ -55,10 +55,12 @@ extension MainTabCoordinator: Actionable {
         case .didTapTab(let tabItem):
             self.currentTab = tabItem
             
-        case .scheduleNoteEdit:
+        case .scheduleNoteEdit(let target):
             self.currentTab = .note
             let dateString = dateService.getToday().combinedDateString
-            scheudleNoteCoordinator.send(.scheduleEditByDate(dateString))
+            scheudleNoteCoordinator.send(.scheduleEditByDate(
+                target,
+                dateString))
         }
     }
 }
