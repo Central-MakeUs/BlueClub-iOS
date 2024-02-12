@@ -28,6 +28,10 @@ final class ScheduleNoteViewModel: ObservableObject {
     ) {
         self.coordinator = coordinator
         self.dependencies = dependencies
+        Task {
+            await self.send(.fetchGoal)
+            await self.send(.fetchDiaryList)
+        }
     }
     
     @Published var hasExpand = false
@@ -131,19 +135,23 @@ extension ScheduleNoteViewModel: Actionable {
             
         case .scheduleEdit:
             guard let goal else { return }
-            self.coordinator?.send(.scheduleEdit(goal.targetIncome))
+            
+            let currentDay = dateService.getToday().combinedDateString
+            let found = self.diaryList.first(where: { $0.date == currentDay })
+            
+            if let found {
+                self.coordinator?.send(.scheduleEditById(goal.targetIncome, found.id))
+            } else {
+                self.coordinator?.send(.scheduleEdit(goal.targetIncome))
+            }
             
         case .scheduleEditById(let id):
             guard let goal else { return }
-            coordinator?.send(.scheduleEditById(
-                goal.targetIncome,
-                id))
+            coordinator?.send(.scheduleEditById(goal.targetIncome, id))
             
         case .scheduleEditByDate(let date):
             guard let goal else { return }
-            coordinator?.send(.scheduleEditByDate(
-                goal.targetIncome,
-                date))
+            coordinator?.send(.scheduleEditByDate(goal.targetIncome, date))
         }
     }
 }

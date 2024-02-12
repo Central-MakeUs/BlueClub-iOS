@@ -12,11 +12,11 @@ import Utility
 
 struct MainTabView: View {
     
-    @StateObject var viewModel: MainTabCoordinator
+    @StateObject var coordinator: MainTabCoordinator
     
     init(navigator: Navigator) {
         let viewModel = MainTabCoordinator(navigator: navigator)
-        self._viewModel = .init(wrappedValue: viewModel)
+        self._coordinator = .init(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -33,21 +33,20 @@ struct MainTabView: View {
 @MainActor private extension MainTabView {
     
     @ViewBuilder func content() -> some View {
-        TabView(selection: $viewModel.currentTab) {
+        TabView(selection: $coordinator.currentTab) {
             ForEach(MainTabItem.allCases, id: \.self) { tab in
                 switch tab {
                 case .home:
-                    HomeView(coordinator: viewModel.homeCoordinator)
+                    HomeView(coordinator: coordinator.homeCoordinator)
                         .tag(tab)
                 case .note:
                     ScheduleNoteView(
-                        viewModel: .init(
-                            coordinator: viewModel.scheudleNoteCoordinator))
+                        viewModel: coordinator.scheduleNoteViewModel)
                         .tag(tab)
                 case .myPage:
                     MyPageView(
                         viewModel: .init(
-                            coordinator: viewModel.myPageCoordinator))
+                            coordinator: coordinator.myPageCoordinator))
                         .tag(tab)
                 }
             }.toolbar(.hidden, for: .tabBar)
@@ -58,7 +57,7 @@ struct MainTabView: View {
         LazyVGrid(columns: Array(repeating: .init(), count: 3)) {
             ForEach(MainTabItem.allCases, id: \.self) { tab in
                 
-                let selected = viewModel.currentTab == tab
+                let selected = coordinator.currentTab == tab
                 let color: Color = selected
                     ? Color.colors(.primaryNormal)
                     : Color.colors(.gray05)
@@ -77,7 +76,7 @@ struct MainTabView: View {
                 .padding(.vertical, 9)
                 .foregroundColor(color)
                 .onTapGesture {
-                    viewModel.send(.didTapTab(tab))
+                    coordinator.send(.didTapTab(tab))
                 }
             }
         }

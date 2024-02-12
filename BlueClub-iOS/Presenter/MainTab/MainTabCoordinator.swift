@@ -20,11 +20,16 @@ final class MainTabCoordinator: ObservableObject {
     private let container: Container
     private var dateService: DateServiceable { container.resolve() }
     
+    // MARK: - Child Coordinator
     lazy var homeCoordinator: HomeCoordinator = {
         .init(navigator: navigator, parent: self)
     }()
     let scheudleNoteCoordinator: ScheduleNoteCoordinator
     let myPageCoordinator: MyPageCoordinator
+    
+    lazy var scheduleNoteViewModel: ScheduleNoteViewModel = {
+        .init(coordinator: self.scheudleNoteCoordinator)
+    }()
     
     init(
         navigator: Navigator, 
@@ -32,9 +37,8 @@ final class MainTabCoordinator: ObservableObject {
     ) {
         self.navigator = navigator
         self.container = container
-        
-        self.scheudleNoteCoordinator = .init(navigator: navigator)
         self.myPageCoordinator = .init(navigator: navigator)
+        self.scheudleNoteCoordinator = .init(navigator: navigator)
     }
 }
 
@@ -42,7 +46,7 @@ extension MainTabCoordinator: Actionable {
     
     enum Action {
         case login
-        case scheduleNoteEdit(Int)
+        case scheduleNoteEdit
         case didTapTab(MainTabItem)
     }
     
@@ -52,15 +56,12 @@ extension MainTabCoordinator: Actionable {
         case .login:
             break
             
+        case .scheduleNoteEdit:
+            let dateString = dateService.getToday().combinedDateString
+            scheduleNoteViewModel.send(.scheduleEditByDate(dateString))
+            
         case .didTapTab(let tabItem):
             self.currentTab = tabItem
-            
-        case .scheduleNoteEdit(let target):
-            self.currentTab = .note
-            let dateString = dateService.getToday().combinedDateString
-            scheudleNoteCoordinator.send(.scheduleEditByDate(
-                target,
-                dateString))
         }
     }
 }

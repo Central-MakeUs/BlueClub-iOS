@@ -8,6 +8,7 @@
 import Foundation
 
 public struct DiaryCaddyDTO: DiaryDTO {
+    public var id: Int?
     public let worktype: String
     public let memo: String
     public let income: Int
@@ -22,11 +23,12 @@ public struct DiaryCaddyDTO: DiaryDTO {
     public var dateDate: Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         return dateFormatter.date(from: date) ?? .now
     }
     
     public init(
+        id: Int? = nil,
         worktype: String,
         memo: String,
         income: Int,
@@ -38,6 +40,7 @@ public struct DiaryCaddyDTO: DiaryDTO {
         overFee: Int,
         topdressing: Bool
     ) {
+        self.id = id
         self.worktype = worktype
         self.memo = memo
         self.income = income

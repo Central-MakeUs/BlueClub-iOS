@@ -20,6 +20,7 @@ class ScheduleEditViewModel: ObservableObject {
     
     // MARK: - Datas
     private let targetIncome: Int
+    
     var isAvailable: Bool {
         if workType == .dayOff { return true }
         switch self.job {
@@ -108,7 +109,7 @@ class ScheduleEditViewModel: ObservableObject {
     private var diaryApi: DiaryNetworkable { dependencies.resolve() }
     
     init(
-        coordinator: ScheduleNoteCoordinator,
+        coordinator: ScheduleNoteCoordinator?,
         dependencies: Container = .live,
         targetIncome: Int
     ) {
@@ -141,7 +142,7 @@ extension ScheduleEditViewModel: Actionable {
         case fetchUserInfo
         case editByDate(String)
         case fetchDetail(Int)
-        case handleFetchedDiary(Int, any DiaryDTO)
+        case handleFetchedDiary(any DiaryDTO)
         
         case showScheduleTypeSheet
         case save
@@ -159,11 +160,36 @@ extension ScheduleEditViewModel: Actionable {
         case .editByDate(let date):
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.locale = Locale(identifier: "ko_KR")
             dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             let date = dateFormatter.date(from: date)
             guard let date else { return }
             self.date = date
+            
+            Task { @MainActor in
+                do {
+                    self.isLoading = true
+                    switch self.job {
+                    case .caddy:
+                        let diary: DiaryCaddyDTO = try await diaryApi.getDiaryByDate(
+                            job: self.job,
+                            date: date)
+                        self.send(.handleFetchedDiary(diary))
+                    case .rider:
+                        let diary: DiaryRiderDTO = try await diaryApi.getDiaryByDate(
+                            job: self.job,
+                            date: date)
+                        self.send(.handleFetchedDiary(diary))
+                    case .dayWorker:
+                        let diary: DiaryDayWorkerDTO = try await diaryApi.getDiaryByDate(
+                            job: self.job,
+                            date: date)
+                        self.send(.handleFetchedDiary(diary))
+                    }
+                } catch {
+                    printError(error)
+                }
+            }
             
         case .fetchDetail(let diaryId):
             Task { @MainActor in
@@ -171,33 +197,30 @@ extension ScheduleEditViewModel: Actionable {
                     self.isLoading = true
                     switch self.job {
                     case .caddy:
-                        let diary: DiaryCaddyDTO = try await diaryApi.getDiaryById(
+                        var diary: DiaryCaddyDTO = try await diaryApi.getDiaryById(
                             job: self.job,
                             id: diaryId)
-                        self.send(.handleFetchedDiary(
-                            diaryId,
-                            diary))
+                        diary.id = diaryId
+                        self.send(.handleFetchedDiary(diary))
                     case .rider:
-                        let diary: DiaryRiderDTO = try await diaryApi.getDiaryById(
+                        var diary: DiaryRiderDTO = try await diaryApi.getDiaryById(
                             job: self.job,
                             id: diaryId)
-                        self.send(.handleFetchedDiary(
-                            diaryId,
-                            diary))
+                        diary.id = diaryId
+                        self.send(.handleFetchedDiary(diary))
                     case .dayWorker:
-                        let diary: DiaryDayWorkerDTO = try await diaryApi.getDiaryById(
+                        var diary: DiaryDayWorkerDTO = try await diaryApi.getDiaryById(
                             job: self.job,
                             id: diaryId)
-                        self.send(.handleFetchedDiary(
-                            diaryId,
-                            diary))
+                        diary.id = diaryId
+                        self.send(.handleFetchedDiary(diary))
                     }
                 } catch {
                     printError(error)
                 }
             }
             
-        case .handleFetchedDiary(let id, let diary):
+        case .handleFetchedDiary(let diary):
             if let diary = diary as? DiaryCaddyDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.roundingCount = diary.rounding
@@ -206,6 +229,7 @@ extension ScheduleEditViewModel: Actionable {
                 self.topDressing = diary.topdressing
                 self.date = diary.dateDate
                 
+                guard let id = diary.id else { return }
                 self.origianalDiary = (id, formatDate(diary.dateDate))
             } else if let diary = diary as? DiaryRiderDTO {
                 self.workType = .init(rawValue: diary.worktype)
@@ -215,6 +239,7 @@ extension ScheduleEditViewModel: Actionable {
                 self.promotionIncome = diary.incomeOfPromotions.withComma()
                 self.date = diary.dateDate 
                 
+                guard let id = diary.id else { return }
                 self.origianalDiary = (id, formatDate(diary.dateDate))
             } else if let diary = diary as? DiaryDayWorkerDTO {
                 self.workType = .init(rawValue: diary.worktype)
@@ -224,6 +249,7 @@ extension ScheduleEditViewModel: Actionable {
                 self.numberOfWork = diary.numberOfWork
                 self.date = diary.dateDate
                 
+                guard let id = diary.id else { return }
                 self.origianalDiary = (id, formatDate(diary.dateDate))
             }
             self.isLoading = false

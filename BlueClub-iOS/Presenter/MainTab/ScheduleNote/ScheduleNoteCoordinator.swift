@@ -25,7 +25,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
     enum Action {
         case goalInput(ScheduleNoteViewModel)
         case notice
-        case scheduleEdit(Int)
+        case scheduleEdit(Int) // targetIncome
         case scheduleEditById(Int, Int?) // targetIncome, Id
         case scheduleEditByDate(Int, String) // targetIncome. DateString
         

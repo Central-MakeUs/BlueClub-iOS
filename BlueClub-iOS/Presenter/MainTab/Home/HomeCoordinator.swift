@@ -24,7 +24,7 @@ extension HomeCoordinator: Coordinatorable {
     
     enum Action {
         case notice
-        case scheduleNoteEdit(Int) // targetIncome
+        case scheduleNoteEdit
     }
     
     @MainActor func send(_ action: Action) {
@@ -34,8 +34,8 @@ extension HomeCoordinator: Coordinatorable {
             let view = NoticeListView(navigator: self.navigator)
             navigator.push { view }
             
-        case .scheduleNoteEdit(let target):
-            parent?.send(.scheduleNoteEdit(target))
+        case .scheduleNoteEdit:
+            parent?.send(.scheduleNoteEdit)
             
         }
     }

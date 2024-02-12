@@ -29,7 +29,9 @@ struct ScheduleEditView: View {
 //                .hide(when: viewModel.keyboardAppeared)
                 .hide(when: true)
         }
-        .onAppear { viewModel.send(.fetchUserInfo) }
+        .onAppear {
+            viewModel.send(.fetchUserInfo)
+        }
         .loadingSpinner(viewModel.isLoading)
         .disabled(viewModel.isLoading)
         .sheet(isPresented: $viewModel.showScheduleTypeSheet) {

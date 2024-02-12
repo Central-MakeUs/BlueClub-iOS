@@ -65,15 +65,14 @@ struct DiaryListCell: View {
     
     func formatDateString(_ input: String) -> String {
         let inputFormatter = DateFormatter()
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.locale = Locale(identifier: "ko_KR")
         inputFormatter.dateFormat = "yyyy-MM-dd"
         
         guard let date = inputFormatter.date(from: input) else { return "" }
         
         let outputFormatter = DateFormatter()
         outputFormatter.locale = Locale(identifier: "ko_KR")
-        outputFormatter.dateFormat = "MM.dd '월'"
-        
+        outputFormatter.dateFormat = "MM.dd E"
         let output = outputFormatter.string(from: date)
         return output
     }
