@@ -8,11 +8,12 @@
 import Foundation
 
 public func printLog(
+    message: String? = nil,
     file: String = #file,
     function: String = #function
 ) {
     #if DEBUG
     let fileName = (file as NSString).lastPathComponent
-    print("🟢 Log: \(function) executed in \(fileName)")
+    print("🟢 Log: \(function) executed in \(fileName)" + (message ?? ""))
     #endif
 }

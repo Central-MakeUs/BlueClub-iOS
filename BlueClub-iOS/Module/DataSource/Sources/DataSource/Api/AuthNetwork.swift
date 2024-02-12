@@ -23,7 +23,10 @@ public class AuthNetwork: AuthNetworkable {
     
     private let path = "/auth"
     
-    public func auth(_ user: SocialLoginUser) async throws -> AuthDTO {
+    public func auth(
+        _ user: SocialLoginUser,
+        fcmToken: String?
+    ) async throws -> AuthDTO {
         
         let body: [String: Any] = [
             "socialId": user.id,
@@ -31,7 +34,8 @@ public class AuthNetwork: AuthNetworkable {
             "name": user.name,
             "nickname": "",
             "email": user.email,
-            "profileImage": ""
+            "profileImage": "",
+            "fcmToken": fcmToken ?? NSNull()
         ]
         
         return try await EndPoint
@@ -70,6 +74,20 @@ public class AuthNetwork: AuthNetworkable {
                 try handleServerResponseCode($0)
                 return true
             }
+            .asyncThrows
+    }
+    
+    public func fcmToken(token: String) async throws {
+        let header = RequestHeader.withToken(accessToken: token)
+        return try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([path, "/fcm"])
+            .urlQueries(["token": token])
+            .httpHeaders(header)
+            .httpMethod(.post)
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<AuthDTO>.self)
+            .tryMap { try handleServerResponseCode($0) }
             .asyncThrows
     }
     
