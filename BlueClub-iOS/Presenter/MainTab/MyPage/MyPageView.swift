@@ -168,7 +168,7 @@ private extension MyPageView {
     @ViewBuilder func footer() -> some View {
         VStack(spacing: 16) {
             Button {
-                
+                viewModel.send(.ask)
             } label: {
                 HStack(spacing: 4) {
                     Image.icons(.kakao)

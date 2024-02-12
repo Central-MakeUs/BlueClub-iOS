@@ -44,6 +44,7 @@ extension MyPageViewModel: Actionable {
         case profileEdit
         case didTapButton(MyPageHeaderButton)
         case didTapListItem(MyPageItemRow)
+        case ask
     }
     
     func send(_ action: Action) {
@@ -91,6 +92,9 @@ extension MyPageViewModel: Actionable {
             case .versionInfo:
                 break
             }
+            
+        case .ask:
+            coordinator.send(.ask)
         }
     }
 }
