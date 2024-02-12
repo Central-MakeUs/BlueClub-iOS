@@ -229,10 +229,3 @@ fileprivate var formatter: NumberFormatter {
     formatter.usesGroupingSeparator = true
     return formatter
 }
-
-//fileprivate func validateNickname(_ string: String) -> Bool {
-//    let pattern = "^[가-힣A-Za-z0-9]+$"
-//    let regex = try? NSRegularExpression(pattern: pattern)
-//    let range = NSRange(location: 0, length: string.utf16.count)
-//    return regex?.firstMatch(in: string, options: [], range: range) != nil
-//}
