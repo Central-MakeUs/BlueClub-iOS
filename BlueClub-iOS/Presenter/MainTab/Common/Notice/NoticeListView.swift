@@ -65,7 +65,9 @@ struct NoticeListView: View {
                     Button(action: {
                         Task {
                             await navigator?.push {
-                                NoticeDetailView(notice: notice)
+                                NoticeDetailView(
+                                    navigator: self.navigator,
+                                    notice: notice)
                             }
                         }
                     }, label: {

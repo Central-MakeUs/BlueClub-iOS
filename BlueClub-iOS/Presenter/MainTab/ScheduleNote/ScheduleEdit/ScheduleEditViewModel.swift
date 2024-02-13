@@ -187,6 +187,7 @@ extension ScheduleEditViewModel: Actionable {
                         self.send(.handleFetchedDiary(diary))
                     }
                 } catch {
+                    self.isLoading = false
                     printError(error)
                 }
             }
@@ -216,6 +217,7 @@ extension ScheduleEditViewModel: Actionable {
                         self.send(.handleFetchedDiary(diary))
                     }
                 } catch {
+                    self.isLoading = false
                     printError(error)
                 }
             }

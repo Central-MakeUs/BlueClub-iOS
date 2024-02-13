@@ -258,7 +258,6 @@ extension HomeView {
     
     @ViewBuilder func incomeInfoFooter() -> some View {
         Button(action: {
-            guard let record = viewModel.record else { return }
             viewModel.coodinator?.send(.scheduleNoteEdit)
         }, label: {
             HStack(spacing: 4) {
