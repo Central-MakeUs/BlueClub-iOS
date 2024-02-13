@@ -148,8 +148,11 @@ extension ScheduleNoteView {
         }
         .frame(height: 54)
         .overlay(alignment: .topLeading) {
+
             let offset = goal.progress == 0
-                ? progressWidth - (tooltipWidth / 2) + 7
+                ? progressWidth - (tooltipWidth / 2) + 8
+                : goal.progress == 100
+                ? progressWidth - (tooltipWidth / 2) - 8
                 : progressWidth - (tooltipWidth / 2)
             
             PercentToolTipView(progress: goal.progorssFloat)

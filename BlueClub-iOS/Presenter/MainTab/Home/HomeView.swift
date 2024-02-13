@@ -246,9 +246,13 @@ extension HomeView {
         }
         .frame(height: 54)
         .overlay(alignment: .topLeading) {
+            
             let offset = record?.progress == 0
-                ? progressWidth - (tooltipWidth / 2) + 7
+                ? progressWidth - (tooltipWidth / 2) + 8
+                : record?.progress == 100
+                ? progressWidth - (tooltipWidth / 2) - 8
                 : progressWidth - (tooltipWidth / 2)
+            
             PercentToolTipView(progress: record?.progorssFloat ?? 0.0)
                 .getSize { self.tooltipWidth = $0.width }
                 .padding(.bottom, 2)
