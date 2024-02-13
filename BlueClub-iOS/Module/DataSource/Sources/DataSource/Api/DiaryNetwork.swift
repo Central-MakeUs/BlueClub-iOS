@@ -148,6 +148,23 @@ extension DiaryNetwork: DiaryNetworkable {
             .asyncThrows
     }
     
+    public func boast(diaryId: Int) async throws -> Domain.BoastDTO {
+        
+        let header = RequestHeader.withToken(accessToken: self.token)
+        
+        return try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([
+                self.path,
+                "/boast",
+                "/\(diaryId)"])
+            .httpHeaders(header)
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<BoastDTO>.self)
+            .tryMap { try handleServerResponseResult($0) }
+            .asyncThrows
+    }
+    
     
     public func list(monthIndex: Int) async throws -> [DiaryListDTO.MonthlyRecord] {
         let (year, month, _) = dateSerivce.toDayInt(monthIndex)

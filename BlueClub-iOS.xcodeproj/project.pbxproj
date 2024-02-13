@@ -22,6 +22,8 @@
 		FB1C640A2B47119200318FA7 /* Utility in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C64092B47119200318FA7 /* Utility */; };
 		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
 		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
+		FB1EF0852B7B6EE100FC4E6A /* BoastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */; };
+		FB1EF0872B7B804C00FC4E6A /* BoastCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */; };
 		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
 		FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211A2B6BE55E00099B5D /* MyPageView.swift */; };
 		FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */; };
@@ -83,6 +85,8 @@
 		FB1C64082B4710B000318FA7 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utility; sourceTree = "<group>"; };
 		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		FB1C64132B47239200318FA7 /* InitialSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingView.swift; sourceTree = "<group>"; };
+		FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastView.swift; sourceTree = "<group>"; };
+		FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastCard.swift; sourceTree = "<group>"; };
 		FB28DE992B4F012F004710D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
 		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 			isa = PBXGroup;
 			children = (
 				FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */,
+				FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */,
+				FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */,
 			);
 			path = Subview;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
 				FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */,
 				FBE1129C2B75D0F90064D1A9 /* NoticeListView.swift in Sources */,
+				FB1EF0852B7B6EE100FC4E6A /* BoastView.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
 				FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */,
 				FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */,
@@ -514,6 +521,7 @@
 				FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */,
 				FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */,
 				FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */,
+				FB1EF0872B7B804C00FC4E6A /* BoastCard.swift in Sources */,
 				FB81AEF62B752D5600AF6E7C /* JobSelectSheet.swift in Sources */,
 				FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */,
 				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
@@ -685,6 +693,7 @@
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -720,6 +729,7 @@
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

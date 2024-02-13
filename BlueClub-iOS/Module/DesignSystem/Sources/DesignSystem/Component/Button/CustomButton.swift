@@ -14,6 +14,7 @@ public struct CustomButton: View {
     let foreground: Color
     let background: Color
     let border: Color?
+    let hPadding: CGFloat
     let action: () -> Void
     
     public init(
@@ -22,6 +23,7 @@ public struct CustomButton: View {
         foreground: Color,
         background: Color,
         border: Color? = .none,
+        hPadding: CGFloat = 20,
         action: @escaping () -> Void
     ) {
         self.leadingIcon = leadingIcon
@@ -29,6 +31,7 @@ public struct CustomButton: View {
         self.foreground = foreground
         self.background = background
         self.border = border
+        self.hPadding = hPadding
         self.action = action
     }
     
@@ -58,7 +61,7 @@ public struct CustomButton: View {
                 }
             })
             .cornerRadius(12)
-            .padding(.horizontal, 20)
+            .padding(.horizontal, hPadding)
         })
     }
 }
@@ -68,6 +71,7 @@ public struct CustomButton: View {
         title: "카카오로 3초만에 가입하기",
         foreground: Color.colors(.black),
         background: Color(hex: "FDE500"),
+        hPadding: 0,
         action: { }
     )
 //    CustomButton(

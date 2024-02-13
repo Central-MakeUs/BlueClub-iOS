@@ -21,6 +21,7 @@ class ScheduleEditViewModel: ObservableObject {
     // MARK: - Datas
     private let targetIncome: Int
     
+    var shouldNavigateToBoast = false
     var isAvailable: Bool {
         if workType == .dayOff { return true }
         switch self.job {
@@ -39,7 +40,7 @@ class ScheduleEditViewModel: ObservableObject {
         }
     }
     // MARK: - (ID, Date)
-    private var origianalDiary: (Int, String)?
+    private var originalDiary: (Int, String)?
     
     @Published var isLoading = false
     @Published var keyboardAppeared = false
@@ -143,6 +144,7 @@ extension ScheduleEditViewModel: Actionable {
         case editByDate(String)
         case fetchDetail(Int)
         case handleFetchedDiary(any DiaryDTO)
+        case boast
         
         case showScheduleTypeSheet
         case save
@@ -232,7 +234,7 @@ extension ScheduleEditViewModel: Actionable {
                 self.date = diary.dateDate
                 
                 guard let id = diary.id else { return }
-                self.origianalDiary = (id, formatDate(diary.dateDate))
+                self.originalDiary = (id, formatDate(diary.dateDate))
             } else if let diary = diary as? DiaryRiderDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.deliveryCount = diary.numberOfDeliveries
@@ -242,7 +244,7 @@ extension ScheduleEditViewModel: Actionable {
                 self.date = diary.dateDate 
                 
                 guard let id = diary.id else { return }
-                self.origianalDiary = (id, formatDate(diary.dateDate))
+                self.originalDiary = (id, formatDate(diary.dateDate))
             } else if let diary = diary as? DiaryDayWorkerDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.placeName = diary.place
@@ -252,9 +254,13 @@ extension ScheduleEditViewModel: Actionable {
                 self.date = diary.dateDate
                 
                 guard let id = diary.id else { return }
-                self.origianalDiary = (id, formatDate(diary.dateDate))
+                self.originalDiary = (id, formatDate(diary.dateDate))
             }
             self.isLoading = false
+            
+        case .boast:
+            self.shouldNavigateToBoast = true
+            self.send(.save)
             
         case .showScheduleTypeSheet:
             self.showScheduleTypeSheet = true
@@ -284,16 +290,26 @@ extension ScheduleEditViewModel: Actionable {
                 topdressing: self.topDressing)
             Task {
                 do {
-                    if let origianalDiary, 
-                       origianalDiary.1 == self.dateFormatted {
+                    if let originalDiary, originalDiary.1 == self.dateFormatted {
                         try await diaryApi.diaryPatch(
-                            id: origianalDiary.0,
+                            id: originalDiary.0,
                             dto: dto,
                             job: .caddy)
+                        
+                        self.coordinator?.navigator.pop()
+                        if shouldNavigateToBoast {
+                            self.coordinator?.send(.boast(originalDiary.0))
+                        }
                     } else {
-                        try await diaryApi.diaryPost(dto, job: .caddy)
+                        let id = try await diaryApi.diaryPost(
+                            dto,
+                            job: .caddy)
+                        
+                        self.coordinator?.navigator.pop()
+                        if shouldNavigateToBoast {
+                            self.coordinator?.send(.boast(id))
+                        }
                     }
-                    self.coordinator?.navigator.pop()
                 } catch {
                     printError(error)
                 }
@@ -313,18 +329,26 @@ extension ScheduleEditViewModel: Actionable {
                 incomeOfPromotions: self.promotionIncome.removeComma())
             Task {
                 do {
-                    if let origianalDiary, 
-                       origianalDiary.1 == self.dateFormatted {
+                    if let originalDiary, originalDiary.1 == self.dateFormatted {
                         try await diaryApi.diaryPatch(
-                            id: origianalDiary.0,
+                            id: originalDiary.0,
                             dto: dto,
                             job: .rider)
+                        
+                        self.coordinator?.navigator.pop()
+                        if shouldNavigateToBoast {
+                            self.coordinator?.send(.boast(originalDiary.0))
+                        }
                     } else {
-                        try await diaryApi.diaryPost(
+                        let id = try await diaryApi.diaryPost(
                             dto,
                             job: .rider)
+                        
+                        self.coordinator?.navigator.pop()
+                        if shouldNavigateToBoast {
+                            self.coordinator?.send(.boast(id))
+                        }
                     }
-                    self.coordinator?.navigator.pop()
                 } catch {
                     printError(error)
                 }
@@ -344,18 +368,26 @@ extension ScheduleEditViewModel: Actionable {
                 numberOfWork: self.numberOfWork)
             Task {
                 do {
-                    if let origianalDiary,
-                       origianalDiary.1 == self.dateFormatted {
+                    if let originalDiary, originalDiary.1 == self.dateFormatted {
                         try await diaryApi.diaryPatch(
-                            id: origianalDiary.0,
+                            id: originalDiary.0,
                             dto: dto,
                             job: .dayWorker)
+                        
+                        self.coordinator?.navigator.pop()
+                        if shouldNavigateToBoast {
+                            self.coordinator?.send(.boast(originalDiary.0))
+                        }
                     } else {
-                        try await diaryApi.diaryPost(
+                        let id = try await diaryApi.diaryPost(
                             dto,
                             job: .dayWorker)
+                        
+                        self.coordinator?.navigator.pop()
+                        if shouldNavigateToBoast {
+                            self.coordinator?.send(.boast(id))
+                        }
                     }
-                    self.coordinator?.navigator.pop()
                 } catch {
                     printError(error)
                 }

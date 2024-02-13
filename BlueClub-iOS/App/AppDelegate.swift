@@ -58,6 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        
+        let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+        guard !isPreview else { return }
+        
         Self.firebaseToken = fcmToken
         printLog(message: "FCM Token: \(fcmToken ?? "null")")
         guard let fcmToken else { return }

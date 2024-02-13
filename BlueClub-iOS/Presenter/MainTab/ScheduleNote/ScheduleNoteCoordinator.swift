@@ -28,6 +28,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
         case scheduleEdit(Int) // targetIncome
         case scheduleEditById(Int, Int?) // targetIncome, Id
         case scheduleEditByDate(Int, String) // targetIncome. DateString
+        case boast(Int)
         
     }
     
@@ -71,6 +72,10 @@ extension ScheduleNoteCoordinator: Coordinatorable {
                 targetIncome: target)
             viewModel.send(.editByDate(date))
             let view = ScheduleEditView(viewModel: viewModel)
+            navigator.push { view }
+            
+        case .boast(let id):
+            let view = BoastView(navigator: self.navigator, diaryId: id)
             navigator.push { view }
             
         }

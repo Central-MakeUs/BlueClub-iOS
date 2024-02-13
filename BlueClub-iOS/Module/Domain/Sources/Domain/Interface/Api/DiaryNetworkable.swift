@@ -13,6 +13,7 @@ public protocol DiaryNetworkable {
     func getDiaryByDate<T: DiaryDTO>(job: JobOption, date: Date) async throws -> T
     @discardableResult func diaryPost(_ dto: Encodable, job: JobOption) async throws -> Int
     @discardableResult func diaryPatch(id: Int, dto: Encodable, job: JobOption) async throws -> Int
+    func boast(diaryId: Int) async throws -> BoastDTO
     
     func list(monthIndex: Int) async throws -> [DiaryListDTO.MonthlyRecord]
     func record() async throws -> DiaryRecordDTO

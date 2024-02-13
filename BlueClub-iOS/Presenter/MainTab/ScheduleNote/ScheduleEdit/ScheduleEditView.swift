@@ -24,10 +24,8 @@ struct ScheduleEditView: View {
         } content: {
             content()
         } footer: {
-            // TODO: - 백로그
             bottomButton()
-//                .hide(when: viewModel.keyboardAppeared)
-                .hide(when: true)
+                .hide(when: viewModel.keyboardAppeared)
         }
         .onAppear {
             viewModel.send(.fetchUserInfo)
@@ -356,7 +354,9 @@ extension ScheduleEditView {
             background: viewModel.isAvailable
                 ? .colors(.black)
                 : .colors(.gray04),
-            action: { }
+            action: { 
+                viewModel.send(.boast)
+            }
         ).padding(.vertical, 20)
     }
     
