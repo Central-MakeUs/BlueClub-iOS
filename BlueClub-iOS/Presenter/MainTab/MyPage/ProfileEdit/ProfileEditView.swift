@@ -77,7 +77,7 @@ extension ProfileEditView {
             NicknameInputContainer(
                 nickname: viewModel.nickname,
                 isValid: viewModel.nicknameValid,
-                message: .none,
+                message: viewModel.nicknameMessage,
                 onTapCheck: { viewModel.send(.chekcDuplicate) }
             ) {
                 TextInput(

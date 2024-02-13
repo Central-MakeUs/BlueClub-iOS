@@ -14,6 +14,7 @@ import SwiftUI
 import Utility
 import DataSource
 import Navigator
+import DesignSystem
 
 class ProfileEditViewModel: ObservableObject {
     
@@ -28,7 +29,7 @@ class ProfileEditViewModel: ObservableObject {
     
     @Published var nickname = ""
     @Published var nicknameValid = false
-    @Published var nicknameMessage: (String, Color)?
+    @Published var nicknameMessage: InputStatusMessages?
     @Published var nicknameAvailable = false
     var nicknameHasChange: Bool {
         user?.nickname != nickname
@@ -172,26 +173,28 @@ extension ProfileEditViewModel: Actionable {
             }
             
         case .nicknameDidChange:
+            self.nicknameMessage = .none
             self.nicknameAvailable = false
+            
             self.nickname = String(nickname.prefix(10))
             self.nicknameValid = validateNickname.execute(nickname)
             if !nicknameValid {
-                self.nicknameMessage = ("띄어쓰기 없이 한글, 영문, 숫자만 가능해요", .colors(.primaryNormal))
+                self.nicknameMessage = .닉네임유효성에러
             }
             
         case .chekcDuplicate:
-            Task {
+            Task { @MainActor in
                 do {
                     guard nicknameValid else { return }
                     let success = try await self.authApi.duplicated(self.nickname)
                     guard success else { return }
-                    self.nicknameMessage = ("사용 가능한 닉네임입니다.", .colors(.primaryNormal))
+                    self.nicknameMessage = .사용가능닉네임
                     self.nicknameAvailable = true
                 } catch {
                     printError(error)
                     guard let error = error as? ServerError else { return }
                     if error == .해당_닉네임은_중복입니다 {
-                        self.nicknameMessage = ("이미 사용 중인 닉네임입니다.", .colors(.error))
+                        self.nicknameMessage = .중복닉네임
                     }
                 }
             }
