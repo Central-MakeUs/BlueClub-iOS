@@ -22,6 +22,7 @@ class MyPageViewModel: ObservableObject {
     @Published var show개인정보 = false
     @Published var user: AuthDTO?
     @Published var appVersion: String?
+    
     var monthlyTarget: Int {
         (user?.monthlyTargetIncome ?? 0) / 10000
     }

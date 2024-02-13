@@ -21,6 +21,7 @@ final class ScheduleNoteViewModel: ObservableObject {
     private var dateService: DateServiceable { dependencies.resolve() }
     private var monthlyGoalApi: MonthlyGoalNetworkable { dependencies.resolve() }
     private var diaryApi: DiaryNetworkable { dependencies.resolve() }
+    private var userRepository: UserRepositoriable { dependencies.resolve() }
     
     init(
         coordinator: ScheduleNoteCoordinator,
@@ -127,6 +128,10 @@ extension ScheduleNoteViewModel: Actionable {
                         year: year,
                         month: month,
                         targetIncome: target)
+                    if var user = self.userRepository.getUserInfo() {
+                        user.monthlyTargetIncome = target
+                        userRepository.registUserInfo(user)
+                    }
                     self.send(.fetchGoal)
                 } catch {
                     printError(error)
