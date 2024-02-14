@@ -90,9 +90,7 @@ class ScheduleEditViewModel: ObservableObject {
         }
     }
     
-    var dateFormatted: String {
-        formatDate(date)
-    }
+    var dateFormatted: String { date.dateString() }
     
     var contributePercent: Int? {
         let sum = self.totalSum?.removeComma()
@@ -134,6 +132,15 @@ class ScheduleEditViewModel: ObservableObject {
             .sink(receiveValue: { _ in
                 self.keyboardAppeared = false
             }).store(in: &cancellables)
+        
+        $date
+            .receive(on: DispatchQueue.main)
+            .sink { date in
+                Task { @MainActor in
+                    self.isLoading = true
+                    self.send(.fetchDetailByDate)
+                }
+            }.store(in: &cancellables)
     }
 }
 
@@ -142,7 +149,8 @@ extension ScheduleEditViewModel: Actionable {
     enum Action {
         case fetchUserInfo
         case editByDate(String)
-        case fetchDetail(Int)
+        case fetchDetailById(Int)
+        case fetchDetailByDate
         case handleFetchedDiary(any DiaryDTO)
         case boast
         
@@ -151,6 +159,7 @@ extension ScheduleEditViewModel: Actionable {
         case saveCaddy
         case saveRider
         case saveDailyWorker
+        case reset
     }
     
     func send(_ action: Action) {
@@ -159,42 +168,19 @@ extension ScheduleEditViewModel: Actionable {
             let userInfo = userRepository.getUserInfo()
             self.job = .init(title: userInfo?.job ?? "")
             
-        case .editByDate(let date):
+        case .editByDate(let dateString):
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             dateFormatter.locale = Locale(identifier: "ko_KR")
             dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-            let date = dateFormatter.date(from: date)
+            let date = dateFormatter.date(from: dateString)
             guard let date else { return }
-            self.date = date
             
-            Task { @MainActor in
-                do {
-                    self.isLoading = true
-                    switch self.job {
-                    case .caddy:
-                        let diary: DiaryCaddyDTO = try await diaryApi.getDiaryByDate(
-                            job: self.job,
-                            date: date)
-                        self.send(.handleFetchedDiary(diary))
-                    case .rider:
-                        let diary: DiaryRiderDTO = try await diaryApi.getDiaryByDate(
-                            job: self.job,
-                            date: date)
-                        self.send(.handleFetchedDiary(diary))
-                    case .dayWorker:
-                        let diary: DiaryDayWorkerDTO = try await diaryApi.getDiaryByDate(
-                            job: self.job,
-                            date: date)
-                        self.send(.handleFetchedDiary(diary))
-                    }
-                } catch {
-                    self.isLoading = false
-                    printError(error)
-                }
+            if dateString != date.dateString() {
+                self.date = date
             }
             
-        case .fetchDetail(let diaryId):
+        case .fetchDetailById(let diaryId):
             Task { @MainActor in
                 do {
                     self.isLoading = true
@@ -224,6 +210,34 @@ extension ScheduleEditViewModel: Actionable {
                 }
             }
             
+        case .fetchDetailByDate:
+            Task { @MainActor in
+                do {
+                    self.isLoading = true
+                    switch self.job {
+                    case .caddy:
+                        let diary: DiaryCaddyDTO = try await diaryApi.getDiaryByDate(
+                            job: self.job,
+                            date: date)
+                        self.send(.handleFetchedDiary(diary))
+                    case .rider:
+                        let diary: DiaryRiderDTO = try await diaryApi.getDiaryByDate(
+                            job: self.job,
+                            date: date)
+                        self.send(.handleFetchedDiary(diary))
+                    case .dayWorker:
+                        let diary: DiaryDayWorkerDTO = try await diaryApi.getDiaryByDate(
+                            job: self.job,
+                            date: date)
+                        self.send(.handleFetchedDiary(diary))
+                    }
+                } catch {
+                    self.isLoading = false
+                    self.send(.reset)
+                    printError(error)
+                }
+            }
+            
         case .handleFetchedDiary(let diary):
             if let diary = diary as? DiaryCaddyDTO {
                 self.workType = .init(rawValue: diary.worktype)
@@ -231,30 +245,30 @@ extension ScheduleEditViewModel: Actionable {
                 self.caddyFee = diary.caddyFee.withComma()
                 self.overFee = diary.overFee.withComma()
                 self.topDressing = diary.topdressing
-                self.date = diary.dateDate
                 
                 guard let id = diary.id else { return }
-                self.originalDiary = (id, formatDate(diary.dateDate))
+                let dateString = diary.dateDate.dateString()
+                self.originalDiary = (id, dateString)
             } else if let diary = diary as? DiaryRiderDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.deliveryCount = diary.numberOfDeliveries
                 self.deliveryIncome = diary.incomeOfDeliveries.withComma()
                 self.promotionCount = diary.numberOfPromotions
                 self.promotionIncome = diary.incomeOfPromotions.withComma()
-                self.date = diary.dateDate 
                 
                 guard let id = diary.id else { return }
-                self.originalDiary = (id, formatDate(diary.dateDate))
+                let dateString = diary.dateDate.dateString()
+                self.originalDiary = (id, dateString)
             } else if let diary = diary as? DiaryDayWorkerDTO {
                 self.workType = .init(rawValue: diary.worktype)
                 self.placeName = diary.place
                 self.dailyWage = diary.dailyWage.withComma()
                 self.typeOfJob = diary.typeOfJob
                 self.numberOfWork = diary.numberOfWork
-                self.date = diary.dateDate
                 
                 guard let id = diary.id else { return }
-                self.originalDiary = (id, formatDate(diary.dateDate))
+                let dateString = diary.dateDate.dateString()
+                self.originalDiary = (id, dateString)
             }
             self.isLoading = false
             
@@ -283,7 +297,7 @@ extension ScheduleEditViewModel: Actionable {
                 income: self.totalSum?.removeComma() ?? 0,
                 expenditure: self.expenditure.removeComma(),
                 saving: self.saving.removeComma(),
-                date: formatDate(self.date),
+                date: self.date.dateString(),
                 rounding: self.roundingCount,
                 caddyFee: self.caddyFee.removeComma(),
                 overFee: self.overFee.removeComma(),
@@ -322,7 +336,7 @@ extension ScheduleEditViewModel: Actionable {
                 income: self.totalSum?.removeComma() ?? 0,
                 expenditure: self.expenditure.removeComma(),
                 saving: self.saving.removeComma(),
-                date: formatDate(self.date),
+                date: self.date.dateString(),
                 numberOfDeliveries: self.deliveryCount,
                 incomeOfDeliveries: self.deliveryIncome.removeComma(),
                 numberOfPromotions: self.promotionCount,
@@ -361,7 +375,7 @@ extension ScheduleEditViewModel: Actionable {
                 income: self.totalSum?.removeComma() ?? 0,
                 expenditure: self.expenditure.removeComma(),
                 saving: self.saving.removeComma(),
-                date: formatDate(self.date),
+                date: self.date.dateString(),
                 place: self.placeName,
                 dailyWage: self.dailyWage.removeComma(),
                 typeOfJob: self.typeOfJob,
@@ -392,12 +406,35 @@ extension ScheduleEditViewModel: Actionable {
                     printError(error)
                 }
             }
+            
+        case .reset:
+            Task { @MainActor in
+                self.workType = .none
+                self.memo = ""
+                self.expenditure = ""
+                self.saving = ""
+                self.roundingCount = 0
+                self.caddyFee = ""
+                self.overFee = ""
+                self.topDressing = false
+                self.deliveryCount = 0
+                self.deliveryIncome = ""
+                self.promotionCount = 0
+                self.promotionIncome = ""
+                self.placeName = ""
+                self.dailyWage = ""
+                self.typeOfJob = ""
+                self.numberOfWork = 0.0
+            }
         }
     }
 }
 
-fileprivate func formatDate(_ date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.string(from: date)
+fileprivate extension Date {
+    
+    func dateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
 }

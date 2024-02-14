@@ -61,7 +61,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
                 coordinator: self,
                 targetIncome: target)
             if let diaryId {
-                viewModel.send(.fetchDetail(diaryId))
+                viewModel.send(.fetchDetailById(diaryId))
             }
             let view = ScheduleEditView(viewModel: viewModel)
             navigator.push { view }
