@@ -24,6 +24,7 @@ public struct DiaryCaddyDTO: DiaryDTO {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         return dateFormatter.date(from: date) ?? .now
     }
     

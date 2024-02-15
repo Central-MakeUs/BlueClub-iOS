@@ -67,11 +67,13 @@ struct DiaryListCell: View {
         let inputFormatter = DateFormatter()
         inputFormatter.locale = Locale(identifier: "ko_KR")
         inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         
         guard let date = inputFormatter.date(from: input) else { return "" }
         
         let outputFormatter = DateFormatter()
         outputFormatter.locale = Locale(identifier: "ko_KR")
+        outputFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         outputFormatter.dateFormat = "MM.dd E"
         let output = outputFormatter.string(from: date)
         return output

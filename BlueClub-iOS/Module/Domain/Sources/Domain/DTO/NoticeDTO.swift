@@ -17,13 +17,14 @@ public struct NoticeDTO: Codable, Identifiable {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         inputFormatter.locale = Locale(identifier: "ko_KR")
-        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        inputFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         let inputDate = inputFormatter.date(from: createAt)
         guard let inputDate else { return "" }
         
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "yy.MM.dd"
         outputFormatter.locale = Locale(identifier: "ko_KR")
+        outputFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         return outputFormatter.string(from: inputDate)
     }
 }
