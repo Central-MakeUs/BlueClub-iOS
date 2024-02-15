@@ -693,6 +693,7 @@
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "블루클럽";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -729,6 +730,7 @@
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "블루클럽";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
