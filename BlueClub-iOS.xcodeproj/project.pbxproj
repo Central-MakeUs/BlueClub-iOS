@@ -7,21 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB07DF362B52637E00C4A9C8 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = FB07DF352B52637E00C4A9C8 /* KakaoSDKCommon */; };
+		FB07DF382B52638D00C4A9C8 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FB07DF372B52638D00C4A9C8 /* KakaoSDKAuth */; };
+		FB07DF3A2B5263A500C4A9C8 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = FB07DF392B5263A500C4A9C8 /* KakaoSDKUser */; };
+		FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = FB0D21EA2B4B3EB00085670B /* Domain */; };
 		FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D22B459FC500318FA7 /* AppDelegate.swift */; };
 		FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */; };
-		FB1C63D72B459FC500318FA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63D62B459FC500318FA7 /* ViewController.swift */; };
 		FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DB2B459FC600318FA7 /* Assets.xcassets */; };
 		FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB1C63DD2B459FC600318FA7 /* LaunchScreen.storyboard */; };
+		FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C63ED2B45A8C900318FA7 /* DesignSystem */; };
+		FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */; };
+		FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63F72B45D1A500318FA7 /* MainTabView.swift */; };
+		FB1C63FE2B45D1E500318FA7 /* MainTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C63FD2B45D1E500318FA7 /* MainTabCoordinator.swift */; };
+		FB1C640A2B47119200318FA7 /* Utility in Frameworks */ = {isa = PBXBuildFile; productRef = FB1C64092B47119200318FA7 /* Utility */; };
+		FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1C640D2B4719E300318FA7 /* Image.xcassets */; };
+		FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C64132B47239200318FA7 /* InitialSettingView.swift */; };
+		FB1EF0852B7B6EE100FC4E6A /* BoastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */; };
+		FB1EF0872B7B804C00FC4E6A /* BoastCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */; };
+		FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28DE992B4F012F004710D7 /* LoginView.swift */; };
+		FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211A2B6BE55E00099B5D /* MyPageView.swift */; };
+		FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */; };
+		FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */; };
+		FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */; };
+		FB2D44662B7A407E00BAB000 /* DiaryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */; };
+		FB2D44692B7A4CC000BAB000 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44682B7A4CC000BAB000 /* FirebaseAnalytics */; };
+		FB2D446B2B7A4CC000BAB000 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D446A2B7A4CC000BAB000 /* FirebaseAnalyticsOnDeviceConversion */; };
+		FB2D446D2B7A4CC000BAB000 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D446C2B7A4CC000BAB000 /* FirebaseAnalyticsSwift */; };
+		FB2D446F2B7A4CC000BAB000 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D446E2B7A4CC000BAB000 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		FB2D44712B7A4CC000BAB000 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44702B7A4CC000BAB000 /* FirebaseAppCheck */; };
+		FB2D44732B7A4CE700BAB000 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44722B7A4CE700BAB000 /* FirebaseMessaging */; };
+		FB2D44752B7A4F5300BAB000 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB2D44742B7A4F5300BAB000 /* GoogleService-Info.plist */; };
+		FB2D44782B7A57E200BAB000 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */; };
+		FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */; };
+		FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */; };
+		FB3E75D62B6410E600D48993 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FB3E75D52B6410E600D48993 /* Lottie */; };
+		FB4479A12B505EB500741424 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = FB4479A02B505EB500741424 /* DataSource */; };
+		FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4479A22B50635900741424 /* LoginViewModel.swift */; };
+		FB81AEED2B751A7F00AF6E7C /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */; };
+		FB81AEEF2B751B6500AF6E7C /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */; };
+		FB81AEF22B751C9900AF6E7C /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEF12B751C9900AF6E7C /* ProfileEditView.swift */; };
+		FB81AEF42B7524C100AF6E7C /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEF32B7524C100AF6E7C /* ProfileEditViewModel.swift */; };
+		FB81AEF62B752D5600AF6E7C /* JobSelectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB81AEF52B752D5600AF6E7C /* JobSelectSheet.swift */; };
+		FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D22B517820007FF2C1 /* HomeView.swift */; };
+		FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */; };
+		FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */; };
+		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
+		FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* InitialSettingViewModel.swift */; };
+		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
+		FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */; };
+		FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */; };
+		FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF432B7283FD006F4763 /* WonInput.swift */; };
+		FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF452B728417006F4763 /* CustomStepper.swift */; };
+		FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */; };
+		FBB8EF4A2B7285D9006F4763 /* CustomDoubleStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */; };
+		FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8EF4B2B728627006F4763 /* CustomTextField.swift */; };
+		FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */; };
+		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
+		FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */; };
+		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
+		FBE1129C2B75D0F90064D1A9 /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */; };
+		FBE112A02B75D44F0064D1A9 /* NoticetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */; };
+		FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB0D21E92B4B3E6F0085670B /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlueClub-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1C63D22B459FC500318FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FB1C63D62B459FC500318FA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FB1C63DB2B459FC600318FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB1C63DE2B459FC600318FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB1C63E02B459FC600318FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB1C63E92B45A2F400318FA7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = text; name = DesignSystem; path = "BlueClub-iOS/Module/DesignSystem"; sourceTree = SOURCE_ROOT; };
+		FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FB1C63F72B45D1A500318FA7 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		FB1C63FD2B45D1E500318FA7 /* MainTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabCoordinator.swift; sourceTree = "<group>"; };
+		FB1C64082B4710B000318FA7 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utility; sourceTree = "<group>"; };
+		FB1C640D2B4719E300318FA7 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
+		FB1C64132B47239200318FA7 /* InitialSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingView.swift; sourceTree = "<group>"; };
+		FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastView.swift; sourceTree = "<group>"; };
+		FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastCard.swift; sourceTree = "<group>"; };
+		FB28DE992B4F012F004710D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueClub-iOS.entitlements"; sourceTree = "<group>"; };
+		FB28DE9C2B50505F004710D7 /* DataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataSource; sourceTree = "<group>"; };
+		FB2C211A2B6BE55E00099B5D /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteCoordinator.swift; sourceTree = "<group>"; };
+		FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputSheetView.swift; sourceTree = "<group>"; };
+		FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCell.swift; sourceTree = "<group>"; };
+		FB2D44742B7A4F5300BAB000 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
+		FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditViewModel.swift; sourceTree = "<group>"; };
+		FB4479A22B50635900741424 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		FB81AEF12B751C9900AF6E7C /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		FB81AEF32B7524C100AF6E7C /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		FB81AEF52B752D5600AF6E7C /* JobSelectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectSheet.swift; sourceTree = "<group>"; };
+		FB8E68D22B517820007FF2C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteView.swift; sourceTree = "<group>"; };
+		FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteViewModel.swift; sourceTree = "<group>"; };
+		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
+		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
+		FBAD2C722B487756002A77BC /* InitialSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingViewModel.swift; sourceTree = "<group>"; };
+		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementSheet.swift; sourceTree = "<group>"; };
+		FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementView.swift; sourceTree = "<group>"; };
+		FBB8EF432B7283FD006F4763 /* WonInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonInput.swift; sourceTree = "<group>"; };
+		FBB8EF452B728417006F4763 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
+		FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeSheet.swift; sourceTree = "<group>"; };
+		FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDoubleStepper.swift; sourceTree = "<group>"; };
+		FBB8EF4B2B728627006F4763 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueClubPrivateKey.swift; path = ../../../BlueClubPrivateKey.swift; sourceTree = "<group>"; };
+		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
+		FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
+		FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
+		FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticetDetailView.swift; sourceTree = "<group>"; };
+		FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +132,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB2D446F2B7A4CC000BAB000 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				FB2D446D2B7A4CC000BAB000 /* FirebaseAnalyticsSwift in Frameworks */,
+				FB07DF382B52638D00C4A9C8 /* KakaoSDKAuth in Frameworks */,
+				FB0D21EB2B4B3EB00085670B /* Domain in Frameworks */,
+				FB2D44782B7A57E200BAB000 /* SDWebImageSwiftUI in Frameworks */,
+				FB2D44712B7A4CC000BAB000 /* FirebaseAppCheck in Frameworks */,
+				FB2D446B2B7A4CC000BAB000 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				FB3E75D62B6410E600D48993 /* Lottie in Frameworks */,
+				FB1C63EE2B45A8C900318FA7 /* DesignSystem in Frameworks */,
+				FB1C640A2B47119200318FA7 /* Utility in Frameworks */,
+				FB07DF3A2B5263A500C4A9C8 /* KakaoSDKUser in Frameworks */,
+				FB4479A12B505EB500741424 /* DataSource in Frameworks */,
+				FB07DF362B52637E00C4A9C8 /* KakaoSDKCommon in Frameworks */,
+				FB2D44732B7A4CE700BAB000 /* FirebaseMessaging in Frameworks */,
+				FB2D44692B7A4CC000BAB000 /* FirebaseAnalytics in Frameworks */,
+				FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +159,7 @@
 			children = (
 				FB1C63D12B459FC500318FA7 /* BlueClub-iOS */,
 				FB1C63D02B459FC500318FA7 /* Products */,
+				FB1C63EC2B45A8C900318FA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,8 +174,11 @@
 		FB1C63D12B459FC500318FA7 /* BlueClub-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				FB28DE9B2B504CDA004710D7 /* BlueClub-iOS.entitlements */,
+				FB1C63E82B45A2E000318FA7 /* Module */,
 				FB1C63E72B45A17C00318FA7 /* Presenter */,
 				FB1C63E62B45A16100318FA7 /* App */,
+				FB1C63EF2B45A9A900318FA7 /* Resource */,
 			);
 			path = "BlueClub-iOS";
 			sourceTree = "<group>";
@@ -63,10 +186,12 @@
 		FB1C63E62B45A16100318FA7 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C63DB2B459FC600318FA7 /* Assets.xcassets */,
+				FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */,
+				FB1C63F42B45D0D000318FA7 /* AppCoordinator.swift */,
 				FB1C63D22B459FC500318FA7 /* AppDelegate.swift */,
 				FB1C63D42B459FC500318FA7 /* SceneDelegate.swift */,
 				FB1C63E02B459FC600318FA7 /* Info.plist */,
+				FB2D44742B7A4F5300BAB000 /* GoogleService-Info.plist */,
 				FB1C63DD2B459FC600318FA7 /* LaunchScreen.storyboard */,
 			);
 			path = App;
@@ -75,9 +200,210 @@
 		FB1C63E72B45A17C00318FA7 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				FB1C63D62B459FC500318FA7 /* ViewController.swift */,
+				FBAD2C742B487931002A77BC /* Splash */,
+				FB1C64012B470FE300318FA7 /* Login */,
+				FB1C63F62B45D15E00318FA7 /* MainTab */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		FB1C63E82B45A2E000318FA7 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				FB28DE9C2B50505F004710D7 /* DataSource */,
+				FB0D21E92B4B3E6F0085670B /* Domain */,
+				FB96A81E2B4B2BB90094CB3D /* Architecture */,
+				FB1C64082B4710B000318FA7 /* Utility */,
+				FB1C63E92B45A2F400318FA7 /* DesignSystem */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		FB1C63EC2B45A8C900318FA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB96A81D2B4B2B850094CB3D /* Architecture */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB1C63EF2B45A9A900318FA7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FB52E3D82B5E8AFB001169AB /* Lottie */,
+				FB1C63DB2B459FC600318FA7 /* Assets.xcassets */,
+				FB1C640D2B4719E300318FA7 /* Image.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		FB1C63F62B45D15E00318FA7 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				FB302BEA2B714E350005DBCB /* Common */,
+				FB2C21192B6BE55200099B5D /* MyPage */,
+				FB8E68D42B5221E5007FF2C1 /* ScheduleNote */,
+				FB8E68D12B517817007FF2C1 /* Home */,
+				FB1C63F72B45D1A500318FA7 /* MainTabView.swift */,
+				FB1C63FD2B45D1E500318FA7 /* MainTabCoordinator.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		FB1C64012B470FE300318FA7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FB28DE992B4F012F004710D7 /* LoginView.swift */,
+				FB4479A22B50635900741424 /* LoginViewModel.swift */,
+				FB1C64122B47238600318FA7 /* InitialSetting */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		FB1C64122B47238600318FA7 /* InitialSetting */ = {
+			isa = PBXGroup;
+			children = (
+				FB1C64132B47239200318FA7 /* InitialSettingView.swift */,
+				FBAD2C722B487756002A77BC /* InitialSettingViewModel.swift */,
+				FBAD2C9E2B49C275002A77BC /* SubViews */,
+				FBAD2C792B487E5F002A77BC /* Sheet */,
+			);
+			path = InitialSetting;
+			sourceTree = "<group>";
+		};
+		FB2C21192B6BE55200099B5D /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				FB2C211A2B6BE55E00099B5D /* MyPageView.swift */,
+				FB81AEEC2B751A7F00AF6E7C /* MyPageViewModel.swift */,
+				FB81AEEE2B751B6500AF6E7C /* MyPageCoordinator.swift */,
+				FB81AEF02B751C8E00AF6E7C /* ProfileEdit */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		FB2C21232B6DEB9100099B5D /* GoalInputSheet */ = {
+			isa = PBXGroup;
+			children = (
+				FB2C21242B6DEB9D00099B5D /* GoalInputSheetView.swift */,
+			);
+			path = GoalInputSheet;
+			sourceTree = "<group>";
+		};
+		FB2D44642B7A406800BAB000 /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */,
+				FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */,
+				FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */,
+			);
+			path = Subview;
+			sourceTree = "<group>";
+		};
+		FB302BEA2B714E350005DBCB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FBE1129A2B75D0E40064D1A9 /* Notice */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FB302BEE2B71566D0005DBCB /* ScheduleEdit */ = {
+			isa = PBXGroup;
+			children = (
+				FBB8EF422B7283E6006F4763 /* SubView */,
+				FB302BEF2B71567A0005DBCB /* ScheduleEditView.swift */,
+				FB302BF12B7157D00005DBCB /* ScheduleEditViewModel.swift */,
+			);
+			path = ScheduleEdit;
+			sourceTree = "<group>";
+		};
+		FB52E3D82B5E8AFB001169AB /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				FBD812B92B63FDE4000FD1C0 /* splash.json */,
+				FBD812C12B64077E000FD1C0 /* progress.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		FB81AEF02B751C8E00AF6E7C /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				FB81AEF12B751C9900AF6E7C /* ProfileEditView.swift */,
+				FB81AEF32B7524C100AF6E7C /* ProfileEditViewModel.swift */,
+				FB81AEF52B752D5600AF6E7C /* JobSelectSheet.swift */,
+			);
+			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
+		FB8E68D12B517817007FF2C1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FB8E68D22B517820007FF2C1 /* HomeView.swift */,
+				FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */,
+				FB2C211F2B6D530D00099B5D /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FB8E68D42B5221E5007FF2C1 /* ScheduleNote */ = {
+			isa = PBXGroup;
+			children = (
+				FB2D44642B7A406800BAB000 /* Subview */,
+				FB302BEE2B71566D0005DBCB /* ScheduleEdit */,
+				FB2C21232B6DEB9100099B5D /* GoalInputSheet */,
+				FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */,
+				FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */,
+				FB2C21212B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift */,
+			);
+			path = ScheduleNote;
+			sourceTree = "<group>";
+		};
+		FBAD2C742B487931002A77BC /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				FBAD2C752B487938002A77BC /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		FBAD2C792B487E5F002A77BC /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */,
+			);
+			path = Sheet;
+			sourceTree = "<group>";
+		};
+		FBAD2C9E2B49C275002A77BC /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				FBAD2C9F2B49C28E002A77BC /* ServiceAgreementView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		FBB8EF422B7283E6006F4763 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				FBB8EF432B7283FD006F4763 /* WonInput.swift */,
+				FBB8EF452B728417006F4763 /* CustomStepper.swift */,
+				FBB8EF492B7285D9006F4763 /* CustomDoubleStepper.swift */,
+				FBB8EF4B2B728627006F4763 /* CustomTextField.swift */,
+				FBB8EF472B728457006F4763 /* ScheduleTypeSheet.swift */,
+				FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		FBE1129A2B75D0E40064D1A9 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */,
+				FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */,
+			);
+			path = Notice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +422,24 @@
 			dependencies = (
 			);
 			name = "BlueClub-iOS";
+			packageProductDependencies = (
+				FB1C63ED2B45A8C900318FA7 /* DesignSystem */,
+				FB1C64092B47119200318FA7 /* Utility */,
+				FB96A81F2B4B2BFF0094CB3D /* Architecture */,
+				FB0D21EA2B4B3EB00085670B /* Domain */,
+				FB4479A02B505EB500741424 /* DataSource */,
+				FB07DF352B52637E00C4A9C8 /* KakaoSDKCommon */,
+				FB07DF372B52638D00C4A9C8 /* KakaoSDKAuth */,
+				FB07DF392B5263A500C4A9C8 /* KakaoSDKUser */,
+				FB3E75D52B6410E600D48993 /* Lottie */,
+				FB2D44682B7A4CC000BAB000 /* FirebaseAnalytics */,
+				FB2D446A2B7A4CC000BAB000 /* FirebaseAnalyticsOnDeviceConversion */,
+				FB2D446C2B7A4CC000BAB000 /* FirebaseAnalyticsSwift */,
+				FB2D446E2B7A4CC000BAB000 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				FB2D44702B7A4CC000BAB000 /* FirebaseAppCheck */,
+				FB2D44722B7A4CE700BAB000 /* FirebaseMessaging */,
+				FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */,
+			);
 			productName = "BlueClub-iOS";
 			productReference = FB1C63CF2B459FC500318FA7 /* BlueClub-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +468,14 @@
 				Base,
 			);
 			mainGroup = FB1C63C62B459FC500318FA7;
+			packageReferences = (
+				FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */,
+				FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */,
+				FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FB2D44762B7A57E200BAB000 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = FB1C63D02B459FC500318FA7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,7 +491,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */,
+				FBD812C22B64077E000FD1C0 /* progress.json in Resources */,
+				FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */,
+				FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */,
 				FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */,
+				FB2D44752B7A4F5300BAB000 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,9 +506,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB1C63D72B459FC500318FA7 /* ViewController.swift in Sources */,
+				FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */,
+				FB81AEED2B751A7F00AF6E7C /* MyPageViewModel.swift in Sources */,
+				FB1C63F52B45D0D000318FA7 /* AppCoordinator.swift in Sources */,
+				FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */,
+				FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */,
+				FBE1129C2B75D0F90064D1A9 /* NoticeListView.swift in Sources */,
+				FB1EF0852B7B6EE100FC4E6A /* BoastView.swift in Sources */,
 				FB1C63D32B459FC500318FA7 /* AppDelegate.swift in Sources */,
+				FB2C21252B6DEB9D00099B5D /* GoalInputSheetView.swift in Sources */,
+				FBB8EF462B728417006F4763 /* CustomStepper.swift in Sources */,
+				FB2C211B2B6BE55E00099B5D /* MyPageView.swift in Sources */,
+				FBB8EF4A2B7285D9006F4763 /* CustomDoubleStepper.swift in Sources */,
+				FB4479A32B50635900741424 /* LoginViewModel.swift in Sources */,
+				FB302BF22B7157D00005DBCB /* ScheduleEditViewModel.swift in Sources */,
+				FBB8EF442B7283FD006F4763 /* WonInput.swift in Sources */,
+				FB1EF0872B7B804C00FC4E6A /* BoastCard.swift in Sources */,
+				FB81AEF62B752D5600AF6E7C /* JobSelectSheet.swift in Sources */,
+				FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */,
+				FBB8EF4C2B728627006F4763 /* CustomTextField.swift in Sources */,
+				FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */,
+				FBB8EF482B728457006F4763 /* ScheduleTypeSheet.swift in Sources */,
+				FBE112A02B75D44F0064D1A9 /* NoticetDetailView.swift in Sources */,
+				FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */,
+				FBAD2CA02B49C28E002A77BC /* ServiceAgreementView.swift in Sources */,
+				FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */,
+				FBAD2C762B487938002A77BC /* SplashView.swift in Sources */,
+				FB81AEF42B7524C100AF6E7C /* ProfileEditViewModel.swift in Sources */,
+				FB2C21222B6D5BDB00099B5D /* ScheduleNoteCoordinator.swift in Sources */,
+				FB2D44662B7A407E00BAB000 /* DiaryListCell.swift in Sources */,
 				FB1C63D52B459FC500318FA7 /* SceneDelegate.swift in Sources */,
+				FB1C63FE2B45D1E500318FA7 /* MainTabCoordinator.swift in Sources */,
+				FB81AEEF2B751B6500AF6E7C /* MyPageCoordinator.swift in Sources */,
+				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,
+				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
+				FB81AEF22B751C9900AF6E7C /* ProfileEditView.swift in Sources */,
+				FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */,
+				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
+				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,
+				FB302BF02B71567A0005DBCB /* ScheduleEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +614,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -279,7 +671,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -294,15 +686,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,9 +706,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kim.BlueClub-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -321,15 +722,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,9 +742,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kim.BlueClub-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -365,6 +775,135 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FB03FA8C2B4B174C00F2BDFA /* XCRemoteSwiftPackageReference "DependencyContainer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/insub4067/DependencyContainer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.0;
+			};
+		};
+		FB2D44762B7A57E200BAB000 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.6;
+			};
+		};
+		FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
+		FBD21B5D2B4B2CF200E2237A /* XCRemoteSwiftPackageReference "Navigator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/insub4067/Navigator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
+		FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FB07DF352B52637E00C4A9C8 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		FB07DF372B52638D00C4A9C8 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		FB07DF392B5263A500C4A9C8 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBD511242B52513E005154CB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+		FB0D21EA2B4B3EB00085670B /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		FB1C63ED2B45A8C900318FA7 /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
+		FB1C64092B47119200318FA7 /* Utility */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utility;
+		};
+		FB2D44682B7A4CC000BAB000 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FB2D446A2B7A4CC000BAB000 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		FB2D446C2B7A4CC000BAB000 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		FB2D446E2B7A4CC000BAB000 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		FB2D44702B7A4CC000BAB000 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		FB2D44722B7A4CE700BAB000 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44672B7A4CC000BAB000 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		FB2D44772B7A57E200BAB000 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2D44762B7A57E200BAB000 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		FB3E75D52B6410E600D48993 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB3E75D42B6410E600D48993 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		FB4479A02B505EB500741424 /* DataSource */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataSource;
+		};
+		FB96A81F2B4B2BFF0094CB3D /* Architecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Architecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FB1C63C72B459FC500318FA7 /* Project object */;
 }

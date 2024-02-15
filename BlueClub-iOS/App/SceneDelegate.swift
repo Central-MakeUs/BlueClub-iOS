@@ -1,23 +1,30 @@
 //
 //  SceneDelegate.swift
 //  BlueClub-iOS
-//
+
 //  Created by 김인섭 on 1/3/24.
 //
 
-import UIKit
+import SwiftUI
+import DependencyContainer
+import DataSource
+import Domain
+import KakaoSDKAuth
+import MightyCombine
+import Utility
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    var window: UIWindow?
+    
+    static var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: scene.coordinateSpace.bounds)
-        window?.windowScene = scene
-        window?.rootViewController = ViewController()
-        window?.makeKeyAndVisible()
+        printLog()
+        Self.coordinator = .init()
+        Self.coordinator?.send(.start(scene))
+        configDependencies()
+        configDesignSystem()
+        configMightyCombine()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,7 +54,60 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // 카카오 로그인 하면 여기로 열림
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                 _ = AuthController.handleOpenUrl(url: url)
+            }
+        }
+    }
 }
 
+private extension SceneDelegate {
+    
+    func configDesignSystem() {
+        UIFont.registerFonts()
+    }
+    
+    func configDependencies() {
+        
+        Container.live
+        // MARK: - UserRepository
+            .register { KakaoLoginService() as KakaoLoginServiceable }
+            .register { AppleLoginService() as AppleLoginServiceable }
+            .register { UserRepository(dependencies: .live) as UserRepositoriable }
+        // MARK: - Date
+            .register { DateService() as DateServiceable }
+        // MARK: - Api
+            .register { 
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return AuthNetwork(userRespository: userRepository) as AuthNetworkable }
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return UserNetwork(userRespository: userRepository) as UserNetworkable }
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return DiaryNetwork(userRespository: userRepository) as DiaryNetworkable}
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return MonthlyGoalNetwork(userRespository: userRepository) as MonthlyGoalNetworkable }
+            .register {
+                let userRepository: UserRepositoriable = Container.live.resolve()
+                return FileNetwork(userRespository: userRepository) as FileNetworkable }
+            .register { NoticeNetwork(container: .live) as NoticeNetworkable }
+        // MARK: - UseCase
+            .register { ValidateUserNameUseCase() }
+    }
+    
+    func configMightyCombine() {
+        URLSession.printLog = true
+        URLSession.requestLogStyle = .prettyJson
+        URLSession.responseLogStyle = .prettyJson
+    }
+}
+
+extension Container {
+    
+    static let live = Container()
+}
