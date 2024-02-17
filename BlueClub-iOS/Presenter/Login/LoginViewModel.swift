@@ -37,6 +37,7 @@ extension LoginViewModel: Actionable {
     
     @MainActor func send(_ action: Action) {
         switch action {
+            
         case .didSelectLoginMethod(let method):
             Task {
                 do {

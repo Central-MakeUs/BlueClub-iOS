@@ -38,12 +38,19 @@ struct SplashView: View {
         .background(Color.colors(.primaryNormal))
         .task {
             try? await Task.sleep(nanoseconds: 1_000_000_000)
-            let user = userRepository.getLoginUser()
-            guard user != nil else {
+            
+            let socialUser = userRepository.getLoginUser()
+            let userInfo = userRepository.getUserInfo()
+            
+            if socialUser == nil {
                 coordinator?.send(.login)
-                return
+            } else if userInfo?.job == nil {
+                coordinator?.send(.login)
+                try? await Task.sleep(for: .seconds(0.5))
+                coordinator?.send(.initialSetting)
+            } else {
+                coordinator?.send(.home)
             }
-            coordinator?.send(.home)
         }
         .onAppear { printLog() }
     }
