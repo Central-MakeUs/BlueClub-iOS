@@ -9,6 +9,8 @@ import SwiftUI
 import DesignSystem
 import Architecture
 import Combine
+import DependencyContainer
+import DataSource
 
 struct ScheduleEditView: View {
     
@@ -450,11 +452,4 @@ fileprivate func format(date: Date) -> String {
     dateFormatter.dateFormat = "MM.dd EEEE"
     dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
     return dateFormatter.string(from: date)
-}
-
-#Preview {
-    ScheduleEditView(
-        viewModel: .init(
-            coordinator: .init(navigator: .init()),
-            targetIncome: 100000))
 }

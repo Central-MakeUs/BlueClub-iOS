@@ -22,7 +22,7 @@ struct CustomStepper: View {
             }, label: {
                 Image.icons(.minuspx)
                     .resizable()
-                    .fixedSize()
+                    .scaledToFit()
                     .frame(width: 18)
                     .foregroundStyle(Color.colors(
                         decreaseAvailable
@@ -41,7 +41,7 @@ struct CustomStepper: View {
             }, label: {
                 Image.icons(.pluspx)
                     .resizable()
-                    .fixedSize()
+                    .scaledToFit()
                     .frame(width: 18)
                     .foregroundStyle(Color.colors(
                         increaseAvailable
@@ -51,4 +51,8 @@ struct CustomStepper: View {
             }).buttonStyle(.plain)
         }.frame(height: 42)
     }
+}
+
+#Preview {
+    CustomStepper(count: .constant(0))
 }
