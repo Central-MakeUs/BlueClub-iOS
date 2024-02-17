@@ -120,7 +120,7 @@ private extension MyPageView {
     }
     
     @ViewBuilder func rowCell(_ row: MyPageItemRow) -> some View {
-        if row == .versionInfo {
+        if row == .appversion {
             HStack {
                 HStack(alignment: .bottom, spacing: 8) {
                     Text(row.title)
@@ -131,19 +131,21 @@ private extension MyPageView {
                         .foregroundStyle(Color.colors(.gray05))
                 }.frame(height: 24)
                 Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    Text("업데이트")
-                        .foregroundStyle(Color.white)
-                        .fontModifer(.sb3)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 6)
-                        .roundedBackground(
-                            Color.colors(.black),
-                            radius: 4
-                        )
-                })
+                if viewModel.isUpdateAvailable() {
+                    Button(action: {
+                        viewModel.send(.didTapListItem(row))
+                    }, label: {
+                        Text("업데이트")
+                            .foregroundStyle(Color.white)
+                            .fontModifer(.sb3)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .roundedBackground(
+                                Color.colors(.black),
+                                radius: 4
+                            )
+                    })
+                }
             }
             .frame(height: 52)
             .padding(.horizontal, 30)
@@ -223,7 +225,7 @@ enum MyPageItemRow: CaseIterable {
     case notificationSetting
     case termsOf
     case privacy
-    case versionInfo
+    case appversion
     
     var title: String {
         switch self {
@@ -235,7 +237,7 @@ enum MyPageItemRow: CaseIterable {
             return "이용약관"
         case .privacy:
             return "개인정보 처리방침"
-        case .versionInfo:
+        case .appversion:
             return "버전정보"
         }
     }
