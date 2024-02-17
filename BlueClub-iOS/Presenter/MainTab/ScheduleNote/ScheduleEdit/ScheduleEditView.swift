@@ -75,7 +75,13 @@ extension ScheduleEditView {
                     case .dayWorker:
                         temporaryContentRows()
                     }
-                    memoPreview()
+                    
+                    Button(action: {
+                        viewModel.showMemoSheet = true
+                    }, label: {
+                        memoPreview()
+                    })
+                    
                     plusButtons()
                     contentFooter()
                 } else {
