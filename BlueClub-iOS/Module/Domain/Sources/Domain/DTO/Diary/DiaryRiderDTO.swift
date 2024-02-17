@@ -20,14 +20,6 @@ public struct DiaryRiderDTO: DiaryDTO {
     public let numberOfPromotions: Int
     public let incomeOfPromotions: Int
     
-    public var dateDate: Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-        return dateFormatter.date(from: date) ?? .now
-    }
-    
     public init(
         id: Int? = nil,
         worktype: String,

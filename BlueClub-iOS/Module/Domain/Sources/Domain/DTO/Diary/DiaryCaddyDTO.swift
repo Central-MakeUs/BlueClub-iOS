@@ -15,18 +15,11 @@ public struct DiaryCaddyDTO: DiaryDTO {
     public let expenditure: Int
     public let saving: Int
     public let date: String
+    
     public let rounding: Int
     public let caddyFee: Int
     public let overFee: Int
     public let topdressing: Bool
-    
-    public var dateDate: Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-        return dateFormatter.date(from: date) ?? .now
-    }
     
     public init(
         id: Int? = nil,
@@ -54,5 +47,3 @@ public struct DiaryCaddyDTO: DiaryDTO {
         self.topdressing = topdressing
     }
 }
-
-public protocol DiaryDTO: Codable { }

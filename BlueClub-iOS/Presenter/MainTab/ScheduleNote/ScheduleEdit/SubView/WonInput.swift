@@ -46,20 +46,6 @@ private extension WonInput {
         guard let integer = Int(target) else {
             return self.text = ""
         }
-        self.text = formatNumber(integer)
-    }
-    
-    func formatNumber(_ number: Int) -> String {
-        formatter.string(from: NSNumber(value: number)) ?? ""
-    }
-
-    var formatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 0
-        formatter.groupingSeparator = ","
-        formatter.usesGroupingSeparator = true
-        return formatter
+        self.text = integer.withComma()
     }
 }

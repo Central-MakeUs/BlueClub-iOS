@@ -259,46 +259,38 @@ extension ScheduleEditViewModel: Actionable {
             }
             
         case .handleFetchedDiary(let diary, let shouldSetDate):
+            
+            self.workType = .init(rawValue: diary.worktype)
+            self.memo = diary.memo
+            self.saving = diary.saving.withComma()
+            self.expenditure = diary.expenditure.withComma()
+            
+            if shouldSetDate {
+                self.date = diary.dateDate
+            }
+            
+            if let id = diary.id {
+                let dateString = diary.dateDate.dateString()
+                self.originalDiary = (id, dateString)
+            }
+            
             if let diary = diary as? DiaryCaddyDTO {
-                self.workType = .init(rawValue: diary.worktype)
                 self.roundingCount = diary.rounding
                 self.caddyFee = diary.caddyFee.withComma()
                 self.overFee = diary.overFee.withComma()
                 self.topDressing = diary.topdressing
-                if shouldSetDate {
-                    self.date = diary.dateDate
-                }
-                
-                guard let id = diary.id else { return }
-                let dateString = diary.dateDate.dateString()
-                self.originalDiary = (id, dateString)
             } else if let diary = diary as? DiaryRiderDTO {
-                self.workType = .init(rawValue: diary.worktype)
                 self.deliveryCount = diary.numberOfDeliveries
                 self.deliveryIncome = diary.incomeOfDeliveries.withComma()
                 self.promotionCount = diary.numberOfPromotions
                 self.promotionIncome = diary.incomeOfPromotions.withComma()
-                if shouldSetDate {
-                    self.date = diary.dateDate
-                }
-                
-                guard let id = diary.id else { return }
-                let dateString = diary.dateDate.dateString()
-                self.originalDiary = (id, dateString)
             } else if let diary = diary as? DiaryDayWorkerDTO {
-                self.workType = .init(rawValue: diary.worktype)
                 self.placeName = diary.place
                 self.dailyWage = diary.dailyWage.withComma()
                 self.typeOfJob = diary.typeOfJob
                 self.numberOfWork = diary.numberOfWork
-                if shouldSetDate {
-                    self.date = diary.dateDate
-                }
-                
-                guard let id = diary.id else { return }
-                let dateString = diary.dateDate.dateString()
-                self.originalDiary = (id, dateString)
             }
+            
             self.isLoading = false
             
         case .boast:
