@@ -15,6 +15,7 @@ import Utility
 import Combine
 import DesignSystem
 
+@MainActor
 final class InitialSettingViewModel: ObservableObject {
     
     private var cancellables: Set<AnyCancellable> = []

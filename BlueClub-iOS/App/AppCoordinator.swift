@@ -50,7 +50,6 @@ extension AppCoordinator {
             window?.rootViewController = navigator.view
             
         case .initialSetting:
-            
             let viewModel = InitialSettingViewModel(cooridonator: self)
             navigator.push {
                 InitialSettingView(viewModel: viewModel)
