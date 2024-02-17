@@ -85,6 +85,7 @@ extension ScheduleNoteViewModel: Actionable {
             }
             
         case .increaseMonth:
+            guard 0 > monthIndex else { return }
             monthIndex += 1
             self.send(.fetchGoal)
             self.send(.fetchDiaryList)

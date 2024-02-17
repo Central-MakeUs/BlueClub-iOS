@@ -293,7 +293,12 @@ extension ScheduleNoteView {
     @ViewBuilder func diaryList() -> some View {
         if viewModel.diaryList.isEmpty {
             Button {
-                viewModel.send(.scheduleEdit)
+                if viewModel.monthIndex == 0 {
+                    viewModel.send(.scheduleEdit)
+                } else {
+                    let dateString = "\(viewModel.currentYear)-\(viewModel.currentMonth)-01"
+                    viewModel.send(.scheduleEditByDate(dateString))
+                }
             } label: {
                 firstDiaryButton()
             }
