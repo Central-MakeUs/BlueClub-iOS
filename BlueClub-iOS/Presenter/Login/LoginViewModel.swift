@@ -39,32 +39,38 @@ extension LoginViewModel: Actionable {
         switch action {
             
         case .didSelectLoginMethod(let method):
-            Task {
-                do {
-                    self.isLoading = true
-                    let user = try await self.userRepository.requestLogin(method)
-                    userRepository.registLoginUser(user)
-                    
-                    let userInfo = try await self.authApi.auth(
-                        user, fcmToken:
-                            AppDelegate.firebaseToken)
-                    userRepository.registUserInfo(userInfo)
-                    
-                    let isNewUser = (userInfo.job == nil &&
-                    userInfo.monthlyTargetIncome == nil &&
-                    userInfo.socialType == nil &&
-                    userInfo.socialId == nil)
-                    
-                    if isNewUser {
+            self.isLoading = true
+            userRepository.requestLogin(method) { [weak self] result in
+                guard let self else { return }
+                Task { @MainActor in 
+                    switch result {
+                    case .success(let user):
+                        do {
+                            self.userRepository.registLoginUser(user)
+                            let userInfo = try await self.authApi.auth(
+                                user, fcmToken:
+                                    AppDelegate.firebaseToken)
+                            self.userRepository.registUserInfo(userInfo)
+                            let isNewUser = (userInfo.job == nil &&
+                                             userInfo.monthlyTargetIncome == nil &&
+                                             userInfo.socialType == nil &&
+                                             userInfo.socialId == nil)
+                            
+                            if isNewUser {
+                                self.isLoading = false
+                                self.coordinator?.send(.initialSetting)
+                            } else {
+                                self.isLoading = false
+                                self.coordinator?.send(.home)
+                            }
+                        } catch {
+                            printError(error)
+                            self.isLoading = false
+                        }
+                    case .failure(let error):
+                        printError(error)
                         self.isLoading = false
-                        coordinator?.send(.initialSetting)
-                    } else {
-                        self.isLoading = false
-                        coordinator?.send(.home)
                     }
-                } catch {
-                    printError(error)
-                    self.isLoading = false
                 }
             }
         }

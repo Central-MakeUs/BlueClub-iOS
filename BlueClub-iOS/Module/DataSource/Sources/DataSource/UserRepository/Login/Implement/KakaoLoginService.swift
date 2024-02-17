@@ -42,7 +42,7 @@ public class KakaoLoginService: KakaoLoginServiceable {
         UserApi.shared.me { [weak self] user, error in
             if let error { self?.continuation?.resume(throwing: error) }
             guard let user, let id = user.id else {
-                self?.continuation?.resume(throwing: SocialLoginError.kakaoUserNotFoun)
+                self?.continuation?.resume(throwing: SocialLoginError.kakaoUserNotFound)
                 return
             }
             let loginUser = SocialLoginUser(

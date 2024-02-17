@@ -7,4 +7,6 @@
 
 import Foundation
 
-public protocol KakaoLoginServiceable: LoginServiceable { }
+public protocol KakaoLoginServiceable {
+    
+}

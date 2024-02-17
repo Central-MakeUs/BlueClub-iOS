@@ -8,6 +8,7 @@
 import Domain
 import DependencyContainer
 import Architecture
+import KakaoSDKUser
 
 public class UserRepository: LoginAccessible {
     
@@ -31,12 +32,51 @@ public class UserRepository: LoginAccessible {
         self.userInfo = nil
     }
     
-    public func requestLogin(_ loginMethod: Domain.LoginMethod) async throws -> Domain.SocialLoginUser {
+    public func requestLogin(
+        _ loginMethod: Domain.LoginMethod,
+        completion: @escaping (Result<SocialLoginUser, Error>) -> Void
+    ) {
         switch loginMethod {
         case .apple:
-            return try await self.appleLogin.request()
+            Task {
+                do {
+                    let user = try await self.appleLogin.request()
+                    completion(.success(user))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
         case .kakao:
-            return try await self.kakaoLogin.request()
+            let hasKakaoTalk = UserApi.isKakaoTalkLoginAvailable()
+            if hasKakaoTalk {
+                UserApi.shared.loginWithKakaoTalk { [weak self] auth, error in
+                    if let error {
+                        completion(.failure(error))
+                    }
+                    guard
+                        let self,
+                        auth != nil
+                    else {
+                        completion(.failure(SocialLoginError.kakaoAuthNotFound))
+                        return
+                    }
+                    self.requestUserData(completion)
+                }
+            } else {
+                UserApi.shared.loginWithKakaoAccount { [weak self] auth, error in
+                    if let error {
+                        completion(.failure(error))
+                    }
+                    guard 
+                        let self,
+                        auth != nil
+                    else {
+                        completion(.failure(SocialLoginError.kakaoAuthNotFound))
+                        return
+                    }
+                    self.requestUserData(completion)
+                }
+            }
         }
     }
     
@@ -46,6 +86,27 @@ public class UserRepository: LoginAccessible {
     
     public func getLoginUser() -> Domain.SocialLoginUser? {
         self.loginUser
+    }
+    
+    private func requestUserData(_ completion: @escaping (Result<SocialLoginUser, Error>) -> Void) {
+        UserApi.shared.me { user, error in
+            if let error {
+                completion(.failure(error))
+            }
+            guard
+                let user,
+                let id = user.id
+            else {
+                completion(.failure(SocialLoginError.kakaoUserNotFound))
+                return
+            }
+            let loginUser = SocialLoginUser(
+                id: String(id),
+                name: user.kakaoAccount?.legalName,
+                email: user.kakaoAccount?.email,
+                loginMethod: .kakao)
+            completion(.success(loginUser))
+        }
     }
 }
 

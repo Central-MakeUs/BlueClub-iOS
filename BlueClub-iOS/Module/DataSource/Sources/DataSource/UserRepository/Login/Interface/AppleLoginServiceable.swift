@@ -6,5 +6,8 @@
 //
 
 import Foundation
+import Domain
 
-public protocol AppleLoginServiceable: LoginServiceable { }
+public protocol AppleLoginServiceable {
+    @MainActor var request: () async throws -> SocialLoginUser { get set }
+}
