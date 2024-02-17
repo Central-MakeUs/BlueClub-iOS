@@ -411,6 +411,7 @@ extension ScheduleEditViewModel: Actionable {
                         
                         self.coordinator?.navigator.pop()
                         if shouldNavigateToBoast {
+                            self.coordinator
                             self.coordinator?.send(.boast(originalDiary.0))
                         }
                     } else {

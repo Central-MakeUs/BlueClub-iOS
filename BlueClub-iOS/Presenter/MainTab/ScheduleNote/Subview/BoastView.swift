@@ -38,11 +38,13 @@ struct BoastView: View {
         BaseView {
             AppBar(
                 leadingIcon: (Icons.arrow_left, { 
-                    navigator?.pop()
+                    navigator?.dismiss()
+                    navigator?.popToRoot()
                 }),
                 title: .none,
                 trailingButton: ("닫기", { 
-                    navigator?.pop()
+                    navigator?.dismiss()
+                    navigator?.popToRoot()
                 }))
         } content: {
             VStack {

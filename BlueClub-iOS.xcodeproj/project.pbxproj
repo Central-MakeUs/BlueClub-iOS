@@ -52,6 +52,8 @@
 		FB8E68D62B52220D007FF2C1 /* ScheduleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D52B52220D007FF2C1 /* ScheduleNoteView.swift */; };
 		FB8E68D82B522235007FF2C1 /* ScheduleNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */; };
 		FB96A8202B4B2BFF0094CB3D /* Architecture in Frameworks */ = {isa = PBXBuildFile; productRef = FB96A81F2B4B2BFF0094CB3D /* Architecture */; };
+		FBA0A2B22B80FFA200EDA58F /* BoastLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0A2B12B80FFA200EDA58F /* BoastLoadingView.swift */; };
+		FBA0A2B42B8100A000EDA58F /* loadingCoin.json in Resources */ = {isa = PBXBuildFile; fileRef = FBA0A2B32B8100A000EDA58F /* loadingCoin.json */; };
 		FBAD2C732B487756002A77BC /* InitialSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C722B487756002A77BC /* InitialSettingViewModel.swift */; };
 		FBAD2C762B487938002A77BC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C752B487938002A77BC /* SplashView.swift */; };
 		FBAD2C782B487E59002A77BC /* ServiceAgreementSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */; };
@@ -64,7 +66,6 @@
 		FBD5DA092B56F0FC000D720C /* BlueClubPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */; };
 		FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812B92B63FDE4000FD1C0 /* splash.json */; };
 		FBD812C02B6404F0000FD1C0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */; };
-		FBD812C22B64077E000FD1C0 /* progress.json in Resources */ = {isa = PBXBuildFile; fileRef = FBD812C12B64077E000FD1C0 /* progress.json */; };
 		FBE1129C2B75D0F90064D1A9 /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */; };
 		FBE112A02B75D44F0064D1A9 /* NoticetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */; };
 		FBE112A22B75DAA20064D1A9 /* MemoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */; };
@@ -109,6 +110,8 @@
 		FB8E68D72B522235007FF2C1 /* ScheduleNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNoteViewModel.swift; sourceTree = "<group>"; };
 		FB96A81D2B4B2B850094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Architecture; path = "BlueClub-iOS/Module/Architecture"; sourceTree = "<group>"; };
 		FB96A81E2B4B2BB90094CB3D /* Architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Architecture; sourceTree = "<group>"; };
+		FBA0A2B12B80FFA200EDA58F /* BoastLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastLoadingView.swift; sourceTree = "<group>"; };
+		FBA0A2B32B8100A000EDA58F /* loadingCoin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingCoin.json; sourceTree = "<group>"; };
 		FBAD2C722B487756002A77BC /* InitialSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingViewModel.swift; sourceTree = "<group>"; };
 		FBAD2C752B487938002A77BC /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FBAD2C772B487E59002A77BC /* ServiceAgreementSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAgreementSheet.swift; sourceTree = "<group>"; };
@@ -121,7 +124,6 @@
 		FBD5DA082B56F0FC000D720C /* BlueClubPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueClubPrivateKey.swift; path = ../../../BlueClubPrivateKey.swift; sourceTree = "<group>"; };
 		FBD812B92B63FDE4000FD1C0 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		FBD812BF2B6404F0000FD1C0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		FBD812C12B64077E000FD1C0 /* progress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progress.json; sourceTree = "<group>"; };
 		FBE1129B2B75D0F90064D1A9 /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
 		FBE1129F2B75D44F0064D1A9 /* NoticetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticetDetailView.swift; sourceTree = "<group>"; };
 		FBE112A12B75DAA20064D1A9 /* MemoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSheet.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				FB2D44652B7A407E00BAB000 /* DiaryListCell.swift */,
 				FB1EF0842B7B6EE100FC4E6A /* BoastView.swift */,
 				FB1EF0862B7B804C00FC4E6A /* BoastCard.swift */,
+				FBA0A2B12B80FFA200EDA58F /* BoastLoadingView.swift */,
 			);
 			path = Subview;
 			sourceTree = "<group>";
@@ -321,8 +324,8 @@
 		FB52E3D82B5E8AFB001169AB /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				FBA0A2B32B8100A000EDA58F /* loadingCoin.json */,
 				FBD812B92B63FDE4000FD1C0 /* splash.json */,
-				FBD812C12B64077E000FD1C0 /* progress.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -491,11 +494,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB1C63DF2B459FC600318FA7 /* LaunchScreen.storyboard in Resources */,
-				FBD812C22B64077E000FD1C0 /* progress.json in Resources */,
 				FB1C640E2B4719E300318FA7 /* Image.xcassets in Resources */,
 				FBD812BA2B63FDE4000FD1C0 /* splash.json in Resources */,
 				FB1C63DC2B459FC600318FA7 /* Assets.xcassets in Resources */,
 				FB2D44752B7A4F5300BAB000 /* GoogleService-Info.plist in Resources */,
+				FBA0A2B42B8100A000EDA58F /* loadingCoin.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +544,7 @@
 				FB1C64142B47239200318FA7 /* InitialSettingView.swift in Sources */,
 				FB8E68D32B517820007FF2C1 /* HomeView.swift in Sources */,
 				FB81AEF22B751C9900AF6E7C /* ProfileEditView.swift in Sources */,
+				FBA0A2B22B80FFA200EDA58F /* BoastLoadingView.swift in Sources */,
 				FB2C21202B6D530D00099B5D /* HomeCoordinator.swift in Sources */,
 				FB28DE9A2B4F012F004710D7 /* LoginView.swift in Sources */,
 				FB1C63F82B45D1A500318FA7 /* MainTabView.swift in Sources */,

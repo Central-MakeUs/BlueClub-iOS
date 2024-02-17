@@ -75,9 +75,14 @@ extension ScheduleNoteCoordinator: Coordinatorable {
             navigator.push { view }
             
         case .boast(let id):
-            let view = BoastView(navigator: self.navigator, diaryId: id)
-            navigator.push { view }
-            
+            Task {
+                let loadingView = BoastLoadingView(navigator: self.navigator)
+                navigator.push { loadingView }
+                try? await Task.sleep(for: .seconds(2.5))
+                let view = BoastView(navigator: self.navigator, diaryId: id)
+                navigator.present { view }
+                
+            }
         }
     }
 }
