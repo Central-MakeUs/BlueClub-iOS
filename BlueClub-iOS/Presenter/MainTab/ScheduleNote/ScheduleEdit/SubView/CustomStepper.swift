@@ -23,7 +23,9 @@ struct CustomStepper: View {
                 Image.icons(.minuspx)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 18)
+                    .frame(
+                        width: 22,
+                        height: 22)
                     .foregroundStyle(Color.colors(
                         decreaseAvailable
                         ? .gray06
@@ -33,7 +35,7 @@ struct CustomStepper: View {
             Text(String(count))
                 .fontModifer(.sb1)
                 .foregroundStyle(Color.colors(.gray10))
-                .frame(width: 42)
+                .frame(height: 22)
                 .monospaced()
             Button(action: {
                 guard increaseAvailable else { return }
@@ -42,14 +44,16 @@ struct CustomStepper: View {
                 Image.icons(.pluspx)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 18)
+                    .frame(
+                        width: 22,
+                        height: 22)
                     .foregroundStyle(Color.colors(
                         increaseAvailable
                         ? .gray06
                         : .gray04
                     ))
             }).buttonStyle(.plain)
-        }.frame(height: 42)
+        }.frame(height: 22)
     }
 }
 
