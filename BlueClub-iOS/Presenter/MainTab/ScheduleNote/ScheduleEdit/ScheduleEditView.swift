@@ -258,7 +258,7 @@ extension ScheduleEditView {
             title: "직종"
         ) {
             CustomTextField(
-                text: $viewModel.placeName,
+                text: $viewModel.typeOfJob,
                 placeholder: "직종명 입력")
         }
         listCell(
