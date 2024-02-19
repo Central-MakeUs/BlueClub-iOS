@@ -21,7 +21,7 @@ public struct SheetCellRow: View {
             .frame(height: 56)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 10)
-            .drawUnderline()
+            .drawUnderline(.colors(.gray02))
             .padding(.horizontal, 20)
     }
 }

@@ -43,6 +43,7 @@ struct MyPageView: View {
         .background(Color.colors(.cg01))
         .onAppear {
             viewModel.send(.fetchAppVersion)
+            viewModel.send(.fetchUpdateAvailable)
             viewModel.send(.fetchUser)
         }
         .sheet(isPresented: $viewModel.show이용약관) {
@@ -131,7 +132,7 @@ private extension MyPageView {
                         .foregroundStyle(Color.colors(.gray05))
                 }.frame(height: 24)
                 Spacer()
-                if viewModel.isUpdateAvailable() {
+                if viewModel.isUpdateAvailable {
                     Button(action: {
                         viewModel.send(.didTapListItem(row))
                     }, label: {

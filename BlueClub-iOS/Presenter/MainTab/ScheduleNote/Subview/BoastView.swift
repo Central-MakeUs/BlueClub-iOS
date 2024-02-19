@@ -47,7 +47,7 @@ struct BoastView: View {
                     navigator?.popToRoot()
                 }))
         } content: {
-            VStack {
+            VStack(spacing: 16) {
                 contentHeader()
                 if let boast {
                     BoastCard(boast: boast)

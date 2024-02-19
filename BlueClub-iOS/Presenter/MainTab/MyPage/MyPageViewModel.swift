@@ -22,6 +22,7 @@ class MyPageViewModel: ObservableObject {
     @Published var show개인정보 = false
     @Published var user: AuthDTO?
     @Published var appVersion: String?
+    @Published var isUpdateAvailable = false
     
     var monthlyTarget: Int {
         (user?.monthlyTargetIncome ?? 0) / 10000
@@ -34,25 +35,6 @@ class MyPageViewModel: ObservableObject {
         self.coordinator = coordinator
         self.dependencies = dependencies
     }
-    
-    func isUpdateAvailable() -> Bool {
-        guard let info = Bundle.main.infoDictionary,
-            let currentVersion = info["CFBundleShortVersionString"] as? String,
-            let identifier = info["CFBundleIdentifier"] as? String,
-            let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
-            return false
-        }
-        let data = try? Data(contentsOf: url)
-        guard let data else { return false }
-        let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
-        guard let json else { return false }
-        
-        if let result = (json["results"] as? [Any])?.first as? [String: Any],
-           let version = result["version"] as? String {
-            return version != currentVersion
-        }
-        return false
-    }
 }
 
 extension MyPageViewModel: Actionable {
@@ -60,6 +42,7 @@ extension MyPageViewModel: Actionable {
     enum Action {
         case fetchUser
         case fetchAppVersion
+        case fetchUpdateAvailable
         case notice
         case profileEdit
         case didTapButton(MyPageHeaderButton)
@@ -75,6 +58,26 @@ extension MyPageViewModel: Actionable {
             
         case .fetchAppVersion:
             self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            
+        case .fetchUpdateAvailable:
+            Task { @MainActor in
+                guard
+                    let info = Bundle.main.infoDictionary,
+                    let currentVersion = info["CFBundleShortVersionString"] as? String,
+                    let identifier = info["CFBundleIdentifier"] as? String,
+                    let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)")
+                else { return }
+                
+                let (data, _) = try await URLSession.shared.data(from: url)
+                let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
+                guard 
+                    let json,
+                    let result = (json["results"] as? [Any])?.first as? [String: Any],
+                    let version = result["version"] as? String
+                else { return }
+                
+                self.isUpdateAvailable = (version != currentVersion)
+            }
             
         case .notice:
             coordinator.send(.notice)
