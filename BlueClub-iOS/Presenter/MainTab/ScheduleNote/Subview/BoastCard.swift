@@ -87,6 +87,7 @@ struct BoastCard: View {
                 startPoint: .top, endPoint: .bottom
             ).roundedBackground()
         )
+        .frame(height: 426)
     }
 }
 

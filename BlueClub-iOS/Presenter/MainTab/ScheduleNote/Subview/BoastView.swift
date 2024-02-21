@@ -52,8 +52,11 @@ struct BoastView: View {
                     .padding(.bottom, 16)
                 if let boast {
                     BoastCard(boast: boast)
-                        .getSize {
-                            self.cardImage = BoastCard(boast: boast).snapshot(size: $0)
+                        .onAppear {
+                            let view = BoastCard(boast: boast)
+                                .frame(width: 320)
+                            let renderer = ImageRenderer(content: view)
+                            self.cardImage = renderer.uiImage
                         }
                         .padding(.horizontal, 20)
                 }
