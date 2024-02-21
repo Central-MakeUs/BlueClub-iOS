@@ -105,7 +105,7 @@ private extension MyPageView {
             }
         }
         .roundedBorder()
-        .background(Color.white)
+        .roundedBackground(Color.white)
         .padding(.horizontal, 20)
         .padding(.vertical, 14)
     }

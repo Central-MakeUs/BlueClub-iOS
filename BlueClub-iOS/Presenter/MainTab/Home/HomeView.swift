@@ -81,7 +81,11 @@ extension HomeView {
         VStack(spacing: 12) {
             rotateBanner()
             dayInfoView()
-            incomeInfoView()
+            Button {
+                viewModel.send(.scheduleNote)
+            } label: {
+                incomeInfoView()
+            }.buttonStyle(.plain)
         }.padding(.horizontal, 20)
     }
     

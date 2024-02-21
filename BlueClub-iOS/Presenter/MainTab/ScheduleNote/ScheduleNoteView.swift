@@ -19,6 +19,7 @@ struct ScheduleNoteView: View {
     
     @State var progressWidth: CGFloat = .zero
     @State var tooltipWidth: CGFloat = .zero
+    @GestureState var calendarDrag: CGFloat = .zero
 
     let calendarColumns: [GridItem] = Array(
         repeating: .init(),
@@ -44,6 +45,8 @@ struct ScheduleNoteView: View {
             viewModel.send(.fetchGoal)
             viewModel.send(.fetchDiaryList)
         }
+        .disabled(viewModel.isLoading)
+        .loadingSpinner(viewModel.isLoading)
     }
 }
 
@@ -54,8 +57,11 @@ extension ScheduleNoteView {
             LazyVStack(spacing: 0) {
                 contentHeader()
                 calendarView()
-                diaryListHeader()
-                diaryList()
+                Group {
+                    diaryListHeader()
+                    diaryList()
+                        .padding(.bottom, 38)
+                }.background(Color.white)
             }
         }.overlay(alignment: .bottomTrailing) {
             Button(action: {
@@ -69,7 +75,21 @@ extension ScheduleNoteView {
     @ViewBuilder func calendarView() -> some View {
         VStack(spacing: 0) {
             calendarHeader()
-            calendarContent().padding(.vertical, 6)
+            calendarContent()
+                .padding(.vertical, 6)
+                .offset(x: calendarDrag)
+                .highPriorityGesture(
+                    DragGesture().onEnded({ value in
+                        let dragY = value.translation.width
+                        if dragY > 0 {
+                            viewModel.send(.decreaseMonth)
+                        } else {
+                            viewModel.send(.increaseMonth)
+                        }
+                    }).updating($calendarDrag, body: { value, state, transaction in
+                        state = value.translation.width
+                    })
+                )
         }
         .padding(.horizontal, 25)
     }
@@ -284,8 +304,8 @@ extension ScheduleNoteView {
             Spacer()
         }
         .fontModifer(.sb1)
-        .frame(height: 22)
         .padding(.top, 24)
+        .padding(.bottom, 16)
         .padding(.horizontal, 20)
         .frame(height: 62)
     }

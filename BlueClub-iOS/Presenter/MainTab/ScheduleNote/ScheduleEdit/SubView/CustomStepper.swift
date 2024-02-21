@@ -36,7 +36,7 @@ struct CustomStepper: View {
                 .fontModifer(.sb1)
                 .foregroundStyle(Color.colors(.gray10))
                 .frame(height: 22)
-                .monospaced()
+                .frame(width: 42)
             Button(action: {
                 guard increaseAvailable else { return }
                 count += 1

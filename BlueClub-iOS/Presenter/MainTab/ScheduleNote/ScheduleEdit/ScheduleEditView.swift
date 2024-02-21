@@ -28,6 +28,7 @@ struct ScheduleEditView: View {
         } footer: {
             bottomButton()
                 .hide(when: viewModel.keyboardAppeared)
+                .hide(when: viewModel.workType == .dayOff)
         }
         .onAppear {
             viewModel.send(.fetchUserInfo)
@@ -63,7 +64,7 @@ extension ScheduleEditView {
     
     @ViewBuilder func content() -> some View {
         ScrollView {
-            LazyVStack {
+            LazyVStack(spacing: 0) {
                 contentHeader()
                 근무형태()
                 if viewModel.workType != .dayOff {
@@ -155,6 +156,7 @@ extension ScheduleEditView {
             Spacer()
         }
         .padding(.horizontal, 20)
+        .padding(.vertical, 16)
     }
     
     @ViewBuilder func caddyContentRows() -> some View {

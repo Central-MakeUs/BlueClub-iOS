@@ -35,6 +35,7 @@ final class ScheduleNoteViewModel: ObservableObject {
         }
     }
     
+    @Published var isLoading = true
     @Published var hasExpand = false
     @Published var sholdReloadProgressBar = false
     @Published var goal: MonthlyGoalDTO?
@@ -74,6 +75,7 @@ extension ScheduleNoteViewModel: Actionable {
         case scheduleEdit
         case scheduleEditById(Int)
         case scheduleEditByDate(String)
+        case setIsLoading(Bool, Duration)
     }
     
     @MainActor func send(_ action: Action) {
@@ -89,11 +91,13 @@ extension ScheduleNoteViewModel: Actionable {
             monthIndex += 1
             self.send(.fetchGoal)
             self.send(.fetchDiaryList)
+            self.send(.setIsLoading(true, .zero))
             
         case .decreaseMonth:
             monthIndex -= 1
             self.send(.fetchGoal)
             self.send(.fetchDiaryList)
+            self.send(.setIsLoading(true, .zero))
             
         case .fetchGoal:
             Task { @MainActor in
@@ -112,7 +116,9 @@ extension ScheduleNoteViewModel: Actionable {
             Task { @MainActor in
                 do {
                     self.diaryList = try await diaryApi.list(monthIndex: self.monthIndex)
+                    self.send(.setIsLoading(false, .seconds(0.5)))
                 } catch {
+                    self.send(.setIsLoading(false, .seconds(0.5)))
                     printError(error)
                 }
             }
@@ -158,6 +164,12 @@ extension ScheduleNoteViewModel: Actionable {
         case .scheduleEditByDate(let date):
             guard let goal else { return }
             coordinator?.send(.scheduleEditByDate(goal.targetIncome, date))
+            
+        case .setIsLoading(let state, let duration):
+            Task { @MainActor in
+                try? await Task.sleep(for: duration)
+                self.isLoading = state
+            }
         }
     }
 }

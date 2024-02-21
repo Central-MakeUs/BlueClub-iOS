@@ -25,6 +25,7 @@ extension HomeCoordinator: Coordinatorable {
     enum Action {
         case notice
         case scheduleNoteEdit
+        case scheduleNote
     }
     
     @MainActor func send(_ action: Action) {
@@ -36,7 +37,9 @@ extension HomeCoordinator: Coordinatorable {
             
         case .scheduleNoteEdit:
             parent?.send(.scheduleNoteEdit)
-            
+         
+        case .scheduleNote:
+            parent?.send(.didTapTab(.note))
         }
     }
 }

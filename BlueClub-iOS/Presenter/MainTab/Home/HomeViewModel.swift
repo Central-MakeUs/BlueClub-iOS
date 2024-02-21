@@ -42,6 +42,7 @@ extension HomeViewModel: Actionable {
     enum Action: Equatable {
         case fetchBanner
         case fetchData
+        case scheduleNote
     }
     
     func send(_ action: Action) {
@@ -64,6 +65,10 @@ extension HomeViewModel: Actionable {
                     printError(error)
                 }
             }
+            
+        case .scheduleNote:
+            coodinator?.send(.scheduleNote)
+            
         }
     }
 }
