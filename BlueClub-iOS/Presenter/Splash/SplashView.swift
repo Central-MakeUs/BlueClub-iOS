@@ -57,7 +57,3 @@ struct SplashView: View {
         }
     }
 }
-
-#Preview {
-    SplashView(coordinator: .init(), dependencies: .live)
-}

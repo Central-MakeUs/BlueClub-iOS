@@ -48,7 +48,7 @@ struct ProfileEditView: View {
                 onSelect: { viewModel.job = $0 }
             ).presentationDetents([.height(282)])
         }
-        .onChange(of: viewModel.nickname, perform: { _ in
+        .onChange(of: viewModel.nickname, { _, _ in
             viewModel.send(.nicknameDidChange)
         })
     }

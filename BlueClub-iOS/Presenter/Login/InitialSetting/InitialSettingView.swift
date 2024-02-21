@@ -36,7 +36,7 @@ struct InitialSettingView: View {
         }
         .hideKeyboardOnTapBackground()
         .syncFocused($focus, with: $viewModel.focus)
-        .onChange(of: viewModel.nickname, perform: { _ in
+        .onChange(of: viewModel.nickname, { _, _ in
             viewModel.send(.nicknameDidChange)
         })
     }

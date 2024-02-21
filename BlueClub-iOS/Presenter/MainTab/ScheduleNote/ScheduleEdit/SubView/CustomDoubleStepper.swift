@@ -51,8 +51,8 @@ struct CustomDoubleStepper: View {
             }).buttonStyle(.plain)
         }
         .frame(height: 42)
-        .onChange(of: count) { value in
+        .onChange(of: count, { oldValue, newValue in
             count = (count * 10).rounded() / 10
-        }
+        })
     }
 }

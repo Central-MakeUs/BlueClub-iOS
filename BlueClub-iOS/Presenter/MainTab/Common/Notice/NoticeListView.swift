@@ -130,6 +130,6 @@ struct NoticeListView: View {
     }
 }
 
-#Preview {
-    NoticeListView(navigator: .init())
-}
+//#Preview {
+//    NoticeListView(navigator: .init())
+//}

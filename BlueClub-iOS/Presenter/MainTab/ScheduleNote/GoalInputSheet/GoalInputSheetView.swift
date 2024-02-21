@@ -59,6 +59,3 @@ struct GoalInputSheetView: View {
     }
 }
 
-#Preview {
-    GoalInputSheetView(viewModel: .init(coordinator: .init(navigator: .init())), coordinator: .init(navigator: .init()))
-}

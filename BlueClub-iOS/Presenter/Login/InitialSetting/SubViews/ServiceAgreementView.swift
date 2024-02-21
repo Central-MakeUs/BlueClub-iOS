@@ -28,9 +28,10 @@ struct ServiceAgreementView: View {
                 }
             )
             listContent()
-        }.onChange(of: checked, perform: { value in
-            hasAllow = AgreementRow.mandatories.allSatisfy { value.contains($0) }
-            hasAllowTos = value.contains(.마케팅)
+        }
+        .onChange(of: checked, { _, newValue in
+            hasAllow = AgreementRow.mandatories.allSatisfy { newValue.contains($0) }
+            hasAllowTos = newValue.contains(.마케팅)
         })
     }
     
