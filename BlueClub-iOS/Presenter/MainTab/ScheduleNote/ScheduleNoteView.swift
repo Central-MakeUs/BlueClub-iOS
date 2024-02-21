@@ -60,7 +60,6 @@ extension ScheduleNoteView {
                 Group {
                     diaryListHeader()
                     diaryList()
-                        .padding(.bottom, 38)
                 }.background(Color.white)
             }
         }.overlay(alignment: .bottomTrailing) {
@@ -325,7 +324,7 @@ extension ScheduleNoteView {
             .padding(.horizontal, 20)
             .padding(.bottom, 12)
         } else {
-            ForEach(viewModel.diaryList) { diary in
+            ForEach(Array(viewModel.diaryList.enumerated()), id: \.element.id ) { offset, diary in
                 Button {
                     viewModel.send(.scheduleEditById(diary.id))
                 } label: {
@@ -333,6 +332,9 @@ extension ScheduleNoteView {
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
+                .if(offset == viewModel.diaryListCount - 1) {
+                    $0.padding(.bottom, 38)
+                }
             }
         }
     }
