@@ -27,7 +27,7 @@ public enum JobOption: CaseIterable, Codable {
     public var title: String {
         switch self {
         case .caddy:
-            return "골프캐디"
+            return "골프 캐디"
         case .rider:
             return "배달 라이더"
         case .dayWorker:

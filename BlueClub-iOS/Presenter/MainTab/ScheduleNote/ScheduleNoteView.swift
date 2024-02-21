@@ -310,7 +310,7 @@ extension ScheduleNoteView {
     }
     
     @ViewBuilder func diaryList() -> some View {
-        if viewModel.diaryList.isEmpty {
+        if viewModel.diaryList.isEmpty && viewModel.monthIndex == 0 {
             Button {
                 if viewModel.monthIndex == 0 {
                     viewModel.send(.scheduleEdit)
@@ -323,6 +323,10 @@ extension ScheduleNoteView {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 12)
+        } else if viewModel.diaryList.isEmpty && viewModel.monthIndex != 0 {
+            emptyListButton()
+                .padding(.horizontal, 20)
+                .padding(.bottom, 12)
         } else {
             ForEach(Array(viewModel.diaryList.enumerated()), id: \.element.id ) { offset, diary in
                 Button {
@@ -341,7 +345,7 @@ extension ScheduleNoteView {
     
     @ViewBuilder func firstDiaryButton() -> some View {
         HStack {
-            Text("\(viewModel.currentMonth)월의 첫 근무기록 남기러가기")
+            Text("\(viewModel.currentMonth)월의 첫 근무기록 남기러 가기")
                 .fontModifer(.sb2)
             Spacer()
             Image.icons(.arrow_right)
@@ -353,6 +357,19 @@ extension ScheduleNoteView {
         .padding(.horizontal, 16)
         .frame(height: 60)
         .roundedBorder(Color.colors(.primaryNormal))
+    }
+    
+    @ViewBuilder func emptyListButton() -> some View {
+        HStack {
+            Text("작성된 근무기록이 없습니다.")
+                .fontModifer(.sb2)
+                .foregroundStyle(Color.colors(.gray05))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 16)
+        .frame(height: 60)
+        .roundedBorder()
     }
 }
 

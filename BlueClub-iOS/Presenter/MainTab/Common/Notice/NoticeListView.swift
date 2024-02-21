@@ -129,7 +129,3 @@ struct NoticeListView: View {
         }.padding(.top, 138)
     }
 }
-
-//#Preview {
-//    NoticeListView(navigator: .init())
-//}

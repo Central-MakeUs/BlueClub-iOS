@@ -192,7 +192,7 @@ extension InitialSettingViewModel {
         var headerTitle: String {
             switch self {
             case .job:
-                return "어떤일을 하고 계시나요?"
+                return "어떤 일을 하고 계시나요?"
             case .targetIncome:
                 return "매달 수입 목표를 입력해주세요"
             case .nickname:

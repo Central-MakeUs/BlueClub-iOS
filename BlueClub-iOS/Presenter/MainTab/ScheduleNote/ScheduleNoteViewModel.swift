@@ -87,13 +87,14 @@ extension ScheduleNoteViewModel: Actionable {
             }
             
         case .increaseMonth:
-            guard 0 > monthIndex else { return }
+            guard 36 > monthIndex  else { return }
             monthIndex += 1
             self.send(.fetchGoal)
             self.send(.fetchDiaryList)
             self.send(.setIsLoading(true, .zero))
             
         case .decreaseMonth:
+            guard monthIndex > -36  else { return }
             monthIndex -= 1
             self.send(.fetchGoal)
             self.send(.fetchDiaryList)

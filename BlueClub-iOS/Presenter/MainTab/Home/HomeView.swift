@@ -80,7 +80,11 @@ extension HomeView {
     @ViewBuilder func contentBody() -> some View {
         VStack(spacing: 12) {
             rotateBanner()
-            dayInfoView()
+            Button {
+                viewModel.send(.scheduleNote)
+            } label: {
+                dayInfoView()
+            }.buttonStyle(.plain)
             Button {
                 viewModel.send(.scheduleNote)
             } label: {

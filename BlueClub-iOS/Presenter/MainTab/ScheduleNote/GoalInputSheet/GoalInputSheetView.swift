@@ -58,4 +58,3 @@ struct GoalInputSheetView: View {
         )
     }
 }
-
