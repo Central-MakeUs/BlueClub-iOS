@@ -47,8 +47,9 @@ struct BoastView: View {
                     navigator?.popToRoot()
                 }))
         } content: {
-            VStack(spacing: 16) {
+            VStack(spacing: 0) {
                 contentHeader()
+                    .padding(.bottom, 16)
                 if let boast {
                     BoastCard(boast: boast)
                         .getSize {
@@ -60,7 +61,7 @@ struct BoastView: View {
         } footer: {
             HStack(spacing: 8) {
                 Button {
-                    self.saveImage()
+                    self.saveImageIfHasAuthorize()
                 } label: {
                     Text("저장하기")
                         .fontModifer(.sb1)
@@ -105,20 +106,39 @@ struct BoastView: View {
             .padding(.top, 8)
     }
 
-    func saveImage() {
-        guard !isLoading, let cardImage else { return }
-        PHPhotoLibrary.requestAuthorization { status in
+    func saveImageIfHasAuthorize() {
+        guard !isLoading else { return }
+        
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
             if status == .authorized {
-                Task { @MainActor in
-                    UIImageWriteToSavedPhotosAlbum(cardImage, nil, nil, nil)
-                    let parameter = AlertParameter(
-                        message: "이미지가 저장되었습니다.",
-                        buttons: [.init(title: "확인")])
-                    navigator?.alert(parameter)
-                }
+                saveImage()
             } else {
-                printLog(message: "Photo library access denied")
+                requestAuth()
             }
+        }
+    }
+    
+    func saveImage() {
+        guard let cardImage else { return }
+        Task { @MainActor in
+            UIImageWriteToSavedPhotosAlbum(cardImage, nil, nil, nil)
+            let parameter = AlertParameter(
+                message: "이미지가 저장되었습니다.",
+                buttons: [.init(title: "확인")])
+            navigator?.alert(parameter)
+        }
+    }
+    
+    func requestAuth() {
+        Task { @MainActor in
+            printLog(message: "Photo library access denied")
+            let parameter = AlertParameter(
+                message: "설정에서 사진 접근 권한을 허용해주세요.",
+                buttons: [.init(title: "허용하기", action: {
+                    openAppSetting()
+                })]
+            )
+            navigator?.alert(parameter)
         }
     }
 }

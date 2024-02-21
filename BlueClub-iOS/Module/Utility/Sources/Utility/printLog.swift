@@ -10,10 +10,15 @@ import Foundation
 public func printLog(
     message: String? = nil,
     file: String = #file,
-    function: String = #function
+    function: String = #function,
+    line: Int = #line
 ) {
     #if DEBUG
     let fileName = (file as NSString).lastPathComponent
-    print("🟢 Log: \(function) executed in \(fileName)" + (message ?? ""))
+    var logMessage = "🟢 Log: `\(function)` executed in `\(fileName)` line \(line), "
+    if let message {
+        logMessage += "message is `\(message)`"
+    }
+    print(logMessage)
     #endif
 }

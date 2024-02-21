@@ -78,7 +78,7 @@ extension ScheduleNoteView {
                 .padding(.vertical, 6)
                 .offset(x: calendarDrag)
                 .highPriorityGesture(
-                    DragGesture().onEnded({ value in
+                    DragGesture(minimumDistance: 4).onEnded({ value in
                         let dragY = value.translation.width
                         if dragY > 0 {
                             viewModel.send(.decreaseMonth)

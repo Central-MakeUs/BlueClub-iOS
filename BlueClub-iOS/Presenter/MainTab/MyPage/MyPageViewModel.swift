@@ -11,6 +11,7 @@ import DataSource
 import Architecture
 import Domain
 import UIKit
+import Utility
 
 class MyPageViewModel: ObservableObject {
     
@@ -101,10 +102,7 @@ extension MyPageViewModel: Actionable {
                 coordinator.send(.notice)
                 
             case .notificationSetting:
-                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
+                openAppSetting()
                 
             case .termsOf:
                 self.show이용약관 = true

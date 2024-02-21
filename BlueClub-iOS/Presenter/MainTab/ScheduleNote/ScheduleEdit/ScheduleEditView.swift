@@ -89,7 +89,6 @@ extension ScheduleEditView {
                     dayOffPlaceholder()
                 }
             }
-            .padding(.bottom, 120)
             .hideKeyboardOnTapBackground()
         }.scrollDismissesKeyboard(.immediately)
     }
@@ -140,23 +139,18 @@ extension ScheduleEditView {
     }
     
     @ViewBuilder func plusButtons() -> some View {
-        HStack(spacing: 8) {
-            if viewModel.memo.isEmpty {
+        if viewModel.memo.isEmpty {
+            HStack(spacing: 8) {
                 Button(action: {
                     viewModel.showMemoSheet = true
                 }, label: {
                     plusLabel(title: "메모")
                 })
+                Spacer()
             }
-//            Button(action: {
-//                
-//            }, label: {
-//                plusLabel(title: "사진 첨부")
-//            })
-            Spacer()
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 16)
     }
     
     @ViewBuilder func caddyContentRows() -> some View {

@@ -89,3 +89,13 @@ struct BoastCard: View {
         )
     }
 }
+
+#Preview {
+    BoastCard(boast: .init(
+        job: "골프캐디주",
+        workAt: "2024-02-22",
+        rank: "기타",
+        income: 10500,
+        cases: 3)
+    )
+}
