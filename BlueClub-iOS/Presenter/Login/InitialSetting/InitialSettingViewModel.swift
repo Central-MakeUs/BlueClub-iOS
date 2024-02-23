@@ -50,6 +50,7 @@ final class InitialSettingViewModel: ObservableObject {
     @Published var selectedJob: JobOption? = .none
     @Published var nicknameAvailable = false
     @Published var isTargetIcomeValid = false
+    @Published var isLoading = false
 }
 
 extension InitialSettingViewModel: Actionable {
@@ -101,12 +102,15 @@ extension InitialSettingViewModel: Actionable {
             guard self.checkNicknameValid else { return }
             Task { 
                 do {
+                    self.isLoading = true
                     let success = try await authApi.duplicated(self.nickname)
                     guard success else { return }
                     self.nicknameAvailable = true
                     self.nicknameMessage = .사용가능닉네임
+                    self.isLoading = false
                 } catch {
                     printError(error)
+                    self.isLoading = false
                     guard let error = error as? ServerError else { return }
                     if error == .해당_닉네임은_중복입니다 {
                         self.nicknameMessage = .중복닉네임

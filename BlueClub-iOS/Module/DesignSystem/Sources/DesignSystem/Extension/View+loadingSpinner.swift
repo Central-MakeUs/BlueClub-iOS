@@ -10,10 +10,12 @@ import SwiftUI
 public extension View {
     
     @ViewBuilder func loadingSpinner(_ condition: Bool) -> some View {
-        self.overlay {
-            if condition {
-                LoadingSpinner()
+        self
+            .disabled(condition)
+            .overlay {
+                if condition {
+                    LoadingSpinner()
+                }
             }
-        }
     }
 }

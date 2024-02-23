@@ -45,7 +45,6 @@ struct ScheduleNoteView: View {
             viewModel.send(.fetchGoal)
             viewModel.send(.fetchDiaryList)
         }
-        .disabled(viewModel.isLoading)
         .loadingSpinner(viewModel.isLoading)
     }
 }

@@ -26,7 +26,9 @@ struct InitialSettingView: View {
             content()
         } footer: {
             footer()
-        }.sheet(isPresented: $viewModel.showAllowSheet) {
+        }
+        .loadingSpinner(viewModel.isLoading)
+        .sheet(isPresented: $viewModel.showAllowSheet) {
             ServiceAgreementSheet(
                 isPresented: $viewModel.showAllowSheet,
                 onFinish: { tos in

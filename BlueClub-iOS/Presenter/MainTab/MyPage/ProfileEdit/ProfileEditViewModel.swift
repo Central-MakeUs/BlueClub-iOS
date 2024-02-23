@@ -27,6 +27,7 @@ class ProfileEditViewModel: ObservableObject {
         monthlyGoalHasChange && monthlyGoalValid
     }
     
+    @Published var isLoading = false
     @Published var nickname = ""
     @Published var nicknameValid = false
     @Published var nicknameMessage: InputStatusMessages?
@@ -186,12 +187,15 @@ extension ProfileEditViewModel: Actionable {
             Task { @MainActor in
                 do {
                     guard nicknameValid else { return }
+                    self.isLoading = true
                     let success = try await self.authApi.duplicated(self.nickname)
                     guard success else { return }
                     self.nicknameMessage = .사용가능닉네임
                     self.nicknameAvailable = true
+                    self.isLoading = false
                 } catch {
                     printError(error)
+                    self.isLoading = false
                     guard let error = error as? ServerError else { return }
                     if error == .해당_닉네임은_중복입니다 {
                         self.nicknameMessage = .중복닉네임

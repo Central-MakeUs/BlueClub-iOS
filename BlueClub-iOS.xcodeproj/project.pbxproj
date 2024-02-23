@@ -693,7 +693,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";
@@ -731,7 +731,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BlueClub-iOS/BlueClub-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76AJ433CP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BlueClub-iOS/App/Info.plist";

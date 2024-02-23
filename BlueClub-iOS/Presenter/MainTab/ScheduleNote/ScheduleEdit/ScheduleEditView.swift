@@ -32,7 +32,6 @@ struct ScheduleEditView: View {
             viewModel.send(.fetchUserInfo)
         }
         .loadingSpinner(viewModel.isLoading)
-        .disabled(viewModel.isLoading)
         .sheet(isPresented: $viewModel.showScheduleTypeSheet) {
             ScheduleTypeSheet()
                 .environmentObject(viewModel)

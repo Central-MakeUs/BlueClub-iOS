@@ -51,6 +51,7 @@ struct ProfileEditView: View {
         .onChange(of: viewModel.nickname, { _, _ in
             viewModel.send(.nicknameDidChange)
         })
+        .loadingSpinner(viewModel.isLoading)
     }
 }
 
@@ -61,13 +62,6 @@ extension ProfileEditView {
             .resizable()
             .scaledToFit()
             .frame(width: 100)
-//            .overlay(alignment: .bottomTrailing, content: {
-//                Button(action: {
-//                    
-//                }, label: {
-//                    Image(.profileCamera)
-//                })
-//            })
             .padding(.vertical, 24)
     }
     
