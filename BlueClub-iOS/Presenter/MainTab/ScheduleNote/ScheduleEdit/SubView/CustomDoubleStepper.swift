@@ -22,8 +22,10 @@ struct CustomDoubleStepper: View {
             }, label: {
                 Image.icons(.minuspx)
                     .resizable()
-                    .fixedSize()
-                    .frame(width: 18)
+                    .scaledToFit()
+                    .frame(
+                        width: 22,
+                        height: 22)
                     .foregroundStyle(Color.colors(
                         decreaseAvailable
                         ? .gray06
@@ -33,16 +35,18 @@ struct CustomDoubleStepper: View {
             Text(String(count))
                 .fontModifer(.sb1)
                 .foregroundStyle(Color.colors(.gray10))
-                .frame(width: 48)
-                .monospaced()
+                .frame(width: 42)
+                .frame(height: 22)
             Button(action: {
                 guard increaseAvailable else { return }
                 count += 0.1
             }, label: {
                 Image.icons(.pluspx)
                     .resizable()
-                    .fixedSize()
-                    .frame(width: 18)
+                    .scaledToFit()
+                    .frame(
+                        width: 22,
+                        height: 22)
                     .foregroundStyle(Color.colors(
                         increaseAvailable
                         ? .gray06
