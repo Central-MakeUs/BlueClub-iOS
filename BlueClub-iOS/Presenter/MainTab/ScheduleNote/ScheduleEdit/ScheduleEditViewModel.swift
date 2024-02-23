@@ -39,7 +39,7 @@ class ScheduleEditViewModel: ObservableObject {
         }
     }
     // MARK: - (ID, Date)
-    private var originalDiary: (Int, String)?
+    @Published var originalDiary: (Int, String)?
     
     @Published var isLoading = false
     @Published var keyboardAppeared = false
@@ -160,6 +160,8 @@ extension ScheduleEditViewModel: Actionable {
         case saveRider
         case saveDailyWorker
         case reset
+        case delete
+        case executeDelete
     }
     
     func send(_ action: Action) {
@@ -446,6 +448,19 @@ extension ScheduleEditViewModel: Actionable {
                 self.dailyWage = ""
                 self.typeOfJob = ""
                 self.numberOfWork = 0.0
+            }
+            
+        case .delete:
+            self.coordinator?.send(.confirmDeleteSchedule({
+                self.send(.executeDelete)
+            }))
+            
+        case .executeDelete:
+            Task { @MainActor in
+                guard let originalDiary else { return }
+                self.isLoading = true
+                try await diaryApi.deleteDiary(id: originalDiary.0)
+                self.coordinator?.pop()
             }
         }
     }

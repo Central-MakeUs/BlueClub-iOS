@@ -29,7 +29,7 @@ extension ScheduleNoteCoordinator: Coordinatorable {
         case scheduleEditById(Int, Int?) // targetIncome, Id
         case scheduleEditByDate(Int, String) // targetIncome. DateString
         case boast(Int)
-        
+        case confirmDeleteSchedule(() -> Void)
     }
     
     @MainActor func send(_ action: Action) {
@@ -81,8 +81,19 @@ extension ScheduleNoteCoordinator: Coordinatorable {
                 try? await Task.sleep(for: .seconds(2.5))
                 let view = BoastView(navigator: self.navigator, diaryId: id)
                 navigator.present { view }
-                
             }
+            
+        case .confirmDeleteSchedule(let handler):
+            let parameter = AlertParameter(
+                title: "근무기록 삭제",
+                message: "한번 삭제되면 복구되지않아요.\n근무기록을 삭제하겠습니까?",
+                buttons: [
+                    .init(title: "취소"),
+                    .init(
+                        title: "삭제",
+                        action: { handler() })
+                ])
+            self.navigator.alert(parameter)
         }
     }
 }

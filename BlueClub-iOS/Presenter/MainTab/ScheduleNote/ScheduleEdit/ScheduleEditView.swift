@@ -26,9 +26,7 @@ struct ScheduleEditView: View {
         } content: {
             content()
         } footer: {
-            bottomButton()
-                .hide(when: viewModel.keyboardAppeared)
-                .hide(when: viewModel.workType == .dayOff)
+            footerButtons()
         }
         .onAppear {
             viewModel.send(.fetchUserInfo)
@@ -351,19 +349,6 @@ extension ScheduleEditView {
         }.frame(height: 24)
     }
     
-    @ViewBuilder func bottomButton() -> some View {
-        CustomButton(
-            title: "수입 자랑하기✌️",
-            foreground: .colors(.white),
-            background: viewModel.isAvailable
-                ? .colors(.black)
-                : .colors(.gray04),
-            action: { 
-                viewModel.send(.boast)
-            }
-        ).padding(.vertical, 20)
-    }
-    
     @ViewBuilder func plusLabel(title: String) -> some View {
         HStack(spacing: 3) {
             Image.icons(.pluspx)
@@ -445,6 +430,37 @@ extension ScheduleEditView {
             trailingView()
         }
         .frame(height: 24)
+    }
+    
+    @ViewBuilder func footerButtons() -> some View {
+        HStack(spacing: 8) {
+            if viewModel.originalDiary != nil {
+                CustomButton(
+                    title: "삭제",
+                    foreground: .colors(.gray06),
+                    background: .white,
+                    hPadding: 0,
+                    action: {
+                        viewModel.send(.delete)
+                    }
+                )
+                .roundedBorder(.colors(.gray06))
+                .frame(width: (viewModel.workType == .dayOff) ? nil : 76)
+            }
+            CustomButton(
+                title: "수입 자랑하기✌️",
+                foreground: .colors(.white),
+                background: viewModel.isAvailable
+                ? .colors(.black)
+                : .colors(.gray04),
+                hPadding: 0,
+                action: {
+                    viewModel.send(.boast)
+                }
+            ).hide(when: viewModel.workType == .dayOff)
+        }
+        .hide(when: viewModel.keyboardAppeared)
+        .padding(20)
     }
 }
 

@@ -148,6 +148,18 @@ extension DiaryNetwork: DiaryNetworkable {
             .asyncThrows
     }
     
+    public func deleteDiary(id: Int) async throws {
+        return try await EndPoint
+            .init(Const.baseUrl)
+            .urlPaths([self.path, "/\(id)"])
+            .httpMethod(.delete)
+            .httpHeaders(RequestHeader.withToken(accessToken: self.token))
+            .responseHandler { try httpResponseHandler($0) }
+            .requestPublisher(expect: ServerResponse<Empty>.self)
+            .tryMap { try handleServerResponseCode($0) }
+            .asyncThrows
+    }
+    
     public func boast(diaryId: Int) async throws -> Domain.BoastDTO {
         
         let header = RequestHeader.withToken(accessToken: self.token)
