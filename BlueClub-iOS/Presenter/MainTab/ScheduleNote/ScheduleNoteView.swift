@@ -310,20 +310,7 @@ extension ScheduleNoteView {
     }
     
     @ViewBuilder func diaryList() -> some View {
-        if viewModel.diaryList.isEmpty && viewModel.monthIndex == 0 {
-            Button {
-                if viewModel.monthIndex == 0 {
-                    viewModel.send(.scheduleEdit)
-                } else {
-                    let dateString = "\(viewModel.currentYear)-\(viewModel.currentMonth)-01"
-                    viewModel.send(.scheduleEditByDate(dateString))
-                }
-            } label: {
-                firstDiaryButton()
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 12)
-        } else if viewModel.diaryList.isEmpty && viewModel.monthIndex != 0 {
+        if viewModel.diaryList.isEmpty {
             emptyListButton()
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
