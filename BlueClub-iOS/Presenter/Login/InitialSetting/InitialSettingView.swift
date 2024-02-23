@@ -27,7 +27,6 @@ struct InitialSettingView: View {
         } footer: {
             footer()
         }
-        .loadingSpinner(viewModel.isLoading)
         .sheet(isPresented: $viewModel.showAllowSheet) {
             ServiceAgreementSheet(
                 isPresented: $viewModel.showAllowSheet,
@@ -160,6 +159,7 @@ extension InitialSettingView {
         VStack(spacing: 0) {
             contentHeader()
             NicknameInputContainer(
+                isLoading: viewModel.isLoading,
                 nickname: viewModel.nickname,
                 isValid: viewModel.checkNicknameValid,
                 message: viewModel.nicknameMessage,

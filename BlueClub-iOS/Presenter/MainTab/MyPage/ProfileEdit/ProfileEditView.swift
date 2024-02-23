@@ -51,7 +51,6 @@ struct ProfileEditView: View {
         .onChange(of: viewModel.nickname, { _, _ in
             viewModel.send(.nicknameDidChange)
         })
-        .loadingSpinner(viewModel.isLoading)
     }
 }
 
@@ -69,6 +68,7 @@ extension ProfileEditView {
         VStack(spacing: 0) {
             sectionHeader(title: "닉네임")
             NicknameInputContainer(
+                isLoading: viewModel.isLoading,
                 nickname: viewModel.nickname,
                 isValid: viewModel.nicknameValid,
                 message: viewModel.nicknameMessage,

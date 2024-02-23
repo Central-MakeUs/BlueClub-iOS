@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct NicknameInputContainer<Content: View>: View {
     
+    var isLoading: Bool
     let nickname: String
     let isValid: Bool
     let message: InputStatusMessages?
@@ -16,12 +17,14 @@ public struct NicknameInputContainer<Content: View>: View {
     let content: () -> Content
     
     public init(
+        isLoading: Bool,
         nickname: String,
         isValid: Bool,
         message: InputStatusMessages?,
         onTapCheck: @escaping () -> Void,
         content: @escaping () -> Content
     ) {
+        self.isLoading = isLoading
         self.nickname = nickname
         self.isValid = isValid
         self.message = message
@@ -35,7 +38,11 @@ public struct NicknameInputContainer<Content: View>: View {
                 .overlay(alignment: .trailing) {
                     Text("중복확인")
                         .fontModifer(.sb3)
-                        .foregroundStyle(Color.colors(.white))
+                        .foregroundStyle(
+                            isLoading
+                            ? Color.colors(.gray08)
+                            : Color.colors(.white)
+                        )
                         .padding(.vertical, 6)
                         .padding(.horizontal, 6)
                         .roundedBackground(
@@ -44,7 +51,16 @@ public struct NicknameInputContainer<Content: View>: View {
                             : .colors(.gray04),
                             radius: 4
                         )
-                        .onTapGesture { onTapCheck() }
+                        .onTapGesture {
+                            guard !isLoading else { return }
+                            onTapCheck()
+                        }
+                        .overlay {
+                            if isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            }
+                        }
                         .padding(.trailing, 12)
                 }
             HStack {
