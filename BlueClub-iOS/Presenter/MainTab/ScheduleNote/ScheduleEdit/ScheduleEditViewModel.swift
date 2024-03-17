@@ -171,6 +171,7 @@ extension ScheduleEditViewModel: Actionable {
             self.job = .init(title: userInfo?.job ?? "")
             
         case .editByDate(let dateString):
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -185,6 +186,7 @@ extension ScheduleEditViewModel: Actionable {
             self.date = date
             
         case .fetchDetailById(let diaryId):
+            
             Task { @MainActor in
                 do {
                     self.isLoading = true

@@ -48,8 +48,8 @@ extension LoginViewModel: Actionable {
                         do {
                             self.userRepository.registLoginUser(user)
                             let userInfo = try await self.authApi.auth(
-                                user, fcmToken:
-                                    AppDelegate.firebaseToken)
+                                user,
+                                fcmToken:AppDelegate.firebaseToken)
                             self.userRepository.registUserInfo(userInfo)
                             let isNewUser = (userInfo.job == nil &&
                                              userInfo.monthlyTargetIncome == nil &&

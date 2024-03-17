@@ -27,11 +27,16 @@ extension MyPageCoordinator: Coordinatorable {
         // MARK: - Header
         case profileEdit
         case inviteFriend
+        
+        case friend
         case ask
         case service
         
+        case blueClubAppStore
         case notice
         case notificationSetting
+        
+        case open(urlString: String)
     }
     
     func send(_ action: Action) {
@@ -53,20 +58,36 @@ extension MyPageCoordinator: Coordinatorable {
         case .inviteFriend:
             break
             
+        case .friend:
+            let urlString = "https://apps.apple.com/kr/app/%EB%B8%94%EB%A3%A8%ED%81%B4%EB%9F%BD/id6477823755"
+            guard let url = URL(string: urlString) else { return }
+            let activity = UIActivityViewController(
+                activityItems: [url],
+                applicationActivities: nil)
+            self.navigator.present(activity)
+            
         case .ask:
-            guard let url = URL(string: "https://pf.kakao.com/_mxkCiG") else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            let urlString = "https://pf.kakao.com/_mxkCiG/chat"
+            self.send(.open(urlString: urlString))
             
         case .service:
-            guard let url = URL(string: "https://forms.gle/AtRshbAM2FBKMgAX8") else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            let urlString = "https://forms.gle/AtRshbAM2FBKMgAX8"
+            self.send(.open(urlString: urlString))
         
+        case .blueClubAppStore:
+            let urlString = "https://apps.apple.com/kr/app/%EB%B8%94%EB%A3%A8%ED%81%B4%EB%9F%BD/id6477823755"
+            self.send(.open(urlString: urlString))
+            
         case .notice:
             let view = NoticeListView(navigator: self.navigator)
             navigator.push { view }
             
         case .notificationSetting:
             break
+            
+        case .open(let urlString):
+            guard let url = URL(string: urlString) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }

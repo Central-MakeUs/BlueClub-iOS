@@ -89,7 +89,7 @@ extension MyPageViewModel: Actionable {
         case .didTapButton(let headerButton):
             switch headerButton {
             case .friend:
-                break
+                coordinator.send(.friend)
             case .ask:
                 coordinator.send(.ask)
             case .service:
@@ -111,11 +111,7 @@ extension MyPageViewModel: Actionable {
                 self.show개인정보 = true
                 
             case .appversion:
-                let urlString = "https://apps.apple.com/kr/app/%EB%B8%94%EB%A3%A8%ED%81%B4%EB%9F%BD/id6477823755"
-                guard let url = URL(string: urlString) else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
+                self.coordinator.send(.blueClubAppStore)
             }
             
         case .ask:
